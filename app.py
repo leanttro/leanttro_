@@ -160,6 +160,10 @@ def editar_lead(id):
     conn.commit(); cur.close(); conn.close()
     return jsonify({"ok": True})
 
+@app.route("/<bairro_slug>")
+def pagina_bairro(bairro_slug):
+    return render_template("bairro.html")
+
 # ─── PEDIDOS + MERCADO PAGO ───────────────────────────────────────────────────
 @app.route("/pedidos", methods=["POST"])
 def criar_pedido():
