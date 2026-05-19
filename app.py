@@ -168,13 +168,18 @@ def pagina_negocio(slug):
 def pagina_categoria(slug):
     return render_template("categoria.html")
 
+@app.route("/seuhub")
+def pagina_seuhub():
+    return render_template("seuhub.html")
+
 @app.route("/<bairro_slug>")
 def pagina_bairro(bairro_slug):
     # Rotas reservadas que não são bairros
     ROTAS_RESERVADAS = {
         'admin', 'blog', 'loja', 'leads', 'produtos', 'pedidos',
         'hub', 'webhook', 'obrigado', 'erro', 'politica-de-privacidade',
-        'termos', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico'
+        'termos', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico',
+        'seuhub', 'seu-hub', 'portfolio', 'metricas'
     }
     if bairro_slug in ROTAS_RESERVADAS:
         return "Not Found", 404
