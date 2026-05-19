@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leanttro — Painel Admin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:       #0a0a0f;
+  --surface:  #111118;
+  --card:     #16161f;
+  --border:   #23232f;
+  --accent:   #6c63ff;
+  --accent2:  #00e5a0;
+  --danger:   #ff4d6d;
+  --warn:     #ffb300;
+  --text:     #e8e8f0;
+  --muted:    #6b6b80;
+  --radius:   10px;
+  --mono:     'JetBrains Mono', monospace;
+  --sans:     'Syne', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;display:flex;overflow-x:hidden}
+
+/* ── SIDEBAR ── */
+#sidebar{
+  width:220px;min-width:220px;background:var(--surface);border-right:1px solid var(--border);
+  display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;
+  transition:transform .25s ease;
+}
+.sidebar-logo{
+  padding:24px 20px 20px;border-bottom:1px solid var(--border);
+  font-family:var(--sans);font-weight:800;font-size:1.2rem;letter-spacing:-0.5px;
+  display:flex;align-items:center;gap:10px;
+}
+.sidebar-logo span{color:var(--accent)}
+.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
+
+nav{flex:1;padding:16px 0;overflow-y:auto}
+.nav-section{padding:8px 20px 4px;font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase}
+.nav-item{
+  display:flex;align-items:center;gap:10px;padding:10px 20px;cursor:pointer;
+  color:var(--muted);font-size:.85rem;font-weight:600;transition:all .15s;border-left:2px solid transparent;
+}
+.nav-item:hover{color:var(--text);background:rgba(108,99,255,.08)}
+.nav-item.active{color:var(--accent);border-left-color:var(--accent);background:rgba(108,99,255,.1)}
+.nav-item svg{width:16px;height:16px;flex-shrink:0}
+.nav-badge{margin-left:auto;background:var(--accent);color:#fff;font-size:.6rem;padding:2px 6px;border-radius:20px;font-family:var(--mono)}
+
+.sidebar-footer{
+  padding:16px 20px;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);
+}
+.sidebar-user{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;color:#fff;flex-shrink:0}
+.user-info{overflow:hidden}
+.user-name{font-size:.8rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.user-role{font-size:.65rem;color:var(--muted)}
+#btn-logout{width:100%;padding:7px;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--muted);cursor:pointer;font-family:var(--sans);font-size:.75rem;font-weight:600;transition:all .15s}
+#btn-logout:hover{border-color:var(--danger);color:var(--danger)}
+
+/* ── MAIN ── */
+#main{margin-left:220px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+.topbar{
+  position:sticky;top:0;z-index:50;background:rgba(10,10,15,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);padding:0 28px;height:58px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.topbar-title{font-size:1rem;font-weight:700;letter-spacing:-.3px}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.status-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);display:inline-block;margin-right:4px;animation:pulse 2s infinite}
+.api-status{font-size:.75rem;color:var(--muted);font-family:var(--mono)}
+
+.content{padding:28px;flex:1}
+.section{display:none;animation:fadeIn .2s ease}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+/* ── LOGIN SCREEN ── */
+#login-screen{
+  position:fixed;inset:0;background:var(--bg);z-index:999;
+  display:flex;align-items:center;justify-content:center;
+}
+.login-box{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  padding:40px;width:380px;
+}
+.login-logo{font-size:1.5rem;font-weight:800;margin-bottom:8px}
+.login-logo span{color:var(--accent)}
+.login-sub{color:var(--muted);font-size:.85rem;margin-bottom:28px}
+.login-box .field{margin-bottom:16px}
+.login-box label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase}
+.login-box input{
+  width:100%;padding:11px 14px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);color:var(--text);font-family:var(--mono);font-size:.9rem;
+  transition:border-color .15s;outline:none;
+}
+.login-box input:focus{border-color:var(--accent)}
+.login-error{color:var(--danger);font-size:.8rem;margin-bottom:12px;display:none}
+#btn-login{
+  width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);
+  font-family:var(--sans);font-weight:700;font-size:.95rem;cursor:pointer;transition:opacity .15s;
+}
+#btn-login:hover{opacity:.85}
+#btn-login:disabled{opacity:.5;cursor:not-allowed}
+
+/* ── CARDS STATS ── */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:28px}
+.stat-card{
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:20px;position:relative;overflow:hidden;
+}
+.stat-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+}
+.stat-label{font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
+.stat-value{font-size:1.8rem;font-weight:800;font-family:var(--mono);line-height:1}
+.stat-sub{font-size:.72rem;color:var(--muted);margin-top:6px}
+
+/* ── TABLE ── */
+.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.table-header{
+  padding:16px 20px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+}
+.table-header h3{font-size:.9rem;font-weight:700}
+.table-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.search-input{
+  padding:7px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  color:var(--text);font-family:var(--mono);font-size:.8rem;outline:none;width:200px;transition:border-color .15s;
+}
+.search-input:focus{border-color:var(--accent)}
+select.filter-sel{
+  padding:7px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
+  color:var(--text);font-family:var(--sans);font-size:.8rem;outline:none;cursor:pointer;
+}
+table{width:100%;border-collapse:collapse}
+th{
+  padding:10px 16px;text-align:left;font-size:.68rem;font-weight:700;color:var(--muted);
+  letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid var(--border);background:var(--surface);
+}
+td{padding:12px 16px;font-size:.82rem;border-bottom:1px solid rgba(35,35,47,.5);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:rgba(108,99,255,.04)}
+.badge{
+  display:inline-block;padding:3px 8px;border-radius:20px;font-size:.68rem;font-weight:700;
+  font-family:var(--mono);letter-spacing:.3px;
+}
+.badge-novo{background:rgba(108,99,255,.2);color:var(--accent)}
+.badge-pago{background:rgba(0,229,160,.15);color:var(--accent2)}
+.badge-pendente{background:rgba(255,179,0,.15);color:var(--warn)}
+.badge-cancelado{background:rgba(255,77,109,.15);color:var(--danger)}
+.badge-gratuito{background:rgba(107,107,128,.15);color:var(--muted)}
+.badge-destaque{background:rgba(255,179,0,.15);color:var(--warn)}
+.badge-contato,.badge-em_contato{background:rgba(0,229,160,.1);color:var(--accent2)}
+.badge-convertido{background:rgba(0,229,160,.2);color:var(--accent2)}
+.action-btn{
+  padding:5px 10px;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;
+  border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .15s;font-family:var(--sans);
+  margin-right:4px;
+}
+.action-btn:hover{border-color:var(--accent);color:var(--accent)}
+.action-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+
+/* ── BTN PRIMARY ── */
+.btn-primary{
+  padding:9px 18px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);
+  font-family:var(--sans);font-weight:700;font-size:.82rem;cursor:pointer;transition:opacity .15s;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn-primary:hover{opacity:.85}
+.btn-secondary{
+  padding:9px 18px;background:transparent;color:var(--text);border:1px solid var(--border);border-radius:var(--radius);
+  font-family:var(--sans);font-weight:600;font-size:.82rem;cursor:pointer;transition:all .15s;
+}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── MODAL ── */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
+  z-index:200;display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.open{display:flex}
+.modal{
+  background:var(--card);border:1px solid var(--border);border-radius:16px;
+  width:100%;max-width:520px;max-height:90vh;overflow-y:auto;
+  animation:fadeIn .2s ease;
+}
+.modal-head{
+  padding:20px 24px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.modal-head h3{font-size:.95rem;font-weight:700}
+.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;line-height:1}
+.modal-close:hover{color:var(--text)}
+.modal-body{padding:24px}
+.modal-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+
+/* ── FORM FIELDS ── */
+.field{margin-bottom:16px}
+.field label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase}
+.field input,.field textarea,.field select{
+  width:100%;padding:10px 14px;background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);color:var(--text);font-family:var(--mono);font-size:.85rem;
+  outline:none;transition:border-color .15s;
+}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
+.field textarea{resize:vertical;min-height:80px}
+.field select{cursor:pointer}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.field input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--accent)}
+.field-check{display:flex;align-items:center;gap:8px;margin-top:6px}
+.field-check label{font-size:.82rem;color:var(--text);text-transform:none;letter-spacing:0;margin:0}
+
+/* ── EMPTY STATE ── */
+.empty{padding:40px;text-align:center;color:var(--muted)}
+.empty svg{width:40px;height:40px;margin:0 auto 12px;display:block;opacity:.3}
+.empty p{font-size:.85rem}
+
+/* ── TOAST ── */
+.toast{
+  position:fixed;bottom:24px;right:24px;z-index:999;
+  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
+  padding:12px 18px;font-size:.82rem;display:flex;align-items:center;gap:10px;
+  transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none;
+}
+.toast.show{transform:translateY(0);opacity:1}
+.toast.success{border-color:var(--accent2)}
+.toast.error{border-color:var(--danger)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  #sidebar{transform:translateX(-100%)}
+  #sidebar.open{transform:translateX(0)}
+  #main{margin-left:0}
+  .field-row{grid-template-columns:1fr}
+  .stats-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Lean<span>ttro</span></div>
+    <div class="login-sub">Painel Administrativo</div>
+    <div class="field"><label>E-mail</label><input type="email" id="l-email" placeholder="seu@email.com"></div>
+    <div class="field"><label>Senha</label><input type="password" id="l-senha" placeholder="••••••••"></div>
+    <div class="login-error" id="login-error">Credenciais inválidas</div>
+    <button id="btn-login" onclick="doLogin()">Entrar</button>
+  </div>
+</div>
+
+<!-- SIDEBAR -->
+<div id="sidebar">
+  <div class="sidebar-logo">
+    <div class="logo-dot"></div>
+    Lean<span>ttro</span>
+  </div>
+  <nav>
+    <div class="nav-section">Visão Geral</div>
+    <div class="nav-item active" onclick="show('dashboard')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+      Dashboard
+    </div>
+
+    <div class="nav-section">Loja</div>
+    <div class="nav-item" onclick="show('produtos')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      Produtos
+    </div>
+    <div class="nav-item" onclick="show('pedidos')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
+      Pedidos
+      <span class="nav-badge" id="badge-pedidos">0</span>
+    </div>
+    <div class="nav-item" onclick="show('leads')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      Leads
+      <span class="nav-badge" id="badge-leads">0</span>
+    </div>
+
+    <div class="nav-section">Hub Jabaquara</div>
+    <div class="nav-item" onclick="show('hub-negocios')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      Negócios
+    </div>
+    <div class="nav-item" onclick="show('hub-categorias')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>
+      Categorias
+    </div>
+    <div class="nav-item" onclick="show('hub-avaliacoes')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      Avaliações
+    </div>
+
+    <div class="nav-section">Conteúdo</div>
+    <div class="nav-item" onclick="show('blog')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Blog / Posts
+    </div>
+
+    <div class="nav-section">Sistema</div>
+    <div class="nav-item" onclick="show('disparos')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      Disparos
+    </div>
+    <div class="nav-item" onclick="show('logs')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      Logs
+    </div>
+  </nav>
+  <div class="sidebar-footer">
+    <div class="sidebar-user">
+      <div class="avatar" id="sidebar-avatar">L</div>
+      <div class="user-info">
+        <div class="user-name" id="sidebar-nome">Carregando...</div>
+        <div class="user-role">Admin</div>
+      </div>
+    </div>
+    <button id="btn-logout" onclick="doLogout()">Sair</button>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div id="main">
+  <div class="topbar">
+    <div class="topbar-title" id="topbar-title">Dashboard</div>
+    <div class="topbar-right">
+      <span class="api-status"><span class="status-dot"></span>API OK</span>
+    </div>
+  </div>
+
+  <div class="content">
+
+    <!-- DASHBOARD -->
+    <div id="sec-dashboard" class="section active">
+      <div class="stats-grid" id="stats-grid">
+        <div class="stat-card"><div class="stat-label">Pedidos Pendentes</div><div class="stat-value" id="st-pendentes">—</div><div class="stat-sub">aguardando pagamento</div></div>
+        <div class="stat-card"><div class="stat-label">Receita Paga</div><div class="stat-value" id="st-receita">—</div><div class="stat-sub">pagamentos confirmados</div></div>
+        <div class="stat-card"><div class="stat-label">Leads Novos</div><div class="stat-value" id="st-leads">—</div><div class="stat-sub">sem contato</div></div>
+        <div class="stat-card"><div class="stat-label">Produtos Ativos</div><div class="stat-value" id="st-produtos">—</div><div class="stat-sub">na vitrine</div></div>
+        <div class="stat-card"><div class="stat-label">Negócios no Hub</div><div class="stat-value" id="st-negocios">—</div><div class="stat-sub">Jabaquara</div></div>
+        <div class="stat-card"><div class="stat-label">Posts Publicados</div><div class="stat-value" id="st-posts">—</div><div class="stat-sub">no blog</div></div>
+      </div>
+      <div class="table-wrap">
+        <div class="table-header"><h3>Últimos Pedidos</h3></div>
+        <table><thead><tr><th>ID</th><th>Produto</th><th>Lead</th><th>Valor</th><th>Status</th><th>Data</th></tr></thead>
+        <tbody id="dash-pedidos"></tbody></table>
+      </div>
+    </div>
+
+    <!-- PRODUTOS -->
+    <div id="sec-produtos" class="section">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Produtos</h3>
+          <div class="table-actions">
+            <input class="search-input" id="search-produtos" placeholder="Buscar..." oninput="filterTable('produtos')">
+            <select class="filter-sel" id="filter-cat-produto" onchange="filterTable('produtos')">
+              <option value="">Todas categorias</option>
+              <option value="exe">Executável</option>
+              <option value="n8n">n8n JSON</option>
+              <option value="vps">Setup VPS</option>
+              <option value="hub">Seu Hub</option>
+              <option value="site">Site</option>
+              <option value="3d">3D</option>
+            </select>
+            <button class="btn-primary" onclick="openModal('produto')">+ Novo</button>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Nome</th><th>Categoria</th><th>Preço</th><th>Destaque</th><th>Ativo</th><th>Ações</th></tr></thead>
+          <tbody id="tb-produtos"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- PEDIDOS -->
+    <div id="sec-pedidos" class="section">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Pedidos</h3>
+          <div class="table-actions">
+            <select class="filter-sel" id="filter-status-pedido" onchange="loadPedidos()">
+              <option value="">Todos</option>
+              <option value="pendente">Pendente</option>
+              <option value="pago">Pago</option>
+              <option value="cancelado">Cancelado</option>
+            </select>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>ID</th><th>Produto</th><th>Lead ID</th><th>Valor</th><th>Status</th><th>MP ID</th><th>Data</th></tr></thead>
+          <tbody id="tb-pedidos"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LEADS -->
+    <div id="sec-leads" class="section">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Leads</h3>
+          <div class="table-actions">
+            <input class="search-input" id="search-leads" placeholder="Buscar..." oninput="filterTable('leads')">
+            <select class="filter-sel" id="filter-status-lead" onchange="loadLeads()">
+              <option value="">Todos</option>
+              <option value="novo">Novo</option>
+              <option value="em_contato">Em contato</option>
+              <option value="convertido">Convertido</option>
+              <option value="perdido">Perdido</option>
+            </select>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Interesse</th><th>Origem</th><th>Status</th><th>Data</th><th>Ações</th></tr></thead>
+          <tbody id="tb-leads"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- HUB NEGÓCIOS -->
+    <div id="sec-hub-negocios" class="section">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Negócios — Hub Jabaquara</h3>
+          <div class="table-actions">
+            <input class="search-input" id="search-negocios" placeholder="Buscar..." oninput="filterTable('negocios')">
+            <button class="btn-primary" onclick="openModal('negocio')">+ Novo</button>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Nome</th><th>Categoria</th><th>Bairro</th><th>Plano</th><th>Destaque</th><th>Views</th><th>Ativo</th><th>Ações</th></tr></thead>
+          <tbody id="tb-negocios"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- HUB CATEGORIAS -->
+    <div id="sec-hub-categorias" class="section">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Categorias do Hub</h3>
+          <div class="table-actions">
+            <button class="btn-primary" onclick="openModal('categoria')">+ Nova</button>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Nome</th><th>Slug</th><th>Ativo</th><th>Ações</th></tr></thead>
+          <tbody id="tb-categorias"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- HUB AVALIAÇÕES -->
+    <div id="sec-hub-avaliacoes" class="section">
+      <div class="table-wrap">
+        <div class="table-header"><h3>Avaliações</h3></div>
+        <table>
+          <thead><tr><th>Negócio ID</th><th>Autor</th><th>Nota</th><th>Comentário</th><th>Data</th></tr></thead>
+          <tbody id="tb-avaliacoes"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- BLOG -->
+    <div id="sec-blog" class="section">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Posts do Blog</h3>
+          <div class="table-actions">
+            <button class="btn-primary" onclick="openModal('post')">+ Novo Post</button>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Título</th><th>Categoria</th><th>Publicado</th><th>Data</th><th>Ações</th></tr></thead>
+          <tbody id="tb-blog"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- DISPAROS -->
+    <div id="sec-disparos" class="section">
+      <div class="table-wrap">
+        <div class="table-header">
+          <h3>Histórico de Disparos</h3>
+          <div class="table-actions">
+            <button class="btn-primary" onclick="openModal('disparo')">+ Registrar</button>
+          </div>
+        </div>
+        <table>
+          <thead><tr><th>Lead</th><th>Canal</th><th>Assunto</th><th>Status</th><th>Data</th></tr></thead>
+          <tbody id="tb-disparos"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- LOGS -->
+    <div id="sec-logs" class="section">
+      <div class="table-wrap">
+        <div class="table-header"><h3>Logs de Atividade</h3></div>
+        <div class="empty"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16"/><polyline points="14 2 14 8 20 8"/></svg><p>Logs em breve</p></div>
+      </div>
+    </div>
+
+  </div><!-- /content -->
+</div><!-- /main -->
+
+<!-- MODAL PRODUTO -->
+<div class="modal-overlay" id="modal-produto">
+  <div class="modal">
+    <div class="modal-head"><h3 id="mp-title">Novo Produto</h3><button class="modal-close" onclick="closeModal('produto')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="mp-id">
+      <div class="field"><label>Nome</label><input id="mp-nome" placeholder="Nome do produto"></div>
+      <div class="field-row">
+        <div class="field"><label>Slug</label><input id="mp-slug" placeholder="nome-do-produto"></div>
+        <div class="field"><label>Preço (R$)</label><input id="mp-preco" type="number" step="0.01" placeholder="97.00"></div>
+      </div>
+      <div class="field"><label>Categoria</label>
+        <select id="mp-categoria">
+          <option value="exe">Executável (.exe)</option>
+          <option value="n8n">Pacote n8n JSON</option>
+          <option value="vps">Setup VPS + n8n</option>
+          <option value="site">Site Institucional</option>
+          <option value="hub">Seu Hub</option>
+          <option value="3d">3D Experience</option>
+        </select>
+      </div>
+      <div class="field"><label>Descrição</label><textarea id="mp-desc" rows="3" placeholder="Descreva o produto..."></textarea></div>
+      <div class="field-row">
+        <div class="field"><label>URL da Imagem</label><input id="mp-imagem" placeholder="https://..."></div>
+        <div class="field"><label>URL do Arquivo</label><input id="mp-arquivo" placeholder="https://..."></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><div class="field-check"><input type="checkbox" id="mp-ativo" checked><label for="mp-ativo">Ativo</label></div></div>
+        <div class="field"><div class="field-check"><input type="checkbox" id="mp-destaque"><label for="mp-destaque">Destaque</label></div></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" onclick="closeModal('produto')">Cancelar</button>
+      <button class="btn-primary" onclick="saveProduto()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL LEAD -->
+<div class="modal-overlay" id="modal-lead">
+  <div class="modal">
+    <div class="modal-head"><h3>Editar Lead</h3><button class="modal-close" onclick="closeModal('lead')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="ml-id">
+      <div class="field"><label>Status</label>
+        <select id="ml-status">
+          <option value="novo">Novo</option>
+          <option value="em_contato">Em contato</option>
+          <option value="convertido">Convertido</option>
+          <option value="perdido">Perdido</option>
+        </select>
+      </div>
+      <div class="field"><label>Observações</label><textarea id="ml-obs" rows="4" placeholder="Anotações sobre o lead..."></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" onclick="closeModal('lead')">Cancelar</button>
+      <button class="btn-primary" onclick="saveLead()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL NEGÓCIO -->
+<div class="modal-overlay" id="modal-negocio">
+  <div class="modal">
+    <div class="modal-head"><h3 id="mn-title">Novo Negócio</h3><button class="modal-close" onclick="closeModal('negocio')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="mn-id">
+      <div class="field-row">
+        <div class="field"><label>Nome</label><input id="mn-nome" placeholder="Nome do negócio"></div>
+        <div class="field"><label>Slug</label><input id="mn-slug" placeholder="nome-do-negocio"></div>
+      </div>
+      <div class="field"><label>Categoria</label>
+        <select id="mn-categoria"></select>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Bairro</label><input id="mn-bairro" placeholder="Jabaquara"></div>
+        <div class="field"><label>Cidade</label><input id="mn-cidade" value="São Paulo"></div>
+      </div>
+      <div class="field"><label>Endereço</label><input id="mn-endereco" placeholder="Rua, número"></div>
+      <div class="field-row">
+        <div class="field"><label>Lat</label><input id="mn-lat" type="number" step="any" placeholder="-23.xxx"></div>
+        <div class="field"><label>Lng</label><input id="mn-lng" type="number" step="any" placeholder="-46.xxx"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Telefone</label><input id="mn-tel" placeholder="11 9xxxx-xxxx"></div>
+        <div class="field"><label>WhatsApp</label><input id="mn-wpp" placeholder="5511 9xxxx-xxxx"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Site</label><input id="mn-site" placeholder="https://..."></div>
+        <div class="field"><label>Foto URL</label><input id="mn-foto" placeholder="https://..."></div>
+      </div>
+      <div class="field"><label>Descrição</label><textarea id="mn-desc" rows="3"></textarea></div>
+      <div class="field"><label>Plano</label>
+        <select id="mn-plano">
+          <option value="gratuito">Gratuito</option>
+          <option value="destaque">Destaque</option>
+          <option value="premium">Premium</option>
+        </select>
+      </div>
+      <div class="field-row">
+        <div class="field"><div class="field-check"><input type="checkbox" id="mn-destaque"><label for="mn-destaque">Destaque</label></div></div>
+        <div class="field"><div class="field-check"><input type="checkbox" id="mn-ativo" checked><label for="mn-ativo">Ativo</label></div></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" onclick="closeModal('negocio')">Cancelar</button>
+      <button class="btn-primary" onclick="saveNegocio()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CATEGORIA -->
+<div class="modal-overlay" id="modal-categoria">
+  <div class="modal">
+    <div class="modal-head"><h3 id="mc-title">Nova Categoria</h3><button class="modal-close" onclick="closeModal('categoria')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="mcat-id">
+      <div class="field"><label>Nome</label><input id="mcat-nome" placeholder="Ex: Restaurantes"></div>
+      <div class="field"><label>Slug</label><input id="mcat-slug" placeholder="restaurantes"></div>
+      <div class="field"><label>Ícone URL</label><input id="mcat-icone" placeholder="https://..."></div>
+      <div class="field"><div class="field-check"><input type="checkbox" id="mcat-ativo" checked><label for="mcat-ativo">Ativa</label></div></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" onclick="closeModal('categoria')">Cancelar</button>
+      <button class="btn-primary" onclick="saveCategoria()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL POST -->
+<div class="modal-overlay" id="modal-post">
+  <div class="modal" style="max-width:640px">
+    <div class="modal-head"><h3 id="mpost-title">Novo Post</h3><button class="modal-close" onclick="closeModal('post')">✕</button></div>
+    <div class="modal-body">
+      <input type="hidden" id="mpost-id">
+      <div class="field"><label>Título</label><input id="mpost-titulo" placeholder="Título do post"></div>
+      <div class="field-row">
+        <div class="field"><label>Slug</label><input id="mpost-slug" placeholder="titulo-do-post"></div>
+        <div class="field"><label>Categoria</label>
+          <select id="mpost-cat">
+            <option value="automacao">Automação & IA</option>
+            <option value="trafego">Vendas & Tráfego</option>
+            <option value="ecommerce">E-commerce & Landing</option>
+            <option value="3d">3D Experience</option>
+            <option value="hub">Hubs & SEO</option>
+          </select>
+        </div>
+      </div>
+      <div class="field"><label>Imagem URL</label><input id="mpost-img" placeholder="https://..."></div>
+      <div class="field"><label>Resumo</label><textarea id="mpost-resumo" rows="2" placeholder="Breve descrição..."></textarea></div>
+      <div class="field"><label>Conteúdo (HTML/Markdown)</label><textarea id="mpost-conteudo" rows="8" placeholder="Conteúdo completo do post..."></textarea></div>
+      <div class="field"><label>Tags (separadas por vírgula)</label><input id="mpost-tags" placeholder="seo, automacao, n8n"></div>
+      <div class="field"><div class="field-check"><input type="checkbox" id="mpost-pub"><label for="mpost-pub">Publicar agora</label></div></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" onclick="closeModal('post')">Cancelar</button>
+      <button class="btn-primary" onclick="savePost()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL DISPARO -->
+<div class="modal-overlay" id="modal-disparo">
+  <div class="modal">
+    <div class="modal-head"><h3>Registrar Disparo</h3><button class="modal-close" onclick="closeModal('disparo')">✕</button></div>
+    <div class="modal-body">
+      <div class="field"><label>Lead ID</label><input id="md-lead" type="number" placeholder="ID do lead"></div>
+      <div class="field"><label>Canal</label>
+        <select id="md-canal">
+          <option value="whatsapp">WhatsApp</option>
+          <option value="email">E-mail</option>
+        </select>
+      </div>
+      <div class="field"><label>Assunto</label><input id="md-assunto" placeholder="Assunto da mensagem"></div>
+      <div class="field"><label>Mensagem</label><textarea id="md-msg" rows="4" placeholder="Conteúdo da mensagem..."></textarea></div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" onclick="closeModal('disparo')">Cancelar</button>
+      <button class="btn-primary" onclick="saveDisparo()">Registrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<script>
+// ── CONFIG ──
+window.API_BASE = 'https://teste.leanttro.com';
+const API = (window.API_BASE || 'http://localhost:5000');
+
+// ── STATE ──
+let TOKEN = localStorage.getItem('lt_token') || '';
+let categorias = [];
+
+// ── INIT ──
+document.addEventListener('DOMContentLoaded', () => {
+  if (TOKEN) bootApp();
+  document.getElementById('l-senha').addEventListener('keydown', e => { if (e.key === 'Enter') doLogin(); });
+});
+
+async function bootApp() {
+  try {
+    const r = await api('GET', '/admin/me');
+    document.getElementById('sidebar-nome').textContent = r.nome || 'Admin';
+    document.getElementById('sidebar-avatar').textContent = (r.nome || 'A')[0].toUpperCase();
+    document.getElementById('login-screen').style.display = 'none';
+    loadDashboard();
+    loadBadges();
+    loadCategorias();
+  } catch {
+    TOKEN = '';
+    localStorage.removeItem('lt_token');
+  }
+}
+
+// ── AUTH ──
+async function doLogin() {
+  const btn = document.getElementById('btn-login');
+  const err = document.getElementById('login-error');
+  btn.disabled = true; btn.textContent = 'Entrando...';
+  err.style.display = 'none';
+  try {
+    const r = await fetch(API + '/admin/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email: document.getElementById('l-email').value, senha: document.getElementById('l-senha').value })
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.erro || 'Erro');
+    TOKEN = d.token;
+    localStorage.setItem('lt_token', TOKEN);
+    bootApp();
+  } catch {
+    err.style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Entrar';
+  }
+}
+
+function doLogout() {
+  TOKEN = ''; localStorage.removeItem('lt_token');
+  location.reload();
+}
+
+// ── API HELPER ──
+async function api(method, path, body) {
+  const opts = { method, headers: { 'Authorization': 'Bearer ' + TOKEN, 'Content-Type': 'application/json' } };
+  if (body) opts.body = JSON.stringify(body);
+  const r = await fetch(API + path, opts);
+  if (r.status === 401) { doLogout(); throw new Error('Unauthorized'); }
+  return r.json();
+}
+
+// ── NAVIGATION ──
+const sectionTitles = {
+  dashboard:'Dashboard', produtos:'Produtos', pedidos:'Pedidos', leads:'Leads',
+  'hub-negocios':'Negócios — Hub Jabaquara','hub-categorias':'Categorias do Hub',
+  'hub-avaliacoes':'Avaliações', blog:'Blog / Posts', disparos:'Disparos', logs:'Logs'
+};
+
+function show(sec) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  document.getElementById('sec-' + sec).classList.add('active');
+  event.currentTarget.classList.add('active');
+  document.getElementById('topbar-title').textContent = sectionTitles[sec] || sec;
+  const loaders = {
+    dashboard: loadDashboard, produtos: loadProdutos, pedidos: loadPedidos,
+    leads: loadLeads, 'hub-negocios': loadNegocios, 'hub-categorias': loadCategoriasTable,
+    'hub-avaliacoes': loadAvaliacoes, blog: loadBlog, disparos: loadDisparos
+  };
+  if (loaders[sec]) loaders[sec]();
+}
+
+// ── DASHBOARD ──
+async function loadDashboard() {
+  try {
+    const [pedidos, leads, produtos, negocios, posts] = await Promise.all([
+      api('GET', '/admin/pedidos'),
+      api('GET', '/admin/leads'),
+      api('GET', '/produtos'),
+      api('GET', '/hub/negocios'),
+      api('GET', '/blog')
+    ]);
+    const pendentes = pedidos.filter(p => p.status === 'pendente');
+    const pagos = pedidos.filter(p => p.status === 'pago');
+    const receita = pagos.reduce((s, p) => s + parseFloat(p.valor || 0), 0);
+    const leadsNovos = leads.filter(l => l.status === 'novo');
+
+    document.getElementById('st-pendentes').textContent = pendentes.length;
+    document.getElementById('st-receita').textContent = 'R$' + receita.toFixed(0);
+    document.getElementById('st-leads').textContent = leadsNovos.length;
+    document.getElementById('st-produtos').textContent = produtos.length;
+    document.getElementById('st-negocios').textContent = negocios.length;
+    document.getElementById('st-posts').textContent = posts.length;
+
+    const tbody = document.getElementById('dash-pedidos');
+    const recent = [...pedidos].sort((a,b) => b.id - a.id).slice(0, 10);
+    tbody.innerHTML = recent.map(p => `
+      <tr>
+        <td><span style="color:var(--muted);font-family:var(--mono)">#${p.id}</span></td>
+        <td>${p.produto_id || '—'}</td>
+        <td>${p.lead_id}</td>
+        <td style="font-family:var(--mono)">R$${parseFloat(p.valor||0).toFixed(2)}</td>
+        <td><span class="badge badge-${p.status}">${p.status}</span></td>
+        <td style="color:var(--muted);font-size:.75rem">${fmtDate(p.criado_em)}</td>
+      </tr>`).join('') || emptyRow(6);
+  } catch(e) { console.error(e); }
+}
+
+async function loadBadges() {
+  try {
+    const [pedidos, leads] = await Promise.all([api('GET','/admin/pedidos'), api('GET','/admin/leads')]);
+    document.getElementById('badge-pedidos').textContent = pedidos.filter(p => p.status === 'pendente').length;
+    document.getElementById('badge-leads').textContent = leads.filter(l => l.status === 'novo').length;
+  } catch {}
+}
+
+// ── PRODUTOS ──
+let _produtos = [];
+async function loadProdutos() {
+  _produtos = await api('GET', '/produtos');
+  renderProdutos(_produtos);
+}
+
+function renderProdutos(list) {
+  document.getElementById('tb-produtos').innerHTML = list.map(p => `
+    <tr>
+      <td>${p.nome}</td>
+      <td><span class="badge badge-${p.categoria||'gratuito'}">${p.categoria||'—'}</span></td>
+      <td style="font-family:var(--mono)">R$${parseFloat(p.preco||0).toFixed(2)}</td>
+      <td>${p.destaque ? '⭐' : '—'}</td>
+      <td>${p.ativo ? '<span style="color:var(--accent2)">✓</span>' : '<span style="color:var(--danger)">✗</span>'}</td>
+      <td>
+        <button class="action-btn" onclick='editProduto(${JSON.stringify(p)})'>Editar</button>
+      </td>
+    </tr>`).join('') || emptyRow(6);
+}
+
+function filterTable(type) {
+  if (type === 'produtos') {
+    const q = document.getElementById('search-produtos').value.toLowerCase();
+    const cat = document.getElementById('filter-cat-produto').value;
+    const f = _produtos.filter(p => (!q || p.nome.toLowerCase().includes(q)) && (!cat || p.categoria === cat));
+    renderProdutos(f);
+  }
+  if (type === 'leads') {
+    const q = document.getElementById('search-leads').value.toLowerCase();
+    const f = _leads.filter(l => !q || (l.nome||'').toLowerCase().includes(q) || (l.email||'').toLowerCase().includes(q));
+    renderLeads(f);
+  }
+  if (type === 'negocios') {
+    const q = document.getElementById('search-negocios').value.toLowerCase();
+    const f = _negocios.filter(n => !q || (n.nome||'').toLowerCase().includes(q) || (n.bairro||'').toLowerCase().includes(q));
+    renderNegocios(f);
+  }
+}
+
+function openModal(type, data) {
+  document.getElementById('modal-' + type).classList.add('open');
+}
+
+function closeModal(type) {
+  document.getElementById('modal-' + type).classList.remove('open');
+}
+
+function editProduto(p) {
+  document.getElementById('mp-title').textContent = 'Editar Produto';
+  document.getElementById('mp-id').value = p.id;
+  document.getElementById('mp-nome').value = p.nome;
+  document.getElementById('mp-slug').value = p.slug;
+  document.getElementById('mp-preco').value = p.preco;
+  document.getElementById('mp-categoria').value = p.categoria || 'exe';
+  document.getElementById('mp-desc').value = p.descricao || '';
+  document.getElementById('mp-imagem').value = p.imagem_url || '';
+  document.getElementById('mp-arquivo').value = p.arquivo_url || '';
+  document.getElementById('mp-ativo').checked = p.ativo;
+  document.getElementById('mp-destaque').checked = p.destaque;
+  openModal('produto');
+}
+
+async function saveProduto() {
+  const id = document.getElementById('mp-id').value;
+  const body = {
+    nome: document.getElementById('mp-nome').value,
+    slug: document.getElementById('mp-slug').value,
+    preco: parseFloat(document.getElementById('mp-preco').value),
+    categoria: document.getElementById('mp-categoria').value,
+    descricao: document.getElementById('mp-desc').value,
+    imagem_url: document.getElementById('mp-imagem').value,
+    arquivo_url: document.getElementById('mp-arquivo').value,
+    ativo: document.getElementById('mp-ativo').checked,
+    destaque: document.getElementById('mp-destaque').checked,
+  };
+  try {
+    if (id) await api('PUT', '/admin/produtos/' + id, body);
+    else await api('POST', '/admin/produtos', body);
+    closeModal('produto');
+    loadProdutos();
+    toast('Produto salvo!', 'success');
+    document.getElementById('mp-id').value = '';
+    document.getElementById('mp-title').textContent = 'Novo Produto';
+  } catch { toast('Erro ao salvar', 'error'); }
+}
+
+// ── PEDIDOS ──
+async function loadPedidos() {
+  const status = document.getElementById('filter-status-pedido')?.value || '';
+  const list = await api('GET', '/admin/pedidos' + (status ? '?status=' + status : ''));
+  document.getElementById('tb-pedidos').innerHTML = list.map(p => `
+    <tr>
+      <td style="font-family:var(--mono)">#${p.id}</td>
+      <td>${p.produto_id || '—'}</td>
+      <td>${p.lead_id}</td>
+      <td style="font-family:var(--mono)">R$${parseFloat(p.valor||0).toFixed(2)}</td>
+      <td><span class="badge badge-${p.status}">${p.status}</span></td>
+      <td style="font-family:var(--mono);font-size:.72rem;color:var(--muted)">${p.mp_payment_id || '—'}</td>
+      <td style="color:var(--muted);font-size:.75rem">${fmtDate(p.criado_em)}</td>
+    </tr>`).join('') || emptyRow(7);
+}
+
+// ── LEADS ──
+let _leads = [];
+async function loadLeads() {
+  const status = document.getElementById('filter-status-lead')?.value || '';
+  _leads = await api('GET', '/admin/leads' + (status ? '?status=' + status : ''));
+  renderLeads(_leads);
+}
+
+function renderLeads(list) {
+  document.getElementById('tb-leads').innerHTML = list.map(l => `
+    <tr>
+      <td>${l.nome || '—'}</td>
+      <td style="font-family:var(--mono);font-size:.75rem">${l.email || '—'}</td>
+      <td style="font-family:var(--mono)">${l.telefone || '—'}</td>
+      <td>${l.interesse || '—'}</td>
+      <td style="color:var(--muted)">${l.origem || '—'}</td>
+      <td><span class="badge badge-${l.status}">${l.status}</span></td>
+      <td style="color:var(--muted);font-size:.75rem">${fmtDate(l.criado_em)}</td>
+      <td><button class="action-btn" onclick='editLead(${JSON.stringify(l)})'>Editar</button></td>
+    </tr>`).join('') || emptyRow(8);
+}
+
+function editLead(l) {
+  document.getElementById('ml-id').value = l.id;
+  document.getElementById('ml-status').value = l.status;
+  document.getElementById('ml-obs').value = l.obs || '';
+  openModal('lead');
+}
+
+async function saveLead() {
+  const id = document.getElementById('ml-id').value;
+  try {
+    await api('PUT', '/admin/leads/' + id, {
+      status: document.getElementById('ml-status').value,
+      obs: document.getElementById('ml-obs').value
+    });
+    closeModal('lead');
+    loadLeads();
+    toast('Lead atualizado!', 'success');
+  } catch { toast('Erro ao salvar', 'error'); }
+}
+
+// ── HUB ──
+let _negocios = [];
+async function loadCategorias() {
+  categorias = await api('GET', '/hub/categorias').catch(() => []);
+  const sel = document.getElementById('mn-categoria');
+  if (sel) sel.innerHTML = categorias.map(c => `<option value="${c.id}">${c.nome}</option>`).join('');
+}
+
+async function loadNegocios() {
+  _negocios = await api('GET', '/hub/negocios');
+  renderNegocios(_negocios);
+}
+
+function renderNegocios(list) {
+  document.getElementById('tb-negocios').innerHTML = list.map(n => `
+    <tr>
+      <td>${n.nome}</td>
+      <td>${n.categoria_nome || '—'}</td>
+      <td>${n.bairro || '—'}</td>
+      <td><span class="badge badge-${n.plano}">${n.plano}</span></td>
+      <td>${n.destaque ? '⭐' : '—'}</td>
+      <td style="font-family:var(--mono)">${n.visualizacoes || 0}</td>
+      <td>${n.ativo ? '<span style="color:var(--accent2)">✓</span>' : '<span style="color:var(--danger)">✗</span>'}</td>
+      <td><button class="action-btn" onclick='editNegocio(${JSON.stringify(n)})'>Editar</button></td>
+    </tr>`).join('') || emptyRow(8);
+}
+
+function editNegocio(n) {
+  document.getElementById('mn-title').textContent = 'Editar Negócio';
+  document.getElementById('mn-id').value = n.id;
+  document.getElementById('mn-nome').value = n.nome;
+  document.getElementById('mn-slug').value = n.slug;
+  document.getElementById('mn-categoria').value = n.categoria_id;
+  document.getElementById('mn-bairro').value = n.bairro || '';
+  document.getElementById('mn-cidade').value = n.cidade || 'São Paulo';
+  document.getElementById('mn-endereco').value = n.endereco || '';
+  document.getElementById('mn-lat').value = n.lat || '';
+  document.getElementById('mn-lng').value = n.lng || '';
+  document.getElementById('mn-tel').value = n.telefone || '';
+  document.getElementById('mn-wpp').value = n.whatsapp || '';
+  document.getElementById('mn-site').value = n.site_url || '';
+  document.getElementById('mn-foto').value = n.foto_url || '';
+  document.getElementById('mn-desc').value = n.descricao || '';
+  document.getElementById('mn-plano').value = n.plano || 'gratuito';
+  document.getElementById('mn-destaque').checked = n.destaque;
+  document.getElementById('mn-ativo').checked = n.ativo;
+  openModal('negocio');
+}
+
+async function saveNegocio() {
+  const id = document.getElementById('mn-id').value;
+  const body = {
+    categoria_id: parseInt(document.getElementById('mn-categoria').value),
+    nome: document.getElementById('mn-nome').value,
+    slug: document.getElementById('mn-slug').value,
+    bairro: document.getElementById('mn-bairro').value,
+    cidade: document.getElementById('mn-cidade').value,
+    endereco: document.getElementById('mn-endereco').value,
+    lat: document.getElementById('mn-lat').value || null,
+    lng: document.getElementById('mn-lng').value || null,
+    telefone: document.getElementById('mn-tel').value,
+    whatsapp: document.getElementById('mn-wpp').value,
+    site_url: document.getElementById('mn-site').value,
+    foto_url: document.getElementById('mn-foto').value,
+    descricao: document.getElementById('mn-desc').value,
+    plano: document.getElementById('mn-plano').value,
+    destaque: document.getElementById('mn-destaque').checked,
+    ativo: document.getElementById('mn-ativo').checked,
+  };
+  try {
+    if (id) await api('PUT', '/admin/hub/negocios/' + id, body);
+    else await api('POST', '/admin/hub/negocios', body);
+    closeModal('negocio');
+    loadNegocios();
+    toast('Negócio salvo!', 'success');
+    document.getElementById('mn-id').value = '';
+    document.getElementById('mn-title').textContent = 'Novo Negócio';
+  } catch { toast('Erro ao salvar', 'error'); }
+}
+
+async function loadCategoriasTable() {
+  const list = await api('GET', '/hub/categorias');
+  document.getElementById('tb-categorias').innerHTML = list.map(c => `
+    <tr>
+      <td>${c.nome}</td>
+      <td style="font-family:var(--mono);color:var(--muted)">${c.slug}</td>
+      <td>${c.ativo ? '<span style="color:var(--accent2)">✓</span>' : '<span style="color:var(--danger)">✗</span>'}</td>
+      <td><button class="action-btn" onclick='editCategoria(${JSON.stringify(c)})'>Editar</button></td>
+    </tr>`).join('') || emptyRow(4);
+}
+
+function editCategoria(c) {
+  document.getElementById('mc-title').textContent = 'Editar Categoria';
+  document.getElementById('mcat-id').value = c.id;
+  document.getElementById('mcat-nome').value = c.nome;
+  document.getElementById('mcat-slug').value = c.slug;
+  document.getElementById('mcat-icone').value = c.icone_url || '';
+  document.getElementById('mcat-ativo').checked = c.ativo;
+  openModal('categoria');
+}
+
+async function saveCategoria() {
+  const id = document.getElementById('mcat-id').value;
+  const body = {
+    nome: document.getElementById('mcat-nome').value,
+    slug: document.getElementById('mcat-slug').value,
+    icone_url: document.getElementById('mcat-icone').value,
+    ativo: document.getElementById('mcat-ativo').checked,
+  };
+  try {
+    if (id) {
+      // PUT não tem rota ainda — avisa
+      toast('Edição de categoria: adicione PUT /admin/hub/categorias/:id na API', 'error');
+    } else {
+      await api('POST', '/admin/hub/categorias', body);
+      closeModal('categoria');
+      loadCategoriasTable();
+      loadCategorias();
+      toast('Categoria criada!', 'success');
+    }
+    document.getElementById('mcat-id').value = '';
+    document.getElementById('mc-title').textContent = 'Nova Categoria';
+  } catch { toast('Erro ao salvar', 'error'); }
+}
+
+async function loadAvaliacoes() {
+  const list = await api('GET', '/hub/avaliacoes').catch(() => []);
+  const stars = n => '★'.repeat(n) + '☆'.repeat(5-n);
+  document.getElementById('tb-avaliacoes').innerHTML = list.map(a => `
+    <tr>
+      <td style="font-family:var(--mono)">#${a.negocio_id}</td>
+      <td>${a.autor_nome || 'Anônimo'}</td>
+      <td style="color:var(--warn)">${stars(a.nota)}</td>
+      <td>${a.comentario || '—'}</td>
+      <td style="color:var(--muted);font-size:.75rem">${fmtDate(a.criado_em)}</td>
+    </tr>`).join('') || emptyRow(5);
+}
+
+// ── BLOG ──
+async function loadBlog() {
+  const list = await api('GET', '/admin/blog').catch(() => api('GET', '/blog'));
+  document.getElementById('tb-blog').innerHTML = list.map(p => `
+    <tr>
+      <td>${p.titulo}</td>
+      <td>${p.categoria || '—'}</td>
+      <td>${p.publicado ? '<span style="color:var(--accent2)">✓</span>' : '<span style="color:var(--muted)">Rascunho</span>'}</td>
+      <td style="color:var(--muted);font-size:.75rem">${fmtDate(p.publicado_em || p.criado_em)}</td>
+      <td><button class="action-btn" onclick='editPost(${JSON.stringify(p)})'>Editar</button></td>
+    </tr>`).join('') || emptyRow(5);
+}
+
+function editPost(p) {
+  document.getElementById('mpost-title').textContent = 'Editar Post';
+  document.getElementById('mpost-id').value = p.id;
+  document.getElementById('mpost-titulo').value = p.titulo;
+  document.getElementById('mpost-slug').value = p.slug;
+  document.getElementById('mpost-cat').value = p.categoria || '';
+  document.getElementById('mpost-img').value = p.imagem_url || '';
+  document.getElementById('mpost-resumo').value = p.resumo || '';
+  document.getElementById('mpost-conteudo').value = p.conteudo || '';
+  document.getElementById('mpost-tags').value = (p.tags || []).join(', ');
+  document.getElementById('mpost-pub').checked = p.publicado;
+  openModal('post');
+}
+
+async function savePost() {
+  const id = document.getElementById('mpost-id').value;
+  const body = {
+    titulo: document.getElementById('mpost-titulo').value,
+    slug: document.getElementById('mpost-slug').value,
+    categoria: document.getElementById('mpost-cat').value,
+    imagem_url: document.getElementById('mpost-img').value,
+    resumo: document.getElementById('mpost-resumo').value,
+    conteudo: document.getElementById('mpost-conteudo').value,
+    tags: document.getElementById('mpost-tags').value.split(',').map(t => t.trim()).filter(Boolean),
+    publicado: document.getElementById('mpost-pub').checked,
+  };
+  try {
+    if (id) await api('PUT', '/admin/blog/' + id, body);
+    else await api('POST', '/admin/blog', body);
+    closeModal('post');
+    loadBlog();
+    toast('Post salvo!', 'success');
+    document.getElementById('mpost-id').value = '';
+    document.getElementById('mpost-title').textContent = 'Novo Post';
+  } catch { toast('Erro ao salvar', 'error'); }
+}
+
+// ── DISPAROS ──
+async function loadDisparos() {
+  const list = await api('GET', '/admin/disparos');
+  document.getElementById('tb-disparos').innerHTML = list.map(d => `
+    <tr>
+      <td>${d.lead_nome || '#' + d.lead_id}</td>
+      <td><span class="badge badge-${d.canal}">${d.canal}</span></td>
+      <td>${d.assunto || '—'}</td>
+      <td><span class="badge badge-${d.status}">${d.status}</span></td>
+      <td style="color:var(--muted);font-size:.75rem">${fmtDate(d.enviado_em)}</td>
+    </tr>`).join('') || emptyRow(5);
+}
+
+async function saveDisparo() {
+  const body = {
+    lead_id: parseInt(document.getElementById('md-lead').value),
+    canal: document.getElementById('md-canal').value,
+    assunto: document.getElementById('md-assunto').value,
+    mensagem: document.getElementById('md-msg').value,
+  };
+  try {
+    await api('POST', '/admin/disparos', body);
+    closeModal('disparo');
+    loadDisparos();
+    toast('Disparo registrado!', 'success');
+  } catch { toast('Erro ao registrar', 'error'); }
+}
+
+// ── UTILS ──
+function fmtDate(d) {
+  if (!d) return '—';
+  return new Date(d).toLocaleDateString('pt-BR', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+}
+
+function emptyRow(cols) {
+  return `<tr><td colspan="${cols}" style="text-align:center;color:var(--muted);padding:32px;font-size:.82rem">Nenhum registro encontrado</td></tr>`;
+}
+
+function toast(msg, type = 'success') {
+  const el = document.getElementById('toast');
+  el.textContent = (type === 'success' ? '✓ ' : '✗ ') + msg;
+  el.className = 'toast ' + type + ' show';
+  setTimeout(() => el.classList.remove('show'), 3000);
+}
+
+// Fecha modal clicando fora
+document.querySelectorAll('.modal-overlay').forEach(o => {
+  o.addEventListener('click', e => { if (e.target === o) o.classList.remove('open'); });
+});
+</script>
+</body>
+</html>
