@@ -63,20 +63,27 @@ def admin_me():
     cur.close(); conn.close()
     return jsonify(user)
 
-# ─── PRODUTOS ─────────────────────────────────────────────────────────────────
-@app.route("/produtos", methods=["GET"])
+# ─── PRODUTOS (API) ────────────────────────────────────────────────────────────
+@app.route("/api/produtos", methods=["GET"])
 def listar_produtos():
+    tipo = request.args.get("tipo")
     categoria = request.args.get("categoria")
     conn = get_db(); cur = conn.cursor()
+    conditions = ["ativo = true"]
+    params = []
+    if tipo:
+        conditions.append("tipo = %s")
+        params.append(tipo)
     if categoria:
-        cur.execute("SELECT * FROM produtos WHERE ativo = true AND categoria = %s ORDER BY destaque DESC, id DESC", (categoria,))
-    else:
-        cur.execute("SELECT * FROM produtos WHERE ativo = true ORDER BY destaque DESC, id DESC")
+        conditions.append("categoria = %s")
+        params.append(categoria)
+    where = " AND ".join(conditions)
+    cur.execute(f"SELECT * FROM produtos WHERE {where} ORDER BY destaque DESC, id DESC", params)
     produtos = cur.fetchall()
     cur.close(); conn.close()
     return jsonify(list(produtos))
 
-@app.route("/produtos/<slug>", methods=["GET"])
+@app.route("/api/produtos/<slug>", methods=["GET"])
 def detalhe_produto(slug):
     conn = get_db(); cur = conn.cursor()
     cur.execute("SELECT * FROM produtos WHERE slug = %s AND ativo = true", (slug,))
@@ -92,10 +99,11 @@ def criar_produto():
     d = request.json
     conn = get_db(); cur = conn.cursor()
     cur.execute("""
-        INSERT INTO produtos (nome, slug, descricao, categoria, preco, arquivo_url, imagem_url, ativo, destaque)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id
+        INSERT INTO produtos (nome, slug, descricao, categoria, preco, arquivo_url, imagem_url, ativo, destaque, tipo)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id
     """, (d["nome"], d["slug"], d.get("descricao"), d.get("categoria"), d["preco"],
-          d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False)))
+          d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False),
+          d.get("tipo", "loja")))
     novo_id = cur.fetchone()["id"]
     conn.commit(); cur.close(); conn.close()
     return jsonify({"id": novo_id}), 201
@@ -107,10 +115,11 @@ def editar_produto(id):
     conn = get_db(); cur = conn.cursor()
     cur.execute("""
         UPDATE produtos SET nome=%s, slug=%s, descricao=%s, categoria=%s, preco=%s,
-        arquivo_url=%s, imagem_url=%s, ativo=%s, destaque=%s, updated_em=now()
+        arquivo_url=%s, imagem_url=%s, ativo=%s, destaque=%s, tipo=%s, updated_em=now()
         WHERE id=%s
     """, (d["nome"], d["slug"], d.get("descricao"), d.get("categoria"), d["preco"],
-          d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False), id))
+          d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False),
+          d.get("tipo", "loja"), id))
     conn.commit(); cur.close(); conn.close()
     return jsonify({"ok": True})
 
@@ -159,40 +168,6 @@ def editar_lead(id):
     """, (d.get("status"), d.get("obs"), id))
     conn.commit(); cur.close(); conn.close()
     return jsonify({"ok": True})
-
-@app.route("/negocio/<slug>")
-def pagina_negocio(slug):
-    return render_template("negocio.html")
-
-@app.route("/blog")
-def pagina_blog():
-    return render_template("blog.html")
-
-@app.route("/blog/<slug>")
-def pagina_post(slug):
-    return render_template("post.html")
-
-@app.route("/categoria/<slug>")
-def pagina_categoria(slug):
-    return render_template("categoria.html")
-
-@app.route("/seuhub")
-@app.route("/seu-hub")
-def pagina_seuhub():
-    return render_template("seuhub.html")
-
-@app.route("/<bairro_slug>")
-def pagina_bairro(bairro_slug):
-    # Rotas reservadas que não são bairros
-    ROTAS_RESERVADAS = {
-        'admin', 'blog', 'loja', 'leads', 'produtos', 'pedidos',
-        'hub', 'webhook', 'obrigado', 'erro', 'politica-de-privacidade',
-        'termos', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico',
-        'portfolio', 'metricas', 'negocio', 'categoria', 'api'
-    }
-    if bairro_slug in ROTAS_RESERVADAS:
-        return "Not Found", 404
-    return render_template("bairro.html")
 
 # ─── PEDIDOS + MERCADO PAGO ───────────────────────────────────────────────────
 @app.route("/pedidos", methods=["POST"])
@@ -525,6 +500,56 @@ def registrar_disparo():
     conn.commit(); cur.close(); conn.close()
     return jsonify({"id": novo_id}), 201
 
+# ─── PÁGINAS HTML ─────────────────────────────────────────────────────────────
+@app.route("/negocio/<slug>")
+def pagina_negocio(slug):
+    return render_template("negocio.html")
+
+@app.route("/blog")
+def pagina_blog():
+    return render_template("blog.html")
+
+@app.route("/blog/<slug>")
+def pagina_post(slug):
+    return render_template("post.html")
+
+@app.route("/categoria/<slug>")
+def pagina_categoria(slug):
+    return render_template("categoria.html")
+
+@app.route("/seuhub")
+@app.route("/seu-hub")
+def pagina_seuhub():
+    return render_template("seuhub.html")
+
+@app.route("/portfolio")
+def pagina_portfolio():
+    return render_template("portfolio.html")
+
+@app.route("/portfolio/<slug>")
+def pagina_projeto(slug):
+    return render_template("projeto.html")
+
+@app.route("/loja")
+def pagina_loja():
+    return render_template("loja.html")
+
+@app.route("/loja/<slug>")
+def pagina_produto(slug):
+    return render_template("produto.html")
+
+@app.route("/<bairro_slug>")
+def pagina_bairro(bairro_slug):
+    ROTAS_RESERVADAS = {
+        'admin', 'blog', 'loja', 'leads', 'produtos', 'pedidos',
+        'hub', 'webhook', 'obrigado', 'erro', 'politica-de-privacidade',
+        'termos', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico',
+        'portfolio', 'metricas', 'negocio', 'categoria', 'api', 'seu-hub', 'seuhub'
+    }
+    if bairro_slug in ROTAS_RESERVADAS:
+        return "Not Found", 404
+    return render_template("bairro.html")
+
 # ─── PAINEL ADMIN ─────────────────────────────────────────────────────────────
 @app.route("/admin")
 def painel():
@@ -533,7 +558,7 @@ def painel():
 @app.route("/")
 def index():
     return render_template("index.html")
-    
+
 # ─── RUN ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     app.run(debug=os.environ.get("FLASK_DEBUG", "false").lower() == "true")
