@@ -1,0 +1,1652 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leanttro Tecnologia — Sites, Hubs e Automações que colocam seu negócio no Google</title>
+<meta name="description" content="Criação de sites a partir de R$499, hubs de tráfego orgânico, automações com n8n e painel de métricas gratuito. Jabaquara, São Paulo.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#7943e2">
+<link rel="canonical" href="https://www.leanttro.com/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Leanttro Tecnologia">
+<meta property="og:url" content="https://www.leanttro.com/">
+<meta property="og:title" content="Leanttro Tecnologia — Sites, Hubs e Automações">
+<meta property="og:description" content="Sites a partir de R$499, hubs de tráfego orgânico e automações que colocam seu negócio no Google sem pagar por clique.">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.leanttro.com/#organization",
+      "name": "Leanttro Tecnologia",
+      "url": "https://www.leanttro.com/",
+      "logo": { "@type": "ImageObject", "url": "https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" },
+      "areaServed": { "@type": "City", "name": "São Paulo", "addressRegion": "SP" },
+      "founder": { "@type": "Person", "name": "Leandro Andrade" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://www.leanttro.com/#website",
+      "url": "https://www.leanttro.com/",
+      "name": "Leanttro Tecnologia",
+      "inLanguage": "pt-BR"
+    }
+  ]
+}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary:   #7943e2;
+  --primary-d: #5c2ec4;
+  --accent:    #00e5a0;
+  --dark:      #0a0a0f;
+  --text:      #1a1a2e;
+  --muted:     #6b6b80;
+  --border:    #e4e4f0;
+  --bg:        #ffffff;
+  --bg2:       #f8f8fc;
+  --radius:    12px;
+  --sans:      'DM Sans', sans-serif;
+  --display:   'Montserrat', sans-serif;
+  --shadow:    0 4px 24px rgba(108,99,255,0.10);
+  --shadow-md: 0 8px 32px rgba(108,99,255,0.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* ── HEADER ── */
+header {
+  background:#fff;
+  border-bottom:1px solid var(--border);
+  position:sticky;top:0;z-index:200;
+  padding:0 20px;
+}
+.header-inner {
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  height:68px;gap:24px;
+}
+.logo img{height:38px;width:auto}
+nav.desktop-nav ul{list-style:none;display:flex;gap:4px}
+nav.desktop-nav ul li a {
+  padding:8px 14px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--muted);
+  transition:all .15s;white-space:nowrap;
+}
+nav.desktop-nav ul li a:hover{color:var(--primary);background:rgba(108,99,255,.07)}
+nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
+.header-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn-wpp-header {
+  display:inline-flex;align-items:center;gap:7px;
+  background:#25D366;color:#fff;
+  padding:9px 18px;border-radius:8px;font-size:.875rem;font-weight:600;
+  transition:all .2s;white-space:nowrap;
+}
+.btn-wpp-header:hover{background:#1da850;transform:translateY(-1px)}
+.btn-wpp-header svg{width:17px;height:17px;flex-shrink:0}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text)}
+.hamburger svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2}
+.mobile-nav-overlay {
+  display:none;position:fixed;inset:0;
+  background:rgba(0,0,0,.85);z-index:300;
+  justify-content:center;align-items:center;
+  opacity:0;transition:opacity .25s;
+}
+.mobile-nav-overlay.active{display:flex;opacity:1}
+.mobile-nav-overlay ul{list-style:none;text-align:center}
+.mobile-nav-overlay ul li{margin:18px 0}
+.mobile-nav-overlay ul li a{color:#fff;font-family:var(--display);font-size:1.8rem;font-weight:700}
+.mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+
+/* ── HERO CARROSSEL ── */
+.hero-section{
+  background:var(--primary);
+  position:relative;overflow:hidden;
+  min-height:520px;
+}
+.hero-slides{position:relative;min-height:520px}
+.hero-slide{
+  display:none;
+  padding:60px 20px 40px;
+  animation:fadeSlide .4s ease;
+}
+.hero-slide.active{display:flex}
+@keyframes fadeSlide{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+.hero-slide-inner{
+  max-width:1200px;margin:0 auto;width:100%;
+  display:flex;align-items:center;gap:48px;
+}
+.hero-text{flex:1;min-width:0}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(255,255,255,.15);color:#fff;
+  padding:5px 14px;border-radius:20px;
+  font-size:.8rem;font-weight:600;letter-spacing:.3px;
+  margin-bottom:18px;border:1px solid rgba(255,255,255,.25);
+}
+.hero-text h1{
+  font-family:var(--display);font-size:2.8rem;font-weight:800;
+  color:#fff;line-height:1.15;margin-bottom:16px;letter-spacing:-.5px;
+}
+.hero-text p{font-size:1.1rem;color:rgba(255,255,255,.85);margin-bottom:28px;max-width:480px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-hero-primary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;color:var(--primary);
+  padding:13px 26px;border-radius:10px;font-size:.95rem;font-weight:700;
+  transition:all .2s;
+}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.btn-hero-secondary{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,.15);color:#fff;
+  padding:13px 26px;border-radius:10px;font-size:.95rem;font-weight:600;
+  border:1.5px solid rgba(255,255,255,.35);transition:all .2s;
+}
+.btn-hero-secondary:hover{background:rgba(255,255,255,.25)}
+.hero-image{flex:0 0 460px;max-width:460px}
+.hero-image img{width:100%;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.25)}
+.hero-image .hero-img-placeholder{
+  width:100%;height:300px;border-radius:16px;
+  background:rgba(255,255,255,.12);border:2px dashed rgba(255,255,255,.25);
+  display:flex;align-items:center;justify-content:center;
+  color:rgba(255,255,255,.5);font-size:.85rem;font-weight:500;
+  flex-direction:column;gap:8px;
+}
+.hero-image .hero-img-placeholder svg{width:48px;height:48px;stroke:currentColor;fill:none;stroke-width:1.5;opacity:.6}
+
+/* Barra wave */
+.hero-wave{display:block;width:100%;margin-top:-5px;line-height:0;position:relative;z-index:2}
+.hero-wave svg{display:block;width:100%}
+
+/* Navegação hero */
+.hero-nav{
+  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
+  display:flex;align-items:center;gap:12px;z-index:10;
+}
+.hero-arrow{
+  background:#fff;border:1.5px solid #222;
+  border-radius:50%;width:38px;height:38px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:#111;transition:all .2s;flex-shrink:0;
+}
+.hero-arrow:hover{background:#f0f0f0}
+.hero-arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5}
+.hero-progress-bar{width:160px;height:3px;background:rgba(0,0,0,.18);border-radius:3px;overflow:hidden}
+.hero-progress-fill{height:100%;background:#111;border-radius:3px;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.hero-dots{display:flex;gap:6px;align-items:center}
+.hero-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;border:none;padding:0;transition:all .2s}
+.hero-dot.active{background:#fff;transform:scale(1.3)}
+
+/* ── SERVIÇOS CARDS ── */
+.section{padding:72px 0}
+.section-alt{background:var(--bg2)}
+.section-title{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-.3px}
+.section-subtitle{color:var(--muted);font-size:1rem;margin-bottom:44px}
+.section-header{text-align:center}
+.section-header .section-title::before{
+  content:'✦';color:var(--primary);margin-right:10px;font-size:1.2rem
+}
+
+.servicos-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:28px;
+  margin-top:44px;
+}
+.servico-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:32px 28px;text-align:center;
+  transition:all .25s;cursor:pointer;
+}
+.servico-card:hover{border-color:var(--primary);transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.servico-icon{
+  width:64px;height:64px;border-radius:16px;
+  background:rgba(108,99,255,.08);
+  display:flex;align-items:center;justify-content:center;
+  margin:0 auto 20px;font-size:1.8rem;
+  transition:background .25s;
+}
+.servico-card:hover .servico-icon{background:rgba(108,99,255,.15)}
+.servico-card h3{font-family:var(--display);font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.servico-card p{font-size:.9rem;color:var(--muted);line-height:1.6;margin-bottom:16px}
+.servico-preco{
+  display:inline-block;background:rgba(108,99,255,.08);
+  color:var(--primary);font-weight:700;font-size:.9rem;
+  padding:4px 14px;border-radius:20px;margin-bottom:16px;
+}
+.servico-link{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--primary);font-weight:600;font-size:.875rem;
+  transition:gap .2s;
+}
+.servico-card:hover .servico-link{gap:10px}
+
+/* ── HUB DE NEGÓCIOS ── */
+.hub-section{background:#fff}
+.filtros-categoria{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:16px}
+.chip-cat{
+  padding:6px 18px;border-radius:20px;border:2px solid var(--border);
+  background:#fff;color:var(--muted);font-family:var(--sans);
+  font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s;
+}
+.chip-cat:hover{border-color:var(--primary);color:var(--primary)}
+.chip-cat.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.filtros-bairro{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-bottom:28px}
+.chip-loc{
+  padding:4px 14px;border-radius:20px;border:1.5px solid var(--border);
+  background:#fff;color:var(--muted);font-family:var(--sans);
+  font-size:.8rem;font-weight:500;cursor:pointer;transition:all .2s;
+}
+.chip-loc:hover{border-color:var(--primary);color:var(--primary)}
+.chip-loc.active{background:var(--primary);border-color:var(--primary);color:#fff}
+
+/* Carrossel negócios */
+.carousel-wrapper{position:relative}
+.carousel-track-outer{overflow:hidden;border-radius:12px}
+.carousel-track{
+  display:flex;gap:22px;
+  transition:transform .4s ease;
+  will-change:transform;cursor:grab;user-select:none;
+}
+.carousel-track:active{cursor:grabbing}
+.negocio-card{
+  flex:0 0 calc(25% - 17px);min-width:0;
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;text-decoration:none;color:inherit;
+  transition:transform .25s,box-shadow .25s,border-color .25s;
+}
+.negocio-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--primary)}
+.negocio-card-foto{width:100%;height:180px;object-fit:cover}
+.negocio-card-sem-foto{
+  width:100%;height:100px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(108,99,255,.06);color:var(--primary);
+  font-size:.85rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+}
+.negocio-card-body{padding:16px}
+.negocio-badge{
+  display:inline-block;background:rgba(0,229,160,.12);color:#00a870;
+  font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:6px;
+}
+.negocio-card-body h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.negocio-bairro{font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:4px}
+.negocio-bairro svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.btn-ver-negocio{
+  display:inline-block;margin-top:12px;
+  background:var(--primary);color:#fff;
+  padding:7px 16px;border-radius:6px;font-size:.82rem;font-weight:600;
+  transition:background .2s;
+}
+.negocio-card:hover .btn-ver-negocio{background:var(--primary-d)}
+@media(max-width:768px){
+  .carousel-track-outer{overflow-x:scroll;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .carousel-track-outer::-webkit-scrollbar{display:none}
+  .carousel-track{transform:none!important;transition:none!important;cursor:default;padding-bottom:2px}
+  .negocio-card{scroll-snap-align:start;flex:0 0 calc(50% - 11px)}
+}
+@media(max-width:520px){.negocio-card{flex:0 0 calc(100% - 2px)}}
+.carousel-nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:20px}
+.carousel-arrow{
+  background:#fff;border:2px solid var(--border);
+  border-radius:50%;width:42px;height:42px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;color:var(--text);transition:all .2s;flex-shrink:0;
+}
+.carousel-arrow:hover:not(:disabled){background:var(--primary);border-color:var(--primary);color:#fff}
+.carousel-arrow:disabled{opacity:.3;cursor:not-allowed}
+.carousel-arrow svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5}
+.carousel-progress-bar{flex:1;max-width:200px;height:4px;background:var(--border);border-radius:4px;overflow:hidden}
+.carousel-progress-fill{height:100%;background:var(--primary);border-radius:4px;transition:width .35s cubic-bezier(.4,0,.2,1)}
+.hub-ver-todos{text-align:center;margin-top:36px}
+.hub-ver-todos a{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--primary);color:#fff;
+  padding:13px 30px;border-radius:10px;font-size:.95rem;font-weight:700;
+  transition:all .2s;
+}
+.hub-ver-todos a:hover{background:var(--primary-d);transform:translateY(-2px)}
+
+/* ── ISCA MÉTRICAS ── */
+.metricas-section{
+  background:linear-gradient(160deg,#0a0a0f 0%,#111118 100%);
+  padding:80px 20px;text-align:center;position:relative;overflow:hidden;
+}
+.metricas-section::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.metricas-section .container{position:relative}
+.metricas-section h2{
+  font-family:var(--display);font-size:2.2rem;font-weight:800;
+  color:#fff;margin-bottom:12px;letter-spacing:-.3px;
+}
+.metricas-section p{color:rgba(255,255,255,.85);font-size:1.05rem;margin-bottom:36px;max-width:560px;margin-left:auto;margin-right:auto}
+.metricas-form{
+  display:flex;gap:12px;max-width:480px;margin:0 auto 16px;
+  background:rgba(255,255,255,.12);
+  border:1.5px solid rgba(255,255,255,.25);
+  border-radius:12px;padding:6px 6px 6px 16px;
+}
+.metricas-form input{
+  flex:1;background:none;border:none;outline:none;
+  color:#fff;font-family:var(--sans);font-size:.95rem;
+  placeholder-color:rgba(255,255,255,.5);
+}
+.metricas-form input::placeholder{color:rgba(255,255,255,.55)}
+.btn-metricas{
+  background:#fff;color:var(--primary);
+  padding:10px 22px;border-radius:8px;font-size:.9rem;font-weight:700;
+  border:none;cursor:pointer;white-space:nowrap;
+  transition:all .2s;font-family:var(--sans);
+}
+.btn-metricas:hover{background:var(--accent);color:var(--dark)}
+.metricas-note{color:rgba(255,255,255,.6);font-size:.8rem}
+.metricas-note a{color:rgba(255,255,255,.85);text-decoration:underline}
+
+/* ── CASES ── */
+.cases-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;margin-top:44px}
+.case-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:0;position:relative;overflow:hidden;
+  transition:all .25s;display:flex;flex-direction:column;
+}
+.case-img{width:100%;height:420px;overflow:hidden;flex-shrink:0}
+.case-img img{width:100%;height:100%;object-fit:contain;background:#f8f8f8;display:block;transition:transform .4s}
+.case-card:hover .case-img img{transform:scale(1.04)}
+.case-body{padding:28px 28px 28px;flex:1;display:flex;flex-direction:column;position:relative}
+.case-body::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.case-card:hover{border-color:var(--primary);box-shadow:var(--shadow-md)}
+.case-tag{
+  display:inline-block;background:rgba(121,67,226,.08);color:var(--primary);
+  font-size:.75rem;font-weight:700;padding:3px 10px;border-radius:20px;
+  text-transform:uppercase;letter-spacing:.5px;margin-bottom:14px;
+}
+.case-body h3{font-family:var(--display);font-size:1.35rem;font-weight:800;color:var(--text);margin-bottom:8px}
+.case-body .case-desc{font-size:.9rem;color:var(--muted);margin-bottom:24px;line-height:1.6}
+.case-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-bottom:24px}
+.case-num{text-align:center;padding:14px 8px;background:var(--bg2);border-radius:10px}
+.case-num strong{display:block;font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--primary);line-height:1}
+.case-num span{font-size:.75rem;color:var(--muted);margin-top:3px;display:block}
+.case-link{
+  display:inline-flex;align-items:center;gap:6px;
+  color:var(--primary);font-weight:600;font-size:.875rem;
+  transition:gap .2s;
+}
+.case-card:hover .case-link{gap:10px}
+
+/* ── AVALIAÇÕES GOOGLE ── */
+.reviews-section{background:var(--bg2)}
+.reviews-header-row{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:36px;flex-wrap:wrap;gap:20px;
+}
+.reviews-score{display:flex;align-items:center;gap:20px}
+.reviews-big-num{font-family:var(--display);font-size:3.5rem;font-weight:800;color:var(--text);line-height:1}
+.reviews-stars{display:flex;gap:3px;margin-bottom:4px}
+.reviews-stars svg{width:20px;height:20px;fill:#FBBC04;stroke:#FBBC04;stroke-width:0}
+.reviews-count{font-size:.85rem;color:var(--muted)}
+.btn-google-reviews{
+  display:inline-flex;align-items:center;gap:8px;
+  background:#fff;border:1.5px solid var(--border);
+  padding:10px 20px;border-radius:10px;font-size:.875rem;font-weight:600;color:var(--text);
+  box-shadow:0 2px 8px rgba(0,0,0,.06);transition:all .2s;
+}
+.btn-google-reviews:hover{border-color:var(--primary);box-shadow:var(--shadow)}
+.btn-google-reviews svg{width:18px;height:18px;flex-shrink:0}
+
+/* Carrossel reviews */
+.reviews-track-outer{overflow:hidden}
+.reviews-track{
+  display:flex;gap:20px;
+  transition:transform .4s ease;
+  will-change:transform;cursor:grab;user-select:none;
+}
+.reviews-track:active{cursor:grabbing}
+.review-card{
+  flex:0 0 calc(33.333% - 14px);min-width:0;
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:24px;transition:all .2s;
+}
+.review-card:hover{border-color:var(--primary);box-shadow:var(--shadow)}
+.review-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.review-avatar{
+  width:40px;height:40px;border-radius:50%;
+  background:linear-gradient(135deg,var(--primary),var(--accent));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-weight:700;font-size:.875rem;flex-shrink:0;
+}
+.review-name{font-weight:700;font-size:.9rem;color:var(--text)}
+.review-date{font-size:.75rem;color:var(--muted)}
+.review-stars{display:flex;gap:2px;margin-bottom:10px}
+.review-stars svg{width:14px;height:14px;fill:#FBBC04;stroke:#FBBC04;stroke-width:0}
+.review-text{font-size:.875rem;color:var(--muted);line-height:1.6}
+@media(max-width:768px){
+  .reviews-track-outer{overflow-x:scroll;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .reviews-track-outer::-webkit-scrollbar{display:none}
+  .reviews-track{transform:none!important;transition:none!important;cursor:default}
+  .review-card{scroll-snap-align:start;flex:0 0 calc(85% - 10px)}
+}
+
+/* ── PORTFÓLIO ── */
+.portfolio-section{background:#fff}
+.portfolio-track-outer{overflow:hidden}
+.portfolio-track{
+  display:flex;gap:20px;
+  transition:transform .4s ease;
+  will-change:transform;cursor:grab;user-select:none;
+}
+.portfolio-track:active{cursor:grabbing}
+.portfolio-card{
+  flex:0 0 calc(33.333% - 14px);min-width:0;
+  border-radius:var(--radius);overflow:hidden;
+  border:1.5px solid var(--border);
+  transition:all .25s;position:relative;
+}
+.portfolio-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--primary)}
+.portfolio-card img{width:100%;height:220px;object-fit:cover;display:block}
+.portfolio-card-body{padding:16px}
+.portfolio-card h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.portfolio-card span{font-size:.8rem;color:var(--muted)}
+.portfolio-card a.portfolio-ext{
+  position:absolute;top:12px;right:12px;
+  background:rgba(0,0,0,.55);color:#fff;
+  width:32px;height:32px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transition:opacity .2s;
+}
+.portfolio-card:hover .portfolio-ext{opacity:1}
+.portfolio-card .portfolio-ext svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+@media(max-width:768px){
+  .portfolio-track-outer{overflow-x:scroll;overflow-y:hidden;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory;scrollbar-width:none}
+  .portfolio-track-outer::-webkit-scrollbar{display:none}
+  .portfolio-track{transform:none!important;transition:none!important;cursor:default}
+  .portfolio-card{scroll-snap-align:start;flex:0 0 calc(80% - 10px)}
+}
+
+/* ── FAQ ── */
+.faq-section{background:var(--bg2)}
+.faq-grid{max-width:800px;margin:44px auto 0;display:flex;flex-direction:column;gap:0}
+.faq-item{border-bottom:1px solid var(--border)}
+.faq-item:first-child{border-top:1px solid var(--border)}
+.faq-question{
+  width:100%;background:none;border:none;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:20px 0;cursor:pointer;
+  font-family:var(--sans);font-size:.975rem;font-weight:600;color:var(--text);
+  text-align:left;gap:16px;transition:color .2s;
+}
+.faq-question:hover{color:var(--primary)}
+.faq-question svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0;transition:transform .25s}
+.faq-item.open .faq-question svg{transform:rotate(45deg);color:var(--primary)}
+.faq-answer{max-height:0;overflow:hidden;transition:max-height .3s ease,padding .3s ease}
+.faq-answer p{padding:0 0 20px;font-size:.9rem;color:var(--muted);line-height:1.7}
+.faq-item.open .faq-answer{max-height:300px}
+
+/* ── CTA FINAL ── */
+.cta-section{
+  background:var(--dark);padding:100px 20px;text-align:center;
+}
+.cta-section h2{
+  font-family:var(--display);font-size:2.8rem;font-weight:800;
+  color:#fff;margin-bottom:16px;letter-spacing:-.4px;
+}
+.cta-section h2 span{color:var(--accent)}
+.cta-section p{color:rgba(255,255,255,.7);font-size:1.05rem;margin-bottom:40px;max-width:520px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-cta-wpp{
+  display:inline-flex;align-items:center;gap:9px;
+  background:#25D366;color:#fff;
+  padding:15px 32px;border-radius:12px;font-size:1rem;font-weight:700;
+  transition:all .2s;
+}
+.btn-cta-wpp:hover{background:#1da850;transform:translateY(-2px);box-shadow:0 8px 24px rgba(37,211,102,.3)}
+.btn-cta-wpp svg{width:20px;height:20px;flex-shrink:0}
+.btn-cta-outline{
+  display:inline-flex;align-items:center;gap:9px;
+  background:transparent;color:#fff;
+  border:1.5px solid rgba(255,255,255,.3);
+  padding:15px 32px;border-radius:12px;font-size:1rem;font-weight:600;
+  transition:all .2s;
+}
+.btn-cta-outline:hover{background:rgba(255,255,255,.08)}
+
+/* ── FOOTER ── */
+footer{
+  background:#0d0d12;border-top:1px solid #1e1e2a;
+  padding:44px 20px 28px;
+}
+.footer-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:24px;
+}
+.footer-logo img{height:36px;width:auto;filter:brightness(0) invert(1)}
+.footer-divider{width:1px;height:40px;background:#1e1e2a;flex-shrink:0}
+.footer-text{flex:1;min-width:200px}
+.footer-text strong{display:block;color:#fff;font-size:.875rem;font-weight:700;margin-bottom:2px}
+.footer-text span{color:#5a5a70;font-size:.8rem;line-height:1.5}
+.footer-links{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.f-btn{
+  display:inline-flex;align-items:center;gap:6px;
+  font-size:.8rem;font-weight:600;text-decoration:none;
+  padding:8px 16px;border-radius:7px;white-space:nowrap;
+  transition:opacity .2s,transform .15s;
+}
+.f-btn:hover{opacity:.82;transform:translateY(-1px)}
+.f-btn svg{width:14px;height:14px;flex-shrink:0}
+.f-btn-site{background:#fff;color:#0d0d12}
+.f-btn-wpp{background:#25D366;color:#fff}
+.f-btn-ig{background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff}
+.footer-bottom{
+  max-width:1200px;margin:24px auto 0;
+  padding-top:18px;border-top:1px solid #1a1a24;
+  text-align:center;color:#3a3a4a;font-size:.78rem;
+}
+.footer-bottom a{color:#505060;text-decoration:none}
+.footer-bottom a:hover{color:#888}
+@media(max-width:640px){
+  .footer-inner{flex-direction:column;align-items:center;text-align:center;gap:14px}
+  .footer-divider{display:none}
+  .footer-links{justify-content:center;width:100%}
+  .f-btn{flex:1;justify-content:center}
+}
+
+/* ── RESPONSIVO GERAL ── */
+@media(max-width:960px){
+  .servicos-grid{grid-template-columns:repeat(2,1fr)}
+  .cases-grid{grid-template-columns:1fr}
+}
+@media(max-width:768px){
+  nav.desktop-nav{display:none}
+  .hamburger{display:block}
+  .hero-slide-inner{flex-direction:column;gap:28px;padding:40px 0 80px}
+  .hero-image{flex:none;max-width:100%;width:100%}
+  .hero-text h1{font-size:2rem}
+  .hero-text p{font-size:1rem}
+  .hero-btns{flex-direction:column}
+  .btn-hero-primary,.btn-hero-secondary{justify-content:center}
+  .section-title{font-size:1.6rem}
+  .reviews-header-row{flex-direction:column;align-items:flex-start}
+  .review-card{flex:0 0 85%}
+  .servicos-grid{grid-template-columns:1fr}
+  .case-nums{grid-template-columns:repeat(3,1fr)}
+  .cta-section h2{font-size:2rem}
+  .metricas-form{flex-direction:column;padding:12px}
+  .metricas-form input{text-align:center}
+}
+@media(max-width:520px){
+  .hero-text h1{font-size:1.75rem}
+  .portfolio-card{flex:0 0 85%}
+  .case-nums{grid-template-columns:repeat(3,1fr)}
+}
+
+/* ── SERVICO CARD V2 (carousel) ────────────────────────── */
+.servico-card-v2{
+  min-width:380px;
+  background:#fff;
+  border-radius:20px;
+  padding:36px 36px 32px;
+  box-shadow:0 4px 24px rgba(121,67,226,.10);
+  border:1.5px solid rgba(121,67,226,.10);
+  display:flex;flex-direction:column;gap:14px;
+  transition:box-shadow .25s,transform .25s;
+  flex:0 0 380px;
+}
+.servico-card-v2:hover{box-shadow:0 8px 40px rgba(121,67,226,.18);transform:translateY(-4px)}
+.servico-card-v2-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.servico-icon-v2{
+  width:52px;height:52px;border-radius:14px;
+  background:linear-gradient(135deg,rgba(121,67,226,.12),rgba(121,67,226,.04));
+  display:flex;align-items:center;justify-content:center;
+  color:var(--primary);flex-shrink:0;
+}
+.servico-tag-v2{
+  font-size:.75rem;font-weight:700;letter-spacing:.04em;
+  background:linear-gradient(135deg,var(--primary),var(--primary-d));
+  color:#fff;padding:5px 12px;border-radius:50px;white-space:nowrap;
+}
+.servico-card-v2 h3{font-size:1.25rem;font-weight:700;color:var(--text);margin:0}
+.servico-card-v2 p{font-size:.93rem;color:#555;line-height:1.65;margin:0;flex:1}
+.servico-extra-tag{font-size:.78rem;font-weight:600;color:#00a870;background:rgba(0,229,160,.1);padding:4px 10px;border-radius:50px;align-self:flex-start}
+.servico-cta-v2{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:.88rem;font-weight:700;color:var(--primary);
+  text-decoration:none;margin-top:6px;
+  transition:gap .2s;
+}
+.servico-cta-v2:hover{gap:10px}
+
+/* ── BLOG SECTION ────────────────────────── */
+.blog-section{background:var(--primary)}
+.blog-section .section-title{color:#fff}
+.blog-section .section-subtitle{color:rgba(255,255,255,.75)}
+.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.blog-card{
+  background:#fff;border-radius:16px;overflow:hidden;
+  text-decoration:none;color:inherit;
+  border:1.5px solid rgba(121,67,226,.08);
+  box-shadow:0 2px 16px rgba(0,0,0,.05);
+  transition:transform .25s,box-shadow .25s;
+  display:flex;flex-direction:column;
+}
+.blog-card:hover{transform:translateY(-5px);box-shadow:0 8px 32px rgba(121,67,226,.14)}
+.blog-card-img{height:190px;width:100%;background:linear-gradient(135deg,#ece6fb,#d5caf6);flex-shrink:0}
+.blog-card-img-placeholder{position:relative;overflow:hidden}
+.blog-card-img-placeholder::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(121,67,226,.3) 0%,rgba(0,229,160,.15) 100%);
+}
+.blog-card-body{padding:22px 24px 26px;display:flex;flex-direction:column;gap:10px;flex:1}
+.blog-tag{font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--primary);background:rgba(121,67,226,.08);padding:3px 10px;border-radius:50px;align-self:flex-start}
+.blog-card-body h3{font-size:1rem;font-weight:700;color:var(--text);line-height:1.45;margin:0}
+.blog-card-body p{font-size:.85rem;color:#666;line-height:1.6;margin:0;flex:1}
+.blog-link{font-size:.83rem;font-weight:700;color:var(--primary);margin-top:6px}
+.btn-ver-blog{
+  display:inline-flex;align-items:center;gap:6px;
+  background:#fff;
+  color:var(--primary);padding:14px 32px;border-radius:50px;
+  text-decoration:none;font-weight:700;font-size:.95rem;
+  box-shadow:0 4px 20px rgba(0,0,0,.15);
+  transition:transform .2s,box-shadow .2s;
+}
+.btn-ver-blog:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.2)}
+@media(max-width:900px){
+  .blog-grid{grid-template-columns:repeat(2,1fr)}
+  .servico-card-v2{min-width:300px;flex:0 0 300px}
+}
+@media(max-width:600px){
+  .blog-grid{grid-template-columns:1fr}
+  .servico-card-v2{min-width:80vw;flex:0 0 80vw;padding:26px 22px 24px}
+}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" height="38">
+    </a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="/" class="ativo">Home</a></li>
+        <li><a href="/seu-hub">Seu Hub</a></li>
+        <li><a href="/loja">Loja</a></li>
+        <li><a href="/portfolio">Portfólio</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/metricas">Métricas Grátis</a></li>
+        <li><a href="#orcamento">Orçamento</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="https://wa.me/5511999999999" class="btn-wpp-header" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav-overlay" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose">×</button>
+  <nav><ul>
+    <li><a href="/" onclick="closeNav()">Home</a></li>
+    <li><a href="/seu-hub" onclick="closeNav()">Seu Hub</a></li>
+    <li><a href="/loja" onclick="closeNav()">Loja</a></li>
+    <li><a href="/portfolio" onclick="closeNav()">Portfólio</a></li>
+    <li><a href="/blog" onclick="closeNav()">Blog</a></li>
+    <li><a href="/metricas" onclick="closeNav()">Métricas Grátis</a></li>
+    <li><a href="#orcamento" onclick="closeNav()">Orçamento</a></li>
+  </ul></nav>
+</div>
+
+<!-- HERO CARROSSEL -->
+<section class="hero-section" aria-label="Apresentação Leanttro">
+  <div class="hero-slides" id="heroSlides">
+
+    <!-- Slide 1: Site R$499 -->
+    <div class="hero-slide active">
+      <div class="hero-slide-inner container">
+        <div class="hero-text">
+          <span class="hero-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Entrega em 3 dias úteis</span>
+          <h1>Site profissional a partir de R$499</h1>
+          <p>Painel admin, blog integrado, leads salvos no banco e métricas de performance. Sem Wix, sem limitação.</p>
+          <div class="hero-btns">
+            <a href="https://wa.me/5511999999999" class="btn-hero-primary">Quero meu site →</a>
+            <a href="/portfolio" class="btn-hero-secondary">Ver portfólio</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="hero-img-placeholder">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+            <span>Mockup do site aqui</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 2: Seu Hub -->
+    <div class="hero-slide">
+      <div class="hero-slide-inner container">
+        <div class="hero-text">
+          <span class="hero-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Tráfego orgânico todo mês</span>
+          <h1>Instalo um Hub de tráfego no seu domínio</h1>
+          <p>Enquanto seus concorrentes pagam por clique, seus clientes te encontram de graça — todo mês. Prova real: 328 mil impressões em 5 meses.</p>
+          <div class="hero-btns">
+            <a href="/seu-hub" class="btn-hero-primary">Como funciona →</a>
+            <a href="#cases" class="btn-hero-secondary">Ver os números</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="hero-img-placeholder">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+            <span>Screenshot do Feiras de Rua</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 3: Automações -->
+    <div class="hero-slide">
+      <div class="hero-slide-inner container">
+        <div class="hero-text">
+          <span class="hero-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>De R$97 a R$497</span>
+          <h1>Automações prontas com n8n e IA</h1>
+          <p>Chatbots, integrações, geração de contratos, lead automático no WhatsApp. Compre e use hoje — sem mensalidade de plataforma.</p>
+          <div class="hero-btns">
+            <a href="/loja" class="btn-hero-primary">Ver automações →</a>
+            <a href="https://wa.me/5511999999999" class="btn-hero-secondary">Consultar</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="hero-img-placeholder">
+            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            <span>Screenshot da loja</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 4: Métricas -->
+    <div class="hero-slide">
+      <div class="hero-slide-inner container">
+        <div class="hero-text">
+          <span class="hero-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>100% gratuito</span>
+          <h1>Veja seu site no Google agora — de graça</h1>
+          <p>Cole o ID do seu Google Analytics e veja cliques, impressões e palavras-chave em tempo real. Sem enrolação.</p>
+          <div class="hero-btns">
+            <a href="/metricas" class="btn-hero-primary">Acessar painel →</a>
+            <a href="https://wa.me/5511999999999" class="btn-hero-secondary">Não tenho GA4</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="hero-img-placeholder">
+            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+            <span>Screenshot do painel de métricas</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Slide 5: 3D Experience -->
+    <div class="hero-slide">
+      <div class="hero-slide-inner container">
+        <div class="hero-text">
+          <span class="hero-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Sem concorrente direto</span>
+          <h1>3D Experience — o diferencial que ninguém tem</h1>
+          <p>Websites imersivos em Three.js e WebGL. Seu produto ou portfólio em uma experiência que o visitante nunca esquece.</p>
+          <div class="hero-btns">
+            <a href="https://wa.me/5511999999999" class="btn-hero-primary">Solicitar proposta →</a>
+            <a href="/portfolio" class="btn-hero-secondary">Ver exemplos</a>
+          </div>
+        </div>
+        <div class="hero-image">
+          <div class="hero-img-placeholder">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
+            <span>Demo 3D aqui</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /hero-slides -->
+
+  <!-- Navegação hero -->
+  <div class="hero-nav">
+    <button class="hero-arrow" id="heroPrev" aria-label="Anterior">
+      <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <div class="hero-progress-bar"><div class="hero-progress-fill" id="heroProgress"></div></div>
+    <button class="hero-arrow" id="heroNext" aria-label="Próximo">
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+  </div>
+
+  <!-- Wave -->
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,90 L0,55 C180,15 360,75 540,35 C720,-5 900,65 1080,30 C1260,-5 1380,20 1440,5 L1440,90 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- NEGÓCIOS DO HUB -->
+<section class="section hub-section" id="hub">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Negócios em destaque no Jabaquara e região</h2>
+      <p class="section-subtitle">Encontre serviços, comércio, saúde e muito mais perto de você</p>
+    </div>
+    <div class="filtros-categoria" id="filtrosCat">
+      <button class="chip-cat active" data-cat="todos">Todos</button>
+      <button class="chip-cat" data-cat="restaurantes"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>Restaurantes</button>
+      <button class="chip-cat" data-cat="servicos"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M20 12h2M2 12h2M17.66 17.66l-1.41-1.41M6.34 17.66l1.41-1.41"/></svg>Serviços</button>
+      <button class="chip-cat" data-cat="comercio"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Comércio</button>
+      <button class="chip-cat" data-cat="saude"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Saúde</button>
+      <button class="chip-cat" data-cat="educacao"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Educação</button>
+      <button class="chip-cat" data-cat="beleza"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>Beleza</button>
+    </div>
+    <div class="filtros-bairro" id="filtrosBairro">
+      <button class="chip-loc active" data-bairro="todos">Todos os bairros</button>
+      <button class="chip-loc" data-bairro="jabaquara">Jabaquara</button>
+      <button class="chip-loc" data-bairro="saude">Saúde</button>
+      <button class="chip-loc" data-bairro="ipiranga">Ipiranga</button>
+      <button class="chip-loc" data-bairro="vila-mariana">Vila Mariana</button>
+      <button class="chip-loc" data-bairro="cursino">Cursino</button>
+    </div>
+
+    <div class="carousel-wrapper">
+      <div class="carousel-track-outer" id="hubTrackOuter">
+        <div class="carousel-track" id="hubTrack">
+
+          <a href="/negocio/exemplo-1" class="negocio-card">
+            <div class="negocio-card-sem-foto">Foto do negócio</div>
+            <div class="negocio-card-body">
+              <span class="negocio-badge">Restaurantes</span>
+              <h3>Nome do Restaurante</h3>
+              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Jabaquara</p>
+              <span class="btn-ver-negocio">Ver mais →</span>
+            </div>
+          </a>
+
+          <a href="/negocio/exemplo-2" class="negocio-card">
+            <div class="negocio-card-sem-foto">Foto do negócio</div>
+            <div class="negocio-card-body">
+              <span class="negocio-badge">Serviços</span>
+              <h3>Oficina do Bairro</h3>
+              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Saúde</p>
+              <span class="btn-ver-negocio">Ver mais →</span>
+            </div>
+          </a>
+
+          <a href="/negocio/exemplo-3" class="negocio-card">
+            <div class="negocio-card-sem-foto">Foto do negócio</div>
+            <div class="negocio-card-body">
+              <span class="negocio-badge">Saúde</span>
+              <h3>Clínica Saúde Total</h3>
+              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Ipiranga</p>
+              <span class="btn-ver-negocio">Ver mais →</span>
+            </div>
+          </a>
+
+          <a href="/negocio/exemplo-4" class="negocio-card">
+            <div class="negocio-card-sem-foto">Foto do negócio</div>
+            <div class="negocio-card-body">
+              <span class="negocio-badge">Comércio</span>
+              <h3>Mercadinho do Zé</h3>
+              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Jabaquara</p>
+              <span class="btn-ver-negocio">Ver mais →</span>
+            </div>
+          </a>
+
+          <a href="/negocio/exemplo-5" class="negocio-card">
+            <div class="negocio-card-sem-foto">Foto do negócio</div>
+            <div class="negocio-card-body">
+              <span class="negocio-badge">Beleza</span>
+              <h3>Studio Hair</h3>
+              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Vila Mariana</p>
+              <span class="btn-ver-negocio">Ver mais →</span>
+            </div>
+          </a>
+
+          <a href="/negocio/exemplo-6" class="negocio-card">
+            <div class="negocio-card-sem-foto">Foto do negócio</div>
+            <div class="negocio-card-body">
+              <span class="negocio-badge">Educação</span>
+              <h3>Curso Técnico Jabaquara</h3>
+              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Jabaquara</p>
+              <span class="btn-ver-negocio">Ver mais →</span>
+            </div>
+          </a>
+
+          <a href="/negocio/exemplo-7" class="negocio-card">
+            <div class="negocio-card-sem-foto">Foto do negócio</div>
+            <div class="negocio-card-body">
+              <span class="negocio-badge">Restaurantes</span>
+              <h3>Pizzaria da Esquina</h3>
+              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Cursino</p>
+              <span class="btn-ver-negocio">Ver mais →</span>
+            </div>
+          </a>
+
+          <a href="/negocio/exemplo-8" class="negocio-card">
+            <div class="negocio-card-sem-foto">Foto do negócio</div>
+            <div class="negocio-card-body">
+              <span class="negocio-badge">Serviços</span>
+              <h3>Eletricista 24h</h3>
+              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Saúde</p>
+              <span class="btn-ver-negocio">Ver mais →</span>
+            </div>
+          </a>
+
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-arrow" id="hubPrev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-progress-bar"><div class="carousel-progress-fill" id="hubProgress"></div></div>
+        <button class="carousel-arrow" id="hubNext" aria-label="Próximo">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <div class="hub-ver-todos">
+      <a href="/jabaquara">Ver todos os negócios <svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;display:inline;vertical-align:middle" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="section section-alt" id="servicos">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">O que a Leanttro faz</h2>
+      <p class="section-subtitle">Soluções digitais com preço justo e entrega real</p>
+    </div>
+    <div class="carousel-wrapper">
+      <div class="carousel-track-outer" id="servicosTrackOuter">
+        <div class="carousel-track" id="servicosTrack">
+
+          <div class="servico-card-v2">
+            <div class="servico-card-v2-top">
+              <div class="servico-icon-v2"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+              <span class="servico-tag-v2">A partir de R$499</span>
+            </div>
+            <h3>Site Profissional</h3>
+            <p>Painel admin, blog integrado, leads salvos no banco, SEO técnico completo e hospedagem na sua VPS. Entrega em 3 dias.</p>
+            <div class="servico-extra-tag">+ R$35/mês hospedagem</div>
+            <a href="/sites" class="servico-cta-v2">Saiba mais <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+
+          <div class="servico-card-v2">
+            <div class="servico-card-v2-top">
+              <div class="servico-icon-v2"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+              <span class="servico-tag-v2">Mensalidade — consulte</span>
+            </div>
+            <h3>Seu Hub</h3>
+            <p>Um hub de tráfego orgânico instalado no seu domínio. Atrai seu público-alvo sem pagar por anúncio — todo mês, de graça.</p>
+            <a href="/seu-hub" class="servico-cta-v2">Ver como funciona <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+
+          <div class="servico-card-v2">
+            <div class="servico-card-v2-top">
+              <div class="servico-icon-v2"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+              <span class="servico-tag-v2">De R$97 a R$497</span>
+            </div>
+            <h3>Automações n8n</h3>
+            <p>Chatbots, integrações com WhatsApp, geração de contratos, IA para respostas automáticas. Compre e use hoje.</p>
+            <a href="/loja" class="servico-cta-v2">Ver loja <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+
+          <div class="servico-card-v2">
+            <div class="servico-card-v2-top">
+              <div class="servico-icon-v2"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/><line x1="2" y1="20" x2="22" y2="20"/></svg></div>
+              <span class="servico-tag-v2">Gratuito</span>
+            </div>
+            <h3>Métricas Grátis</h3>
+            <p>Painel de Google Analytics e Search Console gratuito. Não tem GA4 instalado? A Leanttro instala por R$150.</p>
+            <a href="/metricas" class="servico-cta-v2">Acessar painel <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+
+          <div class="servico-card-v2">
+            <div class="servico-card-v2-top">
+              <div class="servico-icon-v2"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+              <span class="servico-tag-v2">Sob consulta</span>
+            </div>
+            <h3>Tráfego Pago & SEO</h3>
+            <p>Google Ads, Meta Ads e SEO técnico para quem quer resultado rápido e orgânico ao mesmo tempo.</p>
+            <a href="https://wa.me/5511999999999" class="servico-cta-v2">Consultar <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+
+          <div class="servico-card-v2">
+            <div class="servico-card-v2-top">
+              <div class="servico-icon-v2"><svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg></div>
+              <span class="servico-tag-v2">Premium</span>
+            </div>
+            <h3>3D Experience</h3>
+            <p>Websites imersivos em Three.js e WebGL. Diferencial premium para marcas que querem ser inesquecíveis.</p>
+            <a href="https://wa.me/5511999999999" class="servico-cta-v2">Solicitar proposta <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+
+        </div>
+      </div>
+      <div class="carousel-nav">
+        <button class="carousel-arrow" id="servicosPrev" aria-label="Anterior">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-progress"><div class="carousel-progress-fill" id="servicosProgressFill"></div></div>
+        <button class="carousel-arrow" id="servicosNext" aria-label="Próximo">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ISCA MÉTRICAS -->
+<section class="metricas-section" id="metricas-isca">
+  <div class="container">
+    <h2>Veja seu site no Google agora — de graça</h2>
+    <p>Cole o ID do seu Google Analytics e veja cliques, impressões e palavras-chave em tempo real. Não tem GA4? A gente instala por R$150.</p>
+    <div class="metricas-form">
+      <input type="text" placeholder="Cole seu ID: G-XXXXXXXXXX" id="gaInput">
+      <button class="btn-metricas" onclick="window.location.href='/metricas'">Ver minhas métricas →</button>
+    </div>
+    <p class="metricas-note">Cria uma conta gratuita e acessa o painel completo. <a href="/metricas">Saiba mais</a></p>
+  </div>
+</section>
+
+<!-- CASES -->
+<section class="section section-alt" id="cases">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Cases com números reais</h2>
+      <p class="section-subtitle">Não são promessas — são resultados de projetos rodando agora</p>
+    </div>
+    <div class="cases-grid">
+
+      <div class="case-card">
+        <div class="case-img"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779206472/feirasderuaa_h0y5c3.png" alt="Feiras de Rua SP" loading="lazy"></div>
+        <div class="case-body">
+          <span class="case-tag">Hub Local</span>
+          <h3>Feiras de Rua SP</h3>
+          <p class="case-desc">Hub de feiras livres de São Paulo. 5 meses de vida. Crescimento orgânico sem investimento em anúncios.</p>
+          <div class="case-nums">
+            <div class="case-num"><strong>328K</strong><span>Impressões (3 meses)</span></div>
+            <div class="case-num"><strong>7.420</strong><span>Cliques orgânicos</span></div>
+            <div class="case-num"><strong>8.100</strong><span>Usuários ativos</span></div>
+          </div>
+          <a href="https://feirasderua.com.br" target="_blank" rel="noopener" class="case-link">Visitar site <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+
+      <div class="case-card">
+        <div class="case-img"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779206472/guia_do_rodizio_xwzesm.png" alt="Guia do Rodízio SP" loading="lazy"></div>
+        <div class="case-body">
+          <span class="case-tag">Hub de Nicho</span>
+          <h3>Guia do Rodízio SP</h3>
+          <p class="case-desc">Criado na sexta, subiu no sábado. Em 4 dias apareceu acima do Reddit no Google para "guia rodizio".</p>
+          <div class="case-nums">
+            <div class="case-num"><strong>559</strong><span>Restaurantes em 4 dias</span></div>
+            <div class="case-num"><strong>13.4</strong><span>Posição média (24h)</span></div>
+            <div class="case-num"><strong>1 dia</strong><span>Para rankear no Google</span></div>
+          </div>
+          <a href="https://guiadorodizio.com.br" target="_blank" rel="noopener" class="case-link">Visitar site <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg></a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- AVALIAÇÕES GOOGLE -->
+<section class="section reviews-section" id="avaliacoes">
+  <div class="container">
+    <div class="reviews-header-row">
+      <div class="reviews-score">
+        <div class="reviews-big-num">5.0</div>
+        <div>
+          <div class="reviews-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <div class="reviews-count">Avaliações no Google</div>
+        </div>
+      </div>
+      <a href="https://www.google.com/search?q=leanttro#mpd=~7553232772289112501/customers/reviews" target="_blank" rel="noopener" class="btn-google-reviews">
+        <svg viewBox="0 0 24 24" fill="none" stroke="none" width="18" height="18"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        Ver todas as avaliações
+      </a>
+    </div>
+
+    <div class="reviews-track-outer" id="reviewsTrackOuter">
+      <div class="reviews-track" id="reviewsTrack">
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">CL</div>
+            <div><div class="review-name">Construtora Leal</div><div class="review-date">há 2 meses</div></div>
+          </div>
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="review-text">Leandro entregou nosso site em menos de 3 dias com painel admin completo. Superou as expectativas em qualidade e velocidade. Recomendo!</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">RT</div>
+            <div><div class="review-name">RT Design Interiores</div><div class="review-date">há 3 meses</div></div>
+          </div>
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="review-text">Galeria de projetos linda, identidade visual impecável. O Leandro capturou exatamente o que a gente precisava transmitir para os clientes de alto padrão.</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">FL</div>
+            <div><div class="review-name">Fit4Life Food</div><div class="review-date">há 1 mês</div></div>
+          </div>
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="review-text">Blog integrado no nosso site trouxe tráfego orgânico real. Leandro fez tudo sem que a gente precisasse entender de tecnologia. Simples assim.</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">OE</div>
+            <div><div class="review-name">Oceano Etiquetas</div><div class="review-date">há 4 meses</div></div>
+          </div>
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="review-text">Profissional sério, entrega no prazo e com qualidade. O site ficou exatamente como queríamos — moderno, rápido e fácil de atualizar.</p>
+        </div>
+
+        <div class="review-card">
+          <div class="review-top">
+            <div class="review-avatar">CR</div>
+            <div><div class="review-name">Creapes Audiovisual</div><div class="review-date">há 2 meses</div></div>
+          </div>
+          <div class="review-stars">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <p class="review-text">Portfólio visual da Creapes ficou incrível. O painel admin facilita atualizar os projetos sem precisar chamar o desenvolvedor sempre.</p>
+        </div>
+
+      </div>
+    </div>
+    <div class="carousel-nav" style="margin-top:20px">
+      <button class="carousel-arrow" id="reviewsPrev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-progress-bar"><div class="carousel-progress-fill" id="reviewsProgress"></div></div>
+      <button class="carousel-arrow" id="reviewsNext" aria-label="Próximo">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFÓLIO -->
+<section class="section portfolio-section" id="portfolio">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Últimos clientes</h2>
+      <p class="section-subtitle">Sites entregues com qualidade, prazo e painel admin incluído</p>
+    </div>
+    <div class="portfolio-track-outer" id="portfolioTrackOuter" style="margin-top:36px">
+      <div class="portfolio-track" id="portfolioTrack">
+
+        <div class="portfolio-card">
+          <div style="width:100%;height:220px;background:#f0f0f8;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem">Screenshot do site</div>
+          <div class="portfolio-card-body">
+            <h3>Construtora Leal LTDA</h3>
+            <span>construtoralealltda.com.br</span>
+          </div>
+          <a href="https://construtoralealltda.com.br" target="_blank" rel="noopener" class="portfolio-ext">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="portfolio-card">
+          <div style="width:100%;height:220px;background:#f0f0f8;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem">Screenshot do site</div>
+          <div class="portfolio-card-body">
+            <h3>RT Design de Interiores</h3>
+            <span>rtdesigndeinteriores.com.br</span>
+          </div>
+          <a href="https://rtdesigndeinteriores.com.br" target="_blank" rel="noopener" class="portfolio-ext">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="portfolio-card">
+          <div style="width:100%;height:220px;background:#f0f0f8;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem">Screenshot do site</div>
+          <div class="portfolio-card-body">
+            <h3>Fit4Life Food</h3>
+            <span>fit4lifefood.com.br</span>
+          </div>
+          <a href="https://fit4lifefood.com.br" target="_blank" rel="noopener" class="portfolio-ext">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="portfolio-card">
+          <div style="width:100%;height:220px;background:#f0f0f8;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem">Screenshot do site</div>
+          <div class="portfolio-card-body">
+            <h3>Oceano Etiquetas</h3>
+            <span>oceanoetiquetas.com.br</span>
+          </div>
+          <a href="https://oceanoetiquetas.com.br" target="_blank" rel="noopener" class="portfolio-ext">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="portfolio-card">
+          <div style="width:100%;height:220px;background:#f0f0f8;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem">Screenshot do site</div>
+          <div class="portfolio-card-body">
+            <h3>Creapes Audiovisual</h3>
+            <span>creapes.com.br</span>
+          </div>
+          <a href="https://creapes.com.br" target="_blank" rel="noopener" class="portfolio-ext">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+        <div class="portfolio-card">
+          <div style="width:100%;height:220px;background:#f0f0f8;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.85rem">Screenshot do site</div>
+          <div class="portfolio-card-body">
+            <h3>Estrela do Céu Móveis</h3>
+            <span>moveisestreladoceu.com.br</span>
+          </div>
+          <a href="https://moveisestreladoceu.com.br" target="_blank" rel="noopener" class="portfolio-ext">
+            <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+          </a>
+        </div>
+
+      </div>
+    </div>
+    <div class="carousel-nav" style="margin-top:20px">
+      <button class="carousel-arrow" id="portfolioPrev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel-progress-bar"><div class="carousel-progress-fill" id="portfolioProgress"></div></div>
+      <button class="carousel-arrow" id="portfolioNext" aria-label="Próximo">
+        <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section class="section blog-section" id="blog">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Últimas do blog</h2>
+      <p class="section-subtitle">Conteúdo direto sobre sites, SEO e tráfego orgânico</p>
+    </div>
+    <div class="blog-grid" id="blogGrid">
+      <a href="/blog/como-aparecer-no-google-sem-pagar" class="blog-card">
+        <div class="blog-card-img blog-card-img-placeholder"></div>
+        <div class="blog-card-body">
+          <span class="blog-tag">SEO</span>
+          <h3>Como aparecer no Google sem pagar por anúncios</h3>
+          <p>Entenda o que é tráfego orgânico e por que ele vale mais do que qualquer campanha paga no longo prazo.</p>
+          <span class="blog-link">Ler artigo →</span>
+        </div>
+      </a>
+      <a href="/blog/hub-de-trafego-o-que-e" class="blog-card">
+        <div class="blog-card-img blog-card-img-placeholder"></div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Estratégia</span>
+          <h3>O que é um Hub de Tráfego e como ele funciona</h3>
+          <p>Descubra como um hub local pode colocar seu negócio acima de grandes portais no Google em semanas.</p>
+          <span class="blog-link">Ler artigo →</span>
+        </div>
+      </a>
+      <a href="/blog/n8n-automacoes-para-pequenas-empresas" class="blog-card">
+        <div class="blog-card-img blog-card-img-placeholder"></div>
+        <div class="blog-card-body">
+          <span class="blog-tag">Automação</span>
+          <h3>n8n: automações que qualquer empresa pode usar</h3>
+          <p>De resposta automática no WhatsApp à geração de contratos — veja o que dá pra fazer sem programar.</p>
+          <span class="blog-link">Ler artigo →</span>
+        </div>
+      </a>
+    </div>
+    <div style="text-align:center;margin-top:44px">
+      <a href="/blog" class="btn-ver-blog">Ver todas as postagens <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-3px;margin-left:4px"><polyline points="9 18 15 12 9 6"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section faq-section" id="faq">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Dúvidas frequentes</h2>
+      <p class="section-subtitle">Respostas diretas, sem enrolação</p>
+    </div>
+    <div class="faq-grid">
+
+      <div class="faq-item">
+        <button class="faq-question">O que inclui o site de R$499? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><p>Site completo com até 5 páginas, painel admin para atualizar conteúdo, blog integrado, leads salvos no banco de dados (não só e-mail), SEO técnico completo, Google Analytics e Search Console configurados, hospedagem na VPS e entrega em 3 dias úteis.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">O que é o "Seu Hub" e como funciona? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><p>É um hub de conteúdo local ou de nicho instalado dentro do seu domínio. Ele atrai o público-alvo exato do seu negócio via tráfego orgânico — sem pagar por clique. Exemplo: uma academia pode ter um hub de saúde e bem-estar do bairro. Os visitantes chegam buscando conteúdo e encontram o seu negócio.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Como funciona o painel de métricas gratuito? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><p>Você cria uma conta gratuita, conecta seu Google Analytics e Search Console, e acessa um painel completo com cliques, impressões, palavras-chave, canais de tráfego e muito mais. Não tem GA4 instalado? A Leanttro instala por R$150.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Qual a diferença da Leanttro para uma plataforma como Wix? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><p>No Wix você paga mensalidade crescente, não tem acesso ao banco de dados, é difícil migrar e o SEO é limitado. Na Leanttro você tem seu site no seu servidor, leads no seu banco, painel próprio e código aberto — sem amarras e sem mensalidade de plataforma.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">As automações funcionam com meu WhatsApp atual? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><p>Sim. As automações são construídas com n8n e se integram com a API oficial do WhatsApp Business. Você compra o workflow pronto e ele roda no servidor da Leanttro por um período ou pode exportar o JSON e rodar na sua própria infraestrutura.</p></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">Vocês atendem fora de São Paulo? <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></button>
+        <div class="faq-answer"><p>Sim, atendemos todo o Brasil de forma 100% remota. Para hubs locais, trabalhamos principalmente com São Paulo e região, mas o modelo pode ser replicado para qualquer cidade.</p></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section" id="orcamento">
+  <div class="container">
+    <h2>Vamos colocar seu negócio <span>no Google</span>?</h2>
+    <p>Fale comigo agora pelo WhatsApp. Resposta rápida, sem enrolação e sem compromisso.</p>
+    <div class="cta-btns">
+      <a href="https://wa.me/5511999999999" target="_blank" rel="noopener" class="btn-cta-wpp">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar no WhatsApp
+      </a>
+      <a href="/metricas" class="btn-cta-outline">Ver painel de métricas grátis →</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="36">
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-text">
+      <strong>Leanttro Tecnologia</strong>
+      <span>Sites, hubs e automações — Jabaquara, São Paulo<br>© 2026 Leanttro. Todos os direitos reservados.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://leanttro.com" class="f-btn f-btn-site">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        leanttro.com
+      </a>
+      <a href="https://wa.me/5511999999999" class="f-btn f-btn-wpp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <a href="https://instagram.com/leanttro" class="f-btn f-btn-ig" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        Instagram
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <a href="/politica-de-privacidade">Política de Privacidade</a> · <a href="/termos">Termos de Uso</a> · Desenvolvido com ❤️ pela <a href="https://leanttro.com">Leanttro</a>
+  </div>
+</footer>
+
+<!-- BOTÃO FLUTUANTE WHATSAPP -->
+<a href="https://wa.me/5511999999999" target="_blank" rel="noopener" style="position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// ── API CONFIG ──
+const API_BASE = 'https://teste.leanttro.com';
+
+async function apiGet(path) {
+  try {
+    const r = await fetch(API_BASE + path);
+    if (!r.ok) return null;
+    return await r.json();
+  } catch(e) { return null; }
+}
+
+// ── DYNAMIC HUB NEGOCIOS ──
+(async function loadHub() {
+  const track = document.getElementById('hubTrack');
+  const catBtns = document.querySelectorAll('#filtrosCat .chip-cat');
+  const bairroBtns = document.querySelectorAll('#filtrosBairro .chip-loc');
+  let allNegocios = [];
+  let activeCat = 'todos';
+  let activeBairro = 'todos';
+
+  const data = await apiGet('/hub/negocios');
+  if (!data || !Array.isArray(data) || data.length === 0) return; // keep static fallback
+
+  allNegocios = data;
+
+  function slugify(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,''); }
+
+  function renderCards() {
+    const filtered = allNegocios.filter(n => {
+      const catOk = activeCat === 'todos' || slugify(n.categoria) === activeCat;
+      const bairroOk = activeBairro === 'todos' || slugify(n.bairro) === activeBairro;
+      return catOk && bairroOk;
+    });
+    if (filtered.length === 0) { track.innerHTML = '<p style="color:var(--muted);padding:32px;text-align:center">Nenhum negócio encontrado nessa categoria.</p>'; return; }
+    track.innerHTML = filtered.map(n => `
+      <a href="/negocio/${n.slug || slugify(n.nome)}" class="negocio-card">
+        ${n.foto ? `<img src="${n.foto}" alt="${n.nome}" class="negocio-card-foto" loading="lazy">` : '<div class="negocio-card-sem-foto">Foto do negócio</div>'}
+        <div class="negocio-card-body">
+          <span class="negocio-badge">${n.categoria||''}</span>
+          <h3>${n.nome}</h3>
+          <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${n.bairro||''}</p>
+          <span class="btn-ver-negocio">Ver mais →</span>
+        </div>
+      </a>`).join('');
+  }
+
+  catBtns.forEach(btn => btn.addEventListener('click', () => {
+    catBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeCat = btn.dataset.cat;
+    renderCards();
+  }));
+  bairroBtns.forEach(btn => btn.addEventListener('click', () => {
+    bairroBtns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    activeBairro = btn.dataset.bairro;
+    renderCards();
+  }));
+
+  renderCards();
+})();
+
+// ── MOBILE NAV ──
+const hamburger=document.getElementById('hamburger');
+const mobileNav=document.getElementById('mobileNav');
+const navClose=document.getElementById('navClose');
+hamburger.addEventListener('click',()=>mobileNav.classList.add('active'));
+navClose.addEventListener('click',()=>mobileNav.classList.remove('active'));
+mobileNav.addEventListener('click',e=>{if(e.target===mobileNav)mobileNav.classList.remove('active')});
+function closeNav(){mobileNav.classList.remove('active')}
+
+// ── HERO CARROSSEL ──
+(function(){
+  const slides=document.querySelectorAll('.hero-slide');
+  const progress=document.getElementById('heroProgress');
+  let cur=0;
+  function show(n){
+    slides[cur].classList.remove('active');
+    cur=(n+slides.length)%slides.length;
+    slides[cur].classList.add('active');
+    progress.style.width=((cur+1)/slides.length*100)+'%';
+  }
+  show(0);
+  document.getElementById('heroPrev').addEventListener('click',()=>show(cur-1));
+  document.getElementById('heroNext').addEventListener('click',()=>show(cur+1));
+  setInterval(()=>show(cur+1),5000);
+})();
+
+// ── FUNÇÃO CARROSSEL GENÉRICO ──
+function makeCarousel(trackId,prevId,nextId,progressId,visibleFn){
+  const track=document.getElementById(trackId);
+  const outer=track?.parentElement;
+  const prev=document.getElementById(prevId);
+  const next=document.getElementById(nextId);
+  const fill=document.getElementById(progressId);
+  if(!track||!prev||!next)return;
+
+  // Mobile: scroll nativo
+  if(window.innerWidth<=768){
+    function updateProgressScroll(){
+      const max=outer.scrollWidth-outer.clientWidth;
+      if(max>0)fill.style.width=(outer.scrollLeft/max*100)+'%';
+    }
+    outer.addEventListener('scroll',updateProgressScroll,{passive:true});
+    prev.addEventListener('click',()=>outer.scrollBy({left:-outer.clientWidth*.8,behavior:'smooth'}));
+    next.addEventListener('click',()=>outer.scrollBy({left:outer.clientWidth*.8,behavior:'smooth'}));
+    return;
+  }
+
+  let pos=0;
+  const cards=track.children;
+  function visible(){
+    if(window.innerWidth>=1100)return 4;
+    if(window.innerWidth>=768)return 3;
+    return 2;
+  }
+  function cardW(){return cards[0]?cards[0].offsetWidth+22:300}
+  function maxPos(){return Math.max(0,cards.length-visible())}
+  function update(){
+    pos=Math.max(0,Math.min(pos,maxPos()));
+    track.style.transform=`translateX(-${pos*cardW()}px)`;
+    prev.disabled=pos===0;
+    next.disabled=pos>=maxPos();
+    fill.style.width=(maxPos()>0?pos/maxPos()*100:100)+'%';
+  }
+  prev.addEventListener('click',()=>{pos--;update()});
+  next.addEventListener('click',()=>{pos++;update()});
+  update();
+
+  // Drag
+  let startX=0,startPos=0,dragging=false;
+  track.addEventListener('mousedown',e=>{dragging=true;startX=e.clientX;startPos=pos;track.style.transition='none'});
+  window.addEventListener('mousemove',e=>{if(!dragging)return;const diff=Math.round((startX-e.clientX)/cardW());pos=Math.max(0,Math.min(startPos+diff,maxPos()));track.style.transform=`translateX(-${pos*cardW()}px)`;fill.style.width=(maxPos()>0?pos/maxPos()*100:100)+'%'});
+  window.addEventListener('mouseup',()=>{if(!dragging)return;dragging=false;track.style.transition='transform .4s ease';update()});
+}
+
+makeCarousel('hubTrack','hubPrev','hubNext','hubProgress');
+makeCarousel('reviewsTrack','reviewsPrev','reviewsNext','reviewsProgress');
+makeCarousel('portfolioTrack','portfolioPrev','portfolioNext','portfolioProgress');
+
+// ── CHIPS FILTRO HUB ──
+document.querySelectorAll('#filtrosCat .chip-cat').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('#filtrosCat .chip-cat').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+document.querySelectorAll('#filtrosBairro .chip-loc').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    document.querySelectorAll('#filtrosBairro .chip-loc').forEach(b=>b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// ── FAQ ──
+document.querySelectorAll('.faq-question').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    const item=this.closest('.faq-item');
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i=>i.classList.remove('open'));
+    if(!isOpen)item.classList.add('open');
+  });
+});
+
+// Servicos carousel
+(function(){
+  const track = document.getElementById('servicosTrack');
+  const outer = document.getElementById('servicosTrackOuter');
+  const prev  = document.getElementById('servicosPrev');
+  const next  = document.getElementById('servicosNext');
+  const fill  = document.getElementById('servicosProgressFill');
+  if(!track) return;
+  let idx = 0;
+  const cards = track.querySelectorAll('.servico-card-v2');
+  const visible = () => window.innerWidth < 700 ? 1 : window.innerWidth < 1100 ? 2 : 3;
+  const max = () => Math.max(0, cards.length - visible());
+  function go(n){
+    idx = Math.max(0, Math.min(n, max()));
+    const w = cards[0].offsetWidth + parseInt(getComputedStyle(track).gap||'0');
+    track.style.transform = `translateX(-${idx * w}px)`;
+    if(fill) fill.style.width = max()===0 ? '100%' : `${((idx/max())*100)}%`;
+    if(prev) prev.disabled = idx===0;
+    if(next) next.disabled = idx>=max();
+  }
+  if(prev) prev.addEventListener('click',()=>go(idx-1));
+  if(next) next.addEventListener('click',()=>go(idx+1));
+  window.addEventListener('resize',()=>go(idx));
+  go(0);
+})();
+</script>
+</body>
+</html>
