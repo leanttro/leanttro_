@@ -14,6 +14,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 # Copia o código
 COPY app.py .
+COPY painel.html .
 
 # Expõe a porta
 EXPOSE 5000
