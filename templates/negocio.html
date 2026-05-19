@@ -660,18 +660,13 @@ function renderOutros(todos,slugAtual,bairro){
 let slugBairro='';
 
 async function init(){
-  // Pega o slug do negócio da URL: /negocio/meu-negocio → meu-negocio
   const partes=location.pathname.replace(/^\/|\/$/g,'').split('/');
-  // Suporta /negocio/slug ou direto /slug (se o backend rotear assim)
   const slugNegocio=partes[partes.length-1];
 
-  const [negocio, todos] = await Promise.all([
-    apiGet(`/hub/negocios/${slugNegocio}`),
-    apiGet('/hub/negocios')
-  ]);
+  // 1) Busca só o negócio primeiro → mostra rápido
+  const negocio = await apiGet(`/hub/negocios/${slugNegocio}`);
 
-  // Esconde skeleton
-  document.getElementById('skeletonHero').style.display='none';
+  document.getElementById('pageContent').style.display='none';
 
   if(!negocio||negocio.erro){
     document.getElementById('notFoundContent').style.display='';
@@ -768,8 +763,13 @@ async function init(){
   // AVALIAÇÕES
   renderAvaliacoes(negocio.avaliacoes||[]);
 
-  // OUTROS NEGÓCIOS
-  if(todos&&todos.length)renderOutros(todos,negocio.slug,nomeBairro);
+  // Mostra o conteúdo do negócio AGORA (sem esperar outros negócios)
+  document.getElementById('negocioContent').style.display='';
+
+  // 2) Carrega "outros negócios" em background sem bloquear
+  apiGet('/hub/negocios').then(todos=>{
+    if(todos&&todos.length)renderOutros(todos,negocio.slug,nomeBairro);
+  });
 
   // JSON-LD LocalBusiness
   const ld={
@@ -806,9 +806,6 @@ async function init(){
     ]
   };
   document.getElementById('jsonld').textContent=JSON.stringify(ld);
-
-  // Mostra conteúdo
-  document.getElementById('negocioContent').style.display='';
 }
 
 document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('active'));
