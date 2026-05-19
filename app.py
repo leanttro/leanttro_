@@ -6,7 +6,7 @@ import psycopg2
 import psycopg2.extras
 from datetime import datetime, timedelta
 from functools import wraps
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_file
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -433,6 +433,11 @@ def registrar_disparo():
     novo_id = cur.fetchone()["id"]
     conn.commit(); cur.close(); conn.close()
     return jsonify({"id": novo_id}), 201
+
+# ─── PAINEL ADMIN ─────────────────────────────────────────────────────────────
+@app.route("/admin")
+def painel():
+    return send_file("painel.html")
 
 # ─── RUN ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
