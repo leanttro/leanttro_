@@ -1492,7 +1492,7 @@ async function apiGet(path) {
   const grid = document.getElementById('blogGrid');
   if (!grid) return;
   try {
-    const r = await fetch(API_BASE + '/blog');
+    const r = await fetch(API_BASE + '/api/blog');
     const posts = await r.json();
     if (!Array.isArray(posts) || !posts.length) return;
     const top3 = posts.slice(0, 3);
