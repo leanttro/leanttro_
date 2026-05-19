@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Produto — Loja Leanttro</title>
+<meta name="description" id="pageDesc" content="Automações e produtos digitais prontos para usar. Leanttro Tecnologia.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#7943e2">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Leanttro Tecnologia">
+<script id="jsonLd" type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"","description":"","offers":{"@type":"Offer","priceCurrency":"BRL","availability":"https://schema.org/InStock"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#7943e2;--primary-d:#5c2ec4;--accent:#00e5a0;--dark:#0a0a0f;--text:#1a1a2e;--muted:#6b6b80;--border:#e4e4f0;--bg:#ffffff;--bg2:#f8f8fc;--radius:12px;--display:'Montserrat',sans-serif;--sans:'Inter',sans-serif;--shadow:0 4px 24px rgba(108,99,255,.10);--shadow-md:0 8px 32px rgba(108,99,255,.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* HEADER */
+header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 20px}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo img{height:38px;width:auto}
+nav.desktop-nav ul{list-style:none;display:flex;gap:4px}
+nav.desktop-nav ul li a{padding:8px 14px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--muted);transition:all .15s;white-space:nowrap}
+nav.desktop-nav ul li a:hover{color:var(--primary);background:rgba(121,67,226,.07)}
+nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
+.header-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn-wpp-header{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:9px 18px;border-radius:8px;font-size:.875rem;font-weight:600;transition:all .2s;white-space:nowrap}
+.btn-wpp-header:hover{background:#1da850;transform:translateY(-1px)}
+.btn-wpp-header svg{width:17px;height:17px;flex-shrink:0}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text)}
+.hamburger svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2}
+.mobile-nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;justify-content:center;align-items:center;opacity:0;transition:opacity .25s}
+.mobile-nav-overlay.active{display:flex;opacity:1}
+.mobile-nav-overlay ul{list-style:none;text-align:center}
+.mobile-nav-overlay ul li{margin:18px 0}
+.mobile-nav-overlay ul li a{color:#fff;font-family:var(--display);font-size:1.8rem;font-weight:700}
+.mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+@media(max-width:768px){nav.desktop-nav{display:none}.hamburger{display:flex}}
+
+/* HERO */
+.hero-page{background:var(--primary);padding:56px 20px 0;position:relative;overflow:hidden}
+.hero-page-inner{max-width:1200px;margin:0 auto;text-align:center;padding-bottom:64px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);color:#fff;padding:5px 14px;border-radius:20px;font-size:.8rem;font-weight:600;letter-spacing:.3px;margin-bottom:18px;border:1px solid rgba(255,255,255,.25)}
+.hero-page h1{font-family:var(--display);font-size:2.6rem;font-weight:800;color:#fff;line-height:1.15;margin-bottom:14px;letter-spacing:-.5px}
+.hero-preco-destaque{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--accent);margin-top:8px}
+.hero-preco-destaque small{font-size:1rem;color:rgba(255,255,255,.7);font-weight:500;margin-right:6px}
+.hero-wave{display:block;width:100%;margin-top:-5px;line-height:0}
+.hero-wave svg{display:block;width:100%}
+
+/* BREADCRUMB */
+.breadcrumb{padding:18px 0 0;font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.breadcrumb a{color:var(--primary);font-weight:500}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb svg{width:12px;height:12px;stroke:var(--muted);fill:none;stroke-width:2;flex-shrink:0}
+
+/* LAYOUT 2 COLUNAS */
+.produto-layout{display:grid;grid-template-columns:1fr 340px;gap:48px;padding:44px 0 80px;align-items:start}
+@media(max-width:960px){.produto-layout{grid-template-columns:1fr}}
+
+/* IMAGEM DO PRODUTO */
+.produto-img-wrap{border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border);margin-bottom:36px}
+.produto-img-wrap img{width:100%;max-height:480px;object-fit:cover;display:block}
+.produto-img-placeholder{width:100%;height:280px;background:linear-gradient(135deg,rgba(121,67,226,.12),rgba(121,67,226,.04));display:flex;align-items:center;justify-content:center;color:var(--primary);opacity:.4}
+
+/* CONTEÚDO */
+.produto-content h2{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--text);margin:28px 0 12px}
+.produto-content p{color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:14px}
+.produto-content ul,.produto-content ol{padding-left:20px;color:var(--muted);font-size:.95rem;line-height:1.7;margin-bottom:14px}
+.produto-content li{margin-bottom:6px}
+.produto-content strong{color:var(--text)}
+.produto-content a{color:var(--primary);text-decoration:underline}
+
+/* SIDEBAR */
+.sidebar-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:28px;position:sticky;top:88px}
+.sidebar-preco{font-family:var(--display);font-size:2rem;font-weight:800;color:var(--primary);line-height:1;margin-bottom:4px}
+.sidebar-preco small{font-size:.875rem;color:var(--muted);font-weight:400;display:block;margin-bottom:8px}
+.sidebar-badge{display:inline-block;background:rgba(121,67,226,.08);color:var(--primary);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:20px}
+.btn-comprar-wpp{display:flex;align-items:center;justify-content:center;gap:8px;background:#25D366;color:#fff;padding:14px 20px;border-radius:10px;font-size:1rem;font-weight:700;width:100%;transition:background .2s;cursor:pointer;border:none;font-family:var(--sans);margin-bottom:12px}
+.btn-comprar-wpp:hover{background:#1da850}
+.btn-comprar-wpp svg{width:20px;height:20px;flex-shrink:0}
+.sidebar-nota{font-size:.78rem;color:var(--muted);text-align:center;line-height:1.5;margin-bottom:24px}
+.sidebar-divider{border:none;border-top:1px solid var(--border);margin:20px 0}
+.sidebar-outros-titulo{font-family:var(--display);font-size:.85rem;font-weight:700;color:var(--text);margin-bottom:14px;text-transform:uppercase;letter-spacing:.5px}
+.sidebar-outro-card{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--border);text-decoration:none;color:inherit;transition:opacity .15s}
+.sidebar-outro-card:last-child{border-bottom:none}
+.sidebar-outro-card:hover{opacity:.75}
+.sidebar-outro-img{width:52px;height:52px;border-radius:8px;object-fit:cover;flex-shrink:0;background:rgba(121,67,226,.08);display:flex;align-items:center;justify-content:center;color:var(--primary);overflow:hidden}
+.sidebar-outro-img img{width:100%;height:100%;object-fit:cover}
+.sidebar-outro-nome{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:2px}
+.sidebar-outro-preco{font-size:.78rem;color:var(--primary);font-weight:700}
+
+/* SKELETON */
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.skeleton{background:linear-gradient(90deg,#f0f0f8 25%,#e8e8f8 50%,#f0f0f8 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;border-radius:6px}
+
+/* ESTADO VAZIO / ERRO */
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state svg{width:48px;height:48px;stroke:var(--muted);fill:none;stroke-width:1.5;margin:0 auto 16px}
+.empty-state h3{font-family:var(--display);font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:8px}
+
+/* CTA FINAL */
+.cta-section{background:var(--primary);padding:64px 20px;text-align:center}
+.cta-section h2{font-family:var(--display);font-size:2rem;font-weight:800;color:#fff;margin-bottom:12px}
+.cta-section p{color:rgba(255,255,255,.85);font-size:1.05rem;margin-bottom:28px}
+.btn-cta-wpp{display:inline-flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:14px 28px;border-radius:10px;font-size:1rem;font-weight:700;transition:all .2s}
+.btn-cta-wpp:hover{background:#1da850;transform:translateY(-2px)}
+.btn-cta-wpp svg{width:20px;height:20px;flex-shrink:0}
+
+/* FOOTER */
+footer{background:var(--dark);padding:40px 20px 20px}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:28px;flex-wrap:wrap;padding-bottom:28px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-logo img{height:32px;width:auto;filter:brightness(0) invert(1);opacity:.85}
+.footer-divider{width:1px;height:32px;background:rgba(255,255,255,.12)}
+.footer-text{flex:1;min-width:200px}
+.footer-text strong{display:block;color:#fff;font-size:.9rem;font-weight:700;margin-bottom:2px}
+.footer-text span{font-size:.78rem;color:rgba(255,255,255,.45);line-height:1.5}
+.footer-links{display:flex;gap:10px;flex-wrap:wrap}
+.f-btn{display:inline-flex;align-items:center;gap:6px;padding:7px 14px;border-radius:8px;font-size:.78rem;font-weight:600;transition:all .2s}
+.f-btn svg{width:14px;height:14px;flex-shrink:0}
+.f-btn-site{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)}
+.f-btn-site:hover{background:rgba(255,255,255,.14);color:#fff}
+.f-btn-wpp{background:#25D366;color:#fff}
+.f-btn-wpp:hover{background:#1da850}
+.f-btn-ig{background:rgba(255,255,255,.08);color:rgba(255,255,255,.7)}
+.f-btn-ig:hover{background:rgba(255,255,255,.14);color:#fff}
+.footer-bottom{max-width:1200px;margin:16px auto 0;font-size:.75rem;color:rgba(255,255,255,.3);text-align:center}
+.footer-bottom a{color:rgba(255,255,255,.45)}
+.footer-bottom a:hover{color:#fff}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" height="38">
+    </a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/seu-hub">Seu Hub</a></li>
+        <li><a href="/loja" class="ativo">Loja</a></li>
+        <li><a href="/portfolio">Portfólio</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/metricas">Métricas Grátis</a></li>
+        <li><a href="/#orcamento">Orçamento</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="https://wa.me/5511999999999" class="btn-wpp-header" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav-overlay" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose">×</button>
+  <nav><ul>
+    <li><a href="/" onclick="closeNav()">Home</a></li>
+    <li><a href="/seu-hub" onclick="closeNav()">Seu Hub</a></li>
+    <li><a href="/loja" onclick="closeNav()">Loja</a></li>
+    <li><a href="/portfolio" onclick="closeNav()">Portfólio</a></li>
+    <li><a href="/blog" onclick="closeNav()">Blog</a></li>
+    <li><a href="/metricas" onclick="closeNav()">Métricas Grátis</a></li>
+    <li><a href="/#orcamento" onclick="closeNav()">Orçamento</a></li>
+  </ul></nav>
+</div>
+
+<!-- HERO (preenchido via JS) -->
+<section class="hero-page" id="heroSection" style="display:none">
+  <div class="hero-page-inner">
+    <span class="hero-badge" id="heroBadge"></span>
+    <h1 id="heroNome"></h1>
+    <div class="hero-preco-destaque" id="heroPreco"></div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,90 L0,55 C180,15 360,75 540,35 C720,-5 900,65 1080,30 C1260,-5 1380,20 1440,5 L1440,90 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- SKELETON HERO -->
+<div id="heroSkeleton" style="background:var(--primary);padding:64px 20px 90px;text-align:center">
+  <div class="skeleton" style="height:22px;width:120px;margin:0 auto 18px;border-radius:20px"></div>
+  <div class="skeleton" style="height:44px;width:70%;max-width:500px;margin:0 auto 14px"></div>
+  <div class="skeleton" style="height:36px;width:160px;margin:0 auto"></div>
+</div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<div class="container" id="mainContent" style="display:none">
+  <nav class="breadcrumb" id="breadcrumb">
+    <a href="/">Home</a>
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <a href="/loja">Loja</a>
+    <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+    <span id="breadcrumbNome">Produto</span>
+  </nav>
+
+  <div class="produto-layout">
+    <!-- COLUNA PRINCIPAL -->
+    <div>
+      <div id="produtoImgWrap"></div>
+      <div class="produto-content" id="produtoContent"></div>
+    </div>
+    <!-- SIDEBAR -->
+    <aside>
+      <div class="sidebar-card">
+        <div class="sidebar-badge" id="sidebarBadge" style="display:none"></div>
+        <div class="sidebar-preco" id="sidebarPreco"></div>
+        <small style="color:var(--muted);font-size:.8rem;display:block;margin-bottom:16px">Pagamento via WhatsApp — suporte incluso</small>
+        <button class="btn-comprar-wpp" id="btnComprar">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Quero comprar pelo WhatsApp
+        </button>
+        <p class="sidebar-nota">Entraremos em contato para confirmar e processar seu pedido.</p>
+        <hr class="sidebar-divider">
+        <div class="sidebar-outros-titulo">Outros produtos</div>
+        <div id="sidebarOutros">
+          <div class="skeleton" style="height:16px;margin-bottom:10px"></div>
+          <div class="skeleton" style="height:16px;margin-bottom:10px"></div>
+          <div class="skeleton" style="height:16px"></div>
+        </div>
+      </div>
+    </aside>
+  </div>
+</div>
+
+<!-- ESTADO ERRO -->
+<div class="container" id="erroState" style="display:none;padding:80px 20px">
+  <div class="empty-state">
+    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+    <h3>Produto não encontrado</h3>
+    <p>Este produto não existe ou foi removido.</p>
+    <a href="/loja" style="display:inline-flex;align-items:center;gap:6px;margin-top:20px;color:var(--primary);font-weight:600">← Voltar para a loja</a>
+  </div>
+</div>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Tem dúvidas? Fala comigo</h2>
+    <p>Respondo rápido e sem enrolação. Vamos conversar sobre o que você precisa.</p>
+    <a href="https://wa.me/5511999999999" class="btn-cta-wpp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro"></div>
+    <div class="footer-divider"></div>
+    <div class="footer-text">
+      <strong>Leanttro Tecnologia</strong>
+      <span>Sites, hubs e automações — Jabaquara, São Paulo<br>© 2026 Leanttro. Todos os direitos reservados.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://leanttro.com" class="f-btn f-btn-site"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>leanttro.com</a>
+      <a href="https://wa.me/5511999999999" class="f-btn f-btn-wpp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+      <a href="https://instagram.com/leanttro" class="f-btn f-btn-ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <a href="/politica-de-privacidade">Política de Privacidade</a> · <a href="/termos">Termos de Uso</a> · Desenvolvido com ❤️ pela <a href="https://leanttro.com">Leanttro</a>
+  </div>
+</footer>
+
+<!-- WPP FLUTUANTE -->
+<a href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const API_BASE = 'https://teste.leanttro.com';
+
+function formatPreco(v) {
+  if (!v && v !== 0) return '';
+  return Number(v).toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+}
+
+function parseMarkdownBasic(text) {
+  if (!text) return '';
+  // Se já tem tags HTML, retorna direto
+  if (/<[a-z][\s\S]*>/i.test(text)) return text;
+  return text
+    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
+    .replace(/^# (.+)$/gm, '<h2>$1</h2>')
+    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g, '<em>$1</em>')
+    .replace(/^- (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>[\s\S]+?<\/li>)/g, '<ul>$1</ul>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/^(?!<[hul])(.+)$/gm, '<p>$1</p>')
+    .replace(/<p><\/p>/g, '');
+}
+
+function getSlugFromPath() {
+  const parts = window.location.pathname.split('/');
+  return parts[parts.length - 1] || parts[parts.length - 2];
+}
+
+(async function() {
+  const slug = getSlugFromPath();
+
+  try {
+    // Busca produto
+    const r = await fetch(`${API_BASE}/api/produtos/${slug}`);
+    if (!r.ok) throw new Error('not found');
+    const p = await r.json();
+
+    // Atualiza meta
+    document.getElementById('pageTitle').textContent = `${p.nome} — Loja Leanttro`;
+    document.getElementById('pageDesc').setAttribute('content', p.descricao ? p.descricao.replace(/<[^>]*>/g,'').slice(0,155) : '');
+
+    // JSON-LD
+    const ld = {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": p.nome,
+      "description": p.descricao ? p.descricao.replace(/<[^>]*>/g,'').slice(0,200) : '',
+      "image": p.imagem_url || '',
+      "offers": {
+        "@type": "Offer",
+        "priceCurrency": "BRL",
+        "price": p.preco || 0,
+        "availability": "https://schema.org/InStock",
+        "url": window.location.href
+      }
+    };
+    document.getElementById('jsonLd').textContent = JSON.stringify(ld);
+
+    // Hero
+    document.getElementById('heroSkeleton').style.display = 'none';
+    document.getElementById('heroSection').style.display = 'block';
+    if (p.categoria) {
+      const badge = document.getElementById('heroBadge');
+      badge.textContent = p.categoria;
+      badge.style.display = 'inline-flex';
+    }
+    document.getElementById('heroNome').textContent = p.nome;
+    if (p.preco) {
+      document.getElementById('heroPreco').innerHTML = `<small>a partir de</small>${formatPreco(p.preco)}`;
+    }
+
+    // Breadcrumb
+    document.getElementById('breadcrumbNome').textContent = p.nome;
+
+    // Imagem
+    const imgWrap = document.getElementById('produtoImgWrap');
+    if (p.imagem_url) {
+      imgWrap.className = 'produto-img-wrap';
+      imgWrap.innerHTML = `<img src="${p.imagem_url}" alt="${p.nome}" loading="eager">`;
+    } else {
+      imgWrap.className = 'produto-img-wrap';
+      imgWrap.innerHTML = `<div class="produto-img-placeholder"><svg viewBox="0 0 24 24" width="56" height="56" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>`;
+    }
+
+    // Conteúdo
+    document.getElementById('produtoContent').innerHTML = parseMarkdownBasic(p.descricao || '');
+
+    // Sidebar badge + preço
+    if (p.categoria) {
+      const sb = document.getElementById('sidebarBadge');
+      sb.textContent = p.categoria;
+      sb.style.display = 'inline-block';
+    }
+    document.getElementById('sidebarPreco').innerHTML = p.preco ? formatPreco(p.preco) : 'Consulte';
+
+    // Botão comprar — abre WhatsApp com mensagem pré-preenchida
+    document.getElementById('btnComprar').addEventListener('click', () => {
+      const msg = encodeURIComponent(`Quero comprar: ${p.nome}`);
+      window.open(`https://wa.me/5511999999999?text=${msg}`, '_blank');
+    });
+
+    // Sidebar outros produtos
+    try {
+      const r2 = await fetch(`${API_BASE}/api/produtos?tipo=loja`);
+      const todos = await r2.json();
+      const outros = Array.isArray(todos) ? todos.filter(x => x.slug !== slug).slice(0, 4) : [];
+      const sidebarOutros = document.getElementById('sidebarOutros');
+      if (outros.length) {
+        sidebarOutros.innerHTML = outros.map(o => {
+          const imgHtml = o.imagem_url
+            ? `<div class="sidebar-outro-img"><img src="${o.imagem_url}" alt="${o.nome}"></div>`
+            : `<div class="sidebar-outro-img"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>`;
+          return `<a href="/loja/${o.slug}" class="sidebar-outro-card">
+            ${imgHtml}
+            <div>
+              <div class="sidebar-outro-nome">${o.nome}</div>
+              ${o.preco ? `<div class="sidebar-outro-preco">${formatPreco(o.preco)}</div>` : ''}
+            </div>
+          </a>`;
+        }).join('');
+      } else {
+        sidebarOutros.innerHTML = '<p style="font-size:.82rem;color:var(--muted)">Nenhum outro produto disponível.</p>';
+      }
+    } catch(e) {
+      document.getElementById('sidebarOutros').innerHTML = '';
+    }
+
+    document.getElementById('mainContent').style.display = 'block';
+
+  } catch(e) {
+    document.getElementById('heroSkeleton').style.display = 'none';
+    document.getElementById('erroState').style.display = 'block';
+  }
+})();
+
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+const navClose = document.getElementById('navClose');
+hamburger.addEventListener('click', () => mobileNav.classList.add('active'));
+navClose.addEventListener('click', () => mobileNav.classList.remove('active'));
+mobileNav.addEventListener('click', e => { if(e.target===mobileNav) mobileNav.classList.remove('active') });
+function closeNav(){ mobileNav.classList.remove('active') }
+</script>
+</body>
+</html>
