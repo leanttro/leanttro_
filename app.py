@@ -160,8 +160,24 @@ def editar_lead(id):
     conn.commit(); cur.close(); conn.close()
     return jsonify({"ok": True})
 
+@app.route("/negocio/<slug>")
+def pagina_negocio(slug):
+    return render_template("negocio.html")
+
+@app.route("/categoria/<slug>")
+def pagina_categoria(slug):
+    return render_template("categoria.html")
+
 @app.route("/<bairro_slug>")
 def pagina_bairro(bairro_slug):
+    # Rotas reservadas que não são bairros
+    ROTAS_RESERVADAS = {
+        'admin', 'blog', 'loja', 'leads', 'produtos', 'pedidos',
+        'hub', 'webhook', 'obrigado', 'erro', 'politica-de-privacidade',
+        'termos', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico'
+    }
+    if bairro_slug in ROTAS_RESERVADAS:
+        return "Not Found", 404
     return render_template("bairro.html")
 
 # ─── PEDIDOS + MERCADO PAGO ───────────────────────────────────────────────────
