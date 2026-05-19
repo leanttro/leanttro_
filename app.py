@@ -164,6 +164,14 @@ def editar_lead(id):
 def pagina_negocio(slug):
     return render_template("negocio.html")
 
+@app.route("/blog")
+def pagina_blog():
+    return render_template("blog.html")
+
+@app.route("/blog/<slug>")
+def pagina_post(slug):
+    return render_template("post.html")
+
 @app.route("/categoria/<slug>")
 def pagina_categoria(slug):
     return render_template("categoria.html")
@@ -422,7 +430,7 @@ def listar_posts_admin():
     cur.close(); conn.close()
     return jsonify(list(posts))
 
-@app.route("/blog", methods=["GET"])
+@app.route("/api/blog", methods=["GET"])
 def listar_posts():
     categoria = request.args.get("categoria")
     conn = get_db(); cur = conn.cursor()
@@ -442,7 +450,7 @@ def listar_posts():
     cur.close(); conn.close()
     return jsonify(list(posts))
 
-@app.route("/blog/<slug>", methods=["GET"])
+@app.route("/api/blog/<slug>", methods=["GET"])
 def detalhe_post(slug):
     conn = get_db(); cur = conn.cursor()
     cur.execute("SELECT * FROM blog_posts WHERE slug = %s AND publicado = true", (slug,))
