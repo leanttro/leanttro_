@@ -579,6 +579,9 @@ footer{
   .hero-text p{font-size:1rem}
   .hero-btns{flex-direction:column}
   .hero-nav{bottom:8px}
+  .hero-progress-bar{display:none}
+  .hero-section{min-height:0}
+  .hero-slides{min-height:0}
   .btn-hero-primary,.btn-hero-secondary{justify-content:center;width:100%}
   .section-title{font-size:1.6rem}
   .reviews-header-row{flex-direction:column;align-items:flex-start}
@@ -782,7 +785,7 @@ footer{
     <div class="hero-slide">
       <div class="hero-slide-inner container">
         <div class="hero-text">
-          <span class="hero-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>A partir de R$99,00</span>
+          <span class="hero-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>De R$97 a R$497</span>
           <h1>Automações prontas com n8n e IA</h1>
           <p>Chatbots, integrações, geração de contratos, lead automático no WhatsApp. Compre e use hoje — sem mensalidade de plataforma.</p>
           <div class="hero-btns">
@@ -800,7 +803,7 @@ footer{
       <div class="hero-slide-inner container">
         <div class="hero-text">
           <span class="hero-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>100% gratuito</span>
-          <h1>Veja seu site no Google agora — GRÁTIS!</h1>
+          <h1>Veja seu site no Google agora — de graça</h1>
           <p>Cole o ID do seu Google Analytics e veja cliques, impressões e palavras-chave em tempo real. Sem enrolação.</p>
           <div class="hero-btns">
             <a href="/metricas" class="btn-hero-primary">Acessar painel →</a>
@@ -817,7 +820,7 @@ footer{
       <div class="hero-slide-inner container">
         <div class="hero-text">
           <span class="hero-badge"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>Sem concorrente direto</span>
-          <h1>3D Experience — Diferencial que ninguém tem</h1>
+          <h1>3D Experience — o diferencial que ninguém tem</h1>
           <p>Websites imersivos em Three.js e WebGL. Seu produto ou portfólio em uma experiência que o visitante nunca esquece.</p>
           <div class="hero-btns">
             <a href="https://wa.me/5511999999999" class="btn-hero-primary">Solicitar proposta →</a>
@@ -1426,7 +1429,7 @@ async function apiGet(path) {
 
   function buildFiltrosCat(lista) {
     const cats = [];
-    lista.forEach(n => { if (n.categoria && !cats.includes(n.categoria)) cats.push(n.categoria); });
+    lista.forEach(n => { const cat = n.categoria_nome || n.categoria; if (cat && !cats.includes(cat)) cats.push(cat); });
     cats.sort();
     filtrosCat.innerHTML = `<button class="chip-cat ${activeCat === '' ? 'active' : ''}" data-cat="">Todos</button>` +
       cats.map(c => `<button class="chip-cat ${activeCat === c ? 'active' : ''}" data-cat="${c}">${c}</button>`).join('');
@@ -1443,7 +1446,7 @@ async function apiGet(path) {
   }
 
   function buildFiltrosBairro(lista) {
-    const filtered = activeCat ? lista.filter(n => n.categoria === activeCat) : lista;
+    const filtered = activeCat ? lista.filter(n => (n.categoria_nome || n.categoria) === activeCat) : lista;
     const bairros = [];
     filtered.forEach(n => { if (n.bairro && !bairros.includes(n.bairro)) bairros.push(n.bairro); });
     bairros.sort();
@@ -1463,7 +1466,7 @@ async function apiGet(path) {
 
   function renderCards() {
     let filtered = allNegocios;
-    if (activeCat) filtered = filtered.filter(n => n.categoria === activeCat);
+    if (activeCat) filtered = filtered.filter(n => (n.categoria_nome || n.categoria) === activeCat);
     if (activeBairro) filtered = filtered.filter(n => n.bairro === activeBairro);
     if (!filtered.length) { track.innerHTML = '<p style="color:var(--muted);padding:32px;text-align:center">Nenhum negócio encontrado nessa categoria.</p>'; return; }
     // Com foto em destaque primeiro
