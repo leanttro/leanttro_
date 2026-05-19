@@ -242,10 +242,43 @@ def listar_pedidos():
 @app.route("/hub/categorias", methods=["GET"])
 def listar_hub_categorias():
     conn = get_db(); cur = conn.cursor()
-    cur.execute("SELECT * FROM hub_categorias WHERE ativo = true ORDER BY nome")
+    cur.execute("SELECT * FROM hub_categorias ORDER BY nome")
     cats = cur.fetchall()
     cur.close(); conn.close()
     return jsonify(list(cats))
+
+@app.route("/admin/hub/categorias", methods=["POST"])
+@token_required
+def criar_categoria():
+    d = request.json
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("""
+        INSERT INTO hub_categorias (nome, slug, icone_url, ativo)
+        VALUES (%s,%s,%s,%s) RETURNING id
+    """, (d["nome"], d["slug"], d.get("icone_url"), d.get("ativo", True)))
+    novo_id = cur.fetchone()["id"]
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"id": novo_id}), 201
+
+@app.route("/admin/hub/categorias/<int:id>", methods=["PUT"])
+@token_required
+def editar_categoria(id):
+    d = request.json
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("""
+        UPDATE hub_categorias SET nome=%s, slug=%s, icone_url=%s, ativo=%s
+        WHERE id=%s
+    """, (d["nome"], d["slug"], d.get("icone_url"), d.get("ativo", True), id))
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True})
+
+@app.route("/admin/hub/categorias/<int:id>", methods=["DELETE"])
+@token_required
+def deletar_categoria(id):
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("UPDATE hub_categorias SET ativo = false WHERE id = %s", (id,))
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True})
 
 @app.route("/hub/negocios", methods=["GET"])
 def listar_hub_negocios():
@@ -292,6 +325,18 @@ def detalhe_negocio(slug):
 
     conn.commit(); cur.close(); conn.close()
     return jsonify({**negocio, "avaliacoes": list(avaliacoes)})
+
+@app.route("/hub/avaliacoes", methods=["GET"])
+def listar_avaliacoes():
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("""
+        SELECT a.*, n.nome as negocio_nome FROM hub_avaliacoes a
+        JOIN hub_negocios n ON n.id = a.negocio_id
+        ORDER BY a.criado_em DESC
+    """)
+    avaliacoes = cur.fetchall()
+    cur.close(); conn.close()
+    return jsonify(list(avaliacoes))
 
 @app.route("/hub/avaliacoes", methods=["POST"])
 def criar_avaliacao():
@@ -340,6 +385,18 @@ def editar_negocio(id):
     return jsonify({"ok": True})
 
 # ─── BLOG ─────────────────────────────────────────────────────────────────────
+@app.route("/admin/blog", methods=["GET"])
+@token_required
+def listar_posts_admin():
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("""
+        SELECT id, titulo, slug, resumo, categoria, imagem_url, publicado, publicado_em, criado_em
+        FROM blog_posts ORDER BY criado_em DESC
+    """)
+    posts = cur.fetchall()
+    cur.close(); conn.close()
+    return jsonify(list(posts))
+
 @app.route("/blog", methods=["GET"])
 def listar_posts():
     categoria = request.args.get("categoria")
