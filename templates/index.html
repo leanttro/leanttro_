@@ -573,6 +573,7 @@ footer{
 @media(max-width:768px){
   nav.desktop-nav{display:none}
   .hamburger{display:block}
+  .hero-slide{padding-top:30px}
   .hero-slide-inner{flex-direction:column;gap:24px;padding:14px 0 60px}
   .hero-image{flex:none;max-width:100%;width:100%;margin-left:0;display:flex}
   .hero-text h1{font-size:2rem}
@@ -709,7 +710,7 @@ footer{
     <nav class="desktop-nav" aria-label="Navegação principal">
       <ul>
         <li><a href="/" class="ativo">Home</a></li>
-        <li><a href="/seuhub">Seu Hub</a></li>
+        <li><a href="/seu-hub">Seu Hub</a></li>
         <li><a href="/loja">Loja</a></li>
         <li><a href="/portfolio">Portfólio</a></li>
         <li><a href="/blog">Blog</a></li>
@@ -734,7 +735,7 @@ footer{
   <button class="mobile-nav-close" id="navClose">×</button>
   <nav><ul>
     <li><a href="/" onclick="closeNav()">Home</a></li>
-    <li><a href="/seuhub" onclick="closeNav()">Seu Hub</a></li>
+    <li><a href="/seu-hub" onclick="closeNav()">Seu Hub</a></li>
     <li><a href="/loja" onclick="closeNav()">Loja</a></li>
     <li><a href="/portfolio" onclick="closeNav()">Portfólio</a></li>
     <li><a href="/blog" onclick="closeNav()">Blog</a></li>
@@ -772,7 +773,7 @@ footer{
           <h1>Instalo um Hub de tráfego no seu domínio</h1>
           <p>Enquanto seus concorrentes pagam por clique, seus clientes te encontram de graça — todo mês. Prova real: 328 mil impressões em 5 meses.</p>
           <div class="hero-btns">
-            <a href="/seuhub" class="btn-hero-primary">Como funciona →</a>
+            <a href="/seu-hub" class="btn-hero-primary">Como funciona →</a>
           </div>
         </div>
         <div class="hero-image">
@@ -894,7 +895,7 @@ footer{
     </div>
 
     <div class="hub-ver-todos">
-      <a href="/seuhub">Ver todos os negócios <svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;display:inline;vertical-align:middle" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
+      <a href="/jabaquara">Ver todos os negócios <svg style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;display:inline;vertical-align:middle" viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
     </div>
   </div>
 </section>
@@ -1255,33 +1256,7 @@ footer{
       <p class="section-subtitle">Conteúdo direto sobre sites, SEO e tráfego orgânico</p>
     </div>
     <div class="blog-grid" id="blogGrid">
-      <a href="/blog/como-aparecer-no-google-sem-pagar" class="blog-card">
-        <div class="blog-card-img blog-card-img-placeholder"></div>
-        <div class="blog-card-body">
-          <span class="blog-tag">SEO</span>
-          <h3>Como aparecer no Google sem pagar por anúncios</h3>
-          <p>Entenda o que é tráfego orgânico e por que ele vale mais do que qualquer campanha paga no longo prazo.</p>
-          <span class="blog-link">Ler artigo →</span>
-        </div>
-      </a>
-      <a href="/blog/hub-de-trafego-o-que-e" class="blog-card">
-        <div class="blog-card-img blog-card-img-placeholder"></div>
-        <div class="blog-card-body">
-          <span class="blog-tag">Estratégia</span>
-          <h3>O que é um Hub de Tráfego e como ele funciona</h3>
-          <p>Descubra como um hub local pode colocar seu negócio acima de grandes portais no Google em semanas.</p>
-          <span class="blog-link">Ler artigo →</span>
-        </div>
-      </a>
-      <a href="/blog/n8n-automacoes-para-pequenas-empresas" class="blog-card">
-        <div class="blog-card-img blog-card-img-placeholder"></div>
-        <div class="blog-card-body">
-          <span class="blog-tag">Automação</span>
-          <h3>n8n: automações que qualquer empresa pode usar</h3>
-          <p>De resposta automática no WhatsApp à geração de contratos — veja o que dá pra fazer sem programar.</p>
-          <span class="blog-link">Ler artigo →</span>
-        </div>
-      </a>
+      <!-- preenchido via JS -->
     </div>
     <div style="text-align:center;margin-top:44px">
       <a href="/blog" class="btn-ver-blog">Ver todas as postagens <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5" style="vertical-align:-3px;margin-left:4px"><polyline points="9 18 15 12 9 6"/></svg></a>
@@ -1508,7 +1483,38 @@ async function apiGet(path) {
   renderCards();
 })();
 
-// ── MOBILE NAV ──
+// ── BLOG SECTION DINÂMICO ──
+(async function loadBlogHome() {
+  const CAT_LABELS = {
+    automacao:'Automação',trafego:'Estratégia',
+    ecommerce:'E-commerce','3d':'3D',hub:'SEO & Hub'
+  };
+  const grid = document.getElementById('blogGrid');
+  if (!grid) return;
+  try {
+    const r = await fetch(API_BASE + '/blog');
+    const posts = await r.json();
+    if (!Array.isArray(posts) || !posts.length) return;
+    const top3 = posts.slice(0, 3);
+    grid.innerHTML = top3.map(p => {
+      const cat = CAT_LABELS[p.categoria] || p.categoria || 'Artigo';
+      const img = p.imagem_url
+        ? `<div class="blog-card-img"><img src="${p.imagem_url}" alt="${p.titulo}" style="width:100%;height:100%;object-fit:cover;display:block" loading="lazy"></div>`
+        : `<div class="blog-card-img blog-card-img-placeholder"></div>`;
+      return `<a href="/blog/${p.slug}" class="blog-card">
+        ${img}
+        <div class="blog-card-body">
+          <span class="blog-tag">${cat}</span>
+          <h3>${p.titulo}</h3>
+          <p>${p.resumo || ''}</p>
+          <span class="blog-link">Ler artigo →</span>
+        </div>
+      </a>`;
+    }).join('');
+  } catch(e) { /* mantém grid vazio silenciosamente */ }
+})();
+
+
 const hamburger=document.getElementById('hamburger');
 const mobileNav=document.getElementById('mobileNav');
 const navClose=document.getElementById('navClose');
