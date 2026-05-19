@@ -4,13 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="pageTitle">Negócio — Leanttro Hub</title>
-<meta id="pageDesc" name="description" content="Veja informações, endereço, horários e avaliações deste negócio no Jabaquara.">
+<meta name="description" id="pageDesc" content="Encontre informações, endereço, horário e avaliações deste negócio no Leanttro Hub.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#7943e2">
 <link id="pageCanonical" rel="canonical" href="https://www.leanttro.com/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Leanttro Hub">
 <meta property="og:locale" content="pt_BR">
+<meta id="ogTitle" property="og:title" content="Leanttro Hub">
+<meta id="ogDesc" property="og:description" content="">
+<meta id="ogImage" property="og:image" content="">
 <meta name="twitter:card" content="summary_large_image">
 <script id="jsonld" type="application/ld+json">{}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,244 +55,425 @@ nav.desktop-nav ul li a:hover{color:var(--primary);background:rgba(108,99,255,.0
 .mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
 
 /* BREADCRUMB */
-.breadcrumb-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:12px 20px}
+.breadcrumb-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 20px}
 .breadcrumb{display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--muted);max-width:1200px;margin:0 auto;flex-wrap:wrap}
 .breadcrumb a{color:var(--muted);transition:color .15s}
 .breadcrumb a:hover{color:var(--primary)}
 .breadcrumb span{color:var(--border)}
 
-/* HERO FOTO */
-.negocio-hero-foto{width:100%;height:360px;object-fit:cover;display:block}
-.negocio-hero-placeholder{width:100%;height:260px;background:linear-gradient(135deg,rgba(121,67,226,.15),rgba(0,229,160,.08));display:flex;align-items:center;justify-content:center;font-size:5rem}
+/* HERO DO NEGÓCIO */
+.negocio-hero{position:relative;background:var(--dark);overflow:hidden;min-height:280px;display:flex;align-items:flex-end}
+.negocio-hero-foto{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:.35}
+.negocio-hero-sem-foto{position:absolute;inset:0;background:linear-gradient(135deg,var(--primary) 0%,var(--primary-d) 100%);opacity:.9}
+.negocio-hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(10,10,15,.95) 0%,rgba(10,10,15,.4) 60%,transparent 100%)}
+.negocio-hero-content{position:relative;z-index:1;padding:40px 20px 36px;max-width:1200px;margin:0 auto;width:100%}
+.negocio-badge-cat{display:inline-block;padding:4px 12px;border-radius:20px;background:rgba(121,67,226,.85);color:#fff;font-size:.78rem;font-weight:600;margin-bottom:12px;backdrop-filter:blur(4px)}
+.negocio-hero-content h1{font-family:var(--display);font-size:2.4rem;font-weight:800;color:#fff;line-height:1.15;letter-spacing:-.5px;margin-bottom:10px}
+.negocio-hero-meta{display:flex;align-items:center;flex-wrap:wrap;gap:16px}
+.meta-item{display:inline-flex;align-items:center;gap:6px;font-size:.88rem;color:rgba(255,255,255,.75)}
+.meta-item svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.meta-item.destaque{color:var(--accent);font-weight:600}
 
 /* LAYOUT PRINCIPAL */
-.negocio-layout{display:grid;grid-template-columns:1fr 360px;gap:40px;padding:48px 0 80px;align-items:start}
+.negocio-layout{display:grid;grid-template-columns:1fr 340px;gap:32px;padding:40px 0;align-items:start}
+@media(max-width:900px){.negocio-layout{grid-template-columns:1fr}}
+
+/* COLUNA PRINCIPAL */
 .negocio-main{}
-.negocio-sidebar{position:sticky;top:88px;display:flex;flex-direction:column;gap:20px}
 
-/* BADGE + TÍTULO */
-.negocio-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(121,67,226,.1);color:var(--primary);font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:12px}
-.negocio-nome{font-family:var(--display);font-size:2.4rem;font-weight:800;color:var(--text);line-height:1.15;margin-bottom:8px;letter-spacing:-.4px}
-.negocio-destaque-tag{display:inline-flex;align-items:center;gap:5px;background:rgba(245,158,11,.1);color:#d97706;font-size:.78rem;font-weight:700;padding:4px 12px;border-radius:20px;margin-bottom:16px}
+/* SEÇÃO GENÉRICA */
+.info-section{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:28px;margin-bottom:24px}
+.info-section-title{font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.info-section-title svg{width:18px;height:18px;stroke:var(--primary);fill:none;stroke-width:2;flex-shrink:0}
+.negocio-desc{font-size:.97rem;color:var(--muted);line-height:1.75;white-space:pre-line}
 
-/* ENDEREÇO */
-.negocio-endereco{display:flex;align-items:flex-start;gap:10px;padding:16px;background:var(--bg2);border-radius:var(--radius);border:1px solid var(--border);margin-bottom:24px}
-.negocio-endereco svg{width:18px;height:18px;stroke:var(--primary);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px}
-.negocio-endereco p{font-size:.9rem;color:var(--text);line-height:1.5}
-.negocio-endereco span{font-size:.8rem;color:var(--muted)}
-
-/* DESCRIÇÃO */
-.negocio-desc-titulo{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:10px;margin-top:28px}
-.negocio-desc{font-size:.95rem;color:var(--muted);line-height:1.75}
-
-/* HORÁRIOS */
-.horarios-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;margin-top:28px}
-.horarios-titulo{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.horarios-titulo svg{width:16px;height:16px;stroke:var(--primary);fill:none;stroke-width:2}
-.horarios-lista{display:flex;flex-direction:column;gap:8px}
-.horario-linha{display:flex;justify-content:space-between;align-items:center;font-size:.88rem;padding-bottom:8px;border-bottom:1px solid var(--border)}
-.horario-linha:last-child{border-bottom:none;padding-bottom:0}
-.horario-dia{color:var(--muted);font-weight:500}
-.horario-hora{color:var(--text);font-weight:600}
-.horario-hora.fechado{color:var(--muted);font-weight:400}
-.aberto-agora{display:inline-flex;align-items:center;gap:6px;font-size:.78rem;font-weight:700;color:#16a34a;background:rgba(22,163,74,.08);padding:3px 10px;border-radius:20px;margin-bottom:12px}
-.aberto-agora::before{content:'';width:7px;height:7px;border-radius:50%;background:#16a34a;flex-shrink:0}
+/* HORÁRIO */
+.horario-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.horario-linha{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.horario-linha:last-child{border-bottom:none}
+.horario-dia{font-weight:500;color:var(--text)}
+.horario-hora{color:var(--muted)}
+.horario-hora.fechado{color:#ef4444;font-weight:500}
+.horario-hora.aberto-agora{color:#10b981;font-weight:600}
+.badge-aberto{display:inline-flex;align-items:center;gap:5px;background:#d1fae5;color:#065f46;font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:12px;margin-left:8px}
+.badge-fechado{display:inline-flex;align-items:center;gap:5px;background:#fee2e2;color:#991b1b;font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:12px;margin-left:8px}
+.badge-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
 
 /* MAPA */
-.mapa-section{margin-top:36px}
-.mapa-titulo{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.mapa-titulo svg{width:16px;height:16px;stroke:var(--primary);fill:none;stroke-width:2}
-.mapa-iframe-wrap{border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border)}
-.mapa-iframe-wrap iframe{display:block;width:100%;height:280px;border:none}
-.btn-chegar{display:inline-flex;align-items:center;gap:8px;margin-top:12px;background:var(--primary);color:#fff;padding:11px 22px;border-radius:8px;font-size:.88rem;font-weight:700;transition:all .2s}
-.btn-chegar:hover{background:var(--primary-d);transform:translateY(-1px)}
-.btn-chegar svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
+.mapa-container{border-radius:10px;overflow:hidden;border:1.5px solid var(--border);height:280px;background:var(--bg2);position:relative}
+.mapa-container iframe{width:100%;height:100%;border:none}
+.mapa-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:12px;color:var(--muted)}
+.mapa-placeholder svg{width:32px;height:32px;stroke:var(--border);fill:none;stroke-width:1.5}
+.btn-como-chegar{display:inline-flex;align-items:center;gap:7px;margin-top:14px;padding:10px 20px;border-radius:8px;background:var(--primary);color:#fff;font-size:.88rem;font-weight:600;transition:all .2s}
+.btn-como-chegar:hover{background:var(--primary-d);transform:translateY(-1px)}
+.btn-como-chegar svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
 
 /* AVALIAÇÕES */
-.avaliacoes-section{margin-top:48px;padding-top:40px;border-top:1px solid var(--border)}
-.avaliacoes-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:16px}
-.avaliacoes-titulo{font-family:var(--display);font-size:1.3rem;font-weight:800;color:var(--text)}
-.media-nota{display:flex;align-items:center;gap:12px}
-.nota-grande{font-family:var(--display);font-size:3rem;font-weight:800;color:var(--text);line-height:1}
-.nota-stars{display:flex;gap:3px}
-.nota-stars svg{width:18px;height:18px;fill:#FBBC04;stroke:#FBBC04}
-.nota-count{font-size:.82rem;color:var(--muted);margin-top:2px}
-.avaliacoes-lista{display:flex;flex-direction:column;gap:16px}
-.avaliacao-card{background:var(--bg2);border-radius:var(--radius);padding:20px;border:1px solid var(--border)}
-.avaliacao-top{display:flex;align-items:center;gap:12px;margin-bottom:10px}
-.avaliacao-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.875rem;flex-shrink:0}
-.avaliacao-nome{font-weight:700;font-size:.9rem;color:var(--text)}
-.avaliacao-data{font-size:.75rem;color:var(--muted)}
-.avaliacao-stars{display:flex;gap:2px;margin-bottom:8px}
-.avaliacao-stars svg{width:13px;height:13px;fill:#FBBC04;stroke:#FBBC04}
-.avaliacao-texto{font-size:.88rem;color:var(--muted);line-height:1.6}
-.sem-avaliacoes{text-align:center;padding:40px 20px;color:var(--muted)}
-.sem-avaliacoes svg{width:40px;height:40px;stroke:var(--border);fill:none;stroke-width:1.5;margin:0 auto 12px}
+.rating-resumo{display:flex;align-items:center;gap:20px;margin-bottom:20px;padding-bottom:20px;border-bottom:1px solid var(--border)}
+.rating-numero{font-family:var(--display);font-size:3rem;font-weight:800;color:var(--text);line-height:1}
+.rating-estrelas{display:flex;gap:3px;margin-bottom:4px}
+.rating-estrelas svg{width:18px;height:18px;fill:#f59e0b;stroke:#f59e0b;stroke-width:1}
+.rating-estrelas svg.vazia{fill:none;stroke:#d1d5db}
+.rating-total{font-size:.82rem;color:var(--muted)}
+.avaliacao-card{padding:16px 0;border-bottom:1px solid var(--border)}
+.avaliacao-card:last-child{border-bottom:none}
+.avaliacao-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px}
+.avaliacao-autor{font-weight:600;font-size:.9rem;color:var(--text)}
+.avaliacao-data{font-size:.78rem;color:var(--muted)}
+.avaliacao-estrelas{display:flex;gap:2px;margin-bottom:6px}
+.avaliacao-estrelas svg{width:14px;height:14px;fill:#f59e0b;stroke:#f59e0b;stroke-width:1}
+.avaliacao-estrelas svg.vazia{fill:none;stroke:#d1d5db}
+.avaliacao-texto{font-size:.9rem;color:var(--muted);line-height:1.6}
+.sem-avaliacoes{text-align:center;padding:32px 0;color:var(--muted)}
+.sem-avaliacoes svg{width:36px;height:36px;stroke:var(--border);fill:none;stroke-width:1.5;margin:0 auto 10px}
 
 /* FORM AVALIAÇÃO */
-.form-avaliacao{margin-top:28px;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:24px}
-.form-titulo{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px}
-.form-stars-select{display:flex;gap:6px;margin-bottom:16px}
-.star-btn{background:none;border:none;cursor:pointer;font-size:1.6rem;padding:2px;transition:transform .15s;line-height:1}
-.star-btn:hover,.star-btn.sel{transform:scale(1.15)}
-.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--sans);font-size:.9rem;color:var(--text);outline:none;transition:border-color .2s;margin-bottom:12px;background:#fff}
-.form-input:focus{border-color:var(--primary)}
-textarea.form-input{resize:vertical;min-height:90px}
-.btn-enviar-aval{display:inline-flex;align-items:center;gap:7px;background:var(--primary);color:#fff;padding:11px 24px;border-radius:8px;font-size:.88rem;font-weight:700;border:none;cursor:pointer;font-family:var(--sans);transition:all .2s}
-.btn-enviar-aval:hover{background:var(--primary-d)}
-.form-msg{font-size:.85rem;margin-top:10px;color:#16a34a;display:none}
+.form-avaliacao{background:var(--bg2);border-radius:10px;padding:20px;margin-top:20px}
+.form-avaliacao h4{font-family:var(--display);font-size:.95rem;font-weight:700;margin-bottom:14px;color:var(--text)}
+.star-picker{display:flex;gap:6px;margin-bottom:14px}
+.star-picker button{background:none;border:none;cursor:pointer;font-size:1.5rem;line-height:1;transition:transform .15s;padding:0}
+.star-picker button:hover{transform:scale(1.2)}
+.form-group{margin-bottom:12px}
+.form-group input,.form-group textarea{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-size:.9rem;font-family:var(--sans);color:var(--text);background:#fff;transition:border-color .15s;outline:none;resize:vertical}
+.form-group input:focus,.form-group textarea:focus{border-color:var(--primary)}
+.form-group textarea{min-height:80px}
+.btn-enviar-av{width:100%;padding:11px;background:var(--primary);color:#fff;border:none;border-radius:8px;font-size:.9rem;font-weight:600;cursor:pointer;transition:all .2s;font-family:var(--sans)}
+.btn-enviar-av:hover{background:var(--primary-d)}
+.btn-enviar-av:disabled{opacity:.6;cursor:not-allowed}
 
-/* SIDEBAR */
-.sidebar-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:24px}
-.sidebar-card-titulo{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:16px}
-.btn-wpp-negocio{display:flex;align-items:center;justify-content:center;gap:9px;background:#25D366;color:#fff;padding:14px;border-radius:10px;font-weight:700;font-size:.95rem;margin-bottom:10px;transition:all .2s}
-.btn-wpp-negocio:hover{background:#1da850;transform:translateY(-1px)}
-.btn-wpp-negocio svg{width:20px;height:20px;flex-shrink:0}
-.btn-site-negocio{display:flex;align-items:center;justify-content:center;gap:8px;background:var(--bg2);color:var(--text);padding:12px;border-radius:10px;font-weight:600;font-size:.88rem;border:1.5px solid var(--border);transition:all .2s}
-.btn-site-negocio:hover{border-color:var(--primary);color:var(--primary)}
-.btn-site-negocio svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2}
-.sidebar-info-linha{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border);font-size:.88rem}
-.sidebar-info-linha:last-child{border-bottom:none}
-.sidebar-info-linha svg{width:15px;height:15px;stroke:var(--primary);fill:none;stroke-width:2;flex-shrink:0}
-.sidebar-info-linha span{color:var(--muted)}
-.sidebar-info-linha strong{color:var(--text)}
+/* SIDEBAR / CTA */
+.negocio-sidebar{}
+.sidebar-sticky{position:sticky;top:88px;display:flex;flex-direction:column;gap:20px}
 
-/* CTA LEANTTRO SIDEBAR */
-.cta-leanttro{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-d) 100%);border-radius:var(--radius);padding:24px;color:#fff;text-align:center}
-.cta-leanttro img{height:28px;filter:brightness(0) invert(1);margin:0 auto 12px}
-.cta-leanttro h3{font-family:var(--display);font-size:1rem;font-weight:800;margin-bottom:8px}
-.cta-leanttro p{font-size:.82rem;color:rgba(255,255,255,.82);margin-bottom:16px;line-height:1.5}
-.btn-cta-leanttro{display:block;background:#fff;color:var(--primary);padding:11px;border-radius:8px;font-weight:700;font-size:.85rem;text-align:center;transition:all .2s;font-family:var(--display)}
-.btn-cta-leanttro:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+/* CARD CONTATO */
+.contato-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:24px}
+.contato-card h3{font-family:var(--display);font-size:1rem;font-weight:700;margin-bottom:16px;color:var(--text)}
+.btn-contato{display:flex;align-items:center;gap:10px;padding:11px 16px;border-radius:8px;font-size:.9rem;font-weight:600;transition:all .2s;margin-bottom:10px;width:100%}
+.btn-contato:last-child{margin-bottom:0}
+.btn-contato svg{width:18px;height:18px;flex-shrink:0}
+.btn-wpp{background:#25D366;color:#fff}
+.btn-wpp:hover{background:#1da850;transform:translateY(-1px)}
+.btn-site{background:var(--bg2);color:var(--text);border:1.5px solid var(--border)}
+.btn-site:hover{border-color:var(--primary);color:var(--primary)}
+.btn-tel{background:var(--bg2);color:var(--text);border:1.5px solid var(--border)}
+.btn-tel:hover{border-color:var(--primary);color:var(--primary)}
+.btn-maps{background:var(--bg2);color:var(--text);border:1.5px solid var(--border)}
+.btn-maps:hover{border-color:var(--primary);color:var(--primary)}
+.endereco-info{font-size:.85rem;color:var(--muted);margin-top:14px;padding-top:14px;border-top:1px solid var(--border);display:flex;gap:7px;align-items:flex-start}
+.endereco-info svg{width:14px;height:14px;stroke:var(--muted);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px}
+
+/* CARD CTA CADASTRO */
+.cta-card{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-d) 100%);border-radius:var(--radius);padding:24px;color:#fff;text-align:center;position:relative;overflow:hidden}
+.cta-card::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.cta-card .cta-icon{font-size:2rem;margin-bottom:10px;position:relative}
+.cta-card h3{font-family:var(--display);font-size:1.05rem;font-weight:700;margin-bottom:8px;position:relative}
+.cta-card p{font-size:.85rem;opacity:.85;margin-bottom:16px;line-height:1.5;position:relative}
+.btn-cta-wpp{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#fff;color:var(--primary);padding:11px 20px;border-radius:8px;font-size:.88rem;font-weight:700;transition:all .2s;position:relative;width:100%}
+.btn-cta-wpp:hover{background:var(--accent);color:var(--dark)}
+.btn-cta-wpp svg{width:16px;height:16px;flex-shrink:0}
+
+/* OUTROS NEGÓCIOS */
+.outros-section{padding:48px 0;background:var(--bg2);border-top:1px solid var(--border)}
+.outros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:20px;margin-top:28px}
+.negocio-mini{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .25s;display:flex;flex-direction:column}
+.negocio-mini:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:var(--shadow)}
+.negocio-mini-foto{height:140px;object-fit:cover;width:100%}
+.negocio-mini-sem-foto{height:140px;background:linear-gradient(135deg,rgba(121,67,226,.1),rgba(0,229,160,.06));display:flex;align-items:center;justify-content:center;font-size:2rem}
+.negocio-mini-body{padding:14px}
+.negocio-mini-cat{font-size:.72rem;color:var(--primary);font-weight:600;margin-bottom:4px}
+.negocio-mini-nome{font-family:var(--display);font-size:.9rem;font-weight:700;color:var(--text);margin-bottom:4px}
+.negocio-mini-end{font-size:.78rem;color:var(--muted)}
+.negocio-mini-link{margin-top:10px;font-size:.8rem;color:var(--primary);font-weight:600}
 
 /* SKELETON */
-.skeleton-page{padding:48px 0 80px}
 .skeleton{background:var(--bg2);border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border)}
-.skeleton-img{height:360px;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
-.skeleton-body{padding:24px;display:flex;flex-direction:column;gap:12px}
+.skeleton-img{height:280px;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.skeleton-body{padding:28px;display:flex;flex-direction:column;gap:12px}
 .skeleton-line{height:14px;border-radius:6px;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
-.skeleton-line.short{width:40%}.skeleton-line.medium{width:65%}
+.skeleton-line.short{width:55%}
+.skeleton-line.shorter{width:35%}
 @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
-/* FOOTER */
-footer{background:var(--dark);padding:40px 20px 0}
-.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:32px;flex-wrap:wrap;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08)}
-.footer-logo img{height:32px;filter:brightness(0) invert(1);opacity:.9}
-.footer-divider{width:1px;height:40px;background:rgba(255,255,255,.12);flex-shrink:0}
-.footer-text{flex:1}
-.footer-text strong{display:block;color:#fff;font-family:var(--display);font-size:.95rem;margin-bottom:4px}
-.footer-text span{color:rgba(255,255,255,.45);font-size:.82rem}
-.footer-links{display:flex;gap:10px;flex-wrap:wrap}
-.f-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:8px;font-size:.82rem;font-weight:600;transition:all .2s}
-.f-btn svg{width:16px;height:16px;flex-shrink:0}
-.f-btn-site{background:rgba(255,255,255,.08);color:rgba(255,255,255,.75)}.f-btn-site:hover{background:rgba(255,255,255,.15);color:#fff}
-.f-btn-wpp{background:rgba(37,211,102,.15);color:#25D366}.f-btn-wpp:hover{background:rgba(37,211,102,.25)}
-.footer-bottom{max-width:1200px;margin:0 auto;padding:16px 0;display:flex;align-items:center;justify-content:center;gap:8px;font-size:.78rem;color:rgba(255,255,255,.3);flex-wrap:wrap}
-.footer-bottom a{color:rgba(255,255,255,.45);transition:color .15s}.footer-bottom a:hover{color:#fff}
+/* NOT FOUND */
+.not-found{text-align:center;padding:80px 20px;color:var(--muted)}
+.not-found svg{width:56px;height:56px;stroke:var(--border);fill:none;stroke-width:1.5;margin:0 auto 16px}
+.not-found h2{font-family:var(--display);font-size:1.4rem;font-weight:700;color:var(--text);margin-bottom:8px}
+.not-found a{color:var(--primary);font-weight:600}
 
-@media(max-width:960px){
-  .negocio-layout{grid-template-columns:1fr}
-  .negocio-sidebar{position:static}
-  .cta-leanttro{display:none}
-}
+/* FOOTER */
+footer{background:var(--dark);color:#fff;padding:40px 20px 24px}
+.footer-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;margin-bottom:32px}
+.footer-logo img{height:32px;filter:brightness(0) invert(1);opacity:.9;margin-bottom:10px}
+.footer-desc{font-size:.85rem;color:rgba(255,255,255,.5);line-height:1.6}
+.footer-title{font-family:var(--display);font-size:.85rem;font-weight:700;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.footer-links a{font-size:.88rem;color:rgba(255,255,255,.65);transition:color .15s}
+.footer-links a:hover{color:#fff}
+.footer-btns{display:flex;flex-direction:column;gap:10px}
+.f-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;font-size:.85rem;font-weight:600;transition:all .2s}
+.f-btn-wpp{background:#25D366;color:#fff}
+.f-btn-wpp:hover{background:#1da850}
+.f-btn-site{background:rgba(255,255,255,.1);color:rgba(255,255,255,.85)}
+.f-btn-site:hover{background:rgba(255,255,255,.18);color:#fff}
+.footer-bottom{border-top:1px solid rgba(255,255,255,.08);padding-top:20px;text-align:center;font-size:.78rem;color:rgba(255,255,255,.35)}
+@media(max-width:680px){.footer-inner{grid-template-columns:1fr}}
+
+/* RESPONSIVO */
 @media(max-width:768px){
-  nav.desktop-nav,.btn-wpp-header{display:none}
+  .negocio-hero-content h1{font-size:1.7rem}
+  nav.desktop-nav,.header-cta{display:none}
   .hamburger{display:block}
-  .negocio-hero-foto{height:240px}
-  .negocio-nome{font-size:1.8rem}
-  .negocio-layout{padding:28px 0 60px;gap:28px}
+  .info-section{padding:20px}
+}
+@media(max-width:480px){
+  .rating-resumo{flex-direction:column;align-items:flex-start;gap:10px}
 }
 </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
   <div class="header-inner">
     <a href="/" class="logo-link">
       <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" height="38">
     </a>
-    <nav class="desktop-nav" aria-label="Navegação principal">
+    <nav class="desktop-nav">
       <ul>
         <li><a href="/">Home</a></li>
         <li><a href="/#hub">Hub</a></li>
-        <li><a href="/loja">Loja</a></li>
         <li><a href="/blog">Blog</a></li>
-        <li><a href="#orcamento">Orçamento</a></li>
+        <li><a href="/loja">Loja</a></li>
       </ul>
     </nav>
     <div class="header-cta">
       <a href="https://wa.me/5511999999999" class="btn-wpp-header" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
         WhatsApp
       </a>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
     </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
   </div>
 </header>
 
+<!-- MOBILE NAV -->
 <div class="mobile-nav-overlay" id="mobileNav">
-  <button class="mobile-nav-close" id="navClose">×</button>
-  <nav><ul>
+  <button class="mobile-nav-close" id="navClose">✕</button>
+  <ul>
     <li><a href="/" onclick="closeNav()">Home</a></li>
     <li><a href="/#hub" onclick="closeNav()">Hub</a></li>
-    <li><a href="/loja" onclick="closeNav()">Loja</a></li>
     <li><a href="/blog" onclick="closeNav()">Blog</a></li>
+    <li><a href="/loja" onclick="closeNav()">Loja</a></li>
     <li><a href="https://wa.me/5511999999999" onclick="closeNav()">WhatsApp</a></li>
-  </ul></nav>
+  </ul>
 </div>
 
 <!-- BREADCRUMB -->
 <div class="breadcrumb-bar">
   <nav class="breadcrumb" aria-label="Breadcrumb">
-    <a href="/">Home</a><span>›</span>
-    <a href="/#hub">Hub</a><span>›</span>
-    <a id="breadBairro" href="/">...</a><span>›</span>
-    <strong id="breadNome" style="color:var(--text)">Carregando...</strong>
+    <a href="/">Home</a>
+    <span>›</span>
+    <a href="/#hub">Hub</a>
+    <span>›</span>
+    <a id="breadBairro" href="#">Bairro</a>
+    <span>›</span>
+    <span id="breadNome">Negócio</span>
   </nav>
 </div>
 
-<!-- CONTEÚDO DINÂMICO -->
+<!-- CONTEÚDO PRINCIPAL -->
 <div id="pageContent">
-  <!-- Foto / placeholder -->
-  <div id="fotoWrap"></div>
+  <!-- Skeleton enquanto carrega -->
+  <div id="skeletonHero" class="skeleton" style="border-radius:0;border:none">
+    <div class="skeleton-img"></div>
+  </div>
+  <div class="container" style="padding-top:32px">
+    <div class="skeleton" style="border:none;background:transparent">
+      <div class="skeleton-body">
+        <div class="skeleton-line shorter"></div>
+        <div class="skeleton-line" style="height:28px;width:60%"></div>
+        <div class="skeleton-line short"></div>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- CONTEÚDO REAL (inicialmente oculto) -->
+<div id="negocioContent" style="display:none">
+
+  <!-- HERO -->
+  <div class="negocio-hero">
+    <div id="heroBg"></div>
+    <div class="negocio-hero-overlay"></div>
+    <div class="negocio-hero-content container">
+      <span class="negocio-badge-cat" id="heroCat">Categoria</span>
+      <h1 id="heroNome">Nome do Negócio</h1>
+      <div class="negocio-hero-meta">
+        <span class="meta-item" id="heroEnd">
+          <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span id="heroEndText">Endereço</span>
+        </span>
+        <span class="meta-item" id="heroBadgeStatus"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- LAYOUT -->
   <div class="container">
     <div class="negocio-layout">
 
       <!-- COLUNA PRINCIPAL -->
-      <main class="negocio-main" id="negocioMain">
-        <div style="padding:80px 0;text-align:center;color:var(--muted)">
-          <div class="skeleton-body" style="max-width:500px;margin:0 auto">
-            <div class="skeleton-line short"></div>
-            <div class="skeleton-line"></div>
-            <div class="skeleton-line medium"></div>
+      <div class="negocio-main">
+
+        <!-- DESCRIÇÃO -->
+        <div class="info-section" id="secDescricao" style="display:none">
+          <div class="info-section-title">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            Sobre o negócio
           </div>
-        </div>
-      </main>
-
-      <!-- SIDEBAR -->
-      <aside class="negocio-sidebar" id="negocioSidebar" style="display:none">
-
-        <!-- Contato -->
-        <div class="sidebar-card" id="cardContato">
-          <p class="sidebar-card-titulo">Entrar em contato</p>
-          <div id="botoesContato"></div>
-          <div id="infoLinhas"></div>
+          <p class="negocio-desc" id="negocioDesc"></p>
         </div>
 
-        <!-- CTA Leanttro -->
-        <div class="cta-leanttro">
-          <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro">
-          <h3>Quer uma página como essa?</h3>
-          <p>Site profissional com painel admin, SEO, leads e hub de bairro. A partir de R$499.</p>
-          <a href="https://wa.me/5511999999999?text=Vi%20a%20p%C3%A1gina%20de%20neg%C3%B3cio%20e%20quero%20um%20site%20assim" class="btn-cta-leanttro" target="_blank" rel="noopener">
-            Quero o meu site →
+        <!-- HORÁRIO -->
+        <div class="info-section" id="secHorario" style="display:none">
+          <div class="info-section-title">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Horário de funcionamento
+            <span id="badgeAberto"></span>
+          </div>
+          <div id="horarioLista"></div>
+        </div>
+
+        <!-- MAPA -->
+        <div class="info-section" id="secMapa" style="display:none">
+          <div class="info-section-title">
+            <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Localização
+          </div>
+          <div class="mapa-container" id="mapaContainer"></div>
+          <a id="btnMaps" href="#" target="_blank" rel="noopener" class="btn-como-chegar" style="margin-top:14px">
+            <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
+            Como chegar
           </a>
         </div>
 
+        <!-- AVALIAÇÕES -->
+        <div class="info-section">
+          <div class="info-section-title">
+            <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            Avaliações
+          </div>
+
+          <div class="rating-resumo" id="ratingResumo" style="display:none">
+            <div>
+              <div class="rating-numero" id="ratingNumero">0</div>
+              <div class="rating-estrelas" id="ratingEstrelasGrande"></div>
+              <div class="rating-total" id="ratingTotal">0 avaliações</div>
+            </div>
+          </div>
+
+          <div id="avaliacoesList">
+            <div class="sem-avaliacoes">
+              <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <p>Ainda sem avaliações. Seja o primeiro!</p>
+            </div>
+          </div>
+
+          <!-- FORM AVALIAÇÃO -->
+          <div class="form-avaliacao">
+            <h4>Deixar uma avaliação</h4>
+            <div class="star-picker" id="starPicker">
+              <button onclick="setStar(1)" data-star="1">☆</button>
+              <button onclick="setStar(2)" data-star="2">☆</button>
+              <button onclick="setStar(3)" data-star="3">☆</button>
+              <button onclick="setStar(4)" data-star="4">☆</button>
+              <button onclick="setStar(5)" data-star="5">☆</button>
+            </div>
+            <div class="form-group">
+              <input type="text" id="avNome" placeholder="Seu nome">
+            </div>
+            <div class="form-group">
+              <textarea id="avComentario" placeholder="Conte sua experiência (opcional)"></textarea>
+            </div>
+            <button class="btn-enviar-av" id="btnEnviarAv" onclick="enviarAvaliacao()">Enviar avaliação</button>
+          </div>
+        </div>
+
+      </div><!-- /negocio-main -->
+
+      <!-- SIDEBAR -->
+      <aside class="negocio-sidebar">
+        <div class="sidebar-sticky">
+
+          <!-- CONTATO -->
+          <div class="contato-card">
+            <h3>Entrar em contato</h3>
+            <a id="btnWpp" href="#" target="_blank" rel="noopener" class="btn-contato btn-wpp" style="display:none">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+              WhatsApp
+            </a>
+            <a id="btnTel" href="#" class="btn-contato btn-tel" style="display:none">
+              <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.37 2 2 0 0 1 3.6 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.37a16 16 0 0 0 6.72 6.72l.93-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+              <span id="telTexto">Ligar</span>
+            </a>
+            <a id="btnSite" href="#" target="_blank" rel="noopener" class="btn-contato btn-site" style="display:none">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              Visitar site
+            </a>
+            <a id="btnMapsCard" href="#" target="_blank" rel="noopener" class="btn-contato btn-maps">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Ver no mapa
+            </a>
+            <div class="endereco-info" id="enderecoInfo" style="display:none">
+              <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <span id="enderecoTexto"></span>
+            </div>
+          </div>
+
+          <!-- CTA CADASTRO -->
+          <div class="cta-card">
+            <div class="cta-icon">🚀</div>
+            <h3>Quer uma página como essa?</h3>
+            <p>Seu negócio aparece no Google organicamente. Sem anúncios. Cadastro gratuito.</p>
+            <a href="https://wa.me/5511999999999?text=Quero%20cadastrar%20meu%20neg%C3%B3cio%20no%20hub" target="_blank" rel="noopener" class="btn-cta-wpp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+              Quero cadastrar grátis
+            </a>
+          </div>
+
+        </div>
       </aside>
+
+    </div>
+  </div>
+
+  <!-- OUTROS NEGÓCIOS -->
+  <div class="outros-section" id="outrosSection" style="display:none">
+    <div class="container">
+      <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px">
+        <div>
+          <h2 style="font-family:var(--display);font-size:1.5rem;font-weight:800;color:var(--text)">
+            ✦ Outros negócios no bairro
+          </h2>
+          <p id="outrosSubtitulo" style="color:var(--muted);font-size:.9rem;margin-top:4px"></p>
+        </div>
+        <a id="outrosBairroLink" href="#" style="font-size:.9rem;font-weight:600;color:var(--primary)">Ver todos →</a>
+      </div>
+      <div class="outros-grid" id="outrosGrid"></div>
+    </div>
+  </div>
+
+</div><!-- /negocioContent -->
+
+<!-- NOT FOUND -->
+<div id="notFoundContent" style="display:none">
+  <div class="container">
+    <div class="not-found">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <h2>Negócio não encontrado</h2>
+      <p>Este negócio não existe ou foi removido. <a href="/">Voltar para o início</a></p>
     </div>
   </div>
 </div>
@@ -297,23 +481,32 @@ footer{background:var(--dark);padding:40px 20px 0}
 <!-- FOOTER -->
 <footer>
   <div class="footer-inner">
-    <div class="footer-logo">
-      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro">
+    <div>
+      <div class="footer-logo">
+        <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro">
+      </div>
+      <p class="footer-desc">Hub local de negócios no Jabaquara e região. Apareça no Google sem pagar por anúncios.</p>
     </div>
-    <div class="footer-divider"></div>
-    <div class="footer-text">
-      <strong>Leanttro Tecnologia</strong>
-      <span>Sites, hubs e automações — Jabaquara, São Paulo<br>© 2026 Leanttro. Todos os direitos reservados.</span>
+    <div>
+      <div class="footer-title">Links</div>
+      <ul class="footer-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/#hub">Hub de Negócios</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/loja">Loja</a></li>
+      </ul>
     </div>
-    <div class="footer-links">
-      <a href="https://leanttro.com" class="f-btn f-btn-site">
-        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
-        leanttro.com
-      </a>
-      <a href="https://wa.me/5511999999999" class="f-btn f-btn-wpp" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
-      </a>
+    <div>
+      <div class="footer-title">Contato</div>
+      <div class="footer-btns">
+        <a href="https://wa.me/5511999999999" class="f-btn f-btn-wpp" target="_blank" rel="noopener">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+          WhatsApp
+        </a>
+        <a href="https://leanttro.com" class="f-btn f-btn-site" target="_blank" rel="noopener">
+          🌐 leanttro.com
+        </a>
+      </div>
     </div>
   </div>
   <div class="footer-bottom">
@@ -321,214 +514,301 @@ footer{background:var(--dark);padding:40px 20px 0}
   </div>
 </footer>
 
-<a href="https://wa.me/5511999999999" target="_blank" rel="noopener" id="wppFlutuante" style="position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="WhatsApp">
-  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5511999999999" target="_blank" rel="noopener"
+  style="position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s"
+  onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
 </a>
 
 <script>
 const API_BASE = 'https://teste.leanttro.com';
-const DIAS = ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'];
-
-function slugify(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}
-function capitalize(s){return(s||'').split('-').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')}
-async function apiGet(p){try{const r=await fetch(API_BASE+p);if(!r.ok)return null;return await r.json()}catch(e){return null}}
-
-function starsHtml(n,size=14){
-  return Array.from({length:5},(_,i)=>`<svg width="${size}" height="${size}" viewBox="0 0 24 24" style="fill:${i<n?'#FBBC04':'#e4e4f0'};stroke:${i<n?'#FBBC04':'#e4e4f0'}"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`).join('')
-}
-
-function mediaAvaliacoes(lista){
-  if(!lista||!lista.length)return 0;
-  return lista.reduce((s,a)=>s+(a.nota||0),0)/lista.length;
-}
-
-function formatarData(str){
-  if(!str)return '';
-  const d=new Date(str);
-  return d.toLocaleDateString('pt-BR',{day:'2-digit',month:'short',year:'numeric'});
-}
-
-let negocioId = null;
+let negocioData = null;
 let notaSelecionada = 0;
 
-function renderEstrelas(){
-  document.querySelectorAll('.star-btn').forEach((btn,i)=>{
-    btn.textContent = i < notaSelecionada ? '★' : '☆';
-    btn.classList.toggle('sel', i < notaSelecionada);
-  });
+const DIAS_PT = ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'];
+const HORARIOS_MOCK = null; // O backend ainda não tem campo horarios; quando tiver, remova isso
+
+async function apiGet(p){
+  try{const r=await fetch(API_BASE+p);if(!r.ok)return null;return await r.json()}
+  catch(e){return null}
+}
+
+async function apiPost(p,body){
+  try{
+    const r=await fetch(API_BASE+p,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(body)});
+    if(!r.ok)return null;return await r.json();
+  }catch(e){return null}
+}
+
+function estrelas(nota,tamanho='normal'){
+  const n=Math.round(nota||0);
+  return Array.from({length:5},(_,i)=>`<svg class="${i<n?'':'vazia'}" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`).join('');
+}
+
+function slugify(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+function capitalize(s){return s?s.charAt(0).toUpperCase()+s.slice(1).replace(/-/g,' '):''}
+function formatDate(d){try{return new Date(d).toLocaleDateString('pt-BR')}catch{return''}}
+
+function setStar(n){
+  notaSelecionada=n;
+  document.querySelectorAll('#starPicker button').forEach((b,i)=>{b.textContent=i<n?'★':'☆'});
+}
+
+function isAberto(horarios){
+  if(!horarios||!horarios.length)return null;
+  const now=new Date();
+  const dia=now.getDay();
+  const h=now.getHours()*100+now.getMinutes();
+  const hoje=horarios.find(ho=>ho.dia===dia);
+  if(!hoje||hoje.fechado)return false;
+  const [ah,am]=hoje.abre.split(':').map(Number);
+  const [fh,fm]=hoje.fecha.split(':').map(Number);
+  return h>=ah*100+am && h<=fh*100+fm;
+}
+
+function renderHorarios(horarios){
+  if(!horarios||!horarios.length){
+    document.getElementById('secHorario').style.display='none';return;
+  }
+  document.getElementById('secHorario').style.display='';
+  const aberto=isAberto(horarios);
+  const badge=document.getElementById('badgeAberto');
+  if(aberto===true)badge.innerHTML='<span class="badge-aberto"><span class="badge-dot"></span>Aberto agora</span>';
+  else if(aberto===false)badge.innerHTML='<span class="badge-fechado"><span class="badge-dot"></span>Fechado agora</span>';
+
+  const lista=document.getElementById('horarioLista');
+  lista.innerHTML=horarios.map(h=>`
+    <div class="horario-linha">
+      <span class="horario-dia">${DIAS_PT[h.dia]||h.dia_nome||''}</span>
+      <span class="horario-hora ${h.fechado?'fechado':''}">${h.fechado?'Fechado':`${h.abre} – ${h.fecha}`}</span>
+    </div>
+  `).join('');
+}
+
+function renderAvaliacoes(avaliacoes){
+  const lista=document.getElementById('avaliacoesList');
+  if(!avaliacoes||!avaliacoes.length){
+    lista.innerHTML=`<div class="sem-avaliacoes"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><p>Ainda sem avaliações. Seja o primeiro!</p></div>`;
+    return;
+  }
+  const media=(avaliacoes.reduce((s,a)=>s+(a.nota||0),0)/avaliacoes.length).toFixed(1);
+  document.getElementById('ratingResumo').style.display='flex';
+  document.getElementById('ratingNumero').textContent=media;
+  document.getElementById('ratingEstrelasGrande').innerHTML=estrelas(parseFloat(media));
+  document.getElementById('ratingTotal').textContent=`${avaliacoes.length} avaliação${avaliacoes.length!==1?'ões':''}`;
+
+  lista.innerHTML=avaliacoes.map(a=>`
+    <div class="avaliacao-card">
+      <div class="avaliacao-header">
+        <span class="avaliacao-autor">${a.autor_nome||'Anônimo'}</span>
+        <span class="avaliacao-data">${formatDate(a.criado_em)}</span>
+      </div>
+      <div class="avaliacao-estrelas">${estrelas(a.nota)}</div>
+      ${a.comentario?`<p class="avaliacao-texto">${a.comentario}</p>`:''}
+    </div>
+  `).join('');
 }
 
 async function enviarAvaliacao(){
-  const nome=document.getElementById('avalNome').value.trim();
-  const texto=document.getElementById('avalTexto').value.trim();
-  if(!notaSelecionada){alert('Selecione uma nota.');return}
-  if(!nome){alert('Informe seu nome.');return}
-  const btn=document.getElementById('btnEnviarAval');
-  btn.textContent='Enviando...';btn.disabled=true;
-  try{
-    const r=await fetch(API_BASE+'/hub/avaliacoes',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({negocio_id:negocioId,nota:notaSelecionada,comentario:texto,autor_nome:nome})});
-    if(r.ok){
-      document.getElementById('formMsg').style.display='block';
-      document.getElementById('avalNome').value='';
-      document.getElementById('avalTexto').value='';
-      notaSelecionada=0;renderEstrelas();
-      setTimeout(()=>window.location.reload(),1500);
-    }else{throw new Error()}
-  }catch(e){alert('Erro ao enviar. Tente novamente.');}
-  btn.textContent='Enviar avaliação';btn.disabled=false;
+  if(!notaSelecionada){alert('Selecione uma nota antes de enviar.');return}
+  if(!negocioData)return;
+  const btn=document.getElementById('btnEnviarAv');
+  btn.disabled=true;btn.textContent='Enviando...';
+  const res=await apiPost('/hub/avaliacoes',{
+    negocio_id:negocioData.id,
+    nota:notaSelecionada,
+    comentario:document.getElementById('avComentario').value||null,
+    autor_nome:document.getElementById('avNome').value||null
+  });
+  if(res&&res.id){
+    btn.textContent='✓ Enviado! Obrigado';
+    document.getElementById('avNome').value='';
+    document.getElementById('avComentario').value='';
+    setStar(0);
+    // Recarrega avaliações
+    const updated=await apiGet(`/hub/negocios/${slugBairro}`);
+    if(updated)renderAvaliacoes(updated.avaliacoes||[]);
+  } else {
+    btn.disabled=false;btn.textContent='Enviar avaliação';
+    alert('Erro ao enviar avaliação. Tente novamente.');
+  }
 }
 
-function renderNegocio(n){
-  negocioId = n.id;
-  const bairroSlug = slugify(n.bairro||'jabaquara');
-  const bairroNome = n.bairro || 'Jabaquara';
-  const endFull = [n.endereco, n.bairro, n.cidade||'São Paulo'].filter(Boolean).join(', ');
-  const avaliacoes = n.avaliacoes || [];
-  const media = mediaAvaliacoes(avaliacoes);
-
-  // Breadcrumb
-  document.getElementById('breadBairro').textContent = bairroNome;
-  document.getElementById('breadBairro').href = `/${bairroSlug}`;
-  document.getElementById('breadNome').textContent = n.nome;
-
-  // Foto
-  document.getElementById('fotoWrap').innerHTML = n.foto_url
-    ? `<img src="${n.foto_url}" alt="${n.nome}" class="negocio-hero-foto" loading="eager">`
-    : `<div class="negocio-hero-placeholder">🏪</div>`;
-
-  // Horário: verifica se está aberto agora
-  const agora = new Date();
-  const diaAtual = DIAS[agora.getDay()];
-  let aberto = false;
-  let horariosHtml = '';
-  if(n.horarios && typeof n.horarios === 'object'){
-    horariosHtml = `<div class="horarios-card">
-      <p class="horarios-titulo"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Horários de funcionamento</p>
-      <div class="horarios-lista">
-        ${DIAS.map(dia=>{
-          const h=n.horarios[dia]||n.horarios[dia.toLowerCase()];
-          const fechado=!h||h==='-'||h.toLowerCase()==='fechado';
-          if(!fechado&&dia===diaAtual)aberto=true;
-          return`<div class="horario-linha"><span class="horario-dia">${dia}</span><span class="horario-hora${fechado?' fechado':''}">${fechado?'Fechado':h}</span></div>`;
-        }).join('')}
+function renderOutros(todos,slugAtual,bairro){
+  const outros=todos.filter(n=>n.slug!==slugAtual&&slugify(n.bairro||'')===(slugify(bairro||''))).slice(0,4);
+  if(!outros.length){document.getElementById('outrosSection').style.display='none';return}
+  document.getElementById('outrosSection').style.display='';
+  document.getElementById('outrosSubtitulo').textContent=`Mais negócios em ${bairro}`;
+  document.getElementById('outrosBairroLink').href=`/${slugify(bairro)}`;
+  document.getElementById('outrosBairroLink').textContent=`Ver todos em ${bairro} →`;
+  const ICONS={restaurante:'🍽️',lanchonete:'🍔',pizzaria:'🍕',padaria:'🥖',mercado:'🛒',farmácia:'💊',salão:'💇',barbearia:'✂️',academia:'💪',clínica:'🏥',escola:'📚',pet:'🐾'};
+  function getIcon(c){const k=Object.keys(ICONS).find(k=>slugify(c||'').includes(k));return k?ICONS[k]:'🏪'}
+  document.getElementById('outrosGrid').innerHTML=outros.map(n=>`
+    <a href="/negocio/${n.slug}" class="negocio-mini">
+      ${n.foto_url?`<img src="${n.foto_url}" alt="${n.nome}" class="negocio-mini-foto" loading="lazy">`:`<div class="negocio-mini-sem-foto">${getIcon(n.categoria_nome)}</div>`}
+      <div class="negocio-mini-body">
+        <div class="negocio-mini-cat">${n.categoria_nome||''}</div>
+        <div class="negocio-mini-nome">${n.nome}</div>
+        ${n.endereco?`<div class="negocio-mini-end">${n.endereco}</div>`:''}
+        <div class="negocio-mini-link">Ver mais →</div>
       </div>
-    </div>`;
+    </a>
+  `).join('');
+}
+
+let slugBairro='';
+
+async function init(){
+  // Pega o slug do negócio da URL: /negocio/meu-negocio → meu-negocio
+  const partes=location.pathname.replace(/^\/|\/$/g,'').split('/');
+  // Suporta /negocio/slug ou direto /slug (se o backend rotear assim)
+  const slugNegocio=partes[partes.length-1];
+
+  const [negocio, todos] = await Promise.all([
+    apiGet(`/hub/negocios/${slugNegocio}`),
+    apiGet('/hub/negocios')
+  ]);
+
+  // Esconde skeleton
+  document.getElementById('skeletonHero').style.display='none';
+
+  if(!negocio||negocio.erro){
+    document.getElementById('notFoundContent').style.display='';
+    return;
   }
 
-  // Mapa
-  let mapaHtml = '';
-  if(n.lat && n.lng){
-    const q=encodeURIComponent(endFull);
-    mapaHtml=`<div class="mapa-section">
-      <p class="mapa-titulo"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Como chegar</p>
-      <div class="mapa-iframe-wrap">
-        <iframe loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade"
-          src="https://www.google.com/maps?q=${n.lat},${n.lng}&z=16&output=embed"></iframe>
-      </div>
-      <a href="https://www.google.com/maps/dir/?api=1&destination=${n.lat},${n.lng}" target="_blank" rel="noopener" class="btn-chegar">
-        <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
-        Abrir no Google Maps
-      </a>
-    </div>`;
+  negocioData=negocio;
+  slugBairro=slugify(negocio.bairro||'');
+  const nomeBairro=negocio.bairro||'';
+
+  // HERO
+  const heroBg=document.getElementById('heroBg');
+  if(negocio.foto_url){
+    heroBg.outerHTML=`<img id="heroBg" src="${negocio.foto_url}" alt="${negocio.nome}" class="negocio-hero-foto">`;
+  } else {
+    heroBg.outerHTML=`<div id="heroBg" class="negocio-hero-sem-foto"></div>`;
   }
 
-  // Avaliações
-  const avalHtml = avaliacoes.length
-    ? avaliacoes.map(a=>`<div class="avaliacao-card">
-        <div class="avaliacao-top">
-          <div class="avaliacao-avatar">${(a.autor_nome||'?').charAt(0).toUpperCase()}</div>
-          <div><p class="avaliacao-nome">${a.autor_nome||'Anônimo'}</p><p class="avaliacao-data">${formatarData(a.criado_em)}</p></div>
-        </div>
-        <div class="avaliacao-stars">${starsHtml(a.nota||0,13)}</div>
-        ${a.comentario?`<p class="avaliacao-texto">${a.comentario}</p>`:''}
-      </div>`).join('')
-    : `<div class="sem-avaliacoes"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="8" y1="15" x2="16" y2="15"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg><p>Ainda sem avaliações. Seja o primeiro!</p></div>`;
+  document.getElementById('heroCat').textContent=negocio.categoria_nome||'';
+  document.getElementById('heroNome').textContent=negocio.nome;
+  const end=[negocio.endereco,nomeBairro].filter(Boolean).join(', ');
+  document.getElementById('heroEndText').textContent=end||'São Paulo';
 
-  // Main
-  document.getElementById('negocioMain').innerHTML = `
-    ${n.destaque?'<span class="negocio-destaque-tag">⭐ Negócio em destaque</span>':''}
-    <span class="negocio-badge">${n.categoria_nome||''}</span>
-    <h1 class="negocio-nome">${n.nome}</h1>
-    ${aberto?'<div class="aberto-agora">Aberto agora</div>':''}
-    <div class="negocio-endereco">
-      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-      <div><p>${endFull}</p>${n.cep?`<span>CEP: ${n.cep}</span>`:''}</div>
-    </div>
-    ${n.descricao?`<p class="negocio-desc-titulo">Sobre o estabelecimento</p><p class="negocio-desc">${n.descricao}</p>`:''}
-    ${horariosHtml}
-    ${mapaHtml}
-    <div class="avaliacoes-section">
-      <div class="avaliacoes-header">
-        <p class="avaliacoes-titulo">Avaliações</p>
-        ${avaliacoes.length?`<div class="media-nota"><span class="nota-grande">${media.toFixed(1)}</span><div><div class="nota-stars">${starsHtml(Math.round(media),18)}</div><p class="nota-count">${avaliacoes.length} avaliação${avaliacoes.length!==1?'es':''}</p></div></div>`:''}
-      </div>
-      <div class="avaliacoes-lista">${avalHtml}</div>
-      <div class="form-avaliacao">
-        <p class="form-titulo">Deixar uma avaliação</p>
-        <div class="form-stars-select" id="starsSelect">
-          ${Array.from({length:5},(_,i)=>`<button class="star-btn" onclick="notaSelecionada=${i+1};renderEstrelas()">☆</button>`).join('')}
-        </div>
-        <input id="avalNome" class="form-input" type="text" placeholder="Seu nome" maxlength="80">
-        <textarea id="avalTexto" class="form-input" placeholder="Conte sua experiência (opcional)" maxlength="500"></textarea>
-        <button class="btn-enviar-aval" id="btnEnviarAval" onclick="enviarAvaliacao()">
-          <svg viewBox="0 0 24 24" width="15" height="15" stroke="currentColor" fill="none" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
-          Enviar avaliação
-        </button>
-        <p class="form-msg" id="formMsg">✓ Avaliação enviada! Obrigado.</p>
-      </div>
-    </div>`;
+  // Status aberto/fechado (se tiver horarios no futuro)
+  // Por ora não mostra badge
 
-  // Sidebar
-  let botoesHtml = '';
-  if(n.whatsapp) botoesHtml+=`<a href="https://wa.me/55${n.whatsapp.replace(/\D/g,'')}" class="btn-wpp-negocio" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Falar pelo WhatsApp</a>`;
-  if(n.site_url) botoesHtml+=`<a href="${n.site_url}" class="btn-site-negocio" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>Visitar site</a>`;
-  document.getElementById('botoesContato').innerHTML=botoesHtml;
+  // BREADCRUMB
+  document.getElementById('breadBairro').textContent=nomeBairro;
+  document.getElementById('breadBairro').href=`/${slugBairro}`;
+  document.getElementById('breadNome').textContent=negocio.nome;
 
-  let infoHtml='';
-  if(n.telefone) infoHtml+=`<div class="sidebar-info-linha"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.18 6.18l1-.93a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg><div><span>Telefone</span><br><strong>${n.telefone}</strong></div></div>`;
-  if(n.endereco) infoHtml+=`<div class="sidebar-info-linha"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg><div><span>Endereço</span><br><strong>${endFull}</strong></div></div>`;
-  document.getElementById('infoLinhas').innerHTML=infoHtml;
-  document.getElementById('negocioSidebar').style.display='flex';
+  // TÍTULO
+  document.title=`${negocio.nome} — ${nomeBairro} | Leanttro Hub`;
+  document.getElementById('pageDesc').setAttribute('content',`${negocio.descricao?negocio.descricao.slice(0,150)+'...':negocio.nome+' em '+nomeBairro+'. Encontre endereço, horário e avaliações no Leanttro Hub.'}`);
+  document.getElementById('pageCanonical').setAttribute('href',`https://www.leanttro.com/negocio/${negocio.slug}`);
+  document.getElementById('ogTitle').setAttribute('content',negocio.nome);
+  document.getElementById('ogDesc').setAttribute('content',negocio.descricao||'');
+  if(negocio.foto_url)document.getElementById('ogImage').setAttribute('content',negocio.foto_url);
 
-  // WPP flutuante do negócio (se tiver)
-  if(n.whatsapp){
-    document.getElementById('wppFlutuante').href=`https://wa.me/55${n.whatsapp.replace(/\D/g,'')}`;
+  // DESCRIÇÃO
+  if(negocio.descricao){
+    document.getElementById('secDescricao').style.display='';
+    document.getElementById('negocioDesc').textContent=negocio.descricao;
   }
 
-  // Meta tags dinâmicas
-  const slug=location.pathname.replace(/^\/negocio\//,'').replace(/\/$/,'');
-  document.title=`${n.nome} — ${bairroNome} | Leanttro Hub`;
-  document.getElementById('pageDesc').content=`${n.nome} em ${bairroNome}. ${n.descricao?n.descricao.slice(0,120)+'...':'Veja endereço, horários e avaliações.'}`;
-  document.getElementById('pageCanonical').href=`https://www.leanttro.com/negocio/${slug}`;
+  // HORÁRIO (mock — quando o backend tiver campo `horarios`, troque aqui)
+  // renderHorarios(negocio.horarios);
+  document.getElementById('secHorario').style.display='none';
+
+  // MAPA
+  if(negocio.lat&&negocio.lng){
+    document.getElementById('secMapa').style.display='';
+    const mapsUrl=`https://www.google.com/maps?q=${negocio.lat},${negocio.lng}`;
+    const embedUrl=`https://maps.google.com/maps?q=${negocio.lat},${negocio.lng}&z=16&output=embed`;
+    document.getElementById('mapaContainer').innerHTML=`<iframe src="${embedUrl}" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+    document.getElementById('btnMaps').href=mapsUrl;
+    document.getElementById('btnMapsCard').href=mapsUrl;
+  } else if(negocio.endereco){
+    document.getElementById('secMapa').style.display='';
+    const q=encodeURIComponent(`${negocio.endereco}, ${nomeBairro}, São Paulo`);
+    const mapsUrl=`https://www.google.com/maps/search/?api=1&query=${q}`;
+    const embedUrl=`https://maps.google.com/maps?q=${q}&z=16&output=embed`;
+    document.getElementById('mapaContainer').innerHTML=`<iframe src="${embedUrl}" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>`;
+    document.getElementById('btnMaps').href=mapsUrl;
+    document.getElementById('btnMapsCard').href=mapsUrl;
+  } else {
+    document.getElementById('secMapa').style.display='none';
+    const q=encodeURIComponent(`${nomeBairro}, São Paulo`);
+    document.getElementById('btnMapsCard').href=`https://www.google.com/maps/search/?api=1&query=${q}`;
+  }
+
+  // CONTATOS SIDEBAR
+  if(negocio.whatsapp){
+    const wppLink=document.getElementById('btnWpp');
+    wppLink.href=`https://wa.me/55${negocio.whatsapp.replace(/\D/g,'')}`;
+    wppLink.style.display='flex';
+  }
+  if(negocio.telefone){
+    const telLink=document.getElementById('btnTel');
+    telLink.href=`tel:${negocio.telefone.replace(/\D/g,'')}`;
+    document.getElementById('telTexto').textContent=negocio.telefone;
+    telLink.style.display='flex';
+  }
+  if(negocio.site_url){
+    const siteLink=document.getElementById('btnSite');
+    siteLink.href=negocio.site_url;
+    siteLink.style.display='flex';
+  }
+  if(end){
+    document.getElementById('enderecoInfo').style.display='flex';
+    document.getElementById('enderecoTexto').textContent=end;
+  }
+
+  // AVALIAÇÕES
+  renderAvaliacoes(negocio.avaliacoes||[]);
+
+  // OUTROS NEGÓCIOS
+  if(todos&&todos.length)renderOutros(todos,negocio.slug,nomeBairro);
 
   // JSON-LD LocalBusiness
   const ld={
     "@context":"https://schema.org",
-    "@type":"LocalBusiness",
-    "name":n.nome,
-    "description":n.descricao||`${n.nome} em ${bairroNome}, São Paulo.`,
-    "url":`https://www.leanttro.com/negocio/${slug}`,
-    "image":n.foto_url||undefined,
-    "telephone":n.telefone||undefined,
-    "address":{"@type":"PostalAddress","streetAddress":n.endereco||undefined,"addressLocality":"São Paulo","addressRegion":"SP","addressCountry":"BR"},
-    ...(n.lat&&n.lng?{"geo":{"@type":"GeoCoordinates","latitude":n.lat,"longitude":n.lng}}:{}),
-    ...(avaliacoes.length?{"aggregateRating":{"@type":"AggregateRating","ratingValue":media.toFixed(1),"reviewCount":avaliacoes.length}}:{}),
-    "parentOrganization":{"@type":"Organization","name":"Leanttro Hub","url":"https://www.leanttro.com"}
+    "@graph":[
+      {
+        "@type":"LocalBusiness",
+        "@id":`https://www.leanttro.com/negocio/${negocio.slug}`,
+        "name":negocio.nome,
+        "description":negocio.descricao||undefined,
+        "image":negocio.foto_url||undefined,
+        "url":`https://www.leanttro.com/negocio/${negocio.slug}`,
+        "telephone":negocio.telefone||undefined,
+        "address":{
+          "@type":"PostalAddress",
+          "streetAddress":negocio.endereco||undefined,
+          "addressLocality":nomeBairro||"São Paulo",
+          "addressRegion":"SP",
+          "addressCountry":"BR"
+        },
+        ...(negocio.lat&&negocio.lng?{"geo":{"@type":"GeoCoordinates","latitude":negocio.lat,"longitude":negocio.lng}}:{}),
+        ...(negocio.avaliacoes&&negocio.avaliacoes.length?{"aggregateRating":{"@type":"AggregateRating","ratingValue":(negocio.avaliacoes.reduce((s,a)=>s+(a.nota||0),0)/negocio.avaliacoes.length).toFixed(1),"reviewCount":negocio.avaliacoes.length}}:{}),
+        "openingHours":undefined
+      },
+      {
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://www.leanttro.com/"},
+          {"@type":"ListItem","position":2,"name":"Hub","item":"https://www.leanttro.com/#hub"},
+          {"@type":"ListItem","position":3,"name":nomeBairro,"item":`https://www.leanttro.com/${slugBairro}`},
+          {"@type":"ListItem","position":4,"name":negocio.nome,"item":`https://www.leanttro.com/negocio/${negocio.slug}`}
+        ]
+      }
+    ]
   };
   document.getElementById('jsonld').textContent=JSON.stringify(ld);
-}
 
-async function init(){
-  // Pega slug da URL: /negocio/meu-restaurante → meu-restaurante
-  const slug = location.pathname.replace(/^\/negocio\//,'').replace(/\/$/,'');
-  if(!slug){ document.getElementById('negocioMain').innerHTML='<p style="padding:60px;text-align:center;color:var(--muted)">Negócio não encontrado.</p>'; return; }
-
-  const n = await apiGet(`/hub/negocios/${slug}`);
-  if(!n||n.erro){
-    document.getElementById('negocioMain').innerHTML=`<div style="padding:80px 20px;text-align:center;color:var(--muted)"><h2 style="font-family:var(--display);margin-bottom:8px">Negócio não encontrado</h2><p>Verifique o link ou <a href="/#hub" style="color:var(--primary)">veja outros negócios</a>.</p></div>`;
-    return;
-  }
-  renderNegocio(n);
+  // Mostra conteúdo
+  document.getElementById('negocioContent').style.display='';
 }
 
 document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('active'));
