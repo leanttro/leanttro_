@@ -525,15 +525,23 @@ tr:hover td{background:rgba(108,99,255,.04)}
         <div class="field"><label>Slug</label><input id="mp-slug" placeholder="nome-do-produto"></div>
         <div class="field"><label>Preço (R$)</label><input id="mp-preco" type="number" step="0.01" placeholder="97.00"></div>
       </div>
-      <div class="field"><label>Categoria</label>
-        <select id="mp-categoria">
-          <option value="exe">Executável (.exe)</option>
-          <option value="n8n">Pacote n8n JSON</option>
-          <option value="vps">Setup VPS + n8n</option>
-          <option value="site">Site Institucional</option>
-          <option value="hub">Seu Hub</option>
-          <option value="3d">3D Experience</option>
-        </select>
+      <div class="field-row">
+        <div class="field"><label>Categoria</label>
+          <select id="mp-categoria">
+            <option value="exe">Executável (.exe)</option>
+            <option value="n8n">Pacote n8n JSON</option>
+            <option value="vps">Setup VPS + n8n</option>
+            <option value="site">Site Institucional</option>
+            <option value="hub">Seu Hub</option>
+            <option value="3d">3D Experience</option>
+          </select>
+        </div>
+        <div class="field"><label>Tipo</label>
+          <select id="mp-tipo">
+            <option value="loja">Loja</option>
+            <option value="portfolio">Portfólio</option>
+          </select>
+        </div>
       </div>
       <div class="field"><label>Descrição</label><textarea id="mp-desc" rows="3" placeholder="Descreva o produto..."></textarea></div>
       <div class="field-row">
@@ -795,7 +803,7 @@ async function loadDashboard() {
     const [pedidos, leads, produtos, negocios, posts] = await Promise.all([
       api('GET', '/admin/pedidos'),
       api('GET', '/admin/leads'),
-      api('GET', '/produtos'),
+      api('GET', '/api/produtos'),
       api('GET', '/hub/negocios'),
       api('GET', '/blog')
     ]);
@@ -836,7 +844,7 @@ async function loadBadges() {
 // ── PRODUTOS ──
 let _produtos = [];
 async function loadProdutos() {
-  _produtos = await api('GET', '/produtos');
+  _produtos = await api('GET', '/api/produtos');
   renderProdutos(_produtos);
 }
 
@@ -888,6 +896,7 @@ function editProduto(p) {
   document.getElementById('mp-slug').value = p.slug;
   document.getElementById('mp-preco').value = p.preco;
   document.getElementById('mp-categoria').value = p.categoria || 'exe';
+  document.getElementById('mp-tipo').value = p.tipo || 'loja';
   document.getElementById('mp-desc').value = p.descricao || '';
   document.getElementById('mp-imagem').value = p.imagem_url || '';
   document.getElementById('mp-arquivo').value = p.arquivo_url || '';
@@ -903,6 +912,7 @@ async function saveProduto() {
     slug: document.getElementById('mp-slug').value,
     preco: parseFloat(document.getElementById('mp-preco').value),
     categoria: document.getElementById('mp-categoria').value,
+    tipo: document.getElementById('mp-tipo').value,
     descricao: document.getElementById('mp-desc').value,
     imagem_url: document.getElementById('mp-imagem').value,
     arquivo_url: document.getElementById('mp-arquivo').value,
