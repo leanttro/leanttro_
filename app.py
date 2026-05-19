@@ -438,7 +438,11 @@ def registrar_disparo():
 @app.route("/admin")
 def painel():
     return send_file("painel.html")
-
+    
+@app.route("/")
+def index():
+    return send_file("index.html")
+    
 # ─── RUN ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     app.run(debug=os.environ.get("FLASK_DEBUG", "false").lower() == "true")
