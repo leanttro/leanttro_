@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog — Sites, Hubs e Automações | Leanttro Tecnologia</title>
+<meta name="description" content="Artigos sobre SEO, tráfego orgânico, automações com n8n, IA e como colocar seu negócio no Google sem pagar por anúncio.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#7943e2">
+<link rel="canonical" href="https://www.leanttro.com/blog">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Leanttro Tecnologia">
+<meta property="og:title" content="Blog Leanttro — SEO, Automações e Tráfego Orgânico">
+<meta property="og:description" content="Artigos sobre como aparecer no Google sem pagar por clique, automações com IA e muito mais.">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#7943e2;--primary-d:#5c2ec4;--accent:#00e5a0;
+  --dark:#0a0a0f;--text:#1a1a2e;--muted:#6b6b80;
+  --border:#e4e4f0;--bg:#ffffff;--bg2:#f8f8fc;
+  --radius:12px;--sans:'Inter',sans-serif;--display:'Montserrat',sans-serif;
+  --shadow:0 4px 24px rgba(108,99,255,0.10);--shadow-md:0 8px 32px rgba(108,99,255,0.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* HEADER */
+header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 20px}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo img{height:38px;width:auto}
+nav.desktop-nav ul{list-style:none;display:flex;gap:4px}
+nav.desktop-nav ul li a{padding:8px 14px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--muted);transition:all .15s;white-space:nowrap}
+nav.desktop-nav ul li a:hover{color:var(--primary);background:rgba(108,99,255,.07)}
+nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
+.header-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn-wpp-header{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:9px 18px;border-radius:8px;font-size:.875rem;font-weight:600;transition:all .2s;white-space:nowrap}
+.btn-wpp-header:hover{background:#1da850;transform:translateY(-1px)}
+.btn-wpp-header svg{width:17px;height:17px;flex-shrink:0}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text)}
+.hamburger svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2}
+.mobile-nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;justify-content:center;align-items:center;opacity:0;transition:opacity .25s}
+.mobile-nav-overlay.active{display:flex;opacity:1}
+.mobile-nav-overlay ul{list-style:none;text-align:center}
+.mobile-nav-overlay ul li{margin:18px 0}
+.mobile-nav-overlay ul li a{color:#fff;font-family:var(--display);font-size:1.8rem;font-weight:700}
+.mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+
+/* HERO BLOG */
+.hero-blog{
+  background:var(--primary);position:relative;overflow:hidden;
+  padding:56px 20px 0;min-height:260px;
+}
+.hero-blog::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-blog-inner{position:relative;z-index:1;max-width:720px;margin:0 auto;text-align:center;padding-bottom:52px}
+.hero-blog h1{font-family:var(--display);font-size:2.8rem;font-weight:800;color:#fff;line-height:1.1;letter-spacing:-.6px;margin-bottom:14px}
+.hero-blog h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),#c4f0e0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-blog p{font-size:1.05rem;color:rgba(255,255,255,.8);max-width:520px;margin:0 auto}
+.hero-wave{display:block;width:100%;margin-top:-5px;line-height:0;position:relative;z-index:2}
+.hero-wave svg{display:block;width:100%}
+
+/* FILTROS POR TAG */
+.tags-bar{padding:32px 0 0}
+.tags-bar-inner{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tags-label{font-size:.8rem;font-weight:600;color:var(--muted);margin-right:4px}
+.tag-btn{
+  padding:6px 16px;border-radius:20px;border:1.5px solid var(--border);
+  background:#fff;color:var(--muted);font-family:var(--sans);
+  font-size:.82rem;font-weight:600;cursor:pointer;transition:all .2s;
+}
+.tag-btn:hover{border-color:var(--primary);color:var(--primary)}
+.tag-btn.active{background:var(--primary);border-color:var(--primary);color:#fff}
+
+/* GRID DE POSTS */
+.posts-section{padding:40px 0 72px}
+.posts-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:28px}
+.post-card{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;transition:all .25s;display:flex;flex-direction:column;
+}
+.post-card:hover{border-color:var(--primary);transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.post-thumb{width:100%;height:200px;object-fit:cover;display:block;background:var(--bg2)}
+.post-thumb-placeholder{
+  width:100%;height:200px;
+  background:linear-gradient(135deg,rgba(121,67,226,.1),rgba(0,229,160,.06));
+  display:flex;align-items:center;justify-content:center;
+  font-size:3rem;
+}
+.post-body{padding:24px;flex:1;display:flex;flex-direction:column;gap:10px}
+.post-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.post-cat{
+  display:inline-block;background:rgba(121,67,226,.1);color:var(--primary);
+  font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em;
+}
+.post-date{font-size:.75rem;color:var(--muted)}
+.post-body h2{font-family:var(--display);font-size:1.15rem;font-weight:700;color:var(--text);line-height:1.35}
+.post-resumo{font-size:.88rem;color:var(--muted);line-height:1.6;flex:1}
+.post-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+.post-tag{
+  font-size:.72rem;padding:2px 8px;border-radius:12px;
+  background:var(--bg2);color:var(--muted);font-weight:600;
+}
+.post-footer{margin-top:12px;padding-top:12px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.btn-ler{
+  display:inline-flex;align-items:center;gap:6px;
+  background:var(--primary);color:#fff;
+  padding:8px 18px;border-radius:7px;font-size:.82rem;font-weight:600;
+  transition:background .2s;
+}
+.post-card:hover .btn-ler{background:var(--primary-d)}
+.btn-ler svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5}
+
+/* POST EM DESTAQUE (primeiro post) */
+.post-destaque{
+  grid-column:1/-1;display:flex;gap:0;
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
+  overflow:hidden;transition:all .25s;
+}
+.post-destaque:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.post-destaque-img{flex:0 0 45%;max-width:45%}
+.post-destaque-img img{width:100%;height:100%;object-fit:cover;display:block}
+.post-destaque-img .post-thumb-placeholder{height:100%;min-height:260px}
+.post-destaque-body{flex:1;padding:36px;display:flex;flex-direction:column;gap:12px;justify-content:center}
+.post-destaque-body .post-body{padding:0;border:none}
+.post-destaque-label{font-size:.72rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em}
+.post-destaque-body h2{font-family:var(--display);font-size:1.6rem;font-weight:800;color:var(--text);line-height:1.25}
+@media(max-width:768px){
+  .post-destaque{flex-direction:column}
+  .post-destaque-img{flex:none;max-width:100%}
+  .post-destaque-img .post-thumb-placeholder{min-height:180px}
+  .post-destaque-body{padding:20px}
+  .post-destaque-body h2{font-size:1.3rem}
+}
+
+/* ESTADOS */
+.loading-state{text-align:center;padding:72px 20px;color:var(--muted)}
+.loading-state svg{width:36px;height:36px;stroke:var(--border);fill:none;stroke-width:1.5;margin:0 auto 16px;display:block;animation:spin .9s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.empty-state{text-align:center;padding:72px 20px;color:var(--muted)}
+.empty-state p{font-size:.95rem}
+.empty-title{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:8px}
+
+/* SKELETONS */
+.skeleton-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.sk-img{height:200px;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.sk-body{padding:24px;display:flex;flex-direction:column;gap:12px}
+.sk-line{height:12px;border-radius:6px;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.sk-line.short{width:50%}.sk-line.med{width:75%}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* CTA BOTTOM */
+.blog-cta{background:var(--primary);padding:64px 20px;text-align:center;position:relative;overflow:hidden}
+.blog-cta::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.blog-cta-inner{position:relative;z-index:1;max-width:580px;margin:0 auto}
+.blog-cta h2{font-family:var(--display);font-size:2rem;font-weight:800;color:#fff;margin-bottom:12px;letter-spacing:-.4px}
+.blog-cta p{color:rgba(255,255,255,.8);font-size:1rem;margin-bottom:28px;line-height:1.6}
+.blog-cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-cta-p{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:10px;background:#fff;color:var(--primary);font-family:var(--display);font-size:.9rem;font-weight:700;transition:all .2s}
+.btn-cta-p:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.btn-cta-s{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-size:.9rem;font-weight:600;border:1.5px solid rgba(255,255,255,.3);transition:all .2s}
+.btn-cta-s:hover{background:rgba(255,255,255,.25)}
+
+/* FOOTER */
+footer{background:var(--dark);padding:40px 20px 0}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:32px;flex-wrap:wrap;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-logo img{height:32px;filter:brightness(0) invert(1);opacity:.9}
+.footer-divider{width:1px;height:40px;background:rgba(255,255,255,.12);flex-shrink:0}
+.footer-text{flex:1}
+.footer-text strong{display:block;color:#fff;font-family:var(--display);font-size:.95rem;margin-bottom:4px}
+.footer-text span{color:rgba(255,255,255,.45);font-size:.82rem}
+.footer-links{display:flex;gap:10px;flex-wrap:wrap}
+.f-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:8px;font-size:.82rem;font-weight:600;transition:all .2s}
+.f-btn-site{background:rgba(255,255,255,.08);color:rgba(255,255,255,.75)}.f-btn-site:hover{background:rgba(255,255,255,.15);color:#fff}
+.f-btn-wpp{background:rgba(37,211,102,.15);color:#25D366}.f-btn-wpp:hover{background:rgba(37,211,102,.25)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding:16px 0;text-align:center;font-size:.78rem;color:rgba(255,255,255,.3)}
+.footer-bottom a{color:rgba(255,255,255,.45)}.footer-bottom a:hover{color:#fff}
+
+/* WPP FLUTUANTE */
+.wpp-float{position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s}
+.wpp-float:hover{transform:scale(1.1)}
+
+/* CATEGORIAS MAPA */
+.cat-map{
+  automacao:'Automação & IA',trafego:'Vendas & Tráfego',
+  ecommerce:'E-commerce',3d:'3D Experience',hub:'Hubs & SEO'
+}
+
+@media(max-width:768px){
+  .hero-blog h1{font-size:2rem}
+  nav.desktop-nav,.btn-wpp-header{display:none}
+  .hamburger{display:block}
+  .posts-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" height="38">
+    </a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/seuhub">Seu Hub</a></li>
+        <li><a href="/loja">Loja</a></li>
+        <li><a href="/portfolio">Portfólio</a></li>
+        <li><a href="/blog" class="ativo">Blog</a></li>
+        <li><a href="/metricas">Métricas Grátis</a></li>
+        <li><a href="#orcamento">Orçamento</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="https://wa.me/5511999999999" class="btn-wpp-header" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav-overlay" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose">×</button>
+  <ul>
+    <li><a href="/" onclick="closeNav()">Home</a></li>
+    <li><a href="/seuhub" onclick="closeNav()">Seu Hub</a></li>
+    <li><a href="/loja" onclick="closeNav()">Loja</a></li>
+    <li><a href="/blog" onclick="closeNav()">Blog</a></li>
+    <li><a href="https://wa.me/5511999999999" onclick="closeNav()">WhatsApp</a></li>
+  </ul>
+</div>
+
+<!-- HERO -->
+<section class="hero-blog">
+  <div class="hero-blog-inner">
+    <h1>Blog <em>Leanttro</em></h1>
+    <p>SEO, tráfego orgânico, automações com IA e tudo que coloca seu negócio no Google sem pagar por clique.</p>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,90 L0,55 C180,15 360,75 540,35 C720,-5 900,65 1080,30 C1260,-5 1380,20 1440,5 L1440,90 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- TAGS -->
+<div class="tags-bar">
+  <div class="container">
+    <div class="tags-bar-inner">
+      <span class="tags-label">Filtrar:</span>
+      <button class="tag-btn active" data-tag="">Todos</button>
+      <button class="tag-btn" data-tag="hub">Hubs & SEO</button>
+      <button class="tag-btn" data-tag="automacao">Automação & IA</button>
+      <button class="tag-btn" data-tag="trafego">Vendas & Tráfego</button>
+      <button class="tag-btn" data-tag="ecommerce">E-commerce</button>
+      <button class="tag-btn" data-tag="3d">3D Experience</button>
+    </div>
+  </div>
+</div>
+
+<!-- POSTS -->
+<section class="posts-section">
+  <div class="container">
+    <div id="postsContainer">
+      <!-- Skeletons enquanto carrega -->
+      <div class="posts-grid" id="skeletonGrid">
+        <div class="skeleton-card" style="grid-column:1/-1;display:flex;height:280px">
+          <div style="flex:0 0 45%;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite"></div>
+          <div style="flex:1;padding:36px;display:flex;flex-direction:column;gap:14px">
+            <div class="sk-line short"></div><div class="sk-line med"></div><div class="sk-line"></div><div class="sk-line" style="width:85%"></div>
+          </div>
+        </div>
+        <div class="skeleton-card"><div class="sk-img"></div><div class="sk-body"><div class="sk-line short"></div><div class="sk-line med"></div><div class="sk-line"></div></div></div>
+        <div class="skeleton-card"><div class="sk-img"></div><div class="sk-body"><div class="sk-line short"></div><div class="sk-line med"></div><div class="sk-line"></div></div></div>
+        <div class="skeleton-card"><div class="sk-img"></div><div class="sk-body"><div class="sk-line short"></div><div class="sk-line med"></div><div class="sk-line"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="blog-cta">
+  <div class="blog-cta-inner">
+    <h2>Quer aparecer no Google também?</h2>
+    <p>Sites, hubs de tráfego orgânico e automações que colocam seu negócio no Google sem pagar por clique — a partir de R$499.</p>
+    <div class="blog-cta-btns">
+      <a href="/seuhub" class="btn-cta-p">✦ Quero meu hub</a>
+      <a href="https://wa.me/5511999999999?text=Vi%20o%20blog%20da%20Leanttro%20e%20quero%20saber%20mais" target="_blank" class="btn-cta-s">Falar no WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro"></div>
+    <div class="footer-divider"></div>
+    <div class="footer-text">
+      <strong>Leanttro Tecnologia</strong>
+      <span>Sites, hubs e automações — Jabaquara, São Paulo<br>© 2026 Leanttro. Todos os direitos reservados.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://leanttro.com" class="f-btn f-btn-site">🌐 leanttro.com</a>
+      <a href="https://wa.me/5511999999999" class="f-btn f-btn-wpp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <a href="/politica-de-privacidade">Política de Privacidade</a> · <a href="/termos">Termos</a> · Desenvolvido com ❤️ pela <a href="https://leanttro.com">Leanttro</a>
+  </div>
+</footer>
+
+<!-- WPP FLUTUANTE -->
+<a href="https://wa.me/5511999999999" class="wpp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const API_BASE = 'https://teste.leanttro.com';
+const CAT_LABELS = {automacao:'Automação & IA',trafego:'Vendas & Tráfego',ecommerce:'E-commerce',['3d']:'3D Experience',hub:'Hubs & SEO'};
+const CAT_ICONS = {automacao:'🤖',trafego:'📈',ecommerce:'🛒',['3d']:'🎮',hub:'🌐'};
+
+let allPosts = [];
+let tagAtiva = '';
+
+function fmtDate(d){
+  if(!d) return '';
+  return new Date(d).toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
+}
+
+function renderPost(p, destaque){
+  const thumb = p.imagem_url
+    ? `<img src="${p.imagem_url}" alt="${p.titulo}" class="post-thumb" loading="lazy">`
+    : `<div class="post-thumb-placeholder">${CAT_ICONS[p.categoria]||'✍️'}</div>`;
+  const catLabel = CAT_LABELS[p.categoria] || p.categoria || 'Artigo';
+  const tags = (p.tags||[]).slice(0,3).map(t=>`<span class="post-tag">#${t}</span>`).join('');
+  const data = fmtDate(p.publicado_em);
+
+  if(destaque){
+    return `<a href="/blog/${p.slug}" class="post-destaque">
+      <div class="post-destaque-img">${thumb}</div>
+      <div class="post-destaque-body">
+        <div class="post-destaque-label">✦ Em destaque</div>
+        <div class="post-meta">
+          <span class="post-cat">${catLabel}</span>
+          ${data?`<span class="post-date">${data}</span>`:''}
+        </div>
+        <h2>${p.titulo}</h2>
+        <p class="post-resumo">${p.resumo||''}</p>
+        ${tags?`<div class="post-tags">${tags}</div>`:''}
+        <div class="post-footer" style="margin-top:16px">
+          <span class="btn-ler">Ler artigo <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+        </div>
+      </div>
+    </a>`;
+  }
+
+  return `<a href="/blog/${p.slug}" class="post-card">
+    ${thumb}
+    <div class="post-body">
+      <div class="post-meta">
+        <span class="post-cat">${catLabel}</span>
+        ${data?`<span class="post-date">${data}</span>`:''}
+      </div>
+      <h2>${p.titulo}</h2>
+      <p class="post-resumo">${p.resumo||''}</p>
+      ${tags?`<div class="post-tags">${tags}</div>`:''}
+      <div class="post-footer">
+        <span class="btn-ler">Ler artigo <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
+      </div>
+    </div>
+  </a>`;
+}
+
+function renderPosts(){
+  const lista = tagAtiva
+    ? allPosts.filter(p => p.categoria === tagAtiva || (p.tags||[]).includes(tagAtiva))
+    : allPosts;
+
+  const container = document.getElementById('postsContainer');
+
+  if(!lista.length){
+    container.innerHTML = `<div class="empty-state"><p class="empty-title">Nenhum post encontrado</p><p>Tente outro filtro ou volte em breve — novos artigos em breve!</p></div>`;
+    return;
+  }
+
+  const [primeiro, ...resto] = lista;
+  let html = `<div class="posts-grid">`;
+  html += renderPost(primeiro, true);
+  resto.forEach(p => { html += renderPost(p, false); });
+  html += `</div>`;
+  container.innerHTML = html;
+}
+
+async function init(){
+  try{
+    const r = await fetch(API_BASE + '/blog');
+    const data = await r.json();
+    allPosts = Array.isArray(data) ? data : [];
+  } catch(e){
+    allPosts = [];
+  }
+  renderPosts();
+}
+
+// Filtros por tag
+document.querySelectorAll('.tag-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.tag-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    tagAtiva = btn.dataset.tag;
+    renderPosts();
+  });
+});
+
+// Nav mobile
+document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.add('active'));
+document.getElementById('navClose').addEventListener('click', () => closeNav());
+function closeNav(){ document.getElementById('mobileNav').classList.remove('active') }
+
+init();
+</script>
+</body>
+</html>
