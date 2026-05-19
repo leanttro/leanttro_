@@ -1,0 +1,814 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Seu Hub — Tráfego orgânico dentro do seu site | Leanttro</title>
+<meta name="description" content="Tenha um hub de negócios dentro do seu site. Seus clientes te encontram no Google sem pagar por anúncio. Veja como funciona e descubra qual hub faz sentido pro seu negócio.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#7943e2">
+<link rel="canonical" href="https://www.leanttro.com/seuhub">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Leanttro">
+<meta property="og:title" content="Seu Hub — Tráfego orgânico dentro do seu site">
+<meta property="og:description" content="Enquanto seus concorrentes pagam por clique, seus clientes te encontram de graça — todo mês.">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","name":"Seu Hub","provider":{"@type":"Organization","name":"Leanttro Tecnologia","url":"https://leanttro.com"},"description":"Hub de negócios instalado no domínio do cliente para geração de tráfego orgânico no Google.","areaServed":{"@type":"City","name":"São Paulo"}}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#7943e2;--primary-d:#5c2ec4;--accent:#00e5a0;
+  --dark:#0a0a0f;--text:#1a1a2e;--muted:#6b6b80;
+  --border:#e4e4f0;--bg:#ffffff;--bg2:#f8f8fc;
+  --radius:12px;--sans:'Inter',sans-serif;--display:'Montserrat',sans-serif;
+  --shadow:0 4px 24px rgba(108,99,255,0.10);--shadow-md:0 8px 32px rgba(108,99,255,0.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* HEADER */
+header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 20px}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo img{height:38px;width:auto}
+nav.desktop-nav ul{list-style:none;display:flex;gap:4px}
+nav.desktop-nav ul li a{padding:8px 14px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--muted);transition:all .15s;white-space:nowrap}
+nav.desktop-nav ul li a:hover{color:var(--primary);background:rgba(108,99,255,.07)}
+nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
+.header-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn-wpp-header{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:9px 18px;border-radius:8px;font-size:.875rem;font-weight:600;transition:all .2s;white-space:nowrap}
+.btn-wpp-header:hover{background:#1da850;transform:translateY(-1px)}
+.btn-wpp-header svg{width:17px;height:17px;flex-shrink:0}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text)}
+.hamburger svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2}
+.mobile-nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;justify-content:center;align-items:center;opacity:0;transition:opacity .25s}
+.mobile-nav-overlay.active{display:flex;opacity:1}
+.mobile-nav-overlay ul{list-style:none;text-align:center}
+.mobile-nav-overlay ul li{margin:18px 0}
+.mobile-nav-overlay ul li a{color:#fff;font-family:var(--display);font-size:1.8rem;font-weight:700}
+.mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+
+/* ─── HERO VENDAS ─── */
+.hero-vendas{
+  background:linear-gradient(135deg,#0a0a0f 0%,#1a0a3e 60%,#2d1060 100%);
+  padding:80px 20px 0;position:relative;overflow:hidden;
+}
+.hero-vendas::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.hero-vendas-inner{position:relative;z-index:1;max-width:780px;margin:0 auto;text-align:center}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(121,67,226,.25);border:1px solid rgba(121,67,226,.4);color:var(--accent);padding:6px 16px;border-radius:20px;font-size:.82rem;font-weight:600;margin-bottom:24px;letter-spacing:.04em}
+.hero-tag::before{content:'●';font-size:.5rem;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero-vendas h1{font-family:var(--display);font-size:3.2rem;font-weight:800;color:#fff;line-height:1.1;letter-spacing:-.8px;margin-bottom:20px}
+.hero-vendas h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),#7943e2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-vendas .sub{font-size:1.15rem;color:rgba(255,255,255,.7);max-width:560px;margin:0 auto 36px;line-height:1.7}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
+.btn-hero-primary{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:var(--dark);padding:15px 32px;border-radius:10px;font-family:var(--display);font-size:1rem;font-weight:700;transition:all .2s}
+.btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,229,160,.35)}
+.btn-hero-secondary{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);color:#fff;padding:15px 32px;border-radius:10px;font-size:1rem;font-weight:600;border:1.5px solid rgba(255,255,255,.2);transition:all .2s}
+.btn-hero-secondary:hover{background:rgba(255,255,255,.18)}
+.hero-metricas{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding:32px 0;border-top:1px solid rgba(255,255,255,.08)}
+.hero-metrica strong{display:block;font-family:var(--display);font-size:2rem;font-weight:800;color:#fff}
+.hero-metrica span{font-size:.78rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em}
+.hero-metrica em{display:block;font-size:.82rem;font-style:normal;color:var(--accent);font-weight:600}
+.hero-wave{display:block;width:100%;line-height:0;margin-top:0}
+.hero-wave svg{display:block;width:100%}
+
+/* ─── PROVA SOCIAL ─── */
+.prova-section{background:var(--bg2);padding:56px 0;border-bottom:1px solid var(--border)}
+.prova-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;margin-top:36px}
+.prova-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:24px;position:relative;overflow:hidden}
+.prova-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--primary),var(--accent))}
+.prova-site{font-size:.78rem;font-weight:700;color:var(--primary);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.prova-num{font-family:var(--display);font-size:2.2rem;font-weight:800;color:var(--text);line-height:1;margin-bottom:4px}
+.prova-desc{font-size:.88rem;color:var(--muted);line-height:1.5}
+.prova-tempo{font-size:.75rem;color:var(--accent);font-weight:600;margin-top:8px}
+
+/* ─── SECTION GENÉRICA ─── */
+.section{padding:64px 0}
+.section-alt{background:var(--bg2)}
+.section-header{margin-bottom:40px}
+.section-header.center{text-align:center}
+.section-title{font-family:var(--display);font-size:1.9rem;font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-.3px}
+.section-title::before{content:'✦';color:var(--primary);margin-right:10px;font-size:1.1rem}
+.section-subtitle{color:var(--muted);font-size:1rem}
+
+/* ─── BAIRROS ─── */
+.bairros-intro{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:28px}
+.bairros-intro p{color:var(--muted);font-size:.9rem;max-width:500px}
+.bairros-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.bairro-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:18px 20px;display:flex;flex-direction:column;gap:6px;transition:all .2s;cursor:pointer}
+.bairro-card:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:var(--shadow)}
+.bairro-card-nome{font-family:var(--display);font-size:.95rem;font-weight:700;color:var(--text)}
+.bairro-card-count{font-size:.78rem;color:var(--muted)}
+.bairro-card-actions{display:flex;gap:8px;margin-top:6px;flex-wrap:wrap}
+.btn-bairro-filtrar{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:6px;font-size:.75rem;font-weight:600;border:1.5px solid var(--border);color:var(--muted);background:#fff;cursor:pointer;transition:all .15s;font-family:var(--sans)}
+.btn-bairro-filtrar:hover{border-color:var(--primary);color:var(--primary)}
+.btn-bairro-filtrar.ativo{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-bairro-pagina{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:6px;font-size:.75rem;font-weight:600;background:rgba(121,67,226,.1);color:var(--primary);transition:all .15s}
+.btn-bairro-pagina:hover{background:var(--primary);color:#fff}
+.bairros-skeleton{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px}
+.sk{background:var(--bg2);border-radius:var(--radius);border:1.5px solid var(--border)}
+.sk-body{padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.sk-line{height:12px;border-radius:6px;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.sk-line.short{width:55%}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ─── CATEGORIAS ─── */
+.cats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.cat-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;flex-direction:column;gap:8px;transition:all .2s}
+.cat-card:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:var(--shadow)}
+.cat-card-icon{font-size:2rem}
+.cat-card-nome{font-family:var(--display);font-size:.92rem;font-weight:700;color:var(--text)}
+.cat-card-count{font-size:.78rem;color:var(--muted)}
+.cat-card-actions{display:flex;gap:8px;margin-top:4px;flex-wrap:wrap}
+.btn-cat-filtrar{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:6px;font-size:.75rem;font-weight:600;border:1.5px solid var(--border);color:var(--muted);background:#fff;cursor:pointer;transition:all .15s;font-family:var(--sans)}
+.btn-cat-filtrar:hover{border-color:var(--primary);color:var(--primary)}
+.btn-cat-filtrar.ativo{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-cat-pagina{display:inline-flex;align-items:center;gap:4px;padding:5px 10px;border-radius:6px;font-size:.75rem;font-weight:600;background:rgba(121,67,226,.1);color:var(--primary);transition:all .15s}
+.btn-cat-pagina:hover{background:var(--primary);color:#fff}
+
+/* ─── FILTROS ATIVOS ─── */
+.filtros-ativos{background:#fff;border-bottom:1px solid var(--border);padding:14px 20px;position:sticky;top:68px;z-index:100}
+.filtros-ativos-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.filtro-ativo-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:20px;background:rgba(121,67,226,.1);color:var(--primary);font-size:.82rem;font-weight:600}
+.filtro-ativo-tag button{background:none;border:none;cursor:pointer;color:var(--primary);font-size:1rem;line-height:1;padding:0 0 0 2px}
+.filtros-label{font-size:.82rem;color:var(--muted);font-weight:600}
+.btn-limpar{background:none;border:none;cursor:pointer;font-size:.82rem;color:var(--muted);font-family:var(--sans);text-decoration:underline}
+.btn-limpar:hover{color:var(--text)}
+
+/* ─── NEGÓCIOS ─── */
+.negocios-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.negocio-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .25s;display:flex;flex-direction:column;color:inherit}
+.negocio-card:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.negocio-card-foto{width:100%;height:180px;object-fit:cover;display:block}
+.negocio-card-sem-foto{width:100%;height:180px;background:linear-gradient(135deg,rgba(121,67,226,.12),rgba(0,229,160,.08));display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+.negocio-card-body{padding:20px;flex:1;display:flex;flex-direction:column;gap:6px}
+.negocio-badge{display:inline-block;padding:3px 10px;border-radius:12px;background:rgba(121,67,226,.1);color:var(--primary);font-size:.75rem;font-weight:600;width:fit-content}
+.negocio-card-body h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);line-height:1.3}
+.negocio-bairro{display:flex;align-items:center;gap:5px;font-size:.82rem;color:var(--muted)}
+.negocio-bairro svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.negocio-card-footer{margin-top:auto;padding-top:12px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.btn-ver-negocio{font-size:.82rem;font-weight:600;color:var(--primary)}
+.destaque-badge{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;color:#f59e0b;font-weight:600}
+.loading-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.skeleton{background:var(--bg2);border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border)}
+.skeleton-img{height:180px;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.skeleton-body{padding:20px;display:flex;flex-direction:column;gap:10px}
+.skeleton-line{height:12px;border-radius:6px;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.skeleton-line.short{width:60%}
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted);grid-column:1/-1}
+.empty-state svg{width:48px;height:48px;stroke:var(--border);fill:none;stroke-width:1.5;margin:0 auto 16px}
+.empty-state h3{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:6px}
+.grid-footer{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:28px}
+.grid-count{font-size:.88rem;color:var(--muted)}
+.btn-ver-todos{display:inline-flex;align-items:center;gap:7px;padding:10px 22px;border-radius:8px;background:var(--primary);color:#fff;font-size:.88rem;font-weight:600;transition:all .2s}
+.btn-ver-todos:hover{background:var(--primary-d);transform:translateY(-1px)}
+
+/* ─── FORM IA ─── */
+.form-section{background:linear-gradient(135deg,#0a0a0f 0%,#1a0a3e 100%);padding:72px 20px;position:relative;overflow:hidden}
+.form-section::before{content:'';position:absolute;top:-80px;right:-80px;width:400px;height:400px;border-radius:50%;background:rgba(121,67,226,.12);filter:blur(60px)}
+.form-section::after{content:'';position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;border-radius:50%;background:rgba(0,229,160,.06);filter:blur(60px)}
+.form-inner{position:relative;z-index:1;max-width:720px;margin:0 auto}
+.form-eyebrow{font-size:.82rem;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+.form-inner h2{font-family:var(--display);font-size:2.4rem;font-weight:800;color:#fff;line-height:1.15;letter-spacing:-.5px;margin-bottom:12px}
+.form-inner h2 em{font-style:normal;color:var(--accent)}
+.form-inner .form-desc{color:rgba(255,255,255,.65);font-size:1rem;margin-bottom:36px;line-height:1.7}
+.form-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:16px;padding:32px;backdrop-filter:blur(10px)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+.form-group{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.form-group label{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.7)}
+.form-group input{padding:12px 16px;border:1.5px solid rgba(255,255,255,.15);border-radius:8px;background:rgba(255,255,255,.07);color:#fff;font-size:.95rem;font-family:var(--sans);outline:none;transition:border-color .15s}
+.form-group input::placeholder{color:rgba(255,255,255,.3)}
+.form-group input:focus{border-color:var(--primary)}
+.btn-analisar{width:100%;padding:14px;background:var(--accent);color:var(--dark);border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;font-family:var(--display);transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px}
+.btn-analisar:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,229,160,.35)}
+.btn-analisar:disabled{opacity:.6;cursor:not-allowed}
+.btn-analisar .spinner{width:18px;height:18px;border:2.5px solid rgba(10,10,15,.3);border-top-color:var(--dark);border-radius:50%;animation:spin .7s linear infinite;display:none}
+.btn-analisar.loading .spinner{display:block}
+.btn-analisar.loading .btn-texto{display:none}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* RESULTADO IA */
+.ia-resultado{margin-top:24px;display:none}
+.ia-resultado.show{display:block}
+.ia-box{background:rgba(0,229,160,.05);border:1px solid rgba(0,229,160,.2);border-radius:12px;padding:24px}
+.ia-box h4{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--accent);margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.ia-texto{color:rgba(255,255,255,.85);font-size:.92rem;line-height:1.75;white-space:pre-line}
+.ia-cta{margin-top:20px;display:flex;gap:10px;flex-wrap:wrap}
+.btn-quero-hub{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;background:var(--accent);color:var(--dark);font-weight:700;font-size:.92rem;transition:all .2s}
+.btn-quero-hub:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,229,160,.3)}
+.btn-quero-hub svg{width:16px;height:16px;fill:currentColor}
+.ia-erro{color:#f87171;font-size:.88rem;margin-top:12px;display:none}
+
+/* ─── CTA FINAL ─── */
+.cta-final{background:var(--primary);padding:72px 20px;text-align:center;position:relative;overflow:hidden}
+.cta-final::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.cta-final-inner{position:relative;z-index:1;max-width:640px;margin:0 auto}
+.cta-final h2{font-family:var(--display);font-size:2.4rem;font-weight:800;color:#fff;margin-bottom:14px;letter-spacing:-.5px}
+.cta-final p{color:rgba(255,255,255,.8);font-size:1rem;margin-bottom:32px;line-height:1.6}
+.cta-final-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-cta-acc{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;background:#fff;color:var(--primary);font-family:var(--display);font-size:.95rem;font-weight:700;transition:all .2s}
+.btn-cta-acc:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
+.btn-cta-sec{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-size:.95rem;font-weight:600;border:1.5px solid rgba(255,255,255,.3);transition:all .2s}
+.btn-cta-sec:hover{background:rgba(255,255,255,.25)}
+
+/* ─── FOOTER ─── */
+footer{background:var(--dark);padding:40px 20px 0}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:32px;flex-wrap:wrap;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-logo img{height:32px;filter:brightness(0) invert(1);opacity:.9}
+.footer-divider{width:1px;height:40px;background:rgba(255,255,255,.12);flex-shrink:0}
+.footer-text{flex:1}
+.footer-text strong{display:block;color:#fff;font-family:var(--display);font-size:.95rem;margin-bottom:4px}
+.footer-text span{color:rgba(255,255,255,.45);font-size:.82rem}
+.footer-links{display:flex;gap:10px;flex-wrap:wrap}
+.f-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:8px;font-size:.82rem;font-weight:600;transition:all .2s}
+.f-btn-site{background:rgba(255,255,255,.08);color:rgba(255,255,255,.75)}.f-btn-site:hover{background:rgba(255,255,255,.15);color:#fff}
+.f-btn-wpp{background:rgba(37,211,102,.15);color:#25D366}.f-btn-wpp:hover{background:rgba(37,211,102,.25)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding:16px 0;text-align:center;font-size:.78rem;color:rgba(255,255,255,.3)}
+.footer-bottom a{color:rgba(255,255,255,.45)}.footer-bottom a:hover{color:#fff}
+
+/* RESPONSIVO */
+@media(max-width:768px){
+  .hero-vendas h1{font-size:2.1rem}
+  .hero-metricas{gap:28px}
+  .form-inner h2{font-size:1.8rem}
+  nav.desktop-nav,.btn-wpp-header{display:none}
+  .hamburger{display:block}
+  .cta-final h2{font-size:1.8rem}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" height="38">
+    </a>
+    <nav class="desktop-nav">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/seuhub" class="ativo">Seu Hub</a></li>
+        <li><a href="/loja">Loja</a></li>
+        <li><a href="/portfolio">Portfólio</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/metricas">Métricas Grátis</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="https://wa.me/5511999999999" class="btn-wpp-header" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav-overlay" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose">✕</button>
+  <ul>
+    <li><a href="/" onclick="closeNav()">Home</a></li>
+    <li><a href="/seuhub" onclick="closeNav()">Seu Hub</a></li>
+    <li><a href="/loja" onclick="closeNav()">Loja</a></li>
+    <li><a href="/blog" onclick="closeNav()">Blog</a></li>
+    <li><a href="https://wa.me/5511999999999" onclick="closeNav()">WhatsApp</a></li>
+  </ul>
+</div>
+
+<!-- ═══ HERO VENDAS ═══ -->
+<section class="hero-vendas">
+  <div class="hero-vendas-inner">
+    <div class="hero-tag">🚀 Novo serviço — Leanttro Tecnologia</div>
+    <h1>Tenha um <em>hub local</em> dentro do seu site</h1>
+    <p class="sub">Enquanto seus concorrentes pagam por clique, seus clientes te encontram de graça — todo mês. Sem anúncio. Sem agência de mídia. Só SEO real.</p>
+    <div class="hero-btns">
+      <a href="#form-ia" class="btn-hero-primary">
+        ✦ Descobrir meu hub ideal
+      </a>
+      <a href="#vitrine" class="btn-hero-secondary">
+        Ver o hub em funcionamento ↓
+      </a>
+    </div>
+    <div class="hero-metricas">
+      <div class="hero-metrica">
+        <strong>328 mil</strong>
+        <em>impressões orgânicas</em>
+        <span>Feiras de Rua · 3 meses</span>
+      </div>
+      <div class="hero-metrica">
+        <strong>7.420</strong>
+        <em>cliques reais</em>
+        <span>sem pagar 1 centavo</span>
+      </div>
+      <div class="hero-metrica">
+        <strong>4 dias</strong>
+        <em>pra aparecer no Google</em>
+        <span>Guia do Rodízio</span>
+      </div>
+      <div class="hero-metrica">
+        <strong>559</strong>
+        <em>negócios cadastrados</em>
+        <span>em 4 dias de vida</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,32 C360,0 1080,64 1440,32 L1440,40 L0,40 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- ═══ PROVA SOCIAL ═══ -->
+<section class="prova-section">
+  <div class="container">
+    <div class="section-header center">
+      <h2 class="section-title">Cases reais, métricas reais</h2>
+      <p class="section-subtitle">Enquanto você lê isso, esses hubs recebem visitas orgânicas sem pagar 1 centavo em anúncio</p>
+    </div>
+    <div class="prova-grid">
+      <div class="prova-card">
+        <div class="prova-site">feirasderua.com.br</div>
+        <div class="prova-num">328 mil</div>
+        <div class="prova-desc">impressões no Google Search Console em 3 meses. Top keyword: "feira livre perto de mim" — 748 cliques / 26 mil impressões.</div>
+        <div class="prova-tempo">⚡ 5 meses de vida</div>
+      </div>
+      <div class="prova-card">
+        <div class="prova-site">feirasderua.com.br</div>
+        <div class="prova-num">8.100</div>
+        <div class="prova-desc">usuários ativos no Google Analytics. +532% vs período anterior. 41 mil eventos. Zero real investido em tráfego pago.</div>
+        <div class="prova-tempo">⚡ Analytics — últimos 3 meses</div>
+      </div>
+      <div class="prova-card">
+        <div class="prova-site">guiadorodizio.com.br</div>
+        <div class="prova-num">acima do Reddit</div>
+        <div class="prova-desc">Criado na sexta, subiu sábado. Em 4 dias apareceu no Google para "guia rodizio" — acima do Reddit que tem 2 anos de domínio.</div>
+        <div class="prova-tempo">⚡ 4 dias de vida</div>
+      </div>
+      <div class="prova-card">
+        <div class="prova-site">Este hub aqui</div>
+        <div class="prova-num" id="statTotal">—</div>
+        <div class="prova-desc">negócios cadastrados no Jabaquara e região, com página própria indexada no Google. Cada negócio = uma URL rankeável.</div>
+        <div class="prova-tempo">⚡ ao vivo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FILTROS ATIVOS (sticky) ═══ -->
+<div class="filtros-ativos" id="filtrosAtivos" style="display:none">
+  <div class="filtros-ativos-inner">
+    <span class="filtros-label">Filtrando:</span>
+    <span class="filtro-ativo-tag" id="tagBairroAtivo" style="display:none">
+      <span id="tagBairroTexto"></span>
+      <button onclick="limparBairro()" title="Remover">×</button>
+    </span>
+    <span class="filtro-ativo-tag" id="tagCatAtiva" style="display:none">
+      <span id="tagCatTexto"></span>
+      <button onclick="limparCategoria()" title="Remover">×</button>
+    </span>
+    <button class="btn-limpar" onclick="limparTudo()">Limpar filtros</button>
+  </div>
+</div>
+
+<!-- ═══ BAIRROS ═══ -->
+<section class="section" id="vitrine">
+  <div class="container">
+    <div class="bairros-intro">
+      <div>
+        <h2 class="section-title">Negócios por bairro</h2>
+        <p>Cada bairro tem sua própria página indexada — clique em "Ver página" para abrir.</p>
+      </div>
+    </div>
+    <div id="bairrosContainer">
+      <div class="bairros-skeleton">
+        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
+        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
+        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
+        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
+        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
+        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CATEGORIAS ═══ -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="bairros-intro">
+      <div>
+        <h2 class="section-title">Negócios por categoria</h2>
+        <p>Cada categoria tem sua própria página — clique em "Ver página" para abrir.</p>
+      </div>
+    </div>
+    <div id="categoriasContainer">
+      <div class="bairros-skeleton">
+        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
+        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
+        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
+        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ NEGÓCIOS (vitrine filtrada) ═══ -->
+<section class="section" id="negociosSection">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-bottom:28px">
+      <div>
+        <h2 class="section-title" id="negociosTitulo">Todos os negócios</h2>
+        <p class="section-subtitle" id="negociosSubtitulo">Carregando...</p>
+      </div>
+    </div>
+    <div id="negociosContainer">
+      <div class="loading-grid">
+        <div class="skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+        <div class="skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+        <div class="skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+      </div>
+    </div>
+    <div class="grid-footer" id="gridFooter" style="display:none">
+      <span class="grid-count" id="gridCount"></span>
+      <a href="/#hub" class="btn-ver-todos">Ver todos os negócios →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FORMULÁRIO IA ═══ -->
+<section class="form-section" id="form-ia">
+  <div class="form-inner">
+    <div class="form-eyebrow">✦ Análise gratuita com IA</div>
+    <h2>Qual hub faria sentido<br>para o <em>seu negócio</em>?</h2>
+    <p class="form-desc">Coloca os dados do seu site e a IA da Leanttro sugere os tipos de hub que atrairiam o público-alvo exato do seu negócio — organicamente, sem anúncio.</p>
+    <div class="form-card">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Seu nome</label>
+          <input type="text" id="inputNome" placeholder="Ex: João Silva">
+        </div>
+        <div class="form-group">
+          <label>WhatsApp</label>
+          <input type="tel" id="inputWpp" placeholder="(11) 9 9999-9999">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Site do seu negócio</label>
+        <input type="url" id="inputSite" placeholder="https://seunegocio.com.br">
+      </div>
+      <div class="form-group">
+        <label>O que seu negócio faz? <span style="opacity:.5;font-weight:400">(opcional, mas ajuda a IA)</span></label>
+        <input type="text" id="inputDesc" placeholder="Ex: academia de natação no Ipiranga">
+      </div>
+      <button class="btn-analisar" id="btnAnalisar" onclick="analisarHub()">
+        <div class="spinner"></div>
+        <span class="btn-texto">✦ Descobrir meu hub ideal</span>
+      </button>
+      <div class="ia-erro" id="iaErro">Erro ao conectar com a IA. Tente novamente.</div>
+
+      <!-- RESULTADO -->
+      <div class="ia-resultado" id="iaResultado">
+        <div class="ia-box">
+          <h4>🤖 Análise da IA para <span id="iaNomeCliente"></span></h4>
+          <div class="ia-texto" id="iaTexto"></div>
+          <div class="ia-cta">
+            <a id="iaWppLink" href="#" target="_blank" class="btn-quero-hub">
+              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+              Quero meu hub →
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA FINAL ═══ -->
+<section class="cta-final">
+  <div class="cta-final-inner">
+    <h2>Pronto para atrair clientes sem pagar por anúncio?</h2>
+    <p>O hub do Jabaquara é a prova de conceito ao vivo. Posso instalar isso no seu domínio — com o público-alvo exato do seu negócio.</p>
+    <div class="cta-final-btns">
+      <a href="#form-ia" class="btn-cta-acc">✦ Analisar meu negócio grátis</a>
+      <a href="https://wa.me/5511999999999?text=Quero%20saber%20mais%20sobre%20o%20Seu%20Hub" target="_blank" class="btn-cta-sec">
+        Falar no WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro"></div>
+    <div class="footer-divider"></div>
+    <div class="footer-text">
+      <strong>Leanttro Tecnologia</strong>
+      <span>Sites, hubs e automações — Jabaquara, São Paulo<br>© 2026 Leanttro. Todos os direitos reservados.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://leanttro.com" class="f-btn f-btn-site">🌐 leanttro.com</a>
+      <a href="https://wa.me/5511999999999" class="f-btn f-btn-wpp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <a href="/politica-de-privacidade">Política de Privacidade</a> · <a href="/termos">Termos</a> · Desenvolvido com ❤️ pela <a href="https://leanttro.com">Leanttro</a>
+  </div>
+</footer>
+
+<!-- WPP FLUTUANTE -->
+<a href="https://wa.me/5511999999999" target="_blank" rel="noopener"
+  style="position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s"
+  onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+</a>
+
+<script>
+const API_BASE = 'https://teste.leanttro.com';
+const ICONS = {restaurante:'🍽️',bar:'🍺',lanchonete:'🥪',pizzaria:'🍕',padaria:'🥐',mercado:'🛒',farmacia:'💊',salao:'💇',barbearia:'✂️',academia:'🏋️',clinica:'🏥',escola:'📚',pet:'🐾',servico:'🔧',loja:'🛍️'};
+
+let allNegocios = [], allCategorias = [];
+let filtBairro = '', filtCategoria = '';
+
+function slugify(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')}
+function capitalize(s){return s?s.charAt(0).toUpperCase()+s.slice(1).replace(/-/g,' '):''}
+function getIcon(c){const k=Object.keys(ICONS).find(k=>slugify(c||'').includes(k));return k?ICONS[k]:'🏪'}
+async function apiGet(p){try{const r=await fetch(API_BASE+p);if(!r.ok)return null;return await r.json()}catch(e){return null}}
+
+// ─── BAIRROS ───
+function renderBairros(negocios){
+  // Agrupa por bairro
+  const map={};
+  negocios.forEach(n=>{
+    const b=n.bairro||'';
+    if(!b)return;
+    if(!map[b])map[b]=0;
+    map[b]++;
+  });
+  const bairros=Object.entries(map).sort((a,b)=>b[1]-a[1]);
+  if(!bairros.length){
+    document.getElementById('bairrosContainer').innerHTML='<p style="color:var(--muted)">Nenhum bairro cadastrado ainda.</p>';
+    return;
+  }
+  document.getElementById('bairrosContainer').innerHTML=`<div class="bairros-grid">${
+    bairros.map(([nome,count])=>{
+      const sl=slugify(nome);
+      return`<div class="bairro-card">
+        <div class="bairro-card-nome">📍 ${nome}</div>
+        <div class="bairro-card-count">${count} negócio${count!==1?'s':''}</div>
+        <div class="bairro-card-actions">
+          <button class="btn-bairro-filtrar" id="filtBtn-${sl}" onclick="filtrarBairroLocal('${sl}','${nome}',this)">Filtrar aqui</button>
+          <a href="/${sl}" class="btn-bairro-pagina" target="_blank">Ver página ↗</a>
+        </div>
+      </div>`;
+    }).join('')
+  }</div>`;
+}
+
+// ─── CATEGORIAS ───
+function renderCategorias(categorias, negocios){
+  if(!categorias.length){
+    document.getElementById('categoriasContainer').innerHTML='<p style="color:var(--muted)">Nenhuma categoria ainda.</p>';
+    return;
+  }
+  // Conta negócios por categoria
+  const countMap={};
+  negocios.forEach(n=>{if(n.categoria_nome)countMap[n.categoria_nome]=(countMap[n.categoria_nome]||0)+1});
+
+  document.getElementById('categoriasContainer').innerHTML=`<div class="cats-grid">${
+    categorias.map(c=>{
+      const count=countMap[c.nome]||0;
+      const sl=c.slug||slugify(c.nome);
+      return`<div class="cat-card">
+        <div class="cat-card-icon">${getIcon(c.nome)}</div>
+        <div class="cat-card-nome">${c.nome}</div>
+        <div class="cat-card-count">${count} negócio${count!==1?'s':''}</div>
+        <div class="cat-card-actions">
+          <button class="btn-cat-filtrar" id="catBtn-${sl}" onclick="filtrarCatLocal('${sl}','${c.nome}',this)">Filtrar aqui</button>
+          <a href="/categoria/${sl}" class="btn-cat-pagina" target="_blank">Ver página ↗</a>
+        </div>
+      </div>`;
+    }).join('')
+  }</div>`;
+}
+
+// ─── FILTROS ───
+function filtrarBairroLocal(slug, nome, btn){
+  // Toggle
+  if(filtBairro===slug){limparBairro();return}
+  filtBairro=slug;
+  // Reset outros botões de bairro
+  document.querySelectorAll('.btn-bairro-filtrar').forEach(b=>b.classList.remove('ativo'));
+  btn.classList.add('ativo');
+  btn.textContent='✓ Filtrando';
+  // Atualiza tag
+  document.getElementById('tagBairroTexto').textContent='📍 '+nome;
+  document.getElementById('tagBairroAtivo').style.display='';
+  atualizarFiltrosAtivos();
+  renderNegocios();
+  document.getElementById('negociosSection').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function filtrarCatLocal(slug, nome, btn){
+  if(filtCategoria===slug){limparCategoria();return}
+  filtCategoria=slug;
+  document.querySelectorAll('.btn-cat-filtrar').forEach(b=>{b.classList.remove('ativo');b.textContent='Filtrar aqui'});
+  btn.classList.add('ativo');
+  btn.textContent='✓ Filtrando';
+  document.getElementById('tagCatTexto').textContent=getIcon(nome)+' '+nome;
+  document.getElementById('tagCatAtiva').style.display='';
+  atualizarFiltrosAtivos();
+  renderNegocios();
+  document.getElementById('negociosSection').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function limparBairro(){
+  filtBairro='';
+  document.querySelectorAll('.btn-bairro-filtrar').forEach(b=>{b.classList.remove('ativo');b.textContent='Filtrar aqui'});
+  document.getElementById('tagBairroAtivo').style.display='none';
+  atualizarFiltrosAtivos();
+  renderNegocios();
+}
+function limparCategoria(){
+  filtCategoria='';
+  document.querySelectorAll('.btn-cat-filtrar').forEach(b=>{b.classList.remove('ativo');b.textContent='Filtrar aqui'});
+  document.getElementById('tagCatAtiva').style.display='none';
+  atualizarFiltrosAtivos();
+  renderNegocios();
+}
+function limparTudo(){limparBairro();limparCategoria()}
+
+function atualizarFiltrosAtivos(){
+  const temFiltro=filtBairro||filtCategoria;
+  document.getElementById('filtrosAtivos').style.display=temFiltro?'':'none';
+}
+
+// ─── RENDER NEGÓCIOS ───
+function renderCard(n){
+  const end=[n.endereco,n.bairro].filter(Boolean).join(', ')||'';
+  const foto=n.foto_url?`<img src="${n.foto_url}" alt="${n.nome}" class="negocio-card-foto" loading="lazy">`:`<div class="negocio-card-sem-foto">${getIcon(n.categoria_nome||'')}</div>`;
+  const destaque=n.destaque?`<span class="destaque-badge">⭐ Destaque</span>`:'';
+  return`<a href="/negocio/${n.slug||slugify(n.nome)}" class="negocio-card">
+    ${foto}
+    <div class="negocio-card-body">
+      <span class="negocio-badge">${n.categoria_nome||''}</span>
+      <h3>${n.nome}</h3>
+      <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${end||'São Paulo'}</p>
+      <div class="negocio-card-footer">${destaque}<span class="btn-ver-negocio">Ver mais →</span></div>
+    </div>
+  </a>`;
+}
+
+function renderNegocios(){
+  let lista=[...allNegocios];
+  if(filtBairro)lista=lista.filter(n=>slugify(n.bairro||'')=== filtBairro||slugify(n.bairro||'').includes(filtBairro));
+  if(filtCategoria)lista=lista.filter(n=>slugify(n.categoria_nome||'')===filtCategoria||n.categoria_slug===filtCategoria);
+
+  const titulo=document.getElementById('negociosTitulo');
+  const sub=document.getElementById('negociosSubtitulo');
+  const container=document.getElementById('negociosContainer');
+  const footer=document.getElementById('gridFooter');
+  const count=document.getElementById('gridCount');
+
+  // Título dinâmico
+  if(filtBairro&&filtCategoria){
+    titulo.textContent=`${capitalize(filtCategoria)} em ${capitalize(filtBairro)}`;
+  } else if(filtBairro){
+    titulo.textContent=`Negócios em ${capitalize(filtBairro)}`;
+  } else if(filtCategoria){
+    titulo.textContent=capitalize(filtCategoria);
+  } else {
+    titulo.textContent='Todos os negócios';
+  }
+
+  if(!lista.length){
+    sub.textContent='Nenhum resultado';
+    container.innerHTML=`<div class="negocios-grid"><div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Nenhum negócio encontrado</h3><p>Tente outro filtro ou <a href="https://wa.me/5511999999999" style="color:var(--primary)">cadastre o seu</a>.</p></div></div>`;
+    footer.style.display='none';
+    return;
+  }
+
+  sub.textContent=`${lista.length} negócio${lista.length!==1?'s':''} encontrado${lista.length!==1?'s':''}`;
+  container.innerHTML=`<div class="negocios-grid">${lista.map(renderCard).join('')}</div>`;
+  count.textContent=`${lista.length} negócio${lista.length!==1?'s':''} encontrado${lista.length!==1?'s':''}`;
+  footer.style.display='flex';
+}
+
+// ─── FORMULÁRIO IA ───
+async function analisarHub(){
+  const nome=document.getElementById('inputNome').value.trim();
+  const wpp=document.getElementById('inputWpp').value.trim();
+  const site=document.getElementById('inputSite').value.trim();
+  const desc=document.getElementById('inputDesc').value.trim();
+
+  if(!nome||!site){alert('Preencha pelo menos seu nome e o site do negócio.');return}
+
+  const btn=document.getElementById('btnAnalisar');
+  const erro=document.getElementById('iaErro');
+  btn.classList.add('loading');
+  btn.disabled=true;
+  erro.style.display='none';
+  document.getElementById('iaResultado').classList.remove('show');
+
+  // Salva lead
+  try{
+    await fetch(API_BASE+'/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      nome,telefone:wpp,empresa:site,origem:'seuhub',interesse:'Seu Hub'
+    })});
+  }catch(e){}
+
+  // Chama a IA (Anthropic API)
+  try{
+    const prompt=`Você é um consultor de SEO e marketing digital da Leanttro Tecnologia. Seu serviço "Seu Hub" instala um hub de negócios locais dentro do domínio do cliente, gerando tráfego orgânico no Google sem pagar por anúncios.
+
+O cliente preencheu:
+- Nome: ${nome}
+- Site: ${site}
+- Descrição do negócio: ${desc||'Não informada'}
+
+Com base no site e descrição, sugira de forma direta e convincente:
+1. Que tipo de hub faria mais sentido para este negócio (ex: hub de academias do bairro, hub de fornecedores do setor, hub de prestadores de serviço local, etc.)
+2. Por que este hub atrairia o público-alvo exato deles
+3. Um exemplo de keyword que esse hub rankearia (ex: "academia perto do Jabaquara")
+4. Uma estimativa realista de resultado nos primeiros 3-6 meses (baseada nos cases reais: Feiras de Rua com 328 mil impressões em 3 meses, Guia do Rodízio rankeando em 4 dias)
+
+Seja direto, entusiasmado mas honesto. Use linguagem próxima, como Leandro Andrade (fundador da Leanttro) falaria. Máximo 200 palavras. Termine com uma frase de call-to-action para falar no WhatsApp.`;
+
+    const response = await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        messages:[{role:'user',content:prompt}]
+      })
+    });
+
+    const data=await response.json();
+    const texto=data.content&&data.content[0]?data.content[0].text:'';
+
+    if(!texto)throw new Error('sem resposta');
+
+    document.getElementById('iaNomeCliente').textContent=nome;
+    document.getElementById('iaTexto').textContent=texto;
+
+    const msg=encodeURIComponent(`Olá Leandro! Me chamo ${nome} e tenho o site ${site}. A IA da Leanttro analisou meu negócio e quero saber mais sobre o Seu Hub.`);
+    document.getElementById('iaWppLink').href=`https://wa.me/5511999999999?text=${msg}`;
+
+    document.getElementById('iaResultado').classList.add('show');
+    document.getElementById('iaResultado').scrollIntoView({behavior:'smooth',block:'start'});
+
+  } catch(e){
+    erro.style.display='block';
+  }
+
+  btn.classList.remove('loading');
+  btn.disabled=false;
+}
+
+// ─── INIT ───
+async function init(){
+  const [negocios, categorias] = await Promise.all([
+    apiGet('/hub/negocios'),
+    apiGet('/hub/categorias')
+  ]);
+
+  allNegocios = negocios||[];
+  allCategorias = (categorias||[]).filter(c=>c.ativo!==false);
+
+  // Stat ao vivo
+  if(allNegocios.length){
+    document.getElementById('statTotal').textContent=allNegocios.length;
+  }
+
+  renderBairros(allNegocios);
+  renderCategorias(allCategorias, allNegocios);
+  renderNegocios();
+}
+
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('active'));
+document.getElementById('navClose').addEventListener('click',()=>closeNav());
+function closeNav(){document.getElementById('mobileNav').classList.remove('active')}
+
+init();
+</script>
+</body>
+</html>
