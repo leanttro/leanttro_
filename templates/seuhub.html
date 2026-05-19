@@ -53,32 +53,30 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 .mobile-nav-overlay ul li a{color:#fff;font-family:var(--display);font-size:1.8rem;font-weight:700}
 .mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
 
-/* ─── HERO VENDAS ─── */
+/* ─── HERO VENDAS — igual ao roxo do index ─── */
 .hero-vendas{
-  background:linear-gradient(135deg,#0a0a0f 0%,#1a0a3e 60%,#2d1060 100%);
-  padding:80px 20px 0;position:relative;overflow:hidden;
+  background:var(--primary);
+  position:relative;overflow:hidden;
+  min-height:340px;
 }
 .hero-vendas::before{
   content:'';position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
 }
-.hero-vendas-inner{position:relative;z-index:1;max-width:780px;margin:0 auto;text-align:center}
-.hero-tag{display:inline-flex;align-items:center;gap:8px;background:rgba(121,67,226,.25);border:1px solid rgba(121,67,226,.4);color:var(--accent);padding:6px 16px;border-radius:20px;font-size:.82rem;font-weight:600;margin-bottom:24px;letter-spacing:.04em}
-.hero-tag::before{content:'●';font-size:.5rem;animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.hero-vendas h1{font-family:var(--display);font-size:3.2rem;font-weight:800;color:#fff;line-height:1.1;letter-spacing:-.8px;margin-bottom:20px}
-.hero-vendas h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),#7943e2);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-vendas .sub{font-size:1.15rem;color:rgba(255,255,255,.7);max-width:560px;margin:0 auto 36px;line-height:1.7}
-.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:56px}
-.btn-hero-primary{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:var(--dark);padding:15px 32px;border-radius:10px;font-family:var(--display);font-size:1rem;font-weight:700;transition:all .2s}
+.hero-vendas-inner{position:relative;z-index:1;max-width:780px;margin:0 auto;text-align:center;padding:48px 20px 0}
+.hero-vendas h1{font-family:var(--display);font-size:3rem;font-weight:800;color:#fff;line-height:1.1;letter-spacing:-.8px;margin-bottom:16px}
+.hero-vendas h1 em{font-style:normal;background:linear-gradient(90deg,var(--accent),#c4f0e0);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero-vendas .sub{font-size:1.1rem;color:rgba(255,255,255,.85);max-width:540px;margin:0 auto 28px;line-height:1.65}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
+.btn-hero-primary{display:inline-flex;align-items:center;gap:9px;background:var(--accent);color:var(--dark);padding:14px 30px;border-radius:10px;font-family:var(--display);font-size:1rem;font-weight:700;transition:all .2s}
 .btn-hero-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,229,160,.35)}
-.btn-hero-secondary{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.1);color:#fff;padding:15px 32px;border-radius:10px;font-size:1rem;font-weight:600;border:1.5px solid rgba(255,255,255,.2);transition:all .2s}
-.btn-hero-secondary:hover{background:rgba(255,255,255,.18)}
-.hero-metricas{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding:32px 0;border-top:1px solid rgba(255,255,255,.08)}
-.hero-metrica strong{display:block;font-family:var(--display);font-size:2rem;font-weight:800;color:#fff}
-.hero-metrica span{font-size:.78rem;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:.06em}
-.hero-metrica em{display:block;font-size:.82rem;font-style:normal;color:var(--accent);font-weight:600}
-.hero-wave{display:block;width:100%;line-height:0;margin-top:0}
+.btn-hero-secondary{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.15);color:#fff;padding:14px 30px;border-radius:10px;font-size:1rem;font-weight:600;border:1.5px solid rgba(255,255,255,.3);transition:all .2s}
+.btn-hero-secondary:hover{background:rgba(255,255,255,.25)}
+.hero-metricas{display:flex;justify-content:center;gap:48px;flex-wrap:wrap;padding:28px 0;border-top:1px solid rgba(255,255,255,.15)}
+.hero-metrica strong{display:block;font-family:var(--display);font-size:1.9rem;font-weight:800;color:#fff}
+.hero-metrica span{font-size:.75rem;color:rgba(255,255,255,.55);text-transform:uppercase;letter-spacing:.06em}
+.hero-metrica em{display:block;font-size:.8rem;font-style:normal;color:var(--accent);font-weight:600}
+.hero-wave{display:block;width:100%;margin-top:-5px;line-height:0;position:relative;z-index:2}
 .hero-wave svg{display:block;width:100%}
 
 /* ─── PROVA SOCIAL ─── */
@@ -144,19 +142,32 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 .btn-limpar{background:none;border:none;cursor:pointer;font-size:.82rem;color:var(--muted);font-family:var(--sans);text-decoration:underline}
 .btn-limpar:hover{color:var(--text)}
 
-/* ─── NEGÓCIOS ─── */
+/* ─── NEGÓCIOS — padrão index: com foto destaque em cima, sem foto barra 40px ─── */
 .negocios-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
-.negocio-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .25s;display:flex;flex-direction:column;color:inherit}
+/* linha de destaque: foto real, tamanho maior */
+.negocios-destaque{display:flex;gap:22px;overflow-x:auto;padding-bottom:8px;margin-bottom:28px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+.negocios-destaque::-webkit-scrollbar{display:none}
+.negocio-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .25s;display:flex;flex-direction:column;color:inherit;text-decoration:none}
 .negocio-card:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow-md)}
+/* COM FOTO — igual index: 180px */
 .negocio-card-foto{width:100%;height:180px;object-fit:cover;display:block}
-.negocio-card-sem-foto{width:100%;height:180px;background:linear-gradient(135deg,rgba(121,67,226,.12),rgba(0,229,160,.08));display:flex;align-items:center;justify-content:center;font-size:2.5rem}
-.negocio-card-body{padding:20px;flex:1;display:flex;flex-direction:column;gap:6px}
-.negocio-badge{display:inline-block;padding:3px 10px;border-radius:12px;background:rgba(121,67,226,.1);color:var(--primary);font-size:.75rem;font-weight:600;width:fit-content}
-.negocio-card-body h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);line-height:1.3}
+/* SEM FOTO — igual index: barra roxa 40px + ícone categoria */
+.negocio-card-sem-foto{
+  width:100%;height:40px;
+  display:flex;align-items:center;justify-content:flex-start;
+  padding:0 14px;
+  background:rgba(121,67,226,.10);color:var(--primary);
+  font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  overflow:hidden;white-space:nowrap;text-overflow:ellipsis;
+}
+.negocio-card-body{padding:16px;flex:1;display:flex;flex-direction:column;gap:6px}
+.negocio-badge{display:inline-block;background:rgba(0,229,160,.12);color:#00a870;font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:2px}
+.negocio-card-body h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:2px}
 .negocio-bairro{display:flex;align-items:center;gap:5px;font-size:.82rem;color:var(--muted)}
 .negocio-bairro svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
-.negocio-card-footer{margin-top:auto;padding-top:12px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-.btn-ver-negocio{font-size:.82rem;font-weight:600;color:var(--primary)}
+.negocio-card-footer{margin-top:auto;padding-top:10px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.btn-ver-negocio{display:inline-block;margin-top:0;background:var(--primary);color:#fff;padding:7px 16px;border-radius:6px;font-size:.82rem;font-weight:600;transition:background .2s}
+.negocio-card:hover .btn-ver-negocio{background:var(--primary-d)}
 .destaque-badge{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;color:#f59e0b;font-weight:600}
 .loading-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
 .skeleton{background:var(--bg2);border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border)}
@@ -267,7 +278,7 @@ footer{background:var(--dark);padding:40px 20px 0}
     </nav>
     <div class="header-cta">
       <a href="https://wa.me/5511999999999" class="btn-wpp-header" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp
       </a>
     </div>
@@ -279,7 +290,7 @@ footer{background:var(--dark);padding:40px 20px 0}
 
 <!-- MOBILE NAV -->
 <div class="mobile-nav-overlay" id="mobileNav">
-  <button class="mobile-nav-close" id="navClose">✕</button>
+  <button class="mobile-nav-close" id="navClose">×</button>
   <ul>
     <li><a href="/" onclick="closeNav()">Home</a></li>
     <li><a href="/seuhub" onclick="closeNav()">Seu Hub</a></li>
@@ -290,18 +301,13 @@ footer{background:var(--dark);padding:40px 20px 0}
 </div>
 
 <!-- ═══ HERO VENDAS ═══ -->
-<section class="hero-vendas">
+<section class="hero-vendas" aria-label="Seu Hub — Tráfego orgânico">
   <div class="hero-vendas-inner">
-    <div class="hero-tag">🚀 Novo serviço — Leanttro Tecnologia</div>
     <h1>Tenha um <em>hub local</em> dentro do seu site</h1>
     <p class="sub">Enquanto seus concorrentes pagam por clique, seus clientes te encontram de graça — todo mês. Sem anúncio. Sem agência de mídia. Só SEO real.</p>
     <div class="hero-btns">
-      <a href="#form-ia" class="btn-hero-primary">
-        ✦ Descobrir meu hub ideal
-      </a>
-      <a href="#vitrine" class="btn-hero-secondary">
-        Ver o hub em funcionamento ↓
-      </a>
+      <a href="#form-ia" class="btn-hero-primary">✦ Descobrir meu hub ideal</a>
+      <a href="#vitrine" class="btn-hero-secondary">Ver o hub em funcionamento ↓</a>
     </div>
     <div class="hero-metricas">
       <div class="hero-metrica">
@@ -320,15 +326,15 @@ footer{background:var(--dark);padding:40px 20px 0}
         <span>Guia do Rodízio</span>
       </div>
       <div class="hero-metrica">
-        <strong>559</strong>
+        <strong id="statTotal">—</strong>
         <em>negócios cadastrados</em>
         <span>em 4 dias de vida</span>
       </div>
     </div>
   </div>
   <div class="hero-wave">
-    <svg viewBox="0 0 1440 40" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0,32 C360,0 1080,64 1440,32 L1440,40 L0,40 Z" fill="#ffffff"/>
+    <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,90 L0,55 C180,15 360,75 540,35 C720,-5 900,65 1080,30 C1260,-5 1380,20 1440,5 L1440,90 Z" fill="#ffffff"/>
     </svg>
   </div>
 </section>
@@ -361,7 +367,7 @@ footer{background:var(--dark);padding:40px 20px 0}
       </div>
       <div class="prova-card">
         <div class="prova-site">Este hub aqui</div>
-        <div class="prova-num" id="statTotal">—</div>
+        <div class="prova-num" id="statTotalProva">—</div>
         <div class="prova-desc">negócios cadastrados no Jabaquara e região, com página própria indexada no Google. Cada negócio = uma URL rankeável.</div>
         <div class="prova-tempo">⚡ ao vivo</div>
       </div>
@@ -396,7 +402,6 @@ footer{background:var(--dark);padding:40px 20px 0}
     </div>
     <div id="bairrosContainer">
       <div class="bairros-skeleton">
-        <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
         <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
         <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
         <div class="sk"><div class="sk-body"><div class="sk-line short"></div><div class="sk-line" style="width:40%"></div></div></div>
@@ -488,7 +493,7 @@ footer{background:var(--dark);padding:40px 20px 0}
           <div class="ia-texto" id="iaTexto"></div>
           <div class="ia-cta">
             <a id="iaWppLink" href="#" target="_blank" class="btn-quero-hub">
-              <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
               Quero meu hub →
             </a>
           </div>
@@ -524,7 +529,7 @@ footer{background:var(--dark);padding:40px 20px 0}
     <div class="footer-links">
       <a href="https://leanttro.com" class="f-btn f-btn-site">🌐 leanttro.com</a>
       <a href="https://wa.me/5511999999999" class="f-btn f-btn-wpp" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
         WhatsApp
       </a>
     </div>
@@ -534,11 +539,11 @@ footer{background:var(--dark);padding:40px 20px 0}
   </div>
 </footer>
 
-<!-- WPP FLUTUANTE -->
+<!-- WPP FLUTUANTE — SVG igual ao index -->
 <a href="https://wa.me/5511999999999" target="_blank" rel="noopener"
   style="position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s"
   onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
 <script>
@@ -555,7 +560,6 @@ async function apiGet(p){try{const r=await fetch(API_BASE+p);if(!r.ok)return nul
 
 // ─── BAIRROS ───
 function renderBairros(negocios){
-  // Agrupa por bairro
   const map={};
   negocios.forEach(n=>{
     const b=n.bairro||'';
@@ -589,7 +593,6 @@ function renderCategorias(categorias, negocios){
     document.getElementById('categoriasContainer').innerHTML='<p style="color:var(--muted)">Nenhuma categoria ainda.</p>';
     return;
   }
-  // Conta negócios por categoria
   const countMap={};
   negocios.forEach(n=>{if(n.categoria_nome)countMap[n.categoria_nome]=(countMap[n.categoria_nome]||0)+1});
 
@@ -612,14 +615,11 @@ function renderCategorias(categorias, negocios){
 
 // ─── FILTROS ───
 function filtrarBairroLocal(slug, nome, btn){
-  // Toggle
   if(filtBairro===slug){limparBairro();return}
   filtBairro=slug;
-  // Reset outros botões de bairro
   document.querySelectorAll('.btn-bairro-filtrar').forEach(b=>b.classList.remove('ativo'));
   btn.classList.add('ativo');
   btn.textContent='✓ Filtrando';
-  // Atualiza tag
   document.getElementById('tagBairroTexto').textContent='📍 '+nome;
   document.getElementById('tagBairroAtivo').style.display='';
   atualizarFiltrosAtivos();
@@ -661,18 +661,20 @@ function atualizarFiltrosAtivos(){
   document.getElementById('filtrosAtivos').style.display=temFiltro?'':'none';
 }
 
-// ─── RENDER NEGÓCIOS ───
-function renderCard(n){
+// ─── RENDER NEGÓCIOS ─── com foto em linha de destaque em cima, sem foto igual ao index
+function renderCard(n, destaqueLine){
   const end=[n.endereco,n.bairro].filter(Boolean).join(', ')||'';
-  const foto=n.foto_url?`<img src="${n.foto_url}" alt="${n.nome}" class="negocio-card-foto" loading="lazy">`:`<div class="negocio-card-sem-foto">${getIcon(n.categoria_nome||'')}</div>`;
-  const destaque=n.destaque?`<span class="destaque-badge">⭐ Destaque</span>`:'';
+  const foto=n.foto_url
+    ?`<img src="${n.foto_url}" alt="${n.nome}" class="negocio-card-foto" loading="lazy">`
+    :`<div class="negocio-card-sem-foto">${getIcon(n.categoria_nome||'')} ${(n.categoria_nome||'').toUpperCase()}</div>`;
+  const destaqueBadge=n.destaque?`<span class="destaque-badge">⭐ Destaque</span>`:'';
   return`<a href="/negocio/${n.slug||slugify(n.nome)}" class="negocio-card">
     ${foto}
     <div class="negocio-card-body">
       <span class="negocio-badge">${n.categoria_nome||''}</span>
       <h3>${n.nome}</h3>
       <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${end||'São Paulo'}</p>
-      <div class="negocio-card-footer">${destaque}<span class="btn-ver-negocio">Ver mais →</span></div>
+      <div class="negocio-card-footer">${destaqueBadge}<span class="btn-ver-negocio">Ver mais →</span></div>
     </div>
   </a>`;
 }
@@ -688,7 +690,6 @@ function renderNegocios(){
   const footer=document.getElementById('gridFooter');
   const count=document.getElementById('gridCount');
 
-  // Título dinâmico
   if(filtBairro&&filtCategoria){
     titulo.textContent=`${capitalize(filtCategoria)} em ${capitalize(filtBairro)}`;
   } else if(filtBairro){
@@ -707,7 +708,20 @@ function renderNegocios(){
   }
 
   sub.textContent=`${lista.length} negócio${lista.length!==1?'s':''} encontrado${lista.length!==1?'s':''}`;
-  container.innerHTML=`<div class="negocios-grid">${lista.map(renderCard).join('')}</div>`;
+
+  // Com foto em linha de destaque acima, sem foto no grid normal
+  const comFoto=lista.filter(n=>n.foto_url);
+  const semFoto=lista.filter(n=>!n.foto_url);
+
+  let html='';
+  if(comFoto.length){
+    html+=`<div class="negocios-destaque">${comFoto.map(n=>renderCard(n)).join('')}</div>`;
+  }
+  if(semFoto.length){
+    html+=`<div class="negocios-grid">${semFoto.map(n=>renderCard(n)).join('')}</div>`;
+  }
+  container.innerHTML=html;
+
   count.textContent=`${lista.length} negócio${lista.length!==1?'s':''} encontrado${lista.length!==1?'s':''}`;
   footer.style.display='flex';
 }
@@ -794,9 +808,10 @@ async function init(){
   allNegocios = negocios||[];
   allCategorias = (categorias||[]).filter(c=>c.ativo!==false);
 
-  // Stat ao vivo
+  // Stat ao vivo — atualiza os dois elementos
   if(allNegocios.length){
     document.getElementById('statTotal').textContent=allNegocios.length;
+    document.getElementById('statTotalProva').textContent=allNegocios.length;
   }
 
   renderBairros(allNegocios);
