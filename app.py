@@ -97,12 +97,15 @@ def detalhe_produto(slug):
 @token_required
 def criar_produto():
     d = request.json
+    preco = d.get("preco")
+    preco = float(preco) if preco not in (None, "", "null") else 0.0
     conn = get_db(); cur = conn.cursor()
     cur.execute("""
-        INSERT INTO produtos (nome, slug, descricao, categoria, preco, arquivo_url, imagem_url, ativo, destaque)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id
-    """, (d["nome"], d["slug"], d.get("descricao"), d.get("categoria"), d["preco"],
-          d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False)))
+        INSERT INTO produtos (nome, slug, descricao, categoria, preco, arquivo_url, imagem_url, ativo, destaque, tipo)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id
+    """, (d["nome"], d["slug"], d.get("descricao"), d.get("categoria"), preco,
+          d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False),
+          d.get("tipo", "loja")))
     novo_id = cur.fetchone()["id"]
     conn.commit(); cur.close(); conn.close()
     return jsonify({"id": novo_id}), 201
@@ -111,13 +114,16 @@ def criar_produto():
 @token_required
 def editar_produto(id):
     d = request.json
+    preco = d.get("preco")
+    preco = float(preco) if preco not in (None, "", "null") else 0.0
     conn = get_db(); cur = conn.cursor()
     cur.execute("""
         UPDATE produtos SET nome=%s, slug=%s, descricao=%s, categoria=%s, preco=%s,
-        arquivo_url=%s, imagem_url=%s, ativo=%s, destaque=%s, updated_em=now()
+        arquivo_url=%s, imagem_url=%s, ativo=%s, destaque=%s, tipo=%s, updated_em=now()
         WHERE id=%s
-    """, (d["nome"], d["slug"], d.get("descricao"), d.get("categoria"), d["preco"],
-          d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False), id))
+    """, (d["nome"], d["slug"], d.get("descricao"), d.get("categoria"), preco,
+          d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False),
+          d.get("tipo", "loja"), id))
     conn.commit(); cur.close(); conn.close()
     return jsonify({"ok": True})
 
