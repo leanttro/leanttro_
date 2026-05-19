@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Loja — Automações & Produtos Digitais Leanttro</title>
+<meta name="description" content="Automações com n8n, chatbots e produtos digitais prontos para usar. Compre e use hoje — sem mensalidade de plataforma.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#7943e2">
+<link rel="canonical" href="https://www.leanttro.com/loja">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Loja Leanttro — Automações & Produtos Digitais">
+<meta property="og:description" content="Automações com n8n, chatbots e produtos digitais prontos para usar. De R$97 a R$497.">
+<meta property="og:url" content="https://www.leanttro.com/loja">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Store","name":"Loja Leanttro","url":"https://www.leanttro.com/loja","description":"Automações e produtos digitais prontos para usar"}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#7943e2;--primary-d:#5c2ec4;--accent:#00e5a0;--dark:#0a0a0f;--text:#1a1a2e;--muted:#6b6b80;--border:#e4e4f0;--bg:#ffffff;--bg2:#f8f8fc;--radius:12px;--display:'Montserrat',sans-serif;--sans:'Inter',sans-serif;--shadow:0 4px 24px rgba(108,99,255,.10);--shadow-md:0 8px 32px rgba(108,99,255,.16)}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* HEADER */
+header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 20px}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo img{height:38px;width:auto}
+nav.desktop-nav ul{list-style:none;display:flex;gap:4px}
+nav.desktop-nav ul li a{padding:8px 14px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--muted);transition:all .15s;white-space:nowrap}
+nav.desktop-nav ul li a:hover{color:var(--primary);background:rgba(121,67,226,.07)}
+nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
+.header-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn-wpp-header{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:9px 18px;border-radius:8px;font-size:.875rem;font-weight:600;transition:all .2s;white-space:nowrap}
+.btn-wpp-header:hover{background:#1da850;transform:translateY(-1px)}
+.btn-wpp-header svg{width:17px;height:17px;flex-shrink:0}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text)}
+.hamburger svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2}
+.mobile-nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;justify-content:center;align-items:center;opacity:0;transition:opacity .25s}
+.mobile-nav-overlay.active{display:flex;opacity:1}
+.mobile-nav-overlay ul{list-style:none;text-align:center}
+.mobile-nav-overlay ul li{margin:18px 0}
+.mobile-nav-overlay ul li a{color:#fff;font-family:var(--display);font-size:1.8rem;font-weight:700}
+.mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+
+/* HERO */
+.hero-page{background:var(--primary);padding:64px 20px 0;position:relative;overflow:hidden}
+.hero-page-inner{max-width:1200px;margin:0 auto;text-align:center;padding-bottom:64px}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.15);color:#fff;padding:5px 14px;border-radius:20px;font-size:.8rem;font-weight:600;letter-spacing:.3px;margin-bottom:18px;border:1px solid rgba(255,255,255,.25)}
+.hero-page h1{font-family:var(--display);font-size:3rem;font-weight:800;color:#fff;line-height:1.15;margin-bottom:14px;letter-spacing:-.5px}
+.hero-page p{font-size:1.15rem;color:rgba(255,255,255,.85);max-width:520px;margin:0 auto}
+.hero-wave{display:block;width:100%;margin-top:-5px;line-height:0}
+.hero-wave svg{display:block;width:100%}
+
+/* BREADCRUMB */
+.breadcrumb{padding:18px 0 0;font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.breadcrumb a{color:var(--primary);font-weight:500}
+.breadcrumb a:hover{text-decoration:underline}
+.breadcrumb svg{width:12px;height:12px;stroke:var(--muted);fill:none;stroke-width:2;flex-shrink:0}
+
+/* FILTROS */
+.filtros-section{padding:28px 0 0}
+.filtros-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
+.chip-cat{padding:6px 18px;border-radius:20px;border:2px solid var(--border);background:#fff;color:var(--muted);font-family:var(--sans);font-size:.875rem;font-weight:600;cursor:pointer;transition:all .2s}
+.chip-cat:hover{border-color:var(--primary);color:var(--primary)}
+.chip-cat.active{background:var(--primary);border-color:var(--primary);color:#fff}
+
+/* GRID */
+.section{padding:36px 0 72px}
+.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:32px}
+@media(max-width:900px){.prod-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.prod-grid{grid-template-columns:1fr}}
+
+/* CARD */
+.prod-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
+.prod-card:hover{border-color:var(--primary);transform:translateY(-5px);box-shadow:var(--shadow-md)}
+.prod-card-img{width:100%;height:190px;overflow:hidden;flex-shrink:0;background:linear-gradient(135deg,rgba(121,67,226,.12),rgba(121,67,226,.04));display:flex;align-items:center;justify-content:center}
+.prod-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
+.prod-card:hover .prod-card-img img{transform:scale(1.04)}
+.prod-card-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary);opacity:.4}
+.prod-card-body{padding:20px 22px;flex:1;display:flex;flex-direction:column;gap:8px}
+.prod-badge{display:inline-block;background:rgba(121,67,226,.08);color:var(--primary);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;align-self:flex-start}
+.prod-card-body h3{font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--text);line-height:1.35}
+.prod-card-body p{font-size:.87rem;color:var(--muted);line-height:1.55;flex:1}
+.prod-preco{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--primary);margin-top:4px}
+.prod-preco small{font-size:.75rem;font-weight:500;color:var(--muted);margin-right:4px}
+.btn-comprar{display:inline-flex;align-items:center;justify-content:center;gap:6px;background:var(--primary);color:#fff;padding:11px 20px;border-radius:8px;font-size:.88rem;font-weight:700;margin-top:6px;transition:background .2s}
+.prod-card:hover .btn-comprar{background:var(--primary-d)}
+
+/* SKELETON */
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.skeleton{background:linear-gradient(90deg,#f0f0f8 25%,#e8e8f4 50%,#f0f0f8 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:6px}
+.skel-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.skel-img{width:100%;height:190px}
+.skel-body{padding:20px 22px;display:flex;flex-direction:column;gap:10px}
+.skel-badge{width:80px;height:20px;border-radius:20px}
+.skel-title{width:70%;height:18px}
+.skel-line{width:100%;height:13px}
+.skel-line-short{width:60%;height:13px}
+.skel-preco{width:100px;height:26px}
+.skel-btn{width:100%;height:40px;margin-top:4px}
+
+/* EMPTY */
+.empty-state{text-align:center;padding:72px 20px;color:var(--muted);grid-column:1/-1}
+.empty-state svg{width:56px;height:56px;stroke:var(--border);fill:none;stroke-width:1.5;margin:0 auto 16px}
+.empty-state h3{font-family:var(--display);font-size:1.2rem;color:var(--text);margin-bottom:8px}
+
+/* CTA */
+.cta-section{background:var(--primary);padding:72px 20px;text-align:center}
+.cta-section h2{font-family:var(--display);font-size:2rem;font-weight:800;color:#fff;margin-bottom:12px;letter-spacing:-.3px}
+.cta-section h2 span{color:var(--accent)}
+.cta-section p{color:rgba(255,255,255,.85);font-size:1rem;margin-bottom:28px;max-width:480px;margin-left:auto;margin-right:auto}
+.btn-cta-wpp{display:inline-flex;align-items:center;gap:9px;background:#25D366;color:#fff;padding:14px 30px;border-radius:50px;font-weight:700;font-size:.95rem;transition:all .2s;box-shadow:0 4px 20px rgba(37,211,102,.4)}
+.btn-cta-wpp:hover{background:#1da850;transform:translateY(-2px)}
+
+/* FOOTER */
+footer{background:var(--dark);padding:32px 20px}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:24px;flex-wrap:wrap}
+.footer-logo img{height:36px;filter:brightness(0) invert(1);opacity:.9}
+.footer-divider{width:1px;height:36px;background:#2a2a34;flex-shrink:0}
+.footer-text strong{color:#fff;font-size:.9rem}
+.footer-text span{color:#6b6b80;font-size:.78rem}
+.footer-links{display:flex;gap:10px;margin-left:auto;flex-wrap:wrap}
+.f-btn{display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:.8rem;font-weight:600;transition:opacity .2s}
+.f-btn svg{width:14px;height:14px;flex-shrink:0}
+.f-btn-site{background:#fff;color:#0d0d12}
+.f-btn-wpp{background:#25D366;color:#fff}
+.f-btn-ig{background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);color:#fff}
+.footer-bottom{max-width:1200px;margin:20px auto 0;padding-top:16px;border-top:1px solid #1a1a24;text-align:center;color:#3a3a4a;font-size:.78rem}
+.footer-bottom a{color:#505060}
+@media(max-width:768px){nav.desktop-nav{display:none}.hamburger{display:block}.hero-page h1{font-size:2rem}}
+@media(max-width:640px){.footer-inner{flex-direction:column;align-items:center;text-align:center;gap:14px}.footer-divider{display:none}.footer-links{justify-content:center}}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" height="38">
+    </a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/seu-hub">Seu Hub</a></li>
+        <li><a href="/loja" class="ativo">Loja</a></li>
+        <li><a href="/portfolio">Portfólio</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="/metricas">Métricas Grátis</a></li>
+        <li><a href="/#orcamento">Orçamento</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="https://wa.me/5511999999999" class="btn-wpp-header" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav-overlay" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose">×</button>
+  <nav><ul>
+    <li><a href="/" onclick="closeNav()">Home</a></li>
+    <li><a href="/seu-hub" onclick="closeNav()">Seu Hub</a></li>
+    <li><a href="/loja" onclick="closeNav()">Loja</a></li>
+    <li><a href="/portfolio" onclick="closeNav()">Portfólio</a></li>
+    <li><a href="/blog" onclick="closeNav()">Blog</a></li>
+    <li><a href="/metricas" onclick="closeNav()">Métricas Grátis</a></li>
+    <li><a href="/#orcamento" onclick="closeNav()">Orçamento</a></li>
+  </ul></nav>
+</div>
+
+<!-- HERO -->
+<section class="hero-page">
+  <div class="hero-page-inner">
+    <span class="hero-badge">
+      <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+      De R$97 a R$497 — compre e use hoje
+    </span>
+    <h1>Automações & Produtos Digitais</h1>
+    <p>Chatbots, integrações n8n, geração de contratos e muito mais. Sem mensalidade de plataforma.</p>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 54" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M0,32 C240,58 480,10 720,32 C960,54 1200,10 1440,32 L1440,54 L0,54 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- CONTEÚDO -->
+<section class="section">
+  <div class="container">
+    <div class="breadcrumb">
+      <a href="/">Home</a>
+      <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+      <span>Loja</span>
+    </div>
+
+    <div class="filtros-section">
+      <div class="filtros-row" id="filtrosCat">
+        <!-- preenchido via JS -->
+      </div>
+    </div>
+
+    <div class="prod-grid" id="prodGrid">
+      <div class="skel-card"><div class="skeleton skel-img"></div><div class="skel-body"><div class="skeleton skel-badge"></div><div class="skeleton skel-title"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line-short"></div><div class="skeleton skel-preco"></div><div class="skeleton skel-btn"></div></div></div>
+      <div class="skel-card"><div class="skeleton skel-img"></div><div class="skel-body"><div class="skeleton skel-badge"></div><div class="skeleton skel-title"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line-short"></div><div class="skeleton skel-preco"></div><div class="skeleton skel-btn"></div></div></div>
+      <div class="skel-card"><div class="skeleton skel-img"></div><div class="skel-body"><div class="skeleton skel-badge"></div><div class="skeleton skel-title"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line-short"></div><div class="skeleton skel-preco"></div><div class="skeleton skel-btn"></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container">
+    <h2>Tem <span>dúvidas</span>? Fala comigo</h2>
+    <p>Preciso de ajuda para escolher? Me manda uma mensagem no WhatsApp — respondo rápido.</p>
+    <a href="https://wa.me/5511999999999" class="btn-cta-wpp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Tirar dúvida no WhatsApp
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro"></div>
+    <div class="footer-divider"></div>
+    <div class="footer-text">
+      <strong>Leanttro Tecnologia</strong>
+      <span>Sites, hubs e automações — Jabaquara, São Paulo<br>© 2026 Leanttro. Todos os direitos reservados.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://leanttro.com" class="f-btn f-btn-site"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>leanttro.com</a>
+      <a href="https://wa.me/5511999999999" class="f-btn f-btn-wpp" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>
+      <a href="https://instagram.com/leanttro" class="f-btn f-btn-ig" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <a href="/politica-de-privacidade">Política de Privacidade</a> · <a href="/termos">Termos de Uso</a> · Desenvolvido com ❤️ pela <a href="https://leanttro.com">Leanttro</a>
+  </div>
+</footer>
+
+<a href="https://wa.me/5511999999999" target="_blank" rel="noopener" aria-label="WhatsApp" style="position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const API_BASE = 'https://teste.leanttro.com';
+const grid = document.getElementById('prodGrid');
+const filtrosCat = document.getElementById('filtrosCat');
+let allProdutos = [];
+let activeCat = '';
+
+function formatPreco(v) {
+  if (!v && v !== 0) return '';
+  return Number(v).toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
+}
+
+function renderCard(p) {
+  const img = p.imagem_url
+    ? `<div class="prod-card-img"><img src="${p.imagem_url}" alt="${p.nome}" loading="lazy"></div>`
+    : `<div class="prod-card-img"><div class="prod-card-img-placeholder"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div></div>`;
+  const desc = p.descricao ? p.descricao.replace(/<[^>]*>/g,'').slice(0,100) + (p.descricao.length > 100 ? '…' : '') : '';
+  return `<a href="/loja/${p.slug}" class="prod-card">
+    ${img}
+    <div class="prod-card-body">
+      ${p.categoria ? `<span class="prod-badge">${p.categoria}</span>` : ''}
+      <h3>${p.nome}</h3>
+      ${desc ? `<p>${desc}</p>` : ''}
+      <div class="prod-preco"><small>a partir de</small>${formatPreco(p.preco)}</div>
+      <span class="btn-comprar">Comprar →</span>
+    </div>
+  </a>`;
+}
+
+function buildFiltros(lista) {
+  const cats = [...new Set(lista.map(p => p.categoria).filter(Boolean))].sort();
+  filtrosCat.innerHTML = `<button class="chip-cat ${activeCat===''?'active':''}" data-cat="">Todos</button>` +
+    cats.map(c => `<button class="chip-cat ${activeCat===c?'active':''}" data-cat="${c}">${c}</button>`).join('');
+  filtrosCat.querySelectorAll('.chip-cat').forEach(btn => {
+    btn.addEventListener('click', () => {
+      activeCat = btn.dataset.cat;
+      filtrosCat.querySelectorAll('.chip-cat').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderGrid();
+    });
+  });
+}
+
+function renderGrid() {
+  const filtered = activeCat ? allProdutos.filter(p => p.categoria === activeCat) : allProdutos;
+  if (!filtered.length) {
+    grid.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg><h3>Nenhum produto nessa categoria</h3><p>Tente outro filtro.</p></div>`;
+    return;
+  }
+  grid.innerHTML = filtered.map(renderCard).join('');
+}
+
+(async function() {
+  try {
+    const r = await fetch(`${API_BASE}/api/produtos?tipo=loja`);
+    if (!r.ok) throw new Error();
+    allProdutos = await r.json();
+    if (!Array.isArray(allProdutos) || !allProdutos.length) {
+      grid.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><h3>Nenhum produto disponível ainda</h3><p>Em breve mais produtos aqui. Fale pelo WhatsApp para saber mais.</p></div>`;
+      return;
+    }
+    buildFiltros(allProdutos);
+    renderGrid();
+  } catch(e) {
+    grid.innerHTML = `<div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg><h3>Erro ao carregar produtos</h3><p>Tente recarregar a página.</p></div>`;
+  }
+})();
+
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+const navClose = document.getElementById('navClose');
+hamburger.addEventListener('click', () => mobileNav.classList.add('active'));
+navClose.addEventListener('click', () => mobileNav.classList.remove('active'));
+mobileNav.addEventListener('click', e => { if(e.target===mobileNav) mobileNav.classList.remove('active') });
+function closeNav(){ mobileNav.classList.remove('active') }
+</script>
+</body>
+</html>
