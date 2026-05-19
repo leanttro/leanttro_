@@ -12,9 +12,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copia o código
-COPY app.py .
-COPY painel.html .
+# Copia tudo (app.py, templates/, etc.)
+# Para adicionar novos HTMLs: basta colocar em templates/ e usar render_template() no app.py
+COPY . .
 
 # Expõe a porta
 EXPOSE 5000
