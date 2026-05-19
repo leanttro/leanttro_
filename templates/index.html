@@ -59,11 +59,12 @@
   --shadow-md: 0 8px 32px rgba(108,99,255,0.16);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html{scroll-behavior:smooth;font-size:20px}
 body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-.container{max-width:1200px;margin:0 auto;padding:0 20px}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
 a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
+@media(max-width:768px){html{font-size:16px}}
 
 /* ── HEADER ── */
 header {
@@ -126,8 +127,12 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
   max-width:1200px;margin:0 auto;width:100%;
   display:flex;align-items:center;gap:48px;
 }
-.hero-text{flex:1;min-width:0;max-width:680px}
-.hero-badge{
+.hero-text{flex:1;min-width:0;max-width:580px}
+/* Hero image lado a lado */
+.hero-image{flex:0 0 320px;max-width:320px;display:flex;align-items:center}
+.hero-image img{width:100%;height:auto;border-radius:14px;box-shadow:0 16px 48px rgba(0,0,0,.28);object-fit:cover;max-height:260px;object-position:center}
+@media(max-width:900px){.hero-image{flex:0 0 240px;max-width:240px}}
+@media(max-width:768px){.hero-image{display:none}}.hero-badge{
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(255,255,255,.15);color:#fff;
   padding:5px 14px;border-radius:20px;
@@ -154,16 +159,6 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
   border:1.5px solid rgba(255,255,255,.35);transition:all .2s;
 }
 .btn-hero-secondary:hover{background:rgba(255,255,255,.25)}
-.hero-image{flex:0 0 460px;max-width:460px}
-.hero-image img{width:100%;border-radius:16px;box-shadow:0 24px 60px rgba(0,0,0,.25)}
-.hero-image .hero-img-placeholder{
-  width:100%;height:300px;border-radius:16px;
-  background:rgba(255,255,255,.12);border:2px dashed rgba(255,255,255,.25);
-  display:flex;align-items:center;justify-content:center;
-  color:rgba(255,255,255,.5);font-size:.85rem;font-weight:500;
-  flex-direction:column;gap:8px;
-}
-.hero-image .hero-img-placeholder svg{width:48px;height:48px;stroke:currentColor;fill:none;stroke-width:1.5;opacity:.6}
 
 /* Barra wave */
 .hero-wave{display:block;width:100%;margin-top:-5px;line-height:0;position:relative;z-index:2}
@@ -266,22 +261,22 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 }
 .negocio-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--primary)}
 .negocio-card-foto{width:100%;height:180px;object-fit:cover;display:block}
-/* Sem foto: só uma barra pequena com categoria */
+/* Sem foto: barra com categoria em preto visível */
 .negocio-card-sem-foto{
-  width:100%;height:36px;
+  width:100%;height:40px;
   display:flex;align-items:center;justify-content:flex-start;
-  padding:0 12px;
-  background:rgba(121,67,226,.07);color:var(--primary);
-  font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
+  padding:0 14px;
+  background:#ede9f8;color:#1a1a2e;
+  font-size:.75rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;
 }
-.negocio-card-body{padding:16px}
+.negocio-card-body{padding:16px;display:flex;flex-direction:column;gap:4px}
+.negocio-card-body h3{font-family:var(--display);font-size:.95rem;font-weight:700;color:var(--text);margin:0}
 .negocio-badge{
   display:inline-block;background:rgba(0,229,160,.12);color:#00a870;
-  font-size:.72rem;font-weight:700;padding:2px 8px;border-radius:20px;margin-bottom:6px;
+  font-size:.68rem;font-weight:700;padding:2px 8px;border-radius:20px;align-self:flex-start;
 }
-.negocio-card-body h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);margin-bottom:4px}
-.negocio-bairro{font-size:.82rem;color:var(--muted);display:flex;align-items:center;gap:4px}
-.negocio-bairro svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.negocio-bairro{font-size:.78rem;color:var(--muted);display:flex;align-items:flex-start;gap:4px;line-height:1.4}
+.negocio-bairro svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0;margin-top:2px}
 .btn-ver-negocio{
   display:inline-block;margin-top:12px;
   background:var(--primary);color:#fff;
@@ -671,9 +666,12 @@ footer{
   .blog-grid{grid-template-columns:repeat(2,1fr)}
   .servico-card-v2{min-width:300px;flex:0 0 300px}
 }
+}
 @media(max-width:600px){
   .blog-grid{grid-template-columns:1fr}
   .servico-card-v2{min-width:80vw;flex:0 0 80vw;padding:26px 22px 24px}
+}
+
 /* ── BOTÃO LOCALIZAÇÃO HUB ── */
 .btn-localizar-hub{
   display:inline-flex;align-items:center;gap:8px;
@@ -749,6 +747,9 @@ footer{
             <a href="/portfolio" class="btn-hero-secondary">Ver portfólio</a>
           </div>
         </div>
+        <div class="hero-image">
+          <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779214152/site_ysqjut.png" alt="Site profissional Leanttro" loading="eager">
+        </div>
       </div>
     </div>
 
@@ -763,6 +764,9 @@ footer{
             <a href="/seu-hub" class="btn-hero-primary">Como funciona →</a>
             <a href="#cases" class="btn-hero-secondary">Ver os números</a>
           </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779219417/Hub_no_seu_Site_zn4c2k.png" alt="Hub de tráfego Leanttro" loading="lazy">
         </div>
       </div>
     </div>
@@ -779,6 +783,9 @@ footer{
             <a href="https://wa.me/5511999999999" class="btn-hero-secondary">Consultar</a>
           </div>
         </div>
+        <div class="hero-image">
+          <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779214134/automacao_oiygaa.png" alt="Automações n8n Leanttro" loading="lazy">
+        </div>
       </div>
     </div>
 
@@ -794,6 +801,9 @@ footer{
             <a href="https://wa.me/5511999999999" class="btn-hero-secondary">Não tenho GA4</a>
           </div>
         </div>
+        <div class="hero-image">
+          <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779219519/visao2_q542bk.png" alt="Painel de métricas Leanttro" loading="lazy">
+        </div>
       </div>
     </div>
 
@@ -808,6 +818,9 @@ footer{
             <a href="https://wa.me/5511999999999" class="btn-hero-primary">Solicitar proposta →</a>
             <a href="/portfolio" class="btn-hero-secondary">Ver exemplos</a>
           </div>
+        </div>
+        <div class="hero-image">
+          <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779214150/3D_af4xlf.png" alt="3D Experience Leanttro" loading="lazy">
         </div>
       </div>
     </div>
@@ -1388,16 +1401,20 @@ async function apiGet(path) {
   function slugify(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,''); }
 
   function renderCard(n) {
+    const endereco = [n.endereco, n.bairro, n.cidade].filter(Boolean).join(', ') || n.bairro || '';
     const foto = n.foto
       ? `<img src="${n.foto}" alt="${n.nome}" class="negocio-card-foto" loading="lazy">`
       : `<div class="negocio-card-sem-foto">${n.categoria||''}</div>`;
+    const distHtml = n.distancia_km !== undefined
+      ? `<p style="font-size:.72rem;color:var(--primary);font-weight:600;margin-top:2px">📍 ${n.distancia_km.toFixed(1)} km de você</p>`
+      : '';
     return `<a href="/negocio/${n.slug || slugify(n.nome)}" class="negocio-card">
       ${foto}
       <div class="negocio-card-body">
-        <span class="negocio-badge">${n.categoria||''}</span>
         <h3>${n.nome}</h3>
-        <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${n.bairro||''}</p>
-        ${n.distancia_km !== undefined ? `<p style="font-size:.78rem;color:var(--primary);margin-top:2px;font-weight:600">📍 ${n.distancia_km.toFixed(1)} km de você</p>` : ''}
+        <span class="negocio-badge">${n.categoria||''}</span>
+        <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${endereco}</p>
+        ${distHtml}
         <span class="btn-ver-negocio">Ver mais →</span>
       </div>
     </a>`;
@@ -1507,7 +1524,6 @@ function closeNav(){mobileNav.classList.remove('active')}
   show(0);
   document.getElementById('heroPrev').addEventListener('click',()=>show(cur-1));
   document.getElementById('heroNext').addEventListener('click',()=>show(cur+1));
-  setInterval(()=>show(cur+1),5000);
 })();
 
 // ── FUNÇÃO CARROSSEL GENÉRICO ──
