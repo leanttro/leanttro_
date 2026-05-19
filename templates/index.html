@@ -112,9 +112,9 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 .hero-section{
   background:var(--primary);
   position:relative;overflow:hidden;
-  min-height:520px;
+  min-height:380px;
 }
-.hero-slides{position:relative;min-height:520px}
+.hero-slides{position:relative;min-height:380px}
 .hero-slide{
   display:none;
   padding:60px 20px 40px;
@@ -126,7 +126,7 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
   max-width:1200px;margin:0 auto;width:100%;
   display:flex;align-items:center;gap:48px;
 }
-.hero-text{flex:1;min-width:0}
+.hero-text{flex:1;min-width:0;max-width:680px}
 .hero-badge{
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(255,255,255,.15);color:#fff;
@@ -265,12 +265,14 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
   transition:transform .25s,box-shadow .25s,border-color .25s;
 }
 .negocio-card:hover{transform:translateY(-5px);box-shadow:var(--shadow-md);border-color:var(--primary)}
-.negocio-card-foto{width:100%;height:180px;object-fit:cover}
+.negocio-card-foto{width:100%;height:180px;object-fit:cover;display:block}
+/* Sem foto: só uma barra pequena com categoria */
 .negocio-card-sem-foto{
-  width:100%;height:100px;
-  display:flex;align-items:center;justify-content:center;
-  background:rgba(108,99,255,.06);color:var(--primary);
-  font-size:.85rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;
+  width:100%;height:36px;
+  display:flex;align-items:center;justify-content:flex-start;
+  padding:0 12px;
+  background:rgba(121,67,226,.07);color:var(--primary);
+  font-size:.7rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
 }
 .negocio-card-body{padding:16px}
 .negocio-badge{
@@ -568,7 +570,7 @@ footer{
 @media(max-width:768px){
   nav.desktop-nav{display:none}
   .hamburger{display:block}
-  .hero-slide-inner{flex-direction:column;gap:28px;padding:40px 0 80px}
+  .hero-slide-inner{flex-direction:column;gap:28px;padding:20px 0 80px}
   .hero-image{flex:none;max-width:100%;width:100%}
   .hero-text h1{font-size:2rem}
   .hero-text p{font-size:1rem}
@@ -582,6 +584,12 @@ footer{
   .cta-section h2{font-size:2rem}
   .metricas-form{flex-direction:column;padding:12px}
   .metricas-form input{text-align:center}
+  /* Reduz pela metade o padding-top das seções no mobile */
+  .section{padding:36px 0}
+  .section-alt{padding:36px 0}
+  .section-subtitle{margin-bottom:22px}
+  .cta-section{padding:50px 20px}
+  .faq-section{padding:36px 0}
 }
 @media(max-width:520px){
   .hero-text h1{font-size:1.75rem}
@@ -666,7 +674,17 @@ footer{
 @media(max-width:600px){
   .blog-grid{grid-template-columns:1fr}
   .servico-card-v2{min-width:80vw;flex:0 0 80vw;padding:26px 22px 24px}
+/* ── BOTÃO LOCALIZAÇÃO HUB ── */
+.btn-localizar-hub{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--primary);color:#fff;
+  padding:10px 22px;border-radius:50px;font-size:.88rem;font-weight:700;
+  border:none;cursor:pointer;transition:all .2s;font-family:var(--sans);
+  box-shadow:0 4px 16px rgba(121,67,226,.25);
 }
+.btn-localizar-hub:hover{background:var(--primary-d);transform:translateY(-1px)}
+.btn-localizar-hub:disabled{opacity:.6;cursor:not-allowed;transform:none}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 </style>
 </head>
@@ -731,12 +749,6 @@ footer{
             <a href="/portfolio" class="btn-hero-secondary">Ver portfólio</a>
           </div>
         </div>
-        <div class="hero-image">
-          <div class="hero-img-placeholder">
-            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
-            <span>Mockup do site aqui</span>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -750,12 +762,6 @@ footer{
           <div class="hero-btns">
             <a href="/seu-hub" class="btn-hero-primary">Como funciona →</a>
             <a href="#cases" class="btn-hero-secondary">Ver os números</a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <div class="hero-img-placeholder">
-            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
-            <span>Screenshot do Feiras de Rua</span>
           </div>
         </div>
       </div>
@@ -773,12 +779,6 @@ footer{
             <a href="https://wa.me/5511999999999" class="btn-hero-secondary">Consultar</a>
           </div>
         </div>
-        <div class="hero-image">
-          <div class="hero-img-placeholder">
-            <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-            <span>Screenshot da loja</span>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -794,12 +794,6 @@ footer{
             <a href="https://wa.me/5511999999999" class="btn-hero-secondary">Não tenho GA4</a>
           </div>
         </div>
-        <div class="hero-image">
-          <div class="hero-img-placeholder">
-            <svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
-            <span>Screenshot do painel de métricas</span>
-          </div>
-        </div>
       </div>
     </div>
 
@@ -813,12 +807,6 @@ footer{
           <div class="hero-btns">
             <a href="https://wa.me/5511999999999" class="btn-hero-primary">Solicitar proposta →</a>
             <a href="/portfolio" class="btn-hero-secondary">Ver exemplos</a>
-          </div>
-        </div>
-        <div class="hero-image">
-          <div class="hero-img-placeholder">
-            <svg viewBox="0 0 24 24"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/></svg>
-            <span>Demo 3D aqui</span>
           </div>
         </div>
       </div>
@@ -852,108 +840,26 @@ footer{
       <h2 class="section-title">Negócios em destaque no Jabaquara e região</h2>
       <p class="section-subtitle">Encontre serviços, comércio, saúde e muito mais perto de você</p>
     </div>
+
+    <!-- Botão localização -->
+    <div style="text-align:center;margin-bottom:20px">
+      <button id="btnLocalizacao" class="btn-localizar-hub">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Usar minha localização
+      </button>
+    </div>
+
+    <!-- Filtro categorias (gerado dinamicamente) -->
     <div class="filtros-categoria" id="filtrosCat">
-      <button class="chip-cat active" data-cat="todos">Todos</button>
-      <button class="chip-cat" data-cat="restaurantes"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>Restaurantes</button>
-      <button class="chip-cat" data-cat="servicos"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M4.93 4.93l1.41 1.41M12 2v2M12 20v2M20 12h2M2 12h2M17.66 17.66l-1.41-1.41M6.34 17.66l1.41-1.41"/></svg>Serviços</button>
-      <button class="chip-cat" data-cat="comercio"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>Comércio</button>
-      <button class="chip-cat" data-cat="saude"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Saúde</button>
-      <button class="chip-cat" data-cat="educacao"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>Educação</button>
-      <button class="chip-cat" data-cat="beleza"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align:-2px;margin-right:5px"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" y1="9" x2="9.01" y2="9"/><line x1="15" y1="9" x2="15.01" y2="9"/></svg>Beleza</button>
+      <button class="chip-cat active" data-cat="">Todos</button>
     </div>
-    <div class="filtros-bairro" id="filtrosBairro">
-      <button class="chip-loc active" data-bairro="todos">Todos os bairros</button>
-      <button class="chip-loc" data-bairro="jabaquara">Jabaquara</button>
-      <button class="chip-loc" data-bairro="saude">Saúde</button>
-      <button class="chip-loc" data-bairro="ipiranga">Ipiranga</button>
-      <button class="chip-loc" data-bairro="vila-mariana">Vila Mariana</button>
-      <button class="chip-loc" data-bairro="cursino">Cursino</button>
-    </div>
+    <!-- Filtro bairros (gerado dinamicamente) -->
+    <div class="filtros-bairro" id="filtrosBairro" style="display:none"></div>
 
     <div class="carousel-wrapper">
       <div class="carousel-track-outer" id="hubTrackOuter">
         <div class="carousel-track" id="hubTrack">
-
-          <a href="/negocio/exemplo-1" class="negocio-card">
-            <div class="negocio-card-sem-foto">Foto do negócio</div>
-            <div class="negocio-card-body">
-              <span class="negocio-badge">Restaurantes</span>
-              <h3>Nome do Restaurante</h3>
-              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Jabaquara</p>
-              <span class="btn-ver-negocio">Ver mais →</span>
-            </div>
-          </a>
-
-          <a href="/negocio/exemplo-2" class="negocio-card">
-            <div class="negocio-card-sem-foto">Foto do negócio</div>
-            <div class="negocio-card-body">
-              <span class="negocio-badge">Serviços</span>
-              <h3>Oficina do Bairro</h3>
-              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Saúde</p>
-              <span class="btn-ver-negocio">Ver mais →</span>
-            </div>
-          </a>
-
-          <a href="/negocio/exemplo-3" class="negocio-card">
-            <div class="negocio-card-sem-foto">Foto do negócio</div>
-            <div class="negocio-card-body">
-              <span class="negocio-badge">Saúde</span>
-              <h3>Clínica Saúde Total</h3>
-              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Ipiranga</p>
-              <span class="btn-ver-negocio">Ver mais →</span>
-            </div>
-          </a>
-
-          <a href="/negocio/exemplo-4" class="negocio-card">
-            <div class="negocio-card-sem-foto">Foto do negócio</div>
-            <div class="negocio-card-body">
-              <span class="negocio-badge">Comércio</span>
-              <h3>Mercadinho do Zé</h3>
-              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Jabaquara</p>
-              <span class="btn-ver-negocio">Ver mais →</span>
-            </div>
-          </a>
-
-          <a href="/negocio/exemplo-5" class="negocio-card">
-            <div class="negocio-card-sem-foto">Foto do negócio</div>
-            <div class="negocio-card-body">
-              <span class="negocio-badge">Beleza</span>
-              <h3>Studio Hair</h3>
-              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Vila Mariana</p>
-              <span class="btn-ver-negocio">Ver mais →</span>
-            </div>
-          </a>
-
-          <a href="/negocio/exemplo-6" class="negocio-card">
-            <div class="negocio-card-sem-foto">Foto do negócio</div>
-            <div class="negocio-card-body">
-              <span class="negocio-badge">Educação</span>
-              <h3>Curso Técnico Jabaquara</h3>
-              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Jabaquara</p>
-              <span class="btn-ver-negocio">Ver mais →</span>
-            </div>
-          </a>
-
-          <a href="/negocio/exemplo-7" class="negocio-card">
-            <div class="negocio-card-sem-foto">Foto do negócio</div>
-            <div class="negocio-card-body">
-              <span class="negocio-badge">Restaurantes</span>
-              <h3>Pizzaria da Esquina</h3>
-              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Cursino</p>
-              <span class="btn-ver-negocio">Ver mais →</span>
-            </div>
-          </a>
-
-          <a href="/negocio/exemplo-8" class="negocio-card">
-            <div class="negocio-card-sem-foto">Foto do negócio</div>
-            <div class="negocio-card-body">
-              <span class="negocio-badge">Serviços</span>
-              <h3>Eletricista 24h</h3>
-              <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Saúde</p>
-              <span class="btn-ver-negocio">Ver mais →</span>
-            </div>
-          </a>
-
+          <p style="color:var(--muted);padding:32px;text-align:center">Carregando negócios...</p>
         </div>
       </div>
       <div class="carousel-nav">
@@ -1472,51 +1378,109 @@ async function apiGet(path) {
 // ── DYNAMIC HUB NEGOCIOS ──
 (async function loadHub() {
   const track = document.getElementById('hubTrack');
-  const catBtns = document.querySelectorAll('#filtrosCat .chip-cat');
-  const bairroBtns = document.querySelectorAll('#filtrosBairro .chip-loc');
+  const filtrosCat = document.getElementById('filtrosCat');
+  const filtrosBairro = document.getElementById('filtrosBairro');
+  const btnLoc = document.getElementById('btnLocalizacao');
   let allNegocios = [];
-  let activeCat = 'todos';
-  let activeBairro = 'todos';
-
-  const data = await apiGet('/hub/negocios');
-  if (!data || !Array.isArray(data) || data.length === 0) return; // keep static fallback
-
-  allNegocios = data;
+  let activeCat = '';
+  let activeBairro = '';
 
   function slugify(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,''); }
 
-  function renderCards() {
-    const filtered = allNegocios.filter(n => {
-      const catOk = activeCat === 'todos' || slugify(n.categoria) === activeCat;
-      const bairroOk = activeBairro === 'todos' || slugify(n.bairro) === activeBairro;
-      return catOk && bairroOk;
-    });
-    if (filtered.length === 0) { track.innerHTML = '<p style="color:var(--muted);padding:32px;text-align:center">Nenhum negócio encontrado nessa categoria.</p>'; return; }
-    track.innerHTML = filtered.map(n => `
-      <a href="/negocio/${n.slug || slugify(n.nome)}" class="negocio-card">
-        ${n.foto ? `<img src="${n.foto}" alt="${n.nome}" class="negocio-card-foto" loading="lazy">` : '<div class="negocio-card-sem-foto">Foto do negócio</div>'}
-        <div class="negocio-card-body">
-          <span class="negocio-badge">${n.categoria||''}</span>
-          <h3>${n.nome}</h3>
-          <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${n.bairro||''}</p>
-          <span class="btn-ver-negocio">Ver mais →</span>
-        </div>
-      </a>`).join('');
+  function renderCard(n) {
+    const foto = n.foto
+      ? `<img src="${n.foto}" alt="${n.nome}" class="negocio-card-foto" loading="lazy">`
+      : `<div class="negocio-card-sem-foto">${n.categoria||''}</div>`;
+    return `<a href="/negocio/${n.slug || slugify(n.nome)}" class="negocio-card">
+      ${foto}
+      <div class="negocio-card-body">
+        <span class="negocio-badge">${n.categoria||''}</span>
+        <h3>${n.nome}</h3>
+        <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${n.bairro||''}</p>
+        ${n.distancia_km !== undefined ? `<p style="font-size:.78rem;color:var(--primary);margin-top:2px;font-weight:600">📍 ${n.distancia_km.toFixed(1)} km de você</p>` : ''}
+        <span class="btn-ver-negocio">Ver mais →</span>
+      </div>
+    </a>`;
   }
 
-  catBtns.forEach(btn => btn.addEventListener('click', () => {
-    catBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeCat = btn.dataset.cat;
-    renderCards();
-  }));
-  bairroBtns.forEach(btn => btn.addEventListener('click', () => {
-    bairroBtns.forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    activeBairro = btn.dataset.bairro;
-    renderCards();
-  }));
+  function buildFiltrosCat(lista) {
+    const cats = [];
+    lista.forEach(n => { if (n.categoria && !cats.includes(n.categoria)) cats.push(n.categoria); });
+    cats.sort();
+    filtrosCat.innerHTML = `<button class="chip-cat ${activeCat === '' ? 'active' : ''}" data-cat="">Todos</button>` +
+      cats.map(c => `<button class="chip-cat ${activeCat === c ? 'active' : ''}" data-cat="${c}">${c}</button>`).join('');
+    filtrosCat.querySelectorAll('.chip-cat').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeCat = btn.dataset.cat;
+        activeBairro = '';
+        buildFiltrosBairro(allNegocios);
+        renderCards();
+        filtrosCat.querySelectorAll('.chip-cat').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  }
 
+  function buildFiltrosBairro(lista) {
+    const filtered = activeCat ? lista.filter(n => n.categoria === activeCat) : lista;
+    const bairros = [];
+    filtered.forEach(n => { if (n.bairro && !bairros.includes(n.bairro)) bairros.push(n.bairro); });
+    bairros.sort();
+    if (!bairros.length) { filtrosBairro.style.display = 'none'; return; }
+    filtrosBairro.style.display = 'flex';
+    filtrosBairro.innerHTML = `<button class="chip-loc ${activeBairro === '' ? 'active' : ''}" data-bairro="">Todos os bairros</button>` +
+      bairros.map(b => `<button class="chip-loc ${activeBairro === b ? 'active' : ''}" data-bairro="${b}">${b}</button>`).join('');
+    filtrosBairro.querySelectorAll('.chip-loc').forEach(btn => {
+      btn.addEventListener('click', () => {
+        activeBairro = btn.dataset.bairro;
+        renderCards();
+        filtrosBairro.querySelectorAll('.chip-loc').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  }
+
+  function renderCards() {
+    let filtered = allNegocios;
+    if (activeCat) filtered = filtered.filter(n => n.categoria === activeCat);
+    if (activeBairro) filtered = filtered.filter(n => n.bairro === activeBairro);
+    if (!filtered.length) { track.innerHTML = '<p style="color:var(--muted);padding:32px;text-align:center">Nenhum negócio encontrado nessa categoria.</p>'; return; }
+    // Com foto em destaque primeiro
+    const comFoto = filtered.filter(n => n.foto);
+    const semFoto = filtered.filter(n => !n.foto);
+    track.innerHTML = [...comFoto, ...semFoto].map(renderCard).join('');
+    makeCarousel('hubTrack','hubPrev','hubNext','hubProgress');
+  }
+
+  // Localização
+  if (btnLoc) {
+    btnLoc.addEventListener('click', async () => {
+      if (!navigator.geolocation) { alert('Geolocalização não suportada neste navegador.'); return; }
+      btnLoc.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;animation:spin 1s linear infinite"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Localizando...';
+      btnLoc.disabled = true;
+      navigator.geolocation.getCurrentPosition(async pos => {
+        try {
+          const r = await fetch(`${API_BASE}/hub/negocios?lat=${pos.coords.latitude}&lng=${pos.coords.longitude}`);
+          const data = await r.json();
+          if (data && data.length) { allNegocios = data; buildFiltrosCat(allNegocios); buildFiltrosBairro(allNegocios); renderCards(); }
+        } catch(e) {}
+        btnLoc.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Localização obtida ✓';
+      }, () => {
+        btnLoc.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Usar minha localização';
+        btnLoc.disabled = false;
+        alert('Não foi possível obter sua localização. Verifique as permissões.');
+      });
+    });
+  }
+
+  const data = await apiGet('/hub/negocios');
+  if (!data || !Array.isArray(data) || data.length === 0) {
+    track.innerHTML = '<p style="color:var(--muted);padding:32px;text-align:center">Nenhum negócio cadastrado ainda.</p>';
+    return;
+  }
+  allNegocios = data;
+  buildFiltrosCat(allNegocios);
+  buildFiltrosBairro(allNegocios);
   renderCards();
 })();
 
@@ -1597,20 +1561,6 @@ function makeCarousel(trackId,prevId,nextId,progressId,visibleFn){
 makeCarousel('hubTrack','hubPrev','hubNext','hubProgress');
 makeCarousel('reviewsTrack','reviewsPrev','reviewsNext','reviewsProgress');
 makeCarousel('portfolioTrack','portfolioPrev','portfolioNext','portfolioProgress');
-
-// ── CHIPS FILTRO HUB ──
-document.querySelectorAll('#filtrosCat .chip-cat').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('#filtrosCat .chip-cat').forEach(b=>b.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
-document.querySelectorAll('#filtrosBairro .chip-loc').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    document.querySelectorAll('#filtrosBairro .chip-loc').forEach(b=>b.classList.remove('active'));
-    this.classList.add('active');
-  });
-});
 
 // ── FAQ ──
 document.querySelectorAll('.faq-question').forEach(btn=>{
