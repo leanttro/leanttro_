@@ -128,10 +128,10 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 }
 .hero-text{flex:1;min-width:0;max-width:580px}
 /* Hero image lado a lado */
-.hero-image{flex:0 0 420px;max-width:420px;display:flex;align-items:center}
+.hero-image{flex:0 0 460px;max-width:460px;display:flex;align-items:center;margin-left:auto}
 .hero-image img{width:100%;height:auto;border-radius:14px;box-shadow:0 16px 48px rgba(0,0,0,.28);display:block}
-@media(max-width:900px){.hero-image{flex:0 0 300px;max-width:300px}}
-@media(max-width:768px){.hero-image{display:none}}.hero-badge{
+@media(max-width:900px){.hero-image{flex:0 0 320px;max-width:320px}}
+.hero-badge{
   display:inline-flex;align-items:center;gap:6px;
   background:rgba(255,255,255,.15);color:#fff;
   padding:5px 14px;border-radius:20px;
@@ -139,10 +139,10 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
   margin-bottom:18px;border:1px solid rgba(255,255,255,.25);
 }
 .hero-text h1{
-  font-family:var(--display);font-size:2.8rem;font-weight:800;
+  font-family:var(--display);font-size:3.2rem;font-weight:800;
   color:#fff;line-height:1.15;margin-bottom:16px;letter-spacing:-.5px;
 }
-.hero-text p{font-size:1.1rem;color:rgba(255,255,255,.85);margin-bottom:28px;max-width:480px}
+.hero-text p{font-size:1.2rem;color:rgba(255,255,255,.85);margin-bottom:28px;max-width:480px}
 .hero-btns{display:flex;gap:12px;flex-wrap:wrap}
 
 /* Barra wave */
@@ -573,11 +573,12 @@ footer{
 @media(max-width:768px){
   nav.desktop-nav{display:none}
   .hamburger{display:block}
-  .hero-slide-inner{flex-direction:column;gap:28px;padding:20px 0 80px}
-  .hero-image{flex:none;max-width:100%;width:100%}
+  .hero-slide-inner{flex-direction:column;gap:24px;padding:14px 0 60px}
+  .hero-image{flex:none;max-width:100%;width:100%;margin-left:0;display:flex}
   .hero-text h1{font-size:2rem}
   .hero-text p{font-size:1rem}
   .hero-btns{flex-direction:column}
+  .hero-nav{bottom:8px}
   .btn-hero-primary,.btn-hero-secondary{justify-content:center;width:100%}
   .section-title{font-size:1.6rem}
   .reviews-header-row{flex-direction:column;align-items:flex-start}
