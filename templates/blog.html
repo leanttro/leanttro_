@@ -412,7 +412,7 @@ function renderPosts(){
 
 async function init(){
   try{
-    const r = await fetch(API_BASE + '/blog');
+    const r = await fetch(API_BASE + '/api/blog');
     const data = await r.json();
     allPosts = Array.isArray(data) ? data : [];
   } catch(e){
