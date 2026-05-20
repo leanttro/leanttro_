@@ -927,6 +927,43 @@ footer{
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:900px){.hero-h1-br{display:none}}
 
+
+/* ── FILTROS SLICER MOBILE ── */
+@media(max-width:768px){
+  .filtro-slicer-wrap{margin-bottom:10px}
+  .filtro-slicer-btn{
+    display:flex;align-items:center;justify-content:space-between;
+    width:100%;padding:11px 16px;
+    background:#fff;border:1.5px solid var(--border);
+    border-radius:50px;cursor:pointer;
+    font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--text);
+    transition:border-color .2s;
+  }
+  .filtro-slicer-btn.has-active{border-color:var(--primary);color:var(--primary)}
+  .filtro-slicer-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0;transition:transform .25s}
+  .filtro-slicer-btn.open svg{transform:rotate(180deg)}
+  .filtro-slicer-label{display:flex;align-items:center;gap:8px}
+  .filtro-slicer-label svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+  .filtro-slicer-selected{
+    font-size:.78rem;font-weight:700;
+    background:var(--primary);color:#fff;
+    padding:2px 9px;border-radius:50px;margin-left:6px;
+  }
+  .filtro-slicer-panel{
+    max-height:0;overflow:hidden;
+    transition:max-height .3s ease,padding .3s ease;
+    background:#fff;border:1.5px solid var(--border);
+    border-top:none;border-radius:0 0 16px 16px;
+    margin-top:-8px;padding:0 12px;
+  }
+  .filtro-slicer-panel.open{max-height:260px;padding:12px 12px 14px;overflow-y:auto}
+  .filtro-slicer-inner{display:flex;flex-wrap:wrap;gap:7px;padding-top:4px}
+  /* Esconde os filtros originais no mobile */
+  .filtros-categoria,.filtros-bairro{display:none!important}
+}
+@media(min-width:769px){
+  .filtro-slicer-wrap{display:none!important}
+}
 </style>
 </head>
 <body>
@@ -1937,6 +1974,106 @@ document.querySelectorAll('.faq-question').forEach(btn=>{
   window.addEventListener('resize',()=>go(idx));
   go(0);
 })();
+
+// ── FILTROS SLICER MOBILE ──
+(function(){
+  if(window.innerWidth > 768) return;
+
+  const catWrap  = document.getElementById('filtrosCat');
+  const bairWrap = document.getElementById('filtrosBairro');
+  if(!catWrap) return;
+
+  function makeSlicer(sourceEl, icon, labelText, slicerId){
+    const wrap = document.createElement('div');
+    wrap.className = 'filtro-slicer-wrap';
+    wrap.id = slicerId + 'Wrap';
+
+    const btn = document.createElement('button');
+    btn.className = 'filtro-slicer-btn';
+    btn.innerHTML = `<span class="filtro-slicer-label">${icon}${labelText}</span><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>`;
+
+    const panel = document.createElement('div');
+    panel.className = 'filtro-slicer-panel';
+    const inner = document.createElement('div');
+    inner.className = 'filtro-slicer-inner';
+    panel.appendChild(inner);
+
+    btn.addEventListener('click', function(){
+      const isOpen = panel.classList.contains('open');
+      panel.classList.toggle('open', !isOpen);
+      btn.classList.toggle('open', !isOpen);
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(panel);
+    sourceEl.parentNode.insertBefore(wrap, sourceEl);
+
+    // Mirror chips into slicer panel (observe mutations for dynamic chips)
+    function syncChips(){
+      inner.innerHTML = '';
+      Array.from(sourceEl.children).forEach(function(chip){
+        const clone = chip.cloneNode(true);
+        clone.addEventListener('click', function(){
+          // trigger click on original chip
+          chip.click();
+          // update active state on clones
+          inner.querySelectorAll('[data-cat],[data-bairro]').forEach(function(c){ c.classList.remove('active') });
+          clone.classList.add('active');
+          // update button label
+          updateLabel();
+          panel.classList.remove('open');
+          btn.classList.remove('open');
+        });
+        inner.appendChild(clone);
+      });
+      updateLabel();
+    }
+
+    function updateLabel(){
+      const activeChip = sourceEl.querySelector('.chip-cat.active,.chip-loc.active');
+      const existing = btn.querySelector('.filtro-slicer-selected');
+      if(existing) existing.remove();
+      if(activeChip){
+        const txt = activeChip.textContent.trim();
+        const isAll = txt === 'Todos' || txt === 'Todos os bairros';
+        btn.classList.toggle('has-active', !isAll);
+        if(!isAll){
+          const badge = document.createElement('span');
+          badge.className = 'filtro-slicer-selected';
+          badge.textContent = txt;
+          btn.querySelector('.filtro-slicer-label').appendChild(badge);
+        }
+      }
+    }
+
+    const obs = new MutationObserver(syncChips);
+    obs.observe(sourceEl, {childList:true, subtree:true, attributes:true, attributeFilter:['class']});
+    syncChips();
+  }
+
+  const iconCat  = '<svg viewBox="0 0 24 24" style="margin-right:4px"><path d="M4 6h16M4 12h16M4 18h7"/></svg>';
+  const iconBair = '<svg viewBox="0 0 24 24" style="margin-right:4px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+
+  makeSlicer(catWrap,  iconCat,  'Categoria',  'slicerCat');
+
+  // Bairro slicer: wait until visible (bairros são carregados dinamicamente)
+  function tryBairro(){
+    if(!bairWrap) return;
+    if(bairWrap.children.length > 0){
+      makeSlicer(bairWrap, iconBair, 'Bairro', 'slicerBairro');
+    } else {
+      const obs2 = new MutationObserver(function(_, o){
+        if(bairWrap.children.length > 0){
+          o.disconnect();
+          makeSlicer(bairWrap, iconBair, 'Bairro', 'slicerBairro');
+        }
+      });
+      obs2.observe(bairWrap, {childList:true});
+    }
+  }
+  tryBairro();
+})();
+
 </script>
 </body>
 </html>
