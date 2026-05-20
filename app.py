@@ -555,6 +555,11 @@ def registrar_disparo():
     conn.commit(); cur.close(); conn.close()
     return jsonify({"id": novo_id}), 201
 
+# ─── MÉTRICAS PÚBLICA (Leanttro) ──────────────────────────────────────────────
+@app.route("/metricas")
+def pagina_metricas():
+    return render_template("metricas.html")
+
 # ─── PAINEL ADMIN ─────────────────────────────────────────────────────────────
 @app.route("/admin")
 def painel():
