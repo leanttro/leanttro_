@@ -544,13 +544,22 @@ function liberarPainel(){
   if(!nome){document.getElementById('g-nome').focus();toast('Digite seu nome para continuar.');return;}
   if(!email||!email.includes('@')){document.getElementById('g-email').focus();toast('Digite um e-mail válido.');return;}
 
-  // Aqui você faz o POST pro seu backend com os dados do lead
-  // fetch('/api/leads', {method:'POST', headers:{'Content-Type':'application/json'},
-  //   body: JSON.stringify({nome, email, wpp: g-wpp.value, empresa: g-empresa.value, gaId, origem:'metricas'})});
-
   const empresa=document.getElementById('g-empresa').value.trim();
   const wpp=document.getElementById('g-wpp').value.trim();
-  console.log('LEAD:', {nome,email,empresa,wpp,gaId,periodo});
+
+  // Salva no banco via /leads (mesmo endpoint do site)
+  fetch('/leads', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({
+      nome:      nome,
+      email:     email,
+      telefone:  wpp,
+      empresa:   empresa,
+      origem:    'metricas',
+      interesse: 'GA4: ' + gaId
+    })
+  }).catch(function(e){ console.warn('Lead não salvo:', e); });
 
   // Esconde o gate, mostra sucesso brevemente, depois abre o painel
   document.getElementById('gate-card').style.display='none';
