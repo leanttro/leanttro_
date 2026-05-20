@@ -722,16 +722,6 @@ async function init(){
   // Status aberto/fechado (se tiver horarios no futuro)
   // Por ora não mostra badge
 
-  // BREADCRUMB
-  document.getElementById('breadBairro').textContent=nomeBairro;
-  document.getElementById('breadBairro').href=`/${slugBairro}`;
-  document.getElementById('breadNome').textContent=negocio.nome;
-  // Breadcrumb de categoria (novo)
-  if(catItem){
-    document.getElementById('breadCategoria').textContent=catItem;
-    document.getElementById('breadCategoria').href=`/categoria/${slugify(catItem)}`;
-  }
-
   // ── SEO DINÂMICO ──
   const nomeItem   = negocio.nome || '';
   const descItem   = negocio.descricao || negocio.resumo || '';
@@ -739,6 +729,16 @@ async function init(){
   const slugItem   = negocio.slug || '';
   const bairroItem = nomeBairro || negocio.cidade || 'São Paulo';
   const catItem    = negocio.categoria_nome || negocio.categoria || '';
+
+  // BREADCRUMB
+  document.getElementById('breadBairro').textContent=nomeBairro;
+  document.getElementById('breadBairro').href=`/${slugBairro}`;
+  document.getElementById('breadNome').textContent=negocio.nome;
+  // Breadcrumb de categoria
+  if(catItem){
+    document.getElementById('breadCategoria').textContent=catItem;
+    document.getElementById('breadCategoria').href=`/categoria/${slugify(catItem)}`;
+  }
   const canonicalUrl = `https://www.leanttro.com/negocio/${slugItem}`;
 
   // Título otimizado
