@@ -1616,16 +1616,30 @@ document.querySelectorAll('.faq-question').forEach(btn=>{
   const prev  = document.getElementById('servicosPrev');
   const next  = document.getElementById('servicosNext');
   const fill  = document.getElementById('servicosProgressFill');
-  if(!track) return;
+  if(!track||!outer) return;
+
+  // Mobile: scroll nativo
+  if(window.innerWidth <= 768){
+    function updateFill(){
+      const max = outer.scrollWidth - outer.clientWidth;
+      if(fill && max > 0) fill.style.width = (outer.scrollLeft / max * 100) + '%';
+    }
+    outer.addEventListener('scroll', updateFill, {passive:true});
+    if(prev) prev.addEventListener('click',()=>outer.scrollBy({left:-outer.clientWidth*.85,behavior:'smooth'}));
+    if(next) next.addEventListener('click',()=>outer.scrollBy({left:outer.clientWidth*.85,behavior:'smooth'}));
+    return;
+  }
+
+  // Desktop: transform
   let idx = 0;
   const cards = track.querySelectorAll('.servico-card-v2');
-  const visible = () => window.innerWidth < 700 ? 1 : window.innerWidth < 1100 ? 2 : 3;
+  const visible = () => window.innerWidth < 1100 ? 2 : 3;
   const max = () => Math.max(0, cards.length - visible());
   function go(n){
     idx = Math.max(0, Math.min(n, max()));
     const w = cards[0].offsetWidth + parseInt(getComputedStyle(track).gap||'0');
     track.style.transform = `translateX(-${idx * w}px)`;
-    if(fill) fill.style.width = max()===0 ? '100%' : `${((idx/max())*100)}%`;
+    if(fill) fill.style.width = max()===0 ? '100%' : `${(idx/max()*100)}%`;
     if(prev) prev.disabled = idx===0;
     if(next) next.disabled = idx>=max();
   }
