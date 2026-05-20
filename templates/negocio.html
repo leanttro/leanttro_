@@ -8,7 +8,14 @@
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#7943e2">
 <meta name="author" content="Leanttro Tecnologia">
-<link id="pageCanonical" rel="canonical" href="https://www.leanttro.com/">
+<link id="pageCanonical" rel="canonical" href="">
+<script>
+(function(){
+  var partes=location.pathname.replace(/^\/|\/$/g,'').split('/');
+  var slug=partes[partes.length-1];
+  if(slug)document.getElementById('pageCanonical').setAttribute('href','https://www.leanttro.com/negocio/'+slug);
+})();
+</script>
 <!-- Favicons -->
 <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
@@ -296,6 +303,8 @@ footer{background:var(--dark);color:#fff;padding:40px 20px 24px}
     <a href="/">Home</a>
     <span>›</span>
     <a href="/#hub">Hub</a>
+    <span>›</span>
+    <a id="breadCategoria" href="/#hub">Categoria</a>
     <span>›</span>
     <a id="breadBairro" href="#">Bairro</a>
     <span>›</span>
@@ -717,6 +726,11 @@ async function init(){
   document.getElementById('breadBairro').textContent=nomeBairro;
   document.getElementById('breadBairro').href=`/${slugBairro}`;
   document.getElementById('breadNome').textContent=negocio.nome;
+  // Breadcrumb de categoria (novo)
+  if(catItem){
+    document.getElementById('breadCategoria').textContent=catItem;
+    document.getElementById('breadCategoria').href=`/categoria/${slugify(catItem)}`;
+  }
 
   // ── SEO DINÂMICO ──
   const nomeItem   = negocio.nome || '';
@@ -847,7 +861,7 @@ async function init(){
         "@type": "BreadcrumbList",
         "itemListElement": [
           { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.leanttro.com/" },
-          { "@type": "ListItem", "position": 2, "name": catItem || "Hub", "item": `https://www.leanttro.com/` },
+          { "@type": "ListItem", "position": 2, "name": catItem || "Hub", "item": catItem ? `https://www.leanttro.com/categoria/${slugify(catItem)}` : `https://www.leanttro.com/#hub` },
           { "@type": "ListItem", "position": 3, "name": bairroItem, "item": `https://www.leanttro.com/${slugBairro}` },
           { "@type": "ListItem", "position": 4, "name": nomeItem, "item": canonicalUrl }
         ]
