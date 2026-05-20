@@ -615,7 +615,7 @@ def registrar_disparo():
 # ─── SITEMAP ──────────────────────────────────────────────────────────────────
 @app.route("/sitemap.xml", methods=["GET"])
 def sitemap():
-    BASE_URL = os.environ.get("BASE_URL", "https://leanttro.com.br").rstrip("/")
+    BASE_URL = os.environ.get("BASE_URL", "https://www.leanttro.com.br").rstrip("/")
     now = datetime.utcnow().strftime("%Y-%m-%d")
 
     urls = []
