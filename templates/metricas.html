@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnóstico do seu site — Leanttro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#7943e2;--primary-d:#5c2ec4;--accent:#00e5a0;--accent-d:#00a872;
+  --dark:#0a0a0f;--text:#1a1a2e;--muted:#6b6b80;--border:#e4e4f0;
+  --bg:#ffffff;--bg2:#f8f8fc;--radius:12px;
+  --display:'Montserrat',sans-serif;--sans:'Inter',sans-serif;
+  --shadow:0 4px 24px rgba(108,99,255,.10);--shadow-md:0 8px 32px rgba(108,99,255,.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg2);color:var(--text);line-height:1.6;min-height:100vh}
+
+/* HEADER */
+header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100}
+.header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:62px;gap:20px}
+.logo-text{font-family:var(--display);font-size:1.2rem;font-weight:800;color:var(--primary);letter-spacing:-.3px}
+.logo-sub{font-size:.75rem;color:var(--muted);font-weight:400;margin-left:8px;letter-spacing:0}
+.btn-wpp{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:8px 16px;border-radius:8px;font-size:.825rem;font-weight:600;text-decoration:none;transition:background .2s}
+.btn-wpp:hover{background:#1da850}
+.btn-wpp svg{width:16px;height:16px;fill:currentColor}
+
+/* HERO TOPO */
+.page-hero{background:var(--primary);padding:40px 20px 32px;text-align:center}
+.page-hero h1{font-family:var(--display);font-size:2rem;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.3px}
+.page-hero p{color:rgba(255,255,255,.85);font-size:1rem;max-width:500px;margin:0 auto}
+.ga-id-pill{display:inline-block;margin-top:14px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-family:monospace;font-size:1rem;font-weight:700;padding:6px 18px;border-radius:99px;letter-spacing:1px}
+
+/* MAIN */
+.main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
+
+/* GATE — LEAD WALL */
+.gate-overlay{
+  position:relative;margin-bottom:28px;
+}
+.gate-blur{
+  filter:blur(7px);pointer-events:none;user-select:none;
+  opacity:.75;border-radius:var(--radius);overflow:hidden;
+}
+.gate-card{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:16px;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(2px);
+  border-radius:var(--radius);border:2px solid var(--primary);
+  padding:32px 24px;text-align:center;
+}
+.gate-icon{font-size:2.4rem;line-height:1}
+.gate-title{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--text)}
+.gate-sub{font-size:.9rem;color:var(--muted);max-width:380px}
+.gate-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:460px}
+.gate-fields input{
+  font-family:var(--sans);font-size:.9rem;padding:11px 14px;
+  border:1.5px solid var(--border);border-radius:8px;
+  background:#fff;color:var(--text);width:100%;
+  transition:border-color .2s;
+}
+.gate-fields input:focus{outline:none;border-color:var(--primary)}
+.btn-gate{
+  width:100%;max-width:460px;background:var(--primary);color:#fff;
+  border:none;border-radius:8px;padding:13px;font-size:.95rem;font-weight:700;
+  cursor:pointer;font-family:var(--sans);transition:background .2s;
+}
+.btn-gate:hover{background:var(--primary-d)}
+.gate-note{font-size:.75rem;color:var(--muted)}
+
+/* PAINEL PRINCIPAL — escondido até lead */
+.painel{display:none}
+.painel.liberado{display:block}
+
+/* PERÍODO */
+.period-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.period-btn{
+  padding:6px 16px;border-radius:99px;font-size:.8rem;font-weight:600;
+  cursor:pointer;border:1.5px solid var(--border);background:transparent;
+  color:var(--muted);font-family:var(--sans);transition:all .15s;
+}
+.period-btn:hover{color:var(--text);border-color:var(--primary)}
+.period-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
+
+/* STATS GRID */
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+@media(max-width:700px){.stats-grid{grid-template-columns:repeat(2,1fr)}}
+.stat-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:18px 20px;transition:border-color .2s}
+.stat-card:hover{border-color:var(--primary)}
+.stat-label{font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:8px}
+.stat-value{font-size:1.7rem;font-weight:700;color:var(--text);line-height:1;margin-bottom:4px;font-family:var(--display)}
+.stat-trend{font-size:.75rem;font-weight:600}
+.trend-up{color:var(--accent-d)}
+.trend-down{color:#d85a30}
+.trend-flat{color:var(--muted)}
+
+/* CHARTS */
+.charts-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:700px){.charts-row{grid-template-columns:1fr}}
+.chart-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:20px}
+.chart-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:14px}
+
+.charts-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:700px){.charts-row2{grid-template-columns:1fr}}
+
+/* INSIGHT */
+.insight-card{
+  background:linear-gradient(135deg,rgba(121,67,226,.06) 0%,rgba(0,229,160,.05) 100%);
+  border:1.5px solid rgba(121,67,226,.22);border-radius:var(--radius);
+  padding:20px 24px;margin-bottom:16px;
+  display:flex;align-items:flex-start;gap:14px;
+}
+.insight-dot{width:10px;height:10px;border-radius:50%;background:var(--primary);flex-shrink:0;margin-top:5px}
+.insight-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--primary);margin-bottom:6px}
+.insight-text{font-size:.9rem;color:var(--text);line-height:1.65}
+
+/* TABELAS */
+.tables-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:700px){.tables-row{grid-template-columns:1fr}}
+.table-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;overflow:hidden}
+.table-card table{width:100%;font-size:.8rem;border-collapse:collapse}
+.table-card th{text-align:left;font-weight:700;color:var(--muted);padding:0 8px 10px 0;border-bottom:1px solid var(--border);font-size:.7rem;text-transform:uppercase;letter-spacing:.5px}
+.table-card td{padding:8px 8px 8px 0;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
+.table-card tr:last-child td{border-bottom:none}
+.td-url{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:.75rem}
+.td-num{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.td-bar{width:60px}
+.mini-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:3px}
+.mini-bar-fill{height:100%;background:var(--primary);border-radius:3px}
+
+/* CTA FINAL */
+.cta-upgrade{
+  background:var(--dark);border-radius:var(--radius);padding:36px 32px;
+  text-align:center;margin-top:8px;
+}
+.cta-upgrade h2{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:8px}
+.cta-upgrade p{color:rgba(255,255,255,.75);font-size:.9rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto}
+.cta-upgrade-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-upgrade{background:var(--primary);color:#fff;padding:12px 28px;border-radius:8px;font-size:.9rem;font-weight:700;text-decoration:none;transition:background .2s}
+.btn-upgrade:hover{background:var(--primary-d)}
+.btn-upgrade-wpp{background:var(--accent);color:var(--dark);padding:12px 28px;border-radius:8px;font-size:.9rem;font-weight:700;text-decoration:none;transition:background .2s}
+.btn-upgrade-wpp:hover{background:var(--accent-d);color:#fff}
+
+/* FAKE PANEL (embaçado) */
+.fake-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
+@media(max-width:700px){.fake-stats{grid-template-columns:repeat(2,1fr)}}
+.fake-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:18px 20px}
+.fake-label{height:10px;background:var(--border);border-radius:4px;width:60%;margin-bottom:12px}
+.fake-value{height:32px;background:#e0e0ec;border-radius:6px;width:80%;margin-bottom:8px}
+.fake-trend{height:8px;background:var(--border);border-radius:4px;width:50%}
+.fake-chart{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;height:200px;display:flex;flex-direction:column;justify-content:flex-end;gap:6px}
+.fake-bars{display:flex;align-items:flex-end;gap:5px;flex:1}
+.fake-bar{flex:1;background:linear-gradient(180deg,#c4b5f5,#e9e5ff);border-radius:3px 3px 0 0}
+.fake-row{display:grid;grid-template-columns:2fr 1fr;gap:14px;margin-bottom:14px}
+@media(max-width:700px){.fake-row{grid-template-columns:1fr}}
+.fake-donut{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:20px;display:flex;align-items:center;justify-content:center}
+.fake-circle{width:100px;height:100px;border-radius:50%;border:18px solid #c4b5f5;border-top-color:#e9e5ff;border-right-color:#a78bfa;opacity:.6}
+
+/* SUCCESS STATE */
+.success-msg{text-align:center;padding:20px 0;display:none}
+.success-msg.show{display:block}
+.success-icon{font-size:3rem;margin-bottom:8px}
+.success-title{font-family:var(--display);font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:4px}
+.success-sub{font-size:.875rem;color:var(--muted)}
+
+/* TOAST */
+.toast{position:fixed;bottom:24px;right:24px;background:var(--dark);color:#fff;padding:12px 20px;border-radius:10px;font-size:.875rem;font-weight:500;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div>
+      <a href="/" style="text-decoration:none">
+        <span class="logo-text">Leanttro</span>
+        <span class="logo-sub">Tecnologia</span>
+      </a>
+    </div>
+    <a href="https://wa.me/5511999999999" class="btn-wpp" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+      Falar no WhatsApp
+    </a>
+  </div>
+</header>
+
+<section class="page-hero">
+  <h1>Diagnóstico do seu site</h1>
+  <p>Veja como seu site está performando no Google — cliques, sessões, canais e muito mais.</p>
+  <div class="ga-id-pill" id="hero-ga-id">G-XXXXXXXXXX</div>
+</section>
+
+<div class="main">
+
+  <!-- GATE: aparece até lead ser preenchido -->
+  <div class="gate-overlay" id="gate-overlay">
+
+    <!-- PAINEL FALSO EMBAÇADO -->
+    <div class="gate-blur">
+      <div class="fake-stats">
+        <div class="fake-card"><div class="fake-label"></div><div class="fake-value"></div><div class="fake-trend"></div></div>
+        <div class="fake-card"><div class="fake-label"></div><div class="fake-value"></div><div class="fake-trend"></div></div>
+        <div class="fake-card"><div class="fake-label"></div><div class="fake-value"></div><div class="fake-trend"></div></div>
+        <div class="fake-card"><div class="fake-label"></div><div class="fake-value"></div><div class="fake-trend"></div></div>
+      </div>
+      <div class="fake-row">
+        <div class="fake-chart">
+          <div class="fake-bars" id="fake-bars"></div>
+        </div>
+        <div class="fake-donut"><div class="fake-circle"></div></div>
+      </div>
+      <div class="fake-stats" style="grid-template-columns:1fr 1fr">
+        <div class="fake-card" style="height:120px"></div>
+        <div class="fake-card" style="height:120px"></div>
+      </div>
+    </div>
+
+    <!-- FORMULÁRIO DE LEAD (por cima do blur) -->
+    <div class="gate-card" id="gate-card">
+      <div class="gate-icon">🔍</div>
+      <div class="gate-title">Seu diagnóstico está pronto</div>
+      <p class="gate-sub">Deixe seu contato para liberar o painel completo. É gratuito — a Leanttro vai analisar seus dados e pode entrar em contato com dicas personalizadas.</p>
+      <div class="gate-fields">
+        <input type="text" id="g-nome" placeholder="Seu nome" />
+        <input type="text" id="g-empresa" placeholder="Site ou empresa" />
+        <input type="email" id="g-email" placeholder="E-mail" />
+        <input type="tel" id="g-wpp" placeholder="WhatsApp" />
+      </div>
+      <button class="btn-gate" onclick="liberarPainel()">Ver meu diagnóstico grátis →</button>
+      <p class="gate-note">Sem spam. Seus dados são usados apenas para contato da Leanttro.</p>
+    </div>
+
+    <!-- SUCESSO (aparece depois do submit) -->
+    <div class="success-msg" id="gate-success">
+      <div class="success-icon">✅</div>
+      <div class="success-title" id="success-title">Liberando seu painel...</div>
+      <p class="success-sub">Carregando suas métricas</p>
+    </div>
+
+  </div><!-- /gate-overlay -->
+
+  <!-- PAINEL REAL — aparece depois do lead -->
+  <div class="painel" id="painel">
+
+    <div class="period-bar">
+      <button class="period-btn" onclick="setPeriodo(7,this)">7 dias</button>
+      <button class="period-btn active" onclick="setPeriodo(30,this)">30 dias</button>
+      <button class="period-btn" onclick="setPeriodo(90,this)">90 dias</button>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-label">Sessões</div>
+        <div class="stat-value" id="s-sessoes">—</div>
+        <div class="stat-trend" id="t-sessoes"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Usuários únicos</div>
+        <div class="stat-value" id="s-usuarios">—</div>
+        <div class="stat-trend" id="t-usuarios"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Pageviews</div>
+        <div class="stat-value" id="s-pageviews">—</div>
+        <div class="stat-trend" id="t-pageviews"></div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-label">Tempo médio</div>
+        <div class="stat-value" id="s-tempo">—</div>
+        <div class="stat-trend trend-flat">por sessão</div>
+      </div>
+    </div>
+
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-title">Sessões por dia</div>
+        <div style="position:relative;width:100%;height:200px">
+          <canvas id="chart-sessoes" role="img" aria-label="Sessões por dia"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Canais de tráfego</div>
+        <div style="position:relative;width:100%;height:200px">
+          <canvas id="chart-canais" role="img" aria-label="Canais de tráfego"></canvas>
+        </div>
+      </div>
+    </div>
+
+    <div class="insight-card">
+      <div class="insight-dot"></div>
+      <div>
+        <div class="insight-label">Diagnóstico Leanttro</div>
+        <div class="insight-text" id="insight-text">Analisando seus dados...</div>
+      </div>
+    </div>
+
+    <div class="charts-row2">
+      <div class="chart-card">
+        <div class="chart-title">Dispositivos</div>
+        <div style="position:relative;width:100%;height:170px">
+          <canvas id="chart-devices" role="img" aria-label="Dispositivos"></canvas>
+        </div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-title">Distribuição por canal</div>
+        <div id="canal-bars" style="display:flex;flex-direction:column;gap:10px;margin-top:4px"></div>
+      </div>
+    </div>
+
+    <div class="tables-row">
+      <div class="table-card">
+        <div class="chart-title">Páginas mais acessadas</div>
+        <table>
+          <thead><tr><th>Página</th><th class="td-num">Views</th><th class="td-num">Usuários</th></tr></thead>
+          <tbody id="tbl-pages"></tbody>
+        </table>
+      </div>
+      <div class="table-card">
+        <div class="chart-title">Palavras-chave orgânicas</div>
+        <table>
+          <thead><tr><th>Keyword</th><th class="td-num">Cliques</th><th class="td-num">Pos.</th></tr></thead>
+          <tbody id="tbl-keywords"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="cta-upgrade">
+      <h2>Quer os dados reais do seu GA4?</h2>
+      <p>Conecte sua conta Google e veja métricas ao vivo — ou fale com a Leanttro para um diagnóstico completo com estratégia de crescimento incluída.</p>
+      <div class="cta-upgrade-btns">
+        <a href="/metricas/conectar" class="btn-upgrade">Conectar Google Analytics →</a>
+        <a href="https://wa.me/5511999999999" class="btn-upgrade-wpp" target="_blank" rel="noopener">Falar com a Leanttro</a>
+      </div>
+    </div>
+
+  </div><!-- /painel -->
+
+</div><!-- /main -->
+
+<div class="toast" id="toast"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+// ─── PEGAR G-ID DA URL ───────────────────────────────────────────────
+const params = new URLSearchParams(window.location.search);
+let gaId = (params.get('id') || params.get('g') || 'G-DEMO123').toUpperCase();
+if(!gaId.startsWith('G-')) gaId = 'G-' + gaId;
+document.getElementById('hero-ga-id').textContent = gaId;
+
+// ─── FAKE BARS (blur) ─────────────────────────────────────────────────
+const fbEl = document.getElementById('fake-bars');
+const fakeH = [40,65,35,80,55,90,45,70,60,85,50,75,40,95,55,65,30,80,70,60,85,45,75,55,90,40,65,80,50,70];
+fakeH.forEach(h=>{
+  const b=document.createElement('div');
+  b.className='fake-bar';b.style.height=h+'%';
+  fbEl.appendChild(b);
+});
+
+// ─── SEED / RNG ───────────────────────────────────────────────────────
+function seed(str){let h=0;for(let c of str)h=(Math.imul(31,h)+c.charCodeAt(0))|0;return Math.abs(h);}
+function rng(s,min,max){const x=Math.sin(s)*10000;return Math.round(min+(x-Math.floor(x))*(max-min));}
+function fmt(n){return Number(n).toLocaleString('pt-BR');}
+
+// ─── GERAR DADOS ──────────────────────────────────────────────────────
+let periodo=30;
+let cSessoes=null,cCanais=null,cDevices=null;
+
+function gerarDados(id,dias){
+  const s=seed(id+dias);
+  const base=rng(s,900,4800);
+  const mult=dias===7?.25:dias===90?3.1:1;
+  const sessoes=Math.round(base*mult);
+  const usuarios=Math.round(sessoes*rng(s+1,70,90)/100);
+  const pageviews=Math.round(sessoes*rng(s+2,18,35)/10);
+  const tempo=rng(s+3,70,240);
+  const trendS=rng(s+4,-18,38);
+  const trendU=rng(s+5,-12,42);
+  const trendP=rng(s+6,-22,28);
+
+  const labels=[];const dataSessoes=[];
+  const now=new Date();
+  for(let i=dias-1;i>=0;i--){
+    const d=new Date(now);d.setDate(d.getDate()-i);
+    labels.push(d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}));
+    const v=Math.round((sessoes/dias)*(0.45+rng(s+i*7,0,110)/100));
+    dataSessoes.push(v);
+  }
+
+  const canais=[
+    {label:'Orgânico',pct:rng(s+10,32,58),cor:'#7943e2'},
+    {label:'Direto',pct:rng(s+11,14,24),cor:'#00e5a0'},
+    {label:'Social',pct:rng(s+12,8,20),cor:'#3b82f6'},
+    {label:'Referência',pct:rng(s+13,4,14),cor:'#f59e0b'},
+  ];
+  const totC=canais.reduce((a,c)=>a+c.pct,0);
+  canais.forEach(c=>c.pct=Math.round(c.pct/totC*100));
+
+  const devices=[
+    {label:'Mobile',pct:rng(s+20,52,72)},
+    {label:'Desktop',pct:rng(s+21,24,44)},
+    {label:'Tablet',pct:rng(s+22,2,8)},
+  ];
+  const totD=devices.reduce((a,d)=>a+d.pct,0);
+  devices.forEach(d=>d.pct=Math.round(d.pct/totD*100));
+
+  const minutos=Math.floor(tempo/60),segs=String(tempo%60).padStart(2,'0');
+  const tempoFmt=`${minutos}m${segs}s`;
+
+  // insight
+  const org=canais[0].pct;
+  let insight='';
+  if(org>=45)insight=`Excelente: ${org}% do seu tráfego vem de busca orgânica — isso significa que seu site já tem presença sólida no Google. Com ${fmt(sessoes)} sessões nos últimos ${dias} dias e tempo médio de ${tempoFmt}, o próximo passo é converter mais visitantes com CTAs estratégicos e páginas otimizadas.`;
+  else if(org>=28)insight=`Seu tráfego orgânico representa ${org}% do total (${fmt(sessoes)} sessões em ${dias} dias). É uma base promissora, mas há espaço grande para crescer. Uma estratégia de SEO local + conteúdo direcionado pode dobrar esse número em 3 a 6 meses sem gastar com anúncios.`;
+  else insight=`Atenção: com ${org}% de tráfego orgânico, seu site está dependendo demais de tráfego direto ou pago. Em ${dias} dias você teve ${fmt(sessoes)} sessões — com SEO bem feito, esse número poderia ser 2x ou 3x maior. Isso significa mais clientes sem pagar por clique.`;
+
+  // páginas simuladas
+  const slugs=['/','/servicos','/contato','/sobre','/blog/seo-local-sp','/portfolio','/blog/site-barato','/loja'];
+  const pages=slugs.slice(0,6).map((p,i)=>({
+    pagina:p,
+    pageviews:Math.round(pageviews*(rng(s+30+i,8,30)/100)),
+    usuarios:Math.round(usuarios*(rng(s+40+i,6,22)/100)),
+  })).sort((a,b)=>b.pageviews-a.pageviews);
+
+  const kws=[
+    'criação de sites jabaquara','agência digital são paulo','site profissional barato',
+    'automações whatsapp business','hub de tráfego orgânico','site para pequenas empresas sp',
+  ];
+  const keywords=kws.map((k,i)=>({
+    query:k,
+    cliques:rng(s+50+i,12,280),
+    posicao:(rng(s+60+i,10,80)/10).toFixed(1),
+  })).sort((a,b)=>b.cliques-a.cliques);
+
+  return{sessoes,usuarios,pageviews,tempoFmt,trendS,trendU,trendP,labels,dataSessoes,canais,devices,insight,pages,keywords};
+}
+
+// ─── RENDER ───────────────────────────────────────────────────────────
+function renderDados(){
+  const d=gerarDados(gaId,periodo);
+
+  // stats
+  document.getElementById('s-sessoes').textContent=fmt(d.sessoes);
+  document.getElementById('s-usuarios').textContent=fmt(d.usuarios);
+  document.getElementById('s-pageviews').textContent=fmt(d.pageviews);
+  document.getElementById('s-tempo').textContent=d.tempoFmt;
+
+  const tEl=(id,v)=>{
+    const el=document.getElementById(id);
+    el.textContent=v>0?`↑ ${v}% vs período anterior`:v<0?`↓ ${Math.abs(v)}% vs período anterior`:'Estável';
+    el.className='stat-trend '+(v>0?'trend-up':v<0?'trend-down':'trend-flat');
+  };
+  tEl('t-sessoes',d.trendS);tEl('t-usuarios',d.trendU);tEl('t-pageviews',d.trendP);
+
+  // insight
+  document.getElementById('insight-text').textContent=d.insight;
+
+  const textColor=getComputedStyle(document.body).getPropertyValue('color').trim()||'#6b6b80';
+  const gridColor='rgba(0,0,0,0.05)';
+
+  // chart sessoes
+  if(cSessoes)cSessoes.destroy();
+  cSessoes=new Chart(document.getElementById('chart-sessoes'),{
+    type:'bar',
+    data:{labels:d.labels,datasets:[{label:'Sessões',data:d.dataSessoes,backgroundColor:'rgba(121,67,226,0.7)',borderRadius:3,borderSkipped:false}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
+      scales:{x:{grid:{color:gridColor},ticks:{color:'#6b6b80',font:{size:10},maxTicksLimit:10}},
+              y:{grid:{color:gridColor},ticks:{color:'#6b6b80',font:{size:10}}}}}
+  });
+
+  // chart canais (donut)
+  if(cCanais)cCanais.destroy();
+  cCanais=new Chart(document.getElementById('chart-canais'),{
+    type:'doughnut',
+    data:{labels:d.canais.map(c=>c.label),datasets:[{data:d.canais.map(c=>c.pct),backgroundColor:d.canais.map(c=>c.cor),borderWidth:0}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',
+      plugins:{legend:{position:'bottom',labels:{color:'#6b6b80',font:{size:11},padding:8,usePointStyle:true,pointStyleWidth:8}}}}
+  });
+
+  // chart devices (donut)
+  if(cDevices)cDevices.destroy();
+  cDevices=new Chart(document.getElementById('chart-devices'),{
+    type:'doughnut',
+    data:{labels:d.devices.map(dv=>dv.label),datasets:[{data:d.devices.map(dv=>dv.pct),backgroundColor:['#7943e2','#00e5a0','#3b82f6'],borderWidth:0}]},
+    options:{responsive:true,maintainAspectRatio:false,cutout:'68%',
+      plugins:{legend:{position:'bottom',labels:{color:'#6b6b80',font:{size:11},padding:8,usePointStyle:true,pointStyleWidth:8}}}}
+  });
+
+  // canal bars
+  const cbEl=document.getElementById('canal-bars');
+  cbEl.innerHTML='';
+  const maxP=Math.max(...d.canais.map(c=>c.pct));
+  d.canais.forEach(c=>{
+    cbEl.innerHTML+=`<div>
+      <div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px">
+        <span style="font-weight:600;color:#1a1a2e">${c.label}</span>
+        <span style="color:#6b6b80">${c.pct}%</span>
+      </div>
+      <div style="height:6px;background:#e4e4f0;border-radius:3px;overflow:hidden">
+        <div style="height:100%;width:${Math.round(c.pct/maxP*100)}%;background:${c.cor};border-radius:3px;transition:width .6s"></div>
+      </div>
+    </div>`;
+  });
+
+  // tabela páginas
+  const tblP=document.getElementById('tbl-pages');
+  tblP.innerHTML=d.pages.map(p=>`<tr>
+    <td class="td-url" title="${p.pagina}">${p.pagina}</td>
+    <td class="td-num">${fmt(p.pageviews)}</td>
+    <td class="td-num">${fmt(p.usuarios)}</td>
+  </tr>`).join('');
+
+  // tabela keywords
+  const tblK=document.getElementById('tbl-keywords');
+  tblK.innerHTML=d.keywords.map(k=>`<tr>
+    <td style="font-size:.78rem;color:#1a1a2e">${k.query}</td>
+    <td class="td-num">${fmt(k.cliques)}</td>
+    <td class="td-num" style="color:#7943e2">#${k.posicao}</td>
+  </tr>`).join('');
+}
+
+// ─── PERÍODO ──────────────────────────────────────────────────────────
+function setPeriodo(dias,btn){
+  periodo=dias;
+  document.querySelectorAll('.period-btn').forEach(b=>b.classList.remove('active'));
+  btn.classList.add('active');
+  renderDados();
+}
+
+// ─── TOAST ────────────────────────────────────────────────────────────
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg;t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),3000);
+}
+
+// ─── LIBERAR PAINEL ───────────────────────────────────────────────────
+function liberarPainel(){
+  const nome=document.getElementById('g-nome').value.trim();
+  const email=document.getElementById('g-email').value.trim();
+
+  if(!nome){document.getElementById('g-nome').focus();toast('Digite seu nome para continuar.');return;}
+  if(!email||!email.includes('@')){document.getElementById('g-email').focus();toast('Digite um e-mail válido.');return;}
+
+  // Aqui você faz o POST pro seu backend com os dados do lead
+  // fetch('/api/leads', {method:'POST', headers:{'Content-Type':'application/json'},
+  //   body: JSON.stringify({nome, email, wpp: g-wpp.value, empresa: g-empresa.value, gaId, origem:'metricas'})});
+
+  const empresa=document.getElementById('g-empresa').value.trim();
+  const wpp=document.getElementById('g-wpp').value.trim();
+  console.log('LEAD:', {nome,email,empresa,wpp,gaId,periodo});
+
+  // Esconde o gate, mostra sucesso brevemente, depois abre o painel
+  document.getElementById('gate-card').style.display='none';
+  const suc=document.getElementById('gate-success');
+  document.getElementById('success-title').textContent=`Liberando painel para ${nome.split(' ')[0]}...`;
+  suc.classList.add('show');
+
+  setTimeout(()=>{
+    document.getElementById('gate-overlay').style.display='none';
+    const painel=document.getElementById('painel');
+    painel.classList.add('liberado');
+    renderDados();
+    painel.scrollIntoView({behavior:'smooth',block:'start'});
+    toast('✅ Diagnóstico liberado!');
+  },1400);
+}
+
+// Enter no último campo dispara o submit
+document.getElementById('g-wpp').addEventListener('keydown',e=>{if(e.key==='Enter')liberarPainel();});
+document.getElementById('g-email').addEventListener('keydown',e=>{if(e.key==='Enter')liberarPainel();});
+</script>
+</body>
+</html>
