@@ -456,16 +456,14 @@ async function init(){
   const canonicalUrl = `https://www.leanttro.com/categoria/${slugCategoria}`;
   document.getElementById('pageCanonical').setAttribute('href', canonicalUrl);
 
-  // Busca tudo (a API não tem filtro por categoria, filtramos no cliente)
-  const [todosNegocios, todasCategorias] = await Promise.all([
-    apiGet('/hub/negocios'),
+  // Busca filtrado no servidor por slug de categoria + todas categorias para o menu "explorar"
+  const [negocios, todasCategorias] = await Promise.all([
+    apiGet(`/hub/negocios?categoria=${encodeURIComponent(slugCategoria)}`),
     apiGet('/hub/categorias')
   ]);
 
-  const todos = todosNegocios || [];
-
-  // Filtra negocios da categoria atual pelo slug do nome
-  allNegocios = todos.filter(n => slugify(n.categoria_nome || '') === slugCategoria);
+  const todos = negocios || [];
+  allNegocios = todos;
 
   // Stats
   const bairros = [...new Set(allNegocios.map(n=>n.bairro).filter(Boolean))];
@@ -485,7 +483,7 @@ async function init(){
   // Outras categorias — usa /hub/categorias se disponível, senão extrai dos negócios
   const catList = (todasCategorias && todasCategorias.length)
     ? todasCategorias.map(c=>c.nome).filter(c=>c && slugify(c)!==slugCategoria)
-    : [...new Set(todos.map(n=>n.categoria_nome).filter(c=>c && slugify(c)!==slugCategoria))];
+    : [];
 
   if(catList.length){
     document.getElementById('outrasCatsSection').style.display='';
