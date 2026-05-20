@@ -970,9 +970,6 @@ async function bootApp() {
 }
 
 // ── AUTH ──
-async function _doLoginOriginal() {
-  // substituída pela versão corrigida abaixo
-
 function doLogout() {
   TOKEN = ''; localStorage.removeItem('lt_token');
   location.reload();
