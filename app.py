@@ -4,6 +4,7 @@ import bcrypt
 import mercadopago
 import psycopg2
 import psycopg2.extras
+import requests as req_ext
 from datetime import datetime, timedelta
 from functools import wraps
 from flask import Flask, request, jsonify, render_template
@@ -16,6 +17,7 @@ CORS(app)
 DB_URL       = os.environ["DATABASE_URL"]        # postgresql://user:pass@host:port/db
 JWT_SECRET   = os.environ["JWT_SECRET"]          # string aleatória segura
 MP_TOKEN     = os.environ["MP_ACCESS_TOKEN"]     # Access Token do Mercado Pago
+GROQ_KEY     = os.environ["GROQ_API_KEY"]        # Chave da Groq
 
 # ─── HELPERS ──────────────────────────────────────────────────────────────────
 def get_db():
@@ -210,159 +212,88 @@ def pagina_loja():
 def pagina_produto(slug):
     return render_template("produto.html")
 
-@app.route("/<bairro_slug>")
-def pagina_bairro(bairro_slug):
-    # Rotas reservadas que não são bairros
-    ROTAS_RESERVADAS = {
-        'admin', 'blog', 'loja', 'leads', 'produtos', 'pedidos',
-        'hub', 'webhook', 'obrigado', 'erro', 'politica-de-privacidade',
-        'termos', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico',
-        'portfolio', 'metricas', 'negocio', 'categoria', 'api',
-        'seu-hub', 'seuhub'
-    }
-    if bairro_slug in ROTAS_RESERVADAS:
-        return "Not Found", 404
-    return render_template("bairro.html")
+# ─── GERAR HUB COM GROQ (proxy seguro — chave fica no servidor) ───────────────
+@app.route("/api/gerar-hub", methods=["POST"])
+def gerar_hub():
+    d = request.json or {}
+    site = d.get("site", "").strip()
+    desc = d.get("descricao", "").strip()
 
-# ─── PEDIDOS + MERCADO PAGO ───────────────────────────────────────────────────
-@app.route("/pedidos", methods=["POST"])
-def criar_pedido():
-    d = request.json
-    conn = get_db(); cur = conn.cursor()
+    if not site and not desc:
+        return jsonify({"erro": "Informe ao menos o site ou a descrição do negócio."}), 400
 
-    # Busca produto
-    cur.execute("SELECT * FROM produtos WHERE id = %s AND ativo = true", (d["produto_id"],))
-    produto = cur.fetchone()
-    if not produto:
-        cur.close(); conn.close()
-        return jsonify({"erro": "Produto não encontrado"}), 404
+    prompt = f"""Você é um consultor sênior de SEO e marketing digital da Leanttro Tecnologia. \
+O serviço "Seu Hub" instala um hub de negócios locais dentro do domínio do cliente, \
+gerando tráfego orgânico no Google sem pagar por anúncios.
 
-    # Cria pedido
-    cur.execute("""
-        INSERT INTO pedidos (produto_id, lead_id, valor, status)
-        VALUES (%s,%s,%s,'pendente') RETURNING id
-    """, (produto["id"], d["lead_id"], produto["preco"]))
-    pedido_id = cur.fetchone()["id"]
-    conn.commit()
+Dados do cliente:
+- Site: {site or "não informado"}
+- Descrição do negócio: {desc or "não informada"}
 
-    # Gera link Mercado Pago
-    sdk = mercadopago.SDK(MP_TOKEN)
-    preference = sdk.preference().create({
-        "items": [{
-            "title": produto["nome"],
-            "quantity": 1,
-            "unit_price": float(produto["preco"])
-        }],
-        "external_reference": str(pedido_id),
-        "notification_url": os.environ.get("MP_WEBHOOK_URL", ""),
-        "back_urls": {
-            "success": os.environ.get("MP_SUCCESS_URL", ""),
-            "failure": os.environ.get("MP_FAILURE_URL", ""),
-        },
-        "auto_return": "approved"
-    })
+Com base nesses dados, gere EXATAMENTE 3 ideias de hub personalizadas para este cliente. \
+Responda APENAS com JSON válido, sem texto antes ou depois, sem markdown, sem ```json. \
+Use este formato exato:
+{{"hubs":[{{"titulo":"...","nicho":"...","keyword_exemplo":"...","potencial":"...","por_que":"..."}},{{"titulo":"...","nicho":"...","keyword_exemplo":"...","potencial":"...","por_que":"..."}},{{"titulo":"...","nicho":"...","keyword_exemplo":"...","potencial":"...","por_que":"..."}}]}}
 
-    link = preference["response"]["init_point"]
-    cur.close(); conn.close()
-    return jsonify({"pedido_id": pedido_id, "link_pagamento": link}), 201
+Regras:
+- titulo: nome criativo e direto do hub (ex: "Hub de Academias do Jabaquara")
+- nicho: segmento/público que seria listado (ex: "academias, crossfit e pilates do bairro")
+- keyword_exemplo: uma keyword real que esse hub rankearia (ex: "academia perto do Jabaquara")
+- potencial: estimativa realista de resultado em 3-6 meses baseada nos cases: \
+feirasderua.com.br com 328 mil impressões em 3 meses, guiadorodizio.com.br rankeando em 4 dias
+- por_que: 1 frase explicando por que faz sentido para o negócio deste cliente especificamente"""
 
-@app.route("/webhook/mp", methods=["POST"])
-def webhook_mp():
-    data = request.json or {}
-    if data.get("type") != "payment":
-        return jsonify({"ok": True})
+    try:
+        r = req_ext.post(
+            "https://api.groq.com/openai/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {GROQ_KEY}",
+                "Content-Type": "application/json"
+            },
+            json={
+                "model": "llama-3.3-70b-versatile",
+                "messages": [{"role": "user", "content": prompt}],
+                "max_tokens": 800,
+                "temperature": 0.7
+            },
+            timeout=30
+        )
+        data = r.json()
+        texto = data["choices"][0]["message"]["content"]
+        return jsonify({"resultado": texto})
+    except Exception as e:
+        return jsonify({"erro": "Falha ao conectar com a IA. Tente novamente."}), 500
 
-    sdk = mercadopago.SDK(MP_TOKEN)
-    payment_id = data.get("data", {}).get("id")
-    pagamento = sdk.payment().get(payment_id)
-    info = pagamento["response"]
-
-    if info.get("status") == "approved":
-        pedido_id = int(info.get("external_reference", 0))
-        conn = get_db(); cur = conn.cursor()
-        cur.execute("""
-            UPDATE pedidos SET status='pago', mp_payment_id=%s WHERE id=%s
-        """, (str(payment_id), pedido_id))
-        conn.commit(); cur.close(); conn.close()
-
-    return jsonify({"ok": True})
-
-@app.route("/admin/pedidos", methods=["GET"])
-@token_required
-def listar_pedidos():
-    conn = get_db(); cur = conn.cursor()
-    cur.execute("""
-        SELECT p.*, pr.nome as produto_nome, l.nome as lead_nome, l.email as lead_email
-        FROM pedidos p
-        JOIN produtos pr ON pr.id = p.produto_id
-        JOIN leads l ON l.id = p.lead_id
-        ORDER BY p.criado_em DESC
-    """)
-    pedidos = cur.fetchall()
-    cur.close(); conn.close()
-    return jsonify(list(pedidos))
-
-# ─── HUB DO JABAQUARA ─────────────────────────────────────────────────────────
+# ─── HUB DE NEGÓCIOS ──────────────────────────────────────────────────────────
 @app.route("/hub/categorias", methods=["GET"])
-def listar_hub_categorias():
+def listar_categorias():
     conn = get_db(); cur = conn.cursor()
-    cur.execute("SELECT * FROM hub_categorias ORDER BY nome")
+    cur.execute("SELECT * FROM hub_categorias WHERE ativo = true ORDER BY nome")
     cats = cur.fetchall()
     cur.close(); conn.close()
     return jsonify(list(cats))
 
-@app.route("/admin/hub/categorias", methods=["POST"])
-@token_required
-def criar_categoria():
-    d = request.json
-    conn = get_db(); cur = conn.cursor()
-    cur.execute("""
-        INSERT INTO hub_categorias (nome, slug, icone_url, ativo)
-        VALUES (%s,%s,%s,%s) RETURNING id
-    """, (d["nome"], d["slug"], d.get("icone_url"), d.get("ativo", True)))
-    novo_id = cur.fetchone()["id"]
-    conn.commit(); cur.close(); conn.close()
-    return jsonify({"id": novo_id}), 201
-
-@app.route("/admin/hub/categorias/<int:id>", methods=["PUT"])
-@token_required
-def editar_categoria(id):
-    d = request.json
-    conn = get_db(); cur = conn.cursor()
-    cur.execute("""
-        UPDATE hub_categorias SET nome=%s, slug=%s, icone_url=%s, ativo=%s
-        WHERE id=%s
-    """, (d["nome"], d["slug"], d.get("icone_url"), d.get("ativo", True), id))
-    conn.commit(); cur.close(); conn.close()
-    return jsonify({"ok": True})
-
-@app.route("/admin/hub/categorias/<int:id>", methods=["DELETE"])
-@token_required
-def deletar_categoria(id):
-    conn = get_db(); cur = conn.cursor()
-    cur.execute("UPDATE hub_categorias SET ativo = false WHERE id = %s", (id,))
-    conn.commit(); cur.close(); conn.close()
-    return jsonify({"ok": True})
-
 @app.route("/hub/negocios", methods=["GET"])
-def listar_hub_negocios():
+def listar_negocios():
     categoria = request.args.get("categoria")
-    bairro = request.args.get("bairro")
+    bairro    = request.args.get("bairro")
     conn = get_db(); cur = conn.cursor()
-    query = """
-        SELECT n.*, c.nome as categoria_nome FROM hub_negocios n
-        JOIN hub_categorias c ON c.id = n.categoria_id
-        WHERE n.ativo = true
-    """
-    params = []
+    filters = ["n.ativo = true"]
+    params  = []
     if categoria:
-        query += " AND c.slug = %s"
+        filters.append("c.slug = %s")
         params.append(categoria)
     if bairro:
-        query += " AND n.bairro ILIKE %s"
-        params.append(f"%{bairro}%")
-    query += " ORDER BY n.destaque DESC, n.visualizacoes DESC"
-    cur.execute(query, params)
+        filters.append("LOWER(n.bairro) LIKE %s")
+        params.append(f"%{bairro.lower()}%")
+    where = " AND ".join(filters)
+    cur.execute(f"""
+        SELECT n.*, c.nome as categoria_nome, c.slug as categoria_slug
+        FROM hub_negocios n
+        JOIN hub_categorias c ON c.id = n.categoria_id
+        WHERE {where}
+        ORDER BY n.destaque DESC, n.id DESC
+    """, params)
     negocios = cur.fetchall()
     cur.close(); conn.close()
     return jsonify(list(negocios))
@@ -568,7 +499,7 @@ def painel():
 @app.route("/")
 def index():
     return render_template("index.html")
-    
+
 # ─── RUN ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     app.run(debug=os.environ.get("FLASK_DEBUG", "false").lower() == "true")
