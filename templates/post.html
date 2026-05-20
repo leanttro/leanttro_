@@ -6,8 +6,16 @@
 <!-- SEO dinâmico — preenchido via JS -->
 <title id="page-title">Carregando… | Blog Leanttro</title>
 <meta name="description" id="meta-desc" content="">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#7943e2">
+<meta name="author" content="Leanttro Tecnologia">
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="shortcut icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<meta name="msapplication-TileImage" content="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<meta name="msapplication-TileColor" content="#7943e2">
 <link rel="canonical" id="canonical" href="https://www.leanttro.com/blog">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Leanttro Tecnologia">
@@ -248,7 +256,7 @@ footer{background:var(--dark);padding:40px 20px 0}
 .loading-hero{padding:120px 20px;text-align:center;background:var(--primary)}
 .loading-hero svg{width:40px;height:40px;stroke:rgba(255,255,255,.4);fill:none;stroke-width:1.5;margin:0 auto;display:block;animation:spin .9s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
-.error-state{padding:100px 20px;text-align:center}
+.error-state{padding:100px 20px;text-align:center;min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
 .error-state h1{font-family:var(--display);font-size:2rem;font-weight:800;margin-bottom:12px}
 .error-state p{color:var(--muted);margin-bottom:24px}
 .error-state a{color:var(--primary);font-weight:600;text-decoration:underline}
