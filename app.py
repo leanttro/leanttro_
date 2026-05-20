@@ -505,6 +505,25 @@ def editar_negocio(id):
     conn.commit(); cur.close(); conn.close()
     return jsonify({"ok": True})
 
+@app.route("/admin/hub/negocios/<int:id>", methods=["DELETE"])
+@token_required
+def deletar_negocio(id):
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("UPDATE hub_negocios SET ativo = false WHERE id = %s", (id,))
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True})
+
+@app.route("/admin/hub/negocios/bulk", methods=["DELETE"])
+@token_required
+def bulk_deletar_negocios():
+    ids = request.json.get("ids", [])
+    if not ids:
+        return jsonify({"erro": "Nenhum ID informado"}), 400
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("UPDATE hub_negocios SET ativo = false WHERE id = ANY(%s)", (ids,))
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True})
+
 # ─── BLOG ─────────────────────────────────────────────────────────────────────
 @app.route("/admin/blog", methods=["GET"])
 @token_required
@@ -582,6 +601,44 @@ def editar_post(id):
     cur.execute("DELETE FROM blog_tags WHERE post_id = %s", (id,))
     for tag in d.get("tags", []):
         cur.execute("INSERT INTO blog_tags (post_id, tag) VALUES (%s,%s)", (id, tag))
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True})
+
+@app.route("/admin/blog/<int:id>", methods=["DELETE"])
+@token_required
+def deletar_post(id):
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("UPDATE blog_posts SET publicado = false WHERE id = %s", (id,))
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True})
+
+@app.route("/admin/hub/avaliacoes/<int:id>", methods=["DELETE"])
+@token_required
+def deletar_avaliacao(id):
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("DELETE FROM hub_avaliacoes WHERE id = %s", (id,))
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True})
+
+@app.route("/admin/produtos/bulk", methods=["DELETE"])
+@token_required
+def bulk_deletar_produtos():
+    ids = request.json.get("ids", [])
+    if not ids:
+        return jsonify({"erro": "Nenhum ID informado"}), 400
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("UPDATE produtos SET ativo = false WHERE id = ANY(%s)", (ids,))
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True})
+
+@app.route("/admin/leads/bulk", methods=["DELETE"])
+@token_required
+def bulk_deletar_leads():
+    ids = request.json.get("ids", [])
+    if not ids:
+        return jsonify({"erro": "Nenhum ID informado"}), 400
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("DELETE FROM leads WHERE id = ANY(%s)", (ids,))
     conn.commit(); cur.close(); conn.close()
     return jsonify({"ok": True})
 
