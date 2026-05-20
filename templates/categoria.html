@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="pageTitle">Negócios por Categoria — São Paulo | Leanttro Hub</title>
+<meta name="description" id="pageDesc" content="Encontre os melhores negócios dessa categoria em São Paulo. Guia local completo no Leanttro Hub.">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+<meta name="theme-color" content="#7943e2">
+<meta name="author" content="Leanttro Tecnologia">
+<!-- Canonical (será atualizado pelo JS; valor pré-definido evita canonical incorreto) -->
+<link id="pageCanonical" rel="canonical" href="https://www.leanttro.com/categoria/">
+<!-- Script imediato: corrige o canonical ANTES de qualquer renderização -->
+<script>
+(function(){
+  var partes = location.pathname.replace(/^\/|\/$/g,'').split('/');
+  var slug = partes[partes.length-1];
+  if(slug && slug !== 'categoria'){
+    document.getElementById('pageCanonical').setAttribute('href','https://www.leanttro.com/categoria/'+slug);
+  }
+})();
+</script>
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="shortcut icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<meta name="msapplication-TileImage" content="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<meta name="msapplication-TileColor" content="#7943e2">
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Leanttro Hub">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" id="ogUrl" content="">
+<meta property="og:title" id="ogTitle" content="">
+<meta property="og:description" id="ogDesc" content="">
+<meta property="og:image" id="ogImage" content="">
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="twTitle" content="">
+<meta name="twitter:description" id="twDesc" content="">
+<meta name="twitter:image" id="twImage" content="">
+<script id="jsonld" type="application/ld+json">{}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --primary:#7943e2;--primary-d:#5c2ec4;--accent:#00e5a0;
+  --dark:#0a0a0f;--text:#1a1a2e;--muted:#6b6b80;
+  --border:#e4e4f0;--bg:#ffffff;--bg2:#f8f8fc;
+  --radius:12px;--sans:'Inter',sans-serif;--display:'Montserrat',sans-serif;
+  --shadow:0 4px 24px rgba(108,99,255,0.10);--shadow-md:0 8px 32px rgba(108,99,255,0.16);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.container{max-width:1200px;margin:0 auto;padding:0 20px}
+a{text-decoration:none;color:inherit}
+img{max-width:100%;display:block}
+
+/* HEADER */
+header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 20px}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
+.logo img{height:38px;width:auto}
+nav.desktop-nav ul{list-style:none;display:flex;gap:4px}
+nav.desktop-nav ul li a{padding:8px 14px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--muted);transition:all .15s;white-space:nowrap}
+nav.desktop-nav ul li a:hover{color:var(--primary);background:rgba(108,99,255,.07)}
+nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
+.header-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.btn-wpp-header{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:9px 18px;border-radius:8px;font-size:.875rem;font-weight:600;transition:all .2s;white-space:nowrap}
+.btn-wpp-header:hover{background:#1da850;transform:translateY(-1px)}
+.btn-wpp-header svg{width:17px;height:17px;flex-shrink:0}
+.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text)}
+.hamburger svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2}
+.mobile-nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;justify-content:center;align-items:center;opacity:0;transition:opacity .25s}
+.mobile-nav-overlay.active{display:flex;opacity:1}
+.mobile-nav-overlay ul{list-style:none;text-align:center}
+.mobile-nav-overlay ul li{margin:18px 0}
+.mobile-nav-overlay ul li a{color:#fff;font-family:var(--display);font-size:1.8rem;font-weight:700}
+.mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+
+/* HERO */
+.bairro-hero{
+  background:linear-gradient(135deg,var(--primary) 0%,var(--primary-d) 100%);
+  padding:56px 20px 0;position:relative;overflow:hidden;
+}
+.bairro-hero::before{
+  content:'';position:absolute;inset:0;
+  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.bairro-hero .container{position:relative;z-index:1}
+.breadcrumb{display:flex;align-items:center;gap:6px;margin-bottom:20px;font-size:.82rem;color:rgba(255,255,255,.65)}
+.breadcrumb a{color:rgba(255,255,255,.65);transition:color .15s}
+.breadcrumb a:hover{color:#fff}
+.breadcrumb span{color:rgba(255,255,255,.4)}
+.hero-icon{font-size:3rem;margin-bottom:12px;display:block}
+.bairro-hero h1{font-family:var(--display);font-size:2.8rem;font-weight:800;color:#fff;line-height:1.15;margin-bottom:12px;letter-spacing:-.5px}
+.bairro-hero h1 em{color:var(--accent);font-style:normal}
+.bairro-hero p{font-size:1.1rem;color:rgba(255,255,255,.82);max-width:540px;margin-bottom:32px}
+.bairro-stats{display:flex;gap:32px;flex-wrap:wrap;margin-bottom:48px}
+.bairro-stat strong{display:block;font-family:var(--display);font-size:1.8rem;font-weight:800;color:#fff}
+.bairro-stat span{font-size:.82rem;color:rgba(255,255,255,.65)}
+.hero-wave{display:block;width:100%;line-height:0}
+.hero-wave svg{display:block;width:100%}
+
+/* FILTROS */
+.filtros-section{background:#fff;padding:24px 0;border-bottom:1px solid var(--border);position:sticky;top:68px;z-index:100}
+.filtros-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.filtro-label{font-size:.82rem;font-weight:600;color:var(--muted);white-space:nowrap}
+.chips{display:flex;gap:8px;flex-wrap:wrap;flex:1}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:.85rem;font-weight:500;color:var(--muted);cursor:pointer;transition:all .18s;white-space:nowrap;font-family:var(--sans)}
+.chip:hover{border-color:var(--primary);color:var(--primary)}
+.chip.active{background:var(--primary);border-color:var(--primary);color:#fff}
+.btn-loc{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:.85rem;font-weight:500;color:var(--muted);cursor:pointer;transition:all .18s;white-space:nowrap;margin-left:auto;font-family:var(--sans)}
+.btn-loc:hover{border-color:var(--primary);color:var(--primary)}
+.btn-loc svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+/* GRID */
+.section{padding:60px 0}
+.section-alt{background:var(--bg2)}
+.section-header{text-align:center;margin-bottom:40px}
+.section-title{font-family:var(--display);font-size:1.9rem;font-weight:800;color:var(--text);margin-bottom:8px;letter-spacing:-.3px}
+.section-title::before{content:'✦';color:var(--primary);margin-right:10px;font-size:1.1rem}
+.section-subtitle{color:var(--muted);font-size:1rem}
+.negocios-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.negocio-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .25s;display:flex;flex-direction:column;color:inherit}
+.negocio-card:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.negocio-card-foto{width:100%;height:180px;object-fit:cover;display:block}
+.negocio-card-sem-foto{width:100%;height:180px;background:linear-gradient(135deg,rgba(121,67,226,.12),rgba(0,229,160,.08));display:flex;align-items:center;justify-content:center;font-size:2.5rem}
+.negocio-card-body{padding:20px;flex:1;display:flex;flex-direction:column;gap:6px}
+.negocio-badge{display:inline-block;padding:3px 10px;border-radius:12px;background:rgba(121,67,226,.1);color:var(--primary);font-size:.75rem;font-weight:600;width:fit-content}
+.negocio-card-body h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);line-height:1.3}
+.negocio-bairro{display:flex;align-items:center;gap:5px;font-size:.82rem;color:var(--muted)}
+.negocio-bairro svg{width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.negocio-card-footer{margin-top:auto;padding-top:12px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.btn-ver-negocio{font-size:.82rem;font-weight:600;color:var(--primary)}
+.destaque-badge{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;color:#f59e0b;font-weight:600}
+
+/* SKELETON */
+.loading-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
+.skeleton{background:var(--bg2);border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border)}
+.skeleton-img{height:180px;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.skeleton-body{padding:20px;display:flex;flex-direction:column;gap:10px}
+.skeleton-line{height:12px;border-radius:6px;background:linear-gradient(90deg,#f0f0f5 25%,#e8e8f0 50%,#f0f0f5 75%);background-size:200% 100%;animation:shimmer 1.4s infinite}
+.skeleton-line.short{width:60%}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.empty-state{text-align:center;padding:60px 20px;color:var(--muted)}
+.empty-state svg{width:48px;height:48px;stroke:var(--border);fill:none;stroke-width:1.5;margin:0 auto 16px}
+.empty-state h3{font-family:var(--display);font-size:1.1rem;font-weight:700;color:var(--text);margin-bottom:6px}
+
+/* OUTRAS CATEGORIAS */
+.cats-chips{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-top:28px}
+.cat-chip{padding:10px 20px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:.88rem;font-weight:500;color:var(--text);transition:all .18s;display:inline-flex;align-items:center;gap:6px}
+.cat-chip:hover{border-color:var(--primary);color:var(--primary);background:rgba(121,67,226,.04)}
+
+/* CTA */
+.cta-cadastro{background:linear-gradient(135deg,var(--primary) 0%,var(--primary-d) 100%);border-radius:20px;padding:48px 40px;text-align:center;margin:60px 0;position:relative;overflow:hidden}
+.cta-cadastro::before{content:'';position:absolute;top:-40px;right:-40px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.06)}
+.cta-cadastro h2{font-family:var(--display);font-size:2rem;font-weight:800;color:#fff;margin-bottom:12px;position:relative}
+.cta-cadastro p{color:rgba(255,255,255,.82);font-size:1rem;margin-bottom:32px;max-width:500px;margin-left:auto;margin-right:auto;position:relative}
+.cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;position:relative}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--primary);padding:14px 28px;border-radius:10px;font-weight:700;font-size:.95rem;transition:all .2s;font-family:var(--display)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.15)}
+.btn-secondary{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,.15);color:#fff;padding:14px 28px;border-radius:10px;font-weight:600;font-size:.95rem;border:1.5px solid rgba(255,255,255,.3);transition:all .2s}
+.btn-secondary:hover{background:rgba(255,255,255,.25)}
+
+/* FOOTER */
+footer{background:var(--dark);padding:40px 20px 0}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:32px;flex-wrap:wrap;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08)}
+.footer-logo img{height:32px;filter:brightness(0) invert(1);opacity:.9}
+.footer-divider{width:1px;height:40px;background:rgba(255,255,255,.12);flex-shrink:0}
+.footer-text{flex:1}
+.footer-text strong{display:block;color:#fff;font-family:var(--display);font-size:.95rem;margin-bottom:4px}
+.footer-text span{color:rgba(255,255,255,.45);font-size:.82rem}
+.footer-links{display:flex;gap:10px;flex-wrap:wrap}
+.f-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:8px;font-size:.82rem;font-weight:600;transition:all .2s}
+.f-btn svg{width:16px;height:16px;flex-shrink:0}
+.f-btn-site{background:rgba(255,255,255,.08);color:rgba(255,255,255,.75)}.f-btn-site:hover{background:rgba(255,255,255,.15);color:#fff}
+.f-btn-wpp{background:rgba(37,211,102,.15);color:#25D366}.f-btn-wpp:hover{background:rgba(37,211,102,.25)}
+.footer-bottom{max-width:1200px;margin:0 auto;padding:16px 0;display:flex;align-items:center;justify-content:center;gap:8px;font-size:.78rem;color:rgba(255,255,255,.3);flex-wrap:wrap}
+.footer-bottom a{color:rgba(255,255,255,.45);transition:color .15s}.footer-bottom a:hover{color:#fff}
+
+@media(max-width:768px){
+  nav.desktop-nav{display:none}
+  .hamburger{display:block}
+  .bairro-hero h1{font-size:2rem}
+  .bairro-stats{gap:20px}
+  .cta-cadastro{padding:36px 24px}
+  .cta-cadastro h2{font-size:1.6rem}
+  .filtros-inner{gap:8px}
+  .btn-loc{margin-left:0}
+  .section{padding:40px 0}
+  header{padding:0 12px}
+  .header-inner{gap:8px;height:60px}
+  .btn-wpp-header{font-size:0;gap:0;padding:8px 12px}
+  .btn-wpp-header svg{width:20px;height:20px}
+  .logo-link img,.logo img{height:32px}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <a href="/" class="logo-link">
+      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" height="38">
+    </a>
+    <nav class="desktop-nav" aria-label="Navegação principal">
+      <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/#hub" class="ativo">Hub</a></li>
+        <li><a href="/loja">Loja</a></li>
+        <li><a href="/blog">Blog</a></li>
+        <li><a href="#orcamento">Orçamento</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="https://wa.me/5511999999999" class="btn-wpp-header" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav-overlay" id="mobileNav">
+  <button class="mobile-nav-close" id="navClose">×</button>
+  <nav><ul>
+    <li><a href="/" onclick="closeNav()">Home</a></li>
+    <li><a href="/#hub" onclick="closeNav()">Hub</a></li>
+    <li><a href="/loja" onclick="closeNav()">Loja</a></li>
+    <li><a href="/blog" onclick="closeNav()">Blog</a></li>
+    <li><a href="https://wa.me/5511999999999" onclick="closeNav()">WhatsApp</a></li>
+  </ul></nav>
+</div>
+
+<!-- HERO -->
+<section class="bairro-hero">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a><span>›</span>
+      <a href="/#hub">Hub</a><span>›</span>
+      <a href="/#hub">Categorias</a><span>›</span>
+      <strong id="breadCategoria" style="color:rgba(255,255,255,.9)">Carregando...</strong>
+    </nav>
+    <span class="hero-icon" id="heroIcon">🏪</span>
+    <h1><em id="heroNomeCategoria">...</em> em São Paulo</h1>
+    <p id="heroDesc">Encontre os melhores estabelecimentos dessa categoria em São Paulo. Tudo indexado no Google, sem pagar por anúncio.</p>
+    <div class="bairro-stats">
+      <div class="bairro-stat"><strong id="statNegocios">—</strong><span>negócios cadastrados</span></div>
+      <div class="bairro-stat"><strong id="statBairros">—</strong><span>bairros cobertos</span></div>
+      <div class="bairro-stat"><strong>Grátis</strong><span>para encontrar</span></div>
+    </div>
+  </div>
+  <div class="hero-wave">
+    <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,32 C240,56 480,0 720,32 C960,56 1200,0 1440,32 L1440,56 L0,56 Z" fill="#ffffff"/>
+    </svg>
+  </div>
+</section>
+
+<!-- FILTROS -->
+<div class="filtros-section">
+  <div class="container">
+    <div class="filtros-inner">
+      <span class="filtro-label">Bairro:</span>
+      <div class="chips" id="chipsBairros">
+        <button class="chip active" onclick="filtrarBairro(this,'')">Todos</button>
+      </div>
+      <button class="btn-loc" id="btnLoc" onclick="usarLocalizacao()">
+        <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Perto de mim
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- GRID DE NEGÓCIOS -->
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title" id="gridTitulo">Negócios da categoria</h2>
+      <p class="section-subtitle" id="gridSubtitulo">Carregando...</p>
+    </div>
+    <div id="negociosContainer">
+      <!-- Skeleton loading -->
+      <div class="loading-grid">
+        <div class="skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+        <div class="skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+        <div class="skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+        <div class="skeleton"><div class="skeleton-img"></div><div class="skeleton-body"><div class="skeleton-line short"></div><div class="skeleton-line"></div><div class="skeleton-line short"></div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OUTRAS CATEGORIAS -->
+<section class="section section-alt" id="outrasCatsSection" style="display:none">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-title">Explorar outras categorias</h2>
+      <p class="section-subtitle">Mais tipos de negócio no hub</p>
+    </div>
+    <div class="cats-chips" id="outrasCatsChips"></div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="section">
+  <div class="container">
+    <div class="cta-cadastro" id="orcamento">
+      <h2 id="ctaTitulo">Seu negócio não está aqui?</h2>
+      <p id="ctaDesc">Cadastre agora. É grátis, aparece no Google e você começa a receber visitas orgânicas sem pagar por anúncio.</p>
+      <div class="cta-btns">
+        <a id="ctaWpp" href="https://wa.me/5511999999999?text=Quero%20cadastrar%20meu%20neg%C3%B3cio%20no%20hub" class="btn-primary" target="_blank" rel="noopener">
+          📍 Cadastrar meu negócio grátis
+        </a>
+        <a href="/loja" class="btn-secondary">Ver planos pagos →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">
+      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro">
+    </div>
+    <div class="footer-divider"></div>
+    <div class="footer-text">
+      <strong>Leanttro Tecnologia</strong>
+      <span>Sites, hubs e automações — Jabaquara, São Paulo<br>© 2026 Leanttro. Todos os direitos reservados.</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://leanttro.com" class="f-btn f-btn-site">
+        <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+        leanttro.com
+      </a>
+      <a href="https://wa.me/5511999999999" class="f-btn f-btn-wpp" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        WhatsApp
+      </a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <a href="/politica-de-privacidade">Política de Privacidade</a> · <a href="/termos">Termos de Uso</a> · Desenvolvido com ❤️ pela <a href="https://leanttro.com">Leanttro</a>
+  </div>
+</footer>
+
+<!-- WHATSAPP FLUTUANTE -->
+<a href="https://wa.me/5511999999999" target="_blank" rel="noopener"
+  style="position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s"
+  onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+const API_BASE = 'https://teste.leanttro.com';
+
+// Mapa de ícones por categoria (slug → emoji)
+const CAT_ICONS = {
+  restaurante:'🍽️', bar:'🍺', salao:'💇', 'salao-de-beleza':'💇',
+  clinica:'🏥', 'clinica-medica':'🏥', mercado:'🛒', farmacia:'💊',
+  academia:'🏋️', padaria:'🥐', lanchonete:'🥪', pizzaria:'🍕',
+  servico:'🔧', loja:'🛍️', escola:'📚', pet:'🐾', auto:'🚗',
+  hotel:'🏨', barbearia:'✂️', escritorio:'💼', advocacia:'⚖️',
+  contabilidade:'📊', imobiliaria:'🏠', tecnologia:'💻', design:'🎨',
+  fotografia:'📷', musica:'🎵', esporte:'⚽', saude:'❤️',
+  beleza:'💄', moda:'👗', joalheria:'💍', relojoaria:'⌚',
+  optica:'👓', dentista:'🦷', veterinario:'🐶', fisioterapia:'🏃',
+  psicologia:'🧠', nutricao:'🥗', estetica:'✨', spa:'🧖',
+};
+
+let allNegocios = [], bairroAtivo = '', userLat = null, userLng = null;
+let nomeCategoria = '', slugCategoria = '';
+
+function slugify(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,'')}
+function capitalize(s){return(s||'').split('-').map(w=>w.charAt(0).toUpperCase()+w.slice(1)).join(' ')}
+function distKm(a,b,c,d){const R=6371,dA=(c-a)*Math.PI/180,dB=(d-b)*Math.PI/180;const x=Math.sin(dA/2)**2+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(dB/2)**2;return R*2*Math.atan2(Math.sqrt(x),Math.sqrt(1-x))}
+async function apiGet(p){try{const r=await fetch(API_BASE+p);if(!r.ok)return null;return await r.json()}catch(e){return null}}
+function getCatIcon(slugCat){const k=Object.keys(CAT_ICONS).find(k=>slugCat.includes(k)||k.includes(slugCat));return k?CAT_ICONS[k]:'🏪'}
+
+function renderCard(n){
+  const end=[n.endereco,n.bairro].filter(Boolean).join(', ')||'';
+  const foto=n.foto?`<img src="${n.foto}" alt="${n.nome}" class="negocio-card-foto" loading="lazy">`:`<div class="negocio-card-sem-foto">${getCatIcon(slugCategoria)}</div>`;
+  const dist=n.distancia_km!==undefined?`<p style="font-size:.78rem;color:var(--primary);font-weight:600;margin-top:2px">📍 ${n.distancia_km.toFixed(1)} km de você</p>`:'';
+  const destaque=n.destaque?`<span class="destaque-badge">⭐ Destaque</span>`:'';
+  return`<a href="/negocio/${n.slug||slugify(n.nome)}" class="negocio-card">
+    ${foto}
+    <div class="negocio-card-body">
+      <span class="negocio-badge">${n.categoria_nome||nomeCategoria}</span>
+      <h3>${n.nome}</h3>
+      <p class="negocio-bairro"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>${end||'São Paulo'}</p>
+      ${dist}
+      <div class="negocio-card-footer">${destaque}<span class="btn-ver-negocio">Ver mais →</span></div>
+    </div>
+  </a>`;
+}
+
+function renderGrid(lista){
+  const container=document.getElementById('negociosContainer');
+  const sub=document.getElementById('gridSubtitulo');
+  if(!lista.length){
+    container.innerHTML=`<div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Nenhum negócio encontrado</h3><p>Tente outro filtro ou <a href="https://wa.me/5511999999999" style="color:var(--primary)">cadastre o seu</a>.</p></div>`;
+    sub.textContent='Nenhum resultado';return;
+  }
+  sub.textContent=`${lista.length} negócio${lista.length!==1?'s':''} encontrado${lista.length!==1?'s':''}`;
+  container.innerHTML=`<div class="negocios-grid">${lista.map(renderCard).join('')}</div>`;
+}
+
+function filtrar(){
+  let lista=allNegocios.filter(n=>!bairroAtivo||(n.bairro&&slugify(n.bairro)===bairroAtivo));
+  if(userLat)lista=lista.map(n=>({...n,distancia_km:(n.lat&&n.lng)?distKm(userLat,userLng,n.lat,n.lng):undefined})).sort((a,b)=>(a.distancia_km||999)-(b.distancia_km||999));
+  renderGrid(lista);
+}
+
+function filtrarBairro(el,slug){
+  document.querySelectorAll('#chipsBairros .chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');bairroAtivo=slug;filtrar();
+}
+
+function usarLocalizacao(){
+  const btn=document.getElementById('btnLoc');
+  btn.textContent='Localizando...';
+  navigator.geolocation.getCurrentPosition(p=>{
+    userLat=p.coords.latitude;userLng=p.coords.longitude;
+    btn.textContent='📍 Perto de mim';filtrar();
+  },()=>{btn.textContent='Perto de mim';alert('Não foi possível obter sua localização.')});
+}
+
+async function init(){
+  // Extrai slug da URL: /categoria/academia → academia
+  const partes = location.pathname.replace(/^\/|\/$/g,'').split('/');
+  slugCategoria = partes[partes.length-1];
+  nomeCategoria = capitalize(slugCategoria);
+
+  // Atualiza elementos estáticos imediatamente
+  const icon = getCatIcon(slugCategoria);
+  document.getElementById('heroIcon').textContent = icon;
+  document.getElementById('heroNomeCategoria').textContent = nomeCategoria;
+  document.getElementById('breadCategoria').textContent = nomeCategoria;
+  document.getElementById('gridTitulo').textContent = `${nomeCategoria} em São Paulo`;
+  document.getElementById('heroDesc').textContent = `Encontre os melhores estabelecimentos de ${nomeCategoria.toLowerCase()} em São Paulo. Endereço, contato e avaliações — tudo no Google, sem pagar por anúncio.`;
+  document.getElementById('ctaTitulo').textContent = `Seu negócio de ${nomeCategoria.toLowerCase()} não está aqui?`;
+  document.getElementById('ctaDesc').textContent = `Cadastre agora. É grátis, aparece no Google e você começa a receber visitas orgânicas de quem procura ${nomeCategoria.toLowerCase()} em São Paulo.`;
+  document.getElementById('ctaWpp').href = `https://wa.me/5511999999999?text=Quero%20cadastrar%20meu%20neg%C3%B3cio%20de%20${encodeURIComponent(nomeCategoria)}%20no%20hub`;
+  document.title = `${nomeCategoria} em São Paulo — Guia Local | Leanttro Hub`;
+  document.getElementById('pageDesc').setAttribute('content',`Encontre os melhores negócios de ${nomeCategoria.toLowerCase()} em São Paulo. Endereço, horário, avaliações e contato no Leanttro Hub.`);
+
+  // Canonical imediato
+  const canonicalUrl = `https://www.leanttro.com/categoria/${slugCategoria}`;
+  document.getElementById('pageCanonical').setAttribute('href', canonicalUrl);
+
+  // Busca tudo (a API não tem filtro por categoria, filtramos no cliente)
+  const [todosNegocios, todasCategorias] = await Promise.all([
+    apiGet('/hub/negocios'),
+    apiGet('/hub/categorias')
+  ]);
+
+  const todos = todosNegocios || [];
+
+  // Filtra negocios da categoria atual pelo slug do nome
+  allNegocios = todos.filter(n => slugify(n.categoria_nome || '') === slugCategoria);
+
+  // Stats
+  const bairros = [...new Set(allNegocios.map(n=>n.bairro).filter(Boolean))];
+  document.getElementById('statNegocios').textContent = allNegocios.length;
+  document.getElementById('statBairros').textContent = bairros.length;
+
+  // Chips de bairro
+  const chipsEl = document.getElementById('chipsBairros');
+  bairros.sort().forEach(b=>{
+    const btn=document.createElement('button');
+    btn.className='chip';
+    btn.textContent=b;
+    btn.onclick=function(){filtrarBairro(this,slugify(b))};
+    chipsEl.appendChild(btn);
+  });
+
+  // Outras categorias — usa /hub/categorias se disponível, senão extrai dos negócios
+  const catList = (todasCategorias && todasCategorias.length)
+    ? todasCategorias.map(c=>c.nome).filter(c=>c && slugify(c)!==slugCategoria)
+    : [...new Set(todos.map(n=>n.categoria_nome).filter(c=>c && slugify(c)!==slugCategoria))];
+
+  if(catList.length){
+    document.getElementById('outrasCatsSection').style.display='';
+    document.getElementById('outrasCatsChips').innerHTML=catList.slice(0,12).map(c=>{
+      const slugC=slugify(c);
+      const iconC=getCatIcon(slugC);
+      return`<a href="/categoria/${slugC}" class="cat-chip">${iconC} ${c}</a>`;
+    }).join('');
+  }
+
+  // ── SEO DINÂMICO ──
+  const OG_IMAGE_DEFAULT = 'https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png';
+  const metaDescSeo = `Encontre os melhores negócios de ${nomeCategoria.toLowerCase()} em São Paulo. Endereço, horário, avaliações e contato no Leanttro Hub.`;
+
+  // Open Graph
+  document.getElementById('ogUrl').setAttribute('content', canonicalUrl);
+  document.getElementById('ogTitle').setAttribute('content', `${nomeCategoria} em São Paulo — Guia Local | Leanttro Hub`);
+  document.getElementById('ogDesc').setAttribute('content', metaDescSeo);
+  document.getElementById('ogImage').setAttribute('content', OG_IMAGE_DEFAULT);
+
+  // Twitter
+  document.getElementById('twTitle').setAttribute('content', `${nomeCategoria} em São Paulo | Leanttro Hub`);
+  document.getElementById('twDesc').setAttribute('content', metaDescSeo);
+  document.getElementById('twImage').setAttribute('content', OG_IMAGE_DEFAULT);
+
+  // JSON-LD (Schema.org)
+  const ld = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "ItemList",
+        "@id": `${canonicalUrl}#itemlist`,
+        "name": `${nomeCategoria} em São Paulo`,
+        "description": metaDescSeo,
+        "url": canonicalUrl,
+        "numberOfItems": allNegocios.length,
+        "itemListElement": allNegocios.slice(0,10).map((n,i)=>({
+          "@type": "ListItem",
+          "position": i+1,
+          "name": n.nome,
+          "url": `https://www.leanttro.com/negocio/${n.slug||slugify(n.nome)}`
+        }))
+      },
+      {
+        "@type": "CollectionPage",
+        "@id": `${canonicalUrl}#webpage`,
+        "url": canonicalUrl,
+        "name": `${nomeCategoria} em São Paulo | Leanttro Hub`,
+        "description": metaDescSeo,
+        "inLanguage": "pt-BR",
+        "about": {
+          "@type": "Thing",
+          "name": nomeCategoria
+        }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.leanttro.com/" },
+          { "@type": "ListItem", "position": 2, "name": "Hub", "item": "https://www.leanttro.com/#hub" },
+          { "@type": "ListItem", "position": 3, "name": "Categorias", "item": "https://www.leanttro.com/#hub" },
+          { "@type": "ListItem", "position": 4, "name": nomeCategoria, "item": canonicalUrl }
+        ]
+      }
+    ]
+  };
+  document.getElementById('jsonld').textContent = JSON.stringify(ld);
+
+  filtrar();
+}
+
+document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('active'));
+document.getElementById('navClose').addEventListener('click',()=>closeNav());
+function closeNav(){document.getElementById('mobileNav').classList.remove('active')}
+
+init();
+</script>
+</body>
+</html>
