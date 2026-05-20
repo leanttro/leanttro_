@@ -1356,8 +1356,28 @@ async function apiGet(path) {
   let allNegocios = [];
   let activeCat = '';
   let activeBairro = '';
+  let userLat = null, userLng = null;
 
   function slugify(s) { return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'-').replace(/[^a-z0-9-]/g,''); }
+
+  function haversine(lat1, lng1, lat2, lng2) {
+    const R = 6371, toRad = d => d * Math.PI / 180;
+    const dLat = toRad(lat2 - lat1), dLng = toRad(lng2 - lng1);
+    const a = Math.sin(dLat/2)**2 + Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng/2)**2;
+    return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+  }
+
+  function applyDistances(lista) {
+    if (userLat === null) return lista;
+    return lista.map(n => {
+      const lat = parseFloat(n.lat || n.latitude);
+      const lng = parseFloat(n.lng || n.longitude || n.lon);
+      if (!isNaN(lat) && !isNaN(lng)) {
+        return { ...n, distancia_km: haversine(userLat, userLng, lat, lng) };
+      }
+      return n;
+    }).sort((a, b) => (a.distancia_km ?? 9999) - (b.distancia_km ?? 9999));
+  }
 
   function renderCard(n) {
     const endereco = [n.endereco, n.bairro, n.cidade].filter(Boolean).join(', ') || n.bairro || '';
@@ -1421,31 +1441,50 @@ async function apiGet(path) {
     if (activeCat) filtered = filtered.filter(n => (n.categoria_nome || n.categoria) === activeCat);
     if (activeBairro) filtered = filtered.filter(n => n.bairro === activeBairro);
     if (!filtered.length) { track.innerHTML = '<p style="color:var(--muted);padding:32px;text-align:center">Nenhum negócio encontrado nessa categoria.</p>'; return; }
-    // Com foto em destaque primeiro
-    const comFoto = filtered.filter(n => n.foto);
-    const semFoto = filtered.filter(n => !n.foto);
-    track.innerHTML = [...comFoto, ...semFoto].map(renderCard).join('');
+    const withDist = applyDistances(filtered);
+    let ordered;
+    if (userLat !== null) {
+      ordered = withDist;
+    } else {
+      const comFoto = withDist.filter(n => n.foto);
+      const semFoto = withDist.filter(n => !n.foto);
+      ordered = [...comFoto, ...semFoto];
+    }
+    track.innerHTML = ordered.map(renderCard).join('');
     makeCarousel('hubTrack','hubPrev','hubNext','hubProgress');
   }
 
   // Localização
+  function applyUserLocation(lat, lng) {
+    userLat = lat; userLng = lng;
+    renderCards();
+    if (btnLoc) {
+      btnLoc.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Localização obtida ✓';
+      btnLoc.disabled = true;
+    }
+  }
+
+  // Tenta obter localização silenciosamente ao carregar
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      pos => applyUserLocation(pos.coords.latitude, pos.coords.longitude),
+      () => {} // silencioso se negado
+    );
+  }
+
   if (btnLoc) {
     btnLoc.addEventListener('click', async () => {
       if (!navigator.geolocation) { alert('Geolocalização não suportada neste navegador.'); return; }
       btnLoc.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;animation:spin 1s linear infinite"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Localizando...';
       btnLoc.disabled = true;
-      navigator.geolocation.getCurrentPosition(async pos => {
-        try {
-          const r = await fetch(`${API_BASE}/hub/negocios?lat=${pos.coords.latitude}&lng=${pos.coords.longitude}`);
-          const data = await r.json();
-          if (data && data.length) { allNegocios = data; buildFiltrosCat(allNegocios); buildFiltrosBairro(allNegocios); renderCards(); }
-        } catch(e) {}
-        btnLoc.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Localização obtida ✓';
-      }, () => {
-        btnLoc.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Usar minha localização';
-        btnLoc.disabled = false;
-        alert('Não foi possível obter sua localização. Verifique as permissões.');
-      });
+      navigator.geolocation.getCurrentPosition(
+        pos => applyUserLocation(pos.coords.latitude, pos.coords.longitude),
+        () => {
+          btnLoc.innerHTML = '<svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Usar minha localização';
+          btnLoc.disabled = false;
+          alert('Não foi possível obter sua localização. Verifique as permissões.');
+        }
+      );
     });
   }
 
