@@ -5,16 +5,30 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="pageTitle">Negócio — Leanttro Hub</title>
 <meta name="description" id="pageDesc" content="Encontre informações, endereço, horário e avaliações deste negócio no Leanttro Hub.">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#7943e2">
+<meta name="author" content="Leanttro Tecnologia">
 <link id="pageCanonical" rel="canonical" href="https://www.leanttro.com/">
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="shortcut icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<meta name="msapplication-TileImage" content="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<meta name="msapplication-TileColor" content="#7943e2">
+<!-- Open Graph -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Leanttro Hub">
 <meta property="og:locale" content="pt_BR">
+<meta id="ogUrl" property="og:url" content="">
 <meta id="ogTitle" property="og:title" content="Leanttro Hub">
 <meta id="ogDesc" property="og:description" content="">
 <meta id="ogImage" property="og:image" content="">
+<!-- Twitter -->
 <meta name="twitter:card" content="summary_large_image">
+<meta id="twTitle" name="twitter:title" content="">
+<meta id="twDesc" name="twitter:description" content="">
+<meta id="twImage" name="twitter:image" content="">
 <script id="jsonld" type="application/ld+json">{}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -224,6 +238,12 @@ footer{background:var(--dark);color:#fff;padding:40px 20px 24px}
   nav.desktop-nav,.header-cta{display:none}
   .hamburger{display:block}
   .info-section{padding:20px}
+  /* CORREÇÃO HEADER MOBILE */
+  header{padding:0 12px}
+  .header-inner{gap:8px;height:60px}
+  .logo-link img,.logo img{height:32px}
+  .btn-wpp-header{font-size:0;gap:0;padding:8px 12px}
+  .btn-wpp-header svg{width:20px;height:20px}
 }
 @media(max-width:480px){
   .rating-resumo{flex-direction:column;align-items:flex-start;gap:10px}
@@ -698,13 +718,37 @@ async function init(){
   document.getElementById('breadBairro').href=`/${slugBairro}`;
   document.getElementById('breadNome').textContent=negocio.nome;
 
-  // TÍTULO
-  document.title=`${negocio.nome} — ${nomeBairro} | Leanttro Hub`;
-  document.getElementById('pageDesc').setAttribute('content',`${negocio.descricao?negocio.descricao.slice(0,150)+'...':negocio.nome+' em '+nomeBairro+'. Encontre endereço, horário e avaliações no Leanttro Hub.'}`);
-  document.getElementById('pageCanonical').setAttribute('href',`https://www.leanttro.com/negocio/${negocio.slug}`);
-  document.getElementById('ogTitle').setAttribute('content',negocio.nome);
-  document.getElementById('ogDesc').setAttribute('content',negocio.descricao||'');
-  if(negocio.foto_url)document.getElementById('ogImage').setAttribute('content',negocio.foto_url);
+  // ── SEO DINÂMICO ──
+  const nomeItem   = negocio.nome || '';
+  const descItem   = negocio.descricao || negocio.resumo || '';
+  const imagemItem = negocio.foto_url || negocio.imagem_url || 'https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png';
+  const slugItem   = negocio.slug || '';
+  const bairroItem = nomeBairro || negocio.cidade || 'São Paulo';
+  const catItem    = negocio.categoria_nome || negocio.categoria || '';
+  const canonicalUrl = `https://www.leanttro.com/negocio/${slugItem}`;
+
+  // Título otimizado
+  document.title = `${nomeItem}${catItem ? ' — ' + catItem : ''}${bairroItem ? ' em ' + bairroItem : ''} | Leanttro Hub`;
+
+  // Description (150 chars)
+  const metaDesc = descItem
+    ? descItem.replace(/<[^>]*>/g,'').slice(0,150) + '…'
+    : `${nomeItem} em ${bairroItem}. Endereço, horário, avaliações e contato no Leanttro Hub.`;
+  document.getElementById('pageDesc').setAttribute('content', metaDesc);
+
+  // Canonical
+  document.getElementById('pageCanonical').setAttribute('href', canonicalUrl);
+
+  // Open Graph
+  document.getElementById('ogUrl').setAttribute('content', canonicalUrl);
+  document.getElementById('ogTitle').setAttribute('content', `${nomeItem} — ${bairroItem} | Leanttro Hub`);
+  document.getElementById('ogDesc').setAttribute('content', metaDesc);
+  document.getElementById('ogImage').setAttribute('content', imagemItem);
+
+  // Twitter
+  document.getElementById('twTitle').setAttribute('content', `${nomeItem} — ${bairroItem}`);
+  document.getElementById('twDesc').setAttribute('content', metaDesc);
+  document.getElementById('twImage').setAttribute('content', imagemItem);
 
   // DESCRIÇÃO
   if(negocio.descricao){
@@ -771,41 +815,46 @@ async function init(){
     if(todos&&todos.length)renderOutros(todos,negocio.slug,nomeBairro);
   });
 
-  // JSON-LD LocalBusiness
-  const ld={
-    "@context":"https://schema.org",
-    "@graph":[
+  // JSON-LD (Schema.org)
+  const ld = {
+    "@context": "https://schema.org",
+    "@graph": [
       {
-        "@type":"LocalBusiness",
-        "@id":`https://www.leanttro.com/negocio/${negocio.slug}`,
-        "name":negocio.nome,
-        "description":negocio.descricao||undefined,
-        "image":negocio.foto_url||undefined,
-        "url":`https://www.leanttro.com/negocio/${negocio.slug}`,
-        "telephone":negocio.telefone||undefined,
-        "address":{
-          "@type":"PostalAddress",
-          "streetAddress":negocio.endereco||undefined,
-          "addressLocality":nomeBairro||"São Paulo",
-          "addressRegion":"SP",
-          "addressCountry":"BR"
+        "@type": "LocalBusiness",
+        "@id": canonicalUrl,
+        "name": nomeItem,
+        "description": descItem || undefined,
+        "image": imagemItem,
+        "url": canonicalUrl,
+        "telephone": negocio.telefone || undefined,
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": negocio.endereco || undefined,
+          "addressLocality": bairroItem,
+          "addressRegion": "SP",
+          "addressCountry": "BR"
         },
-        ...(negocio.lat&&negocio.lng?{"geo":{"@type":"GeoCoordinates","latitude":negocio.lat,"longitude":negocio.lng}}:{}),
-        ...(negocio.avaliacoes&&negocio.avaliacoes.length?{"aggregateRating":{"@type":"AggregateRating","ratingValue":(negocio.avaliacoes.reduce((s,a)=>s+(a.nota||0),0)/negocio.avaliacoes.length).toFixed(1),"reviewCount":negocio.avaliacoes.length}}:{}),
-        "openingHours":undefined
+        ...(negocio.lat && negocio.lng ? { "geo": { "@type": "GeoCoordinates", "latitude": negocio.lat, "longitude": negocio.lng } } : {}),
+        ...(negocio.avaliacoes?.length ? {
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": (negocio.avaliacoes.reduce((s,a) => s + (a.nota||0), 0) / negocio.avaliacoes.length).toFixed(1),
+            "reviewCount": negocio.avaliacoes.length
+          }
+        } : {})
       },
       {
-        "@type":"BreadcrumbList",
-        "itemListElement":[
-          {"@type":"ListItem","position":1,"name":"Home","item":"https://www.leanttro.com/"},
-          {"@type":"ListItem","position":2,"name":"Hub","item":"https://www.leanttro.com/#hub"},
-          {"@type":"ListItem","position":3,"name":nomeBairro,"item":`https://www.leanttro.com/${slugBairro}`},
-          {"@type":"ListItem","position":4,"name":negocio.nome,"item":`https://www.leanttro.com/negocio/${negocio.slug}`}
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.leanttro.com/" },
+          { "@type": "ListItem", "position": 2, "name": catItem || "Hub", "item": `https://www.leanttro.com/` },
+          { "@type": "ListItem", "position": 3, "name": bairroItem, "item": `https://www.leanttro.com/${slugBairro}` },
+          { "@type": "ListItem", "position": 4, "name": nomeItem, "item": canonicalUrl }
         ]
       }
     ]
   };
-  document.getElementById('jsonld').textContent=JSON.stringify(ld);
+  document.getElementById('jsonld').textContent = JSON.stringify(ld);
 }
 
 document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('active'));
