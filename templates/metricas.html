@@ -21,8 +21,7 @@ body{font-family:var(--sans);background:var(--bg2);color:var(--text);line-height
 /* HEADER */
 header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;position:sticky;top:0;z-index:100}
 .header-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:62px;gap:20px}
-.logo-text{font-family:var(--display);font-size:1.2rem;font-weight:800;color:var(--primary);letter-spacing:-.3px}
-.logo-sub{font-size:.75rem;color:var(--muted);font-weight:400;margin-left:8px;letter-spacing:0}
+.logo img{height:38px;width:auto;display:block}
 .btn-wpp{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:8px 16px;border-radius:8px;font-size:.825rem;font-weight:600;text-decoration:none;transition:background .2s}
 .btn-wpp:hover{background:#1da850}
 .btn-wpp svg{width:16px;height:16px;fill:currentColor}
@@ -32,6 +31,66 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 .page-hero h1{font-family:var(--display);font-size:2rem;font-weight:800;color:#fff;margin-bottom:8px;letter-spacing:-.3px}
 .page-hero p{color:rgba(255,255,255,.85);font-size:1rem;max-width:500px;margin:0 auto}
 .ga-id-pill{display:inline-block;margin-top:14px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-family:monospace;font-size:1rem;font-weight:700;padding:6px 18px;border-radius:99px;letter-spacing:1px}
+
+/* INPUT GA ID (quando veio sem ID) */
+.ga-input-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:18px 24px;margin-top:18px;max-width:480px;margin-left:auto;margin-right:auto;display:none}
+.ga-input-section.visible{display:block}
+.ga-input-label{color:rgba(255,255,255,.9);font-size:.85rem;font-weight:600;margin-bottom:10px;display:block}
+.ga-input-row{display:flex;gap:8px}
+.ga-input-row input{
+  flex:1;font-family:monospace;font-size:.95rem;font-weight:700;letter-spacing:1px;
+  padding:9px 14px;border-radius:8px;border:1.5px solid rgba(255,255,255,.4);
+  background:rgba(255,255,255,.15);color:#fff;
+  transition:border-color .2s;
+}
+.ga-input-row input::placeholder{color:rgba(255,255,255,.5);font-weight:400;letter-spacing:0}
+.ga-input-row input:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.22)}
+.ga-input-btn{
+  padding:9px 18px;border-radius:8px;background:#fff;color:var(--primary);
+  border:none;cursor:pointer;font-weight:700;font-size:.85rem;font-family:var(--sans);
+  transition:all .2s;white-space:nowrap;
+}
+.ga-input-btn:hover{background:var(--accent);color:var(--dark)}
+.ga-input-note{color:rgba(255,255,255,.6);font-size:.75rem;margin-top:8px}
+
+/* PROMO BANNER (só aparece quando não tem G-ID válido, antes do gate) */
+.promo-banner{
+  background:var(--dark);border-radius:var(--radius);
+  padding:0;margin-bottom:28px;overflow:hidden;
+  display:none;
+}
+.promo-banner.visible{display:block}
+.promo-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  align-items:stretch;
+  min-height:380px;
+}
+@media(max-width:700px){.promo-inner{grid-template-columns:1fr}}
+.promo-content{padding:36px 32px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.promo-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(121,67,226,.25);border:1px solid rgba(121,67,226,.4);color:#c4b5f5;padding:4px 14px;border-radius:20px;font-size:.75rem;font-weight:700;letter-spacing:.4px;width:fit-content}
+.promo-title{font-family:var(--display);font-size:1.6rem;font-weight:800;color:#fff;line-height:1.2}
+.promo-title span{color:var(--accent)}
+.promo-items{display:flex;flex-direction:column;gap:8px}
+.promo-item{display:flex;align-items:flex-start;gap:10px;font-size:.875rem;color:rgba(255,255,255,.85)}
+.promo-item-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+.promo-item strong{color:#fff}
+.promo-price-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:4px}
+.promo-de{font-size:1rem;color:rgba(255,255,255,.4);text-decoration:line-through}
+.promo-por{font-family:var(--display);font-size:1.8rem;font-weight:800;color:#fff}
+.promo-prazo{font-size:.8rem;color:var(--accent);font-weight:600;background:rgba(0,229,160,.12);border:1px solid rgba(0,229,160,.3);padding:3px 10px;border-radius:99px}
+.promo-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--primary);color:#fff;
+  padding:12px 24px;border-radius:8px;font-size:.9rem;font-weight:700;
+  text-decoration:none;transition:all .2s;width:fit-content;
+}
+.promo-cta:hover{background:var(--primary-d);transform:translateY(-1px)}
+.promo-cta svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
+.promo-img-col{position:relative;overflow:hidden}
+@media(max-width:700px){.promo-img-col{min-height:220px}}
+.promo-img-col img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9}
+.promo-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,var(--dark) 0%,transparent 40%)}
+@media(max-width:700px){.promo-img-overlay{background:linear-gradient(180deg,transparent 0%,var(--dark) 80%)}}
 
 /* MAIN */
 .main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
@@ -130,6 +189,15 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 .mini-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:3px}
 .mini-bar-fill{height:100%;background:var(--primary);border-radius:3px}
 
+/* PRINT SCREEN SECTION */
+.screenshot-section{
+  background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
+  padding:24px;margin-bottom:16px;text-align:center;
+}
+.screenshot-section .chart-title{margin-bottom:16px;display:block}
+.screenshot-section img{width:100%;max-width:720px;border-radius:10px;box-shadow:var(--shadow-md);margin:0 auto;display:block}
+.screenshot-caption{font-size:.78rem;color:var(--muted);margin-top:12px;font-style:italic}
+
 /* CTA FINAL */
 .cta-upgrade{
   background:var(--dark);border-radius:var(--radius);padding:36px 32px;
@@ -174,13 +242,10 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 
 <header>
   <div class="header-inner">
-    <div>
-      <a href="/" style="text-decoration:none">
-        <span class="logo-text">Leanttro</span>
-        <span class="logo-sub">Tecnologia</span>
-      </a>
-    </div>
-    <a href="https://wa.me/5511999999999" class="btn-wpp" target="_blank" rel="noopener">
+    <a href="/" style="text-decoration:none">
+      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" class="logo" style="height:38px;width:auto;display:block">
+    </a>
+    <a href="https://wa.me/5511913324827" class="btn-wpp" target="_blank" rel="noopener">
       <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
       Falar no WhatsApp
     </a>
@@ -191,9 +256,57 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
   <h1>Diagnóstico do seu site</h1>
   <p>Veja como seu site está performando no Google — cliques, sessões, canais e muito mais.</p>
   <div class="ga-id-pill" id="hero-ga-id">G-XXXXXXXXXX</div>
+
+  <!-- Caixa de input do G-ID — aparece só quando não veio pela URL -->
+  <div class="ga-input-section" id="ga-input-section">
+    <span class="ga-input-label">Digite seu código Google Analytics para ver o diagnóstico:</span>
+    <div class="ga-input-row">
+      <input type="text" id="ga-input-field" placeholder="Ex: G-ABC123456" maxlength="20" />
+      <button class="ga-input-btn" onclick="aplicarGaId()">Ver diagnóstico →</button>
+    </div>
+    <p class="ga-input-note">Você encontra esse código em <strong>analytics.google.com</strong> → Administrador → Fluxos de dados.</p>
+  </div>
 </section>
 
 <div class="main">
+
+  <!-- BANNER PROMOÇÃO — aparece quando não veio com G-ID válido -->
+  <div class="promo-banner" id="promo-banner">
+    <div class="promo-inner">
+      <div class="promo-content">
+        <div class="promo-badge">🎯 Promoção por tempo limitado</div>
+        <div class="promo-title">Seu negócio no <span>Google</span> em 48 horas</div>
+        <p style="color:rgba(255,255,255,.7);font-size:.875rem">Você construiu o produto ou serviço, mas o Google <strong style="color:#fff">NÃO sabe que ele existe.</strong> A Leanttro tem a solução:</p>
+        <div class="promo-items">
+          <div class="promo-item">
+            <span class="promo-item-icon">📊</span>
+            <span><strong>Google Analytics 4</strong> — Configuração da conta e instalação da tag no código do site.</span>
+          </div>
+          <div class="promo-item">
+            <span class="promo-item-icon">🔍</span>
+            <span><strong>Google Search Console</strong> — Verificação do site e indexação de páginas.</span>
+          </div>
+          <div class="promo-item">
+            <span class="promo-item-icon">📍</span>
+            <span><strong>Google Business</strong> — Criação ou otimização do perfil da empresa.</span>
+          </div>
+        </div>
+        <div class="promo-price-row">
+          <span class="promo-de">De R$250,00</span>
+          <span class="promo-por">R$150,00</span>
+          <span class="promo-prazo">até dia 20/05</span>
+        </div>
+        <a href="https://wa.me/5511913324827?text=Oi%2C%20vi%20a%20promo%C3%A7%C3%A3o%20no%20diagn%C3%B3stico%20e%20quero%20colocar%20meu%20neg%C3%B3cio%20no%20Google!" class="promo-cta" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
+          Quero meu negócio no Google agora!
+        </a>
+      </div>
+      <div class="promo-img-col">
+        <div class="promo-img-overlay"></div>
+        <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779243876/metricass_ktex0c.png" alt="Painel de métricas Leanttro" loading="lazy">
+      </div>
+    </div>
+  </div>
 
   <!-- GATE: aparece até lead ser preenchido -->
   <div class="gate-overlay" id="gate-overlay">
@@ -297,6 +410,13 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
       </div>
     </div>
 
+    <!-- PRINT SCREEN DO SISTEMA -->
+    <div class="screenshot-section">
+      <span class="chart-title">Exemplo real do painel de métricas</span>
+      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779243876/metricass_ktex0c.png" alt="Painel de métricas Leanttro — exemplo real" loading="lazy">
+      <p class="screenshot-caption">Visualização real do painel de métricas conectado ao Google Analytics 4 — disponível para clientes Leanttro.</p>
+    </div>
+
     <div class="charts-row2">
       <div class="chart-card">
         <div class="chart-title">Dispositivos</div>
@@ -332,7 +452,7 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
       <p>Conecte sua conta Google e veja métricas ao vivo — ou fale com a Leanttro para um diagnóstico completo com estratégia de crescimento incluída.</p>
       <div class="cta-upgrade-btns">
         <a href="/metricas/conectar" class="btn-upgrade">Conectar Google Analytics →</a>
-        <a href="https://wa.me/5511999999999" class="btn-upgrade-wpp" target="_blank" rel="noopener">Falar com a Leanttro</a>
+        <a href="https://wa.me/5511913324827" class="btn-upgrade-wpp" target="_blank" rel="noopener">Falar com a Leanttro</a>
       </div>
     </div>
 
@@ -346,9 +466,46 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 <script>
 // ─── PEGAR G-ID DA URL ───────────────────────────────────────────────
 const params = new URLSearchParams(window.location.search);
-let gaId = (params.get('id') || params.get('g') || 'G-DEMO123').toUpperCase();
-if(!gaId.startsWith('G-')) gaId = 'G-' + gaId;
-document.getElementById('hero-ga-id').textContent = gaId;
+let gaId = (params.get('id') || params.get('g') || '').toUpperCase().trim();
+if(gaId && !gaId.startsWith('G-')) gaId = 'G-' + gaId;
+
+const isDemo = !gaId || gaId === 'G-DEMO' || gaId === 'G-DEMO123';
+
+// Atualiza o pill do hero
+document.getElementById('hero-ga-id').textContent = gaId || 'G-XXXXXXXXXX';
+
+// Se não veio G-ID válido pela URL: mostra input + banner promoção
+if(isDemo){
+  document.getElementById('ga-input-section').classList.add('visible');
+  document.getElementById('promo-banner').classList.add('visible');
+  gaId = 'G-DEMO123'; // fallback para gerar dados fake
+} else {
+  // Veio com G-ID: esconde input e banner, segue normalmente
+  document.getElementById('ga-input-section').classList.remove('visible');
+  document.getElementById('promo-banner').classList.remove('visible');
+}
+
+// ─── APLICAR G-ID DIGITADO MANUALMENTE ───────────────────────────────
+function aplicarGaId(){
+  const val = document.getElementById('ga-input-field').value.trim().toUpperCase();
+  if(!val){ toast('Digite o código G-XXXXXXXX para continuar.'); return; }
+  let id = val;
+  if(!id.startsWith('G-')) id = 'G-' + id;
+  // Atualiza a URL sem recarregar e aplica
+  const url = new URL(window.location.href);
+  url.searchParams.set('id', id);
+  window.history.replaceState({}, '', url.toString());
+  gaId = id;
+  document.getElementById('hero-ga-id').textContent = gaId;
+  document.getElementById('ga-input-section').classList.remove('visible');
+  document.getElementById('promo-banner').classList.remove('visible');
+  toast('✅ Código aplicado: ' + gaId);
+}
+
+// Enter no input dispara aplicar
+document.getElementById('ga-input-field').addEventListener('keydown', function(e){
+  if(e.key === 'Enter') aplicarGaId();
+});
 
 // ─── FAKE BARS (blur) ─────────────────────────────────────────────────
 const fbEl = document.getElementById('fake-bars');
@@ -569,6 +726,8 @@ function liberarPainel(){
 
   setTimeout(()=>{
     document.getElementById('gate-overlay').style.display='none';
+    // Esconde o banner de promoção após liberar o painel
+    document.getElementById('promo-banner').classList.remove('visible');
     const painel=document.getElementById('painel');
     painel.classList.add('liberado');
     renderDados();
