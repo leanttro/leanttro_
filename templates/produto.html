@@ -5,11 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title id="pageTitle">Produto — Loja Leanttro</title>
 <meta name="description" id="pageDesc" content="Automações e produtos digitais prontos para usar. Leanttro Tecnologia.">
-<meta name="robots" content="index, follow">
+<meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#7943e2">
+<meta name="author" content="Leanttro Tecnologia">
+<!-- Favicons -->
+<link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="apple-touch-icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link rel="shortcut icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<meta name="msapplication-TileImage" content="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<meta name="msapplication-TileColor" content="#7943e2">
+<!-- Canonical -->
+<link rel="canonical" id="pageCanonical" href="">
+<!-- Open Graph -->
 <meta property="og:type" content="product">
 <meta property="og:site_name" content="Leanttro Tecnologia">
-<script id="jsonLd" type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"","description":"","offers":{"@type":"Offer","priceCurrency":"BRL","availability":"https://schema.org/InStock"}}</script>
+<meta property="og:url" id="ogUrl" content="">
+<meta property="og:title" id="ogTitle" content="">
+<meta property="og:description" id="ogDesc" content="">
+<meta property="og:image" id="ogImage" content="">
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" id="twTitle" content="">
+<meta name="twitter:description" id="twDesc" content="">
+<meta name="twitter:image" id="twImage" content="">
+<!-- JSON-LD -->
+<script id="jsonld" type="application/ld+json">{}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -42,7 +63,7 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 .mobile-nav-overlay ul li{margin:18px 0}
 .mobile-nav-overlay ul li a{color:#fff;font-family:var(--display);font-size:1.8rem;font-weight:700}
 .mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
-@media(max-width:768px){nav.desktop-nav{display:none}.hamburger{display:flex}}
+@media(max-width:768px){nav.desktop-nav{display:none}.hamburger{display:flex}header{padding:0 12px}.header-inner{height:60px;gap:8px}.logo img{height:32px}.btn-wpp-header{font-size:0;gap:0;padding:8px 12px}.btn-wpp-header svg{width:20px;height:20px}}
 
 /* HERO */
 .hero-page{background:var(--primary);padding:56px 20px 0;position:relative;overflow:hidden}
@@ -326,26 +347,69 @@ function getSlugFromPath() {
     if (!r.ok) throw new Error('not found');
     const p = await r.json();
 
-    // Atualiza meta
-    document.getElementById('pageTitle').textContent = `${p.nome} — Loja Leanttro`;
-    document.getElementById('pageDesc').setAttribute('content', p.descricao ? p.descricao.replace(/<[^>]*>/g,'').slice(0,155) : '');
+    // ── SEO DINÂMICO ──
+    const nomeItem   = p.nome || '';
+    const descItem   = p.descricao || p.resumo || '';
+    const imagemItem = p.imagem_url || 'https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png';
+    const slugItem   = p.slug || getSlugFromPath();
+    const catItem    = p.categoria_nome || p.categoria || '';
+    const canonicalUrl = `https://www.leanttro.com/loja/${slugItem}`;
 
-    // JSON-LD
+    // Título otimizado
+    document.title = `${nomeItem}${catItem ? ' — ' + catItem : ''} | Leanttro Hub`;
+
+    // Description (150 chars)
+    const metaDesc = descItem
+      ? descItem.replace(/<[^>]*>/g,'').slice(0,150) + '…'
+      : `${nomeItem}. Endereço, horário, avaliações e contato no Leanttro Hub.`;
+    document.getElementById('pageDesc').setAttribute('content', metaDesc);
+
+    // Canonical
+    document.getElementById('pageCanonical').setAttribute('href', canonicalUrl);
+
+    // Open Graph
+    document.getElementById('ogUrl').setAttribute('content', canonicalUrl);
+    document.getElementById('ogTitle').setAttribute('content', `${nomeItem}${catItem ? ' — ' + catItem : ''} | Leanttro Hub`);
+    document.getElementById('ogDesc').setAttribute('content', metaDesc);
+    document.getElementById('ogImage').setAttribute('content', imagemItem);
+
+    // Twitter
+    document.getElementById('twTitle').setAttribute('content', `${nomeItem}${catItem ? ' — ' + catItem : ''}`);
+    document.getElementById('twDesc').setAttribute('content', metaDesc);
+    document.getElementById('twImage').setAttribute('content', imagemItem);
+
+    // JSON-LD (Schema.org)
     const ld = {
       "@context": "https://schema.org",
-      "@type": "Product",
-      "name": p.nome,
-      "description": p.descricao ? p.descricao.replace(/<[^>]*>/g,'').slice(0,200) : '',
-      "image": p.imagem_url || '',
-      "offers": {
-        "@type": "Offer",
-        "priceCurrency": "BRL",
-        "price": p.preco || 0,
-        "availability": "https://schema.org/InStock",
-        "url": window.location.href
-      }
+      "@graph": [
+        {
+          "@type": "Product",
+          "@id": canonicalUrl,
+          "name": nomeItem,
+          "description": descItem ? descItem.replace(/<[^>]*>/g,'').slice(0,200) : undefined,
+          "image": imagemItem,
+          "url": canonicalUrl,
+          ...(p.preco ? {
+            "offers": {
+              "@type": "Offer",
+              "priceCurrency": "BRL",
+              "price": p.preco,
+              "availability": "https://schema.org/InStock",
+              "url": canonicalUrl
+            }
+          } : {})
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.leanttro.com/" },
+            { "@type": "ListItem", "position": 2, "name": "Loja", "item": "https://www.leanttro.com/loja" },
+            { "@type": "ListItem", "position": 3, "name": nomeItem, "item": canonicalUrl }
+          ]
+        }
+      ]
     };
-    document.getElementById('jsonLd').textContent = JSON.stringify(ld);
+    document.getElementById('jsonld').textContent = JSON.stringify(ld);
 
     // Hero
     document.getElementById('heroSkeleton').style.display = 'none';
