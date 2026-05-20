@@ -970,28 +970,8 @@ async function bootApp() {
 }
 
 // ── AUTH ──
-async function doLogin() {
-  const btn = document.getElementById('btn-login');
-  const err = document.getElementById('login-error');
-  btn.disabled = true; btn.textContent = 'Entrando...';
-  err.style.display = 'none';
-  try {
-    const r = await fetch(API + '/admin/login', {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({ email: document.getElementById('l-email').value, senha: document.getElementById('l-senha').value })
-    });
-    const d = await r.json();
-    if (!r.ok) throw new Error(d.erro || 'Erro');
-    TOKEN = d.token;
-    localStorage.setItem('lt_token', TOKEN);
-    bootApp();
-  } catch {
-    err.style.display = 'block';
-  } finally {
-    btn.disabled = false; btn.textContent = 'Entrar';
-  }
-}
+async function _doLoginOriginal() {
+  // substituída pela versão corrigida abaixo
 
 function doLogout() {
   TOKEN = ''; localStorage.removeItem('lt_token');
@@ -1290,12 +1270,16 @@ function toggleRow(type, id, checked) {
 }
 
 function toggleAll(type, checked) {
-  const maps = { produtos: _produtos, leads: _leads, negocios: _negocios };
   const sets = { produtos: _selectedProdutos, leads: _selectedLeads, negocios: _selectedNegocios };
-  const list = maps[type]; const s = sets[type];
-  if (!list || !s) return;
+  const s = sets[type];
+  if (!s) return;
   s.clear();
-  if (checked) list.forEach(item => s.add(item.id));
+  // Seleciona apenas os IDs visíveis na tabela (filtrados), não toda a lista
+  if (checked) {
+    document.querySelectorAll(`[data-type="${type}"]`).forEach(chk => {
+      s.add(parseInt(chk.dataset.id));
+    });
+  }
   document.querySelectorAll(`[data-type="${type}"]`).forEach(chk => chk.checked = checked);
   updateBulkBar(type);
 }
@@ -1637,7 +1621,8 @@ function quickDelete(type, id) {
     await api('DELETE', paths[type], {});
     if (reloaders[type]) reloaders[type]();
   };
-  showConfirm('Excluir este item?', 'Esta ação não pode ser desfeita.', true);
+  // Exclusão unitária não requer senha — só bulk requer
+  showConfirm('Excluir este item?', 'Esta ação não pode ser desfeita.', false);
 }
 
 function confirmDelete(type) {
@@ -1706,11 +1691,30 @@ function toast(msg, type = 'success') {
 }
 
 // Guarda email no login para verificação de senha
-const origDoLogin = doLogin;
 async function doLogin() {
+  const btn = document.getElementById('btn-login');
+  const err = document.getElementById('login-error');
   const email = document.getElementById('l-email').value;
-  await origDoLogin.call(this);
-  if (TOKEN) localStorage.setItem('lt_email', email);
+  const senha = document.getElementById('l-senha').value;
+  btn.disabled = true; btn.textContent = 'Entrando...';
+  err.style.display = 'none';
+  try {
+    const r = await fetch(API + '/admin/login', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ email, senha })
+    });
+    const d = await r.json();
+    if (!r.ok) throw new Error(d.erro || 'Erro');
+    TOKEN = d.token;
+    localStorage.setItem('lt_token', TOKEN);
+    localStorage.setItem('lt_email', email);
+    bootApp();
+  } catch {
+    err.style.display = 'block';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Entrar';
+  }
 }
 
 // Fecha modal clicando fora
