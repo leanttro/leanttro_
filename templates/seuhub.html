@@ -566,47 +566,74 @@ footer{background:var(--dark);padding:40px 20px 0}
   <div class="form-inner">
     <div class="form-eyebrow">✦ Análise gratuita com IA</div>
     <h2>Qual hub faria sentido<br>para o <em>seu negócio</em>?</h2>
-    <p class="form-desc">Coloca os dados do seu site e a IA da Leanttro sugere os tipos de hub que atrairiam o público-alvo exato do seu negócio — organicamente, sem anúncio.</p>
+    <p class="form-desc">Cola a URL do seu site e/ou descreve o que você faz — a IA gera 3 opções de hub personalizadas pro seu negócio.</p>
     <div class="form-card">
-      <div class="form-row">
-        <div class="form-group">
-          <label>Seu nome</label>
-          <input type="text" id="inputNome" placeholder="Ex: João Silva">
-        </div>
-        <div class="form-group">
-          <label>WhatsApp</label>
-          <input type="tel" id="inputWpp" placeholder="(11) 9 9999-9999">
-        </div>
-      </div>
-      <div class="form-group">
-        <label>Site do seu negócio</label>
-        <input type="url" id="inputSite" placeholder="https://seunegocio.com.br">
-      </div>
-      <div class="form-group">
-        <label>O que seu negócio faz? <span style="opacity:.5;font-weight:400">(opcional, mas ajuda a IA)</span></label>
-        <input type="text" id="inputDesc" placeholder="Ex: academia de natação no Ipiranga">
-      </div>
-      <button class="btn-analisar" id="btnAnalisar" onclick="analisarHub()">
-        <div class="spinner"></div>
-        <span class="btn-texto">✦ Descobrir meu hub ideal</span>
-      </button>
-      <div class="ia-erro" id="iaErro">Erro ao conectar com a IA. Tente novamente.</div>
 
-      <!-- RESULTADO -->
-      <div class="ia-resultado" id="iaResultado">
-        <div class="ia-box">
-          <h4>🤖 Análise da IA para <span id="iaNomeCliente"></span></h4>
-          <div class="ia-texto" id="iaTexto"></div>
-          <div class="ia-cta">
-            <a id="iaWppLink" href="#" target="_blank" class="btn-quero-hub">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              Quero meu hub →
-            </a>
+      <!-- ETAPA 1: Inputs do negócio -->
+      <div id="etapa1">
+        <div class="form-group">
+          <label>Site do seu negócio <span style="opacity:.5;font-weight:400">(URL ou domínio)</span></label>
+          <input type="url" id="inputSite" placeholder="https://seunegocio.com.br">
+        </div>
+        <div class="form-group">
+          <label>O que seu negócio faz? <span style="opacity:.5;font-weight:400">(opcional, mas ajuda muito a IA)</span></label>
+          <input type="text" id="inputDesc" placeholder="Ex: academia de natação no Ipiranga">
+        </div>
+        <button class="btn-analisar" id="btnAnalisar" onclick="gerarIdeias()">
+          <div class="spinner"></div>
+          <span class="btn-texto">✦ Gerar minhas 3 ideias de hub</span>
+        </button>
+        <div class="ia-erro" id="iaErro">Erro ao conectar com a IA. Tente novamente em instantes.</div>
+      </div>
+
+      <!-- ETAPA 2: Cards embaçados + gate de dados -->
+      <div id="etapa2" style="display:none">
+        <p style="color:rgba(255,255,255,.55);font-size:.85rem;margin-bottom:16px;text-align:center">
+          ✅ 3 ideias geradas para <strong id="etapa2Site" style="color:var(--accent)"></strong>
+        </p>
+
+        <div style="position:relative">
+          <!-- Cards com blur -->
+          <div id="hubCardsBlur" style="filter:blur(6px);pointer-events:none;user-select:none;transition:filter .4s">
+            <div id="hubCards"></div>
+          </div>
+
+          <!-- Overlay de desbloqueio -->
+          <div id="gateOverlay" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(10,10,15,.65);backdrop-filter:blur(2px);border-radius:12px;padding:28px 20px;text-align:center;z-index:10">
+            <div style="font-size:1.4rem;margin-bottom:8px">🔓</div>
+            <p style="color:#fff;font-family:var(--display);font-weight:700;font-size:1.05rem;margin-bottom:6px">Suas ideias estão prontas!</p>
+            <p style="color:rgba(255,255,255,.6);font-size:.85rem;margin-bottom:20px;max-width:320px">Deixa seu nome e WhatsApp pra revelar — sem spam, promessa.</p>
+            <div style="width:100%;max-width:340px;display:flex;flex-direction:column;gap:10px">
+              <input type="text" id="gateNome" placeholder="Seu nome *"
+                style="padding:11px 14px;border:1.5px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font-size:.92rem;font-family:var(--sans);outline:none">
+              <input type="tel" id="gateWpp" placeholder="WhatsApp * (11) 9 9999-9999"
+                style="padding:11px 14px;border:1.5px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font-size:.92rem;font-family:var(--sans);outline:none">
+              <input type="email" id="gateEmail" placeholder="E-mail (opcional)"
+                style="padding:11px 14px;border:1.5px solid rgba(255,255,255,.2);border-radius:8px;background:rgba(255,255,255,.08);color:#fff;font-size:.92rem;font-family:var(--sans);outline:none">
+              <div id="gateErro" style="color:#f87171;font-size:.82rem;display:none">Preencha nome e WhatsApp.</div>
+              <button onclick="revelarResultado()" style="width:100%;padding:13px;background:var(--accent);color:var(--dark);border:none;border-radius:10px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:var(--display);transition:all .2s">🔓 Revelar minhas ideias</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </div>
+
+      <!-- ETAPA 3: Resultado revelado -->
+      <div id="etapa3" style="display:none">
+        <p style="color:rgba(255,255,255,.55);font-size:.85rem;margin-bottom:20px;text-align:center">
+          ✅ 3 ideias de hub para <strong id="etapa3Nome" style="color:var(--accent)"></strong>
+        </p>
+        <div id="hubCardsRevelado"></div>
+        <div style="margin-top:28px">
+          <a id="btnWppFinal" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px 24px;background:#25D366;color:#fff;border-radius:12px;font-family:var(--display);font-size:1.05rem;font-weight:700;text-decoration:none;transition:all .2s;box-shadow:0 6px 24px rgba(37,211,102,.35)" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Falar com a Leanttro pelo WhatsApp →
+          </a>
+          <p style="text-align:center;color:rgba(255,255,255,.35);font-size:.75rem;margin-top:10px">Respondo pessoalmente. Sem robô, sem script.</p>
+        </div>
+      </div>
+
+    </div><!-- /.form-card -->
+  </div><!-- /.form-inner -->
 </section>
 
 <!-- ═══ CTA FINAL ═══ -->
@@ -845,75 +872,92 @@ function renderNegocios(){
 }
 
 // ─── FORMULÁRIO IA ───
-async function analisarHub(){
-  const nome=document.getElementById('inputNome').value.trim();
-  const wpp=document.getElementById('inputWpp').value.trim();
-  const site=document.getElementById('inputSite').value.trim();
-  const desc=document.getElementById('inputDesc').value.trim();
+let hubsGerados = [];
 
-  if(!nome||!site){alert('Preencha pelo menos seu nome e o site do negócio.');return}
+async function gerarIdeias() {
+  const site = document.getElementById('inputSite').value.trim();
+  const desc = document.getElementById('inputDesc').value.trim();
+  if (!site && !desc) { alert('Cole o site do seu negócio ou descreva o que você faz.'); return; }
 
-  const btn=document.getElementById('btnAnalisar');
-  const erro=document.getElementById('iaErro');
+  const btn = document.getElementById('btnAnalisar');
+  const erro = document.getElementById('iaErro');
   btn.classList.add('loading');
-  btn.disabled=true;
-  erro.style.display='none';
-  document.getElementById('iaResultado').classList.remove('show');
+  btn.disabled = true;
+  erro.style.display = 'none';
 
-  // Salva lead
-  try{
-    await fetch(API_BASE+'/leads',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      nome,telefone:wpp,empresa:site,origem:'seuhub',interesse:'Seu Hub'
-    })});
-  }catch(e){}
-
-  // Chama a IA (Anthropic API)
-  try{
-    const prompt=`Você é um consultor de SEO e marketing digital da Leanttro Tecnologia. Seu serviço "Seu Hub" instala um hub de negócios locais dentro do domínio do cliente, gerando tráfego orgânico no Google sem pagar por anúncios.
-
-O cliente preencheu:
-- Nome: ${nome}
-- Site: ${site}
-- Descrição do negócio: ${desc||'Não informada'}
-
-Com base no site e descrição, sugira de forma direta e convincente:
-1. Que tipo de hub faria mais sentido para este negócio (ex: hub de academias do bairro, hub de fornecedores do setor, hub de prestadores de serviço local, etc.)
-2. Por que este hub atrairia o público-alvo exato deles
-3. Um exemplo de keyword que esse hub rankearia (ex: "academia perto do Jabaquara")
-4. Uma estimativa realista de resultado nos primeiros 3-6 meses (baseada nos cases reais: Feiras de Rua com 328 mil impressões em 3 meses, Guia do Rodízio rankeando em 4 dias)
-
-Seja direto, entusiasmado mas honesto. Use linguagem próxima, como Leandro Andrade (fundador da Leanttro) falaria. Máximo 200 palavras. Termine com uma frase de call-to-action para falar no WhatsApp.`;
-
-    const response = await fetch('https://api.anthropic.com/v1/messages',{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        messages:[{role:'user',content:prompt}]
-      })
+  try {
+    const res = await fetch(API_BASE + '/api/gerar-hub', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ site, descricao: desc })
     });
+    const data = await res.json();
+    if (data.erro) throw new Error(data.erro);
 
-    const data=await response.json();
-    const texto=data.content&&data.content[0]?data.content[0].text:'';
+    const parsed = JSON.parse(data.resultado);
+    hubsGerados = parsed.hubs || [];
+    if (!hubsGerados.length) throw new Error('sem hubs');
 
-    if(!texto)throw new Error('sem resposta');
+    document.getElementById('hubCards').innerHTML = hubsGerados.map((h, i) => `
+      <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:18px 20px;margin-bottom:12px">
+        <div style="color:var(--accent);font-size:.75rem;font-weight:700;letter-spacing:.08em;margin-bottom:6px">OPÇÃO ${i+1}</div>
+        <div style="font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff;margin-bottom:8px">${h.titulo}</div>
+        <div style="color:rgba(255,255,255,.6);font-size:.85rem;line-height:1.5">
+          <span style="color:rgba(255,255,255,.4)">Nicho:</span> ${h.nicho}<br>
+          <span style="color:rgba(255,255,255,.4)">Keyword:</span> "${h.keyword_exemplo || h.keyword}"<br>
+          <span style="color:rgba(255,255,255,.4)">Potencial:</span> ${h.potencial}${h.por_que ? `<br><span style="color:rgba(255,255,255,.4)">Por quê?</span> ${h.por_que}` : ''}
+        </div>
+      </div>`).join('');
 
-    document.getElementById('iaNomeCliente').textContent=nome;
-    document.getElementById('iaTexto').textContent=texto;
+    document.getElementById('etapa2Site').textContent = site || desc;
+    document.getElementById('etapa1').style.display = 'none';
+    document.getElementById('etapa2').style.display = 'block';
 
-    const msg=encodeURIComponent(`Olá Leandro! Me chamo ${nome} e tenho o site ${site}. A IA da Leanttro analisou meu negócio e quero saber mais sobre o Seu Hub.`);
-    document.getElementById('iaWppLink').href=`https://wa.me/5511999999999?text=${msg}`;
-
-    document.getElementById('iaResultado').classList.add('show');
-    document.getElementById('iaResultado').scrollIntoView({behavior:'smooth',block:'start'});
-
-  } catch(e){
-    erro.style.display='block';
+  } catch(e) {
+    erro.style.display = 'block';
   }
 
   btn.classList.remove('loading');
-  btn.disabled=false;
+  btn.disabled = false;
+}
+
+async function revelarResultado() {
+  const nome  = document.getElementById('gateNome').value.trim();
+  const wpp   = document.getElementById('gateWpp').value.trim();
+  const email = document.getElementById('gateEmail').value.trim();
+  const erroEl = document.getElementById('gateErro');
+
+  if (!nome || !wpp) { erroEl.style.display = 'block'; return; }
+  erroEl.style.display = 'none';
+
+  const interesse = hubsGerados.map((h,i) => `Opção ${i+1}: ${h.titulo} — ${h.nicho}`).join(' | ');
+
+  try {
+    await fetch(API_BASE + '/leads', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ nome, telefone: wpp, email: email || null, origem: 'seuhub-ia', interesse })
+    });
+  } catch(e) {}
+
+  document.getElementById('hubCardsRevelado').innerHTML = hubsGerados.map((h, i) => `
+    <div style="background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:18px 20px;margin-bottom:12px">
+      <div style="color:var(--accent);font-size:.75rem;font-weight:700;letter-spacing:.08em;margin-bottom:6px">OPÇÃO ${i+1}</div>
+      <div style="font-family:var(--display);font-weight:700;font-size:1.05rem;color:#fff;margin-bottom:8px">${h.titulo}</div>
+      <div style="color:rgba(255,255,255,.6);font-size:.85rem;line-height:1.5">
+        <span style="color:rgba(255,255,255,.4)">Nicho:</span> ${h.nicho}<br>
+        <span style="color:rgba(255,255,255,.4)">Keyword:</span> "${h.keyword_exemplo || h.keyword}"<br>
+        <span style="color:rgba(255,255,255,.4)">Potencial:</span> ${h.potencial}${h.por_que ? `<br><span style="color:rgba(255,255,255,.4)">Por quê?</span> ${h.por_que}` : ''}
+      </div>
+    </div>`).join('');
+
+  const msg = encodeURIComponent(`Olá Leandro! Me chamo ${nome} e tenho o site ${document.getElementById('inputSite').value.trim() || 'não informado'}. A IA gerou 3 ideias de hub pro meu negócio e quero conversar sobre isso!`);
+  document.getElementById('btnWppFinal').href = `https://wa.me/5511999999999?text=${msg}`;
+
+  document.getElementById('etapa2').style.display = 'none';
+  document.getElementById('etapa3').style.display = 'block';
+  document.getElementById('etapa3Nome').textContent = nome;
+  document.getElementById('etapa3').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // ─── INIT ───
