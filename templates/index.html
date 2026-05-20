@@ -888,41 +888,42 @@ footer{
 @media(max-width:900px){.hero-h1-br{display:none}}
 
 
-/* ── FILTROS SLICER MOBILE ── */
-@media(max-width:768px){
-  .filtro-slicer-wrap{margin-bottom:10px}
-  .filtro-slicer-btn{
-    display:flex;align-items:center;justify-content:space-between;
-    width:100%;padding:11px 16px;
-    background:#fff;border:1.5px solid var(--border);
-    border-radius:50px;cursor:pointer;
-    font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--text);
-    transition:border-color .2s;
-  }
-  .filtro-slicer-btn.has-active{border-color:var(--primary);color:var(--primary)}
-  .filtro-slicer-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0;transition:transform .25s}
-  .filtro-slicer-btn.open svg{transform:rotate(180deg)}
-  .filtro-slicer-label{display:flex;align-items:center;gap:8px}
-  .filtro-slicer-label svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
-  .filtro-slicer-selected{
-    font-size:.78rem;font-weight:700;
-    background:var(--primary);color:#fff;
-    padding:2px 9px;border-radius:50px;margin-left:6px;
-  }
-  .filtro-slicer-panel{
-    max-height:0;overflow:hidden;
-    transition:max-height .3s ease,padding .3s ease;
-    background:#fff;border:1.5px solid var(--border);
-    border-top:none;border-radius:0 0 16px 16px;
-    margin-top:-8px;padding:0 12px;
-  }
-  .filtro-slicer-panel.open{max-height:260px;padding:12px 12px 14px;overflow-y:auto}
-  .filtro-slicer-inner{display:flex;flex-wrap:wrap;gap:7px;padding-top:4px}
-  /* Esconde os filtros originais no mobile */
-  .filtros-categoria,.filtros-bairro{display:none!important}
+/* ── FILTROS SLICER (desktop + mobile) ── */
+.filtro-slicer-wrap{margin-bottom:10px;max-width:320px}
+.filtro-slicer-btn{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;padding:11px 16px;
+  background:#fff;border:1.5px solid var(--border);
+  border-radius:50px;cursor:pointer;
+  font-family:var(--sans);font-size:.88rem;font-weight:600;color:var(--text);
+  transition:border-color .2s;
 }
+.filtro-slicer-btn.has-active{border-color:var(--primary);color:var(--primary)}
+.filtro-slicer-btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2.5;flex-shrink:0;transition:transform .25s}
+.filtro-slicer-btn.open svg{transform:rotate(180deg)}
+.filtro-slicer-label{display:flex;align-items:center;gap:8px}
+.filtro-slicer-label svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0}
+.filtro-slicer-selected{
+  font-size:.78rem;font-weight:700;
+  background:var(--primary);color:#fff;
+  padding:2px 9px;border-radius:50px;margin-left:6px;
+}
+.filtro-slicer-panel{
+  max-height:0;overflow:hidden;
+  transition:max-height .3s ease,padding .3s ease;
+  background:#fff;border:1.5px solid var(--border);
+  border-top:none;border-radius:0 0 16px 16px;
+  margin-top:-8px;padding:0 12px;
+  position:relative;z-index:10;
+}
+.filtro-slicer-panel.open{max-height:260px;padding:12px 12px 14px;overflow-y:auto}
+.filtro-slicer-inner{display:flex;flex-wrap:wrap;gap:7px;padding-top:4px}
+/* Esconde os filtros originais (substituídos pelos slicers) */
+.filtros-categoria,.filtros-bairro{display:none!important}
+/* Desktop: slicers lado a lado no centro */
 @media(min-width:769px){
-  .filtro-slicer-wrap{display:none!important}
+  .filtro-slicers-desktop-row{display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+  .filtro-slicer-wrap{max-width:260px;flex:0 0 260px}
 }
 </style>
 </head>
@@ -1935,9 +1936,8 @@ document.querySelectorAll('.faq-question').forEach(btn=>{
   go(0);
 })();
 
-// ── FILTROS SLICER MOBILE ──
+// ── FILTROS SLICER (desktop + mobile) ──
 (function(){
-  if(window.innerWidth > 768) return;
 
   const catWrap  = document.getElementById('filtrosCat');
   const bairWrap = document.getElementById('filtrosBairro');
@@ -2014,18 +2014,100 @@ document.querySelectorAll('.faq-question').forEach(btn=>{
   const iconCat  = '<svg viewBox="0 0 24 24" style="margin-right:4px"><path d="M4 6h16M4 12h16M4 18h7"/></svg>';
   const iconBair = '<svg viewBox="0 0 24 24" style="margin-right:4px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>';
 
-  makeSlicer(catWrap,  iconCat,  'Categoria',  'slicerCat');
+  // Container row que agrupa os dois slicers (centralizado no desktop)
+  const slicerRow = document.createElement('div');
+  slicerRow.className = 'filtro-slicers-desktop-row';
+  catWrap.parentNode.insertBefore(slicerRow, catWrap);
+
+  function makeSlicerInRow(sourceEl, icon, labelText, slicerId){
+    const wrap = document.createElement('div');
+    wrap.className = 'filtro-slicer-wrap';
+    wrap.id = slicerId + 'Wrap';
+
+    const btn = document.createElement('button');
+    btn.className = 'filtro-slicer-btn';
+    btn.innerHTML = `<span class="filtro-slicer-label">${icon}${labelText}</span><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>`;
+
+    const panel = document.createElement('div');
+    panel.className = 'filtro-slicer-panel';
+    const inner = document.createElement('div');
+    inner.className = 'filtro-slicer-inner';
+    panel.appendChild(inner);
+
+    btn.addEventListener('click', function(){
+      const isOpen = panel.classList.contains('open');
+      // Fecha outros painéis abertos
+      document.querySelectorAll('.filtro-slicer-panel.open').forEach(function(p){ p.classList.remove('open'); });
+      document.querySelectorAll('.filtro-slicer-btn.open').forEach(function(b){ b.classList.remove('open'); });
+      if(!isOpen){
+        panel.classList.add('open');
+        btn.classList.add('open');
+      }
+    });
+
+    // Fecha ao clicar fora
+    document.addEventListener('click', function(e){
+      if(!wrap.contains(e.target)){
+        panel.classList.remove('open');
+        btn.classList.remove('open');
+      }
+    });
+
+    wrap.appendChild(btn);
+    wrap.appendChild(panel);
+    slicerRow.appendChild(wrap);
+
+    function syncChips(){
+      inner.innerHTML = '';
+      Array.from(sourceEl.children).forEach(function(chip){
+        const clone = chip.cloneNode(true);
+        clone.addEventListener('click', function(){
+          chip.click();
+          inner.querySelectorAll('[data-cat],[data-bairro]').forEach(function(c){ c.classList.remove('active') });
+          clone.classList.add('active');
+          updateLabel();
+          panel.classList.remove('open');
+          btn.classList.remove('open');
+        });
+        inner.appendChild(clone);
+      });
+      updateLabel();
+    }
+
+    function updateLabel(){
+      const activeChip = sourceEl.querySelector('.chip-cat.active,.chip-loc.active');
+      const existing = btn.querySelector('.filtro-slicer-selected');
+      if(existing) existing.remove();
+      if(activeChip){
+        const txt = activeChip.textContent.trim();
+        const isAll = txt === 'Todos' || txt === 'Todos os bairros';
+        btn.classList.toggle('has-active', !isAll);
+        if(!isAll){
+          const badge = document.createElement('span');
+          badge.className = 'filtro-slicer-selected';
+          badge.textContent = txt;
+          btn.querySelector('.filtro-slicer-label').appendChild(badge);
+        }
+      }
+    }
+
+    const obs = new MutationObserver(syncChips);
+    obs.observe(sourceEl, {childList:true, subtree:true, attributes:true, attributeFilter:['class']});
+    syncChips();
+  }
+
+  makeSlicerInRow(catWrap, iconCat, 'Categoria', 'slicerCat');
 
   // Bairro slicer: wait until visible (bairros são carregados dinamicamente)
   function tryBairro(){
     if(!bairWrap) return;
     if(bairWrap.children.length > 0){
-      makeSlicer(bairWrap, iconBair, 'Bairro', 'slicerBairro');
+      makeSlicerInRow(bairWrap, iconBair, 'Bairro', 'slicerBairro');
     } else {
       const obs2 = new MutationObserver(function(_, o){
         if(bairWrap.children.length > 0){
           o.disconnect();
-          makeSlicer(bairWrap, iconBair, 'Bairro', 'slicerBairro');
+          makeSlicerInRow(bairWrap, iconBair, 'Bairro', 'slicerBairro');
         }
       });
       obs2.observe(bairWrap, {childList:true});
