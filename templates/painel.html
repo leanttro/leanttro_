@@ -6,233 +6,366 @@
 <title>Leanttro — Painel Admin</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg:       #0a0a0f;
-  --surface:  #111118;
-  --card:     #16161f;
-  --border:   #23232f;
-  --accent:   #6c63ff;
-  --accent2:  #00e5a0;
-  --danger:   #ff4d6d;
-  --warn:     #ffb300;
-  --text:     #e8e8f0;
-  --muted:    #6b6b80;
-  --radius:   10px;
-  --mono:     'JetBrains Mono', monospace;
-  --sans:     'Syne', sans-serif;
+  --bg:       #05050a;
+  --surface:  #0e0e18;
+  --card:     #13131f;
+  --border:   #1e1e30;
+  --border2:  #2a2a40;
+  --accent:   #7c6dfa;
+  --accent2:  #00d68f;
+  --accent3:  #f72585;
+  --warn:     #ffd60a;
+  --danger:   #ef233c;
+  --text:     #e2e2f0;
+  --muted:    #5a5a78;
+  --muted2:   #8a8aa8;
+  --radius:   8px;
+  --radius2:  14px;
+  --mono:     'DM Mono', monospace;
+  --sans:     'Space Grotesk', sans-serif;
+  --sidebar:  220px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;display:flex;overflow-x:hidden}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  min-height:100vh;
+  display:flex;
+  overflow-x:hidden;
+}
+/* noise texture */
+body::before{
+  content:'';position:fixed;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events:none;z-index:0;
+}
 
 /* ── SIDEBAR ── */
 #sidebar{
-  width:220px;min-width:220px;background:var(--surface);border-right:1px solid var(--border);
-  display:flex;flex-direction:column;position:fixed;top:0;left:0;height:100vh;z-index:100;
+  width:var(--sidebar);min-width:var(--sidebar);
+  background:var(--surface);
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;
+  position:fixed;top:0;left:0;height:100vh;z-index:100;
   transition:transform .25s ease;
 }
 .sidebar-logo{
-  padding:24px 20px 20px;border-bottom:1px solid var(--border);
-  font-family:var(--sans);font-weight:800;font-size:1.2rem;letter-spacing:-0.5px;
+  padding:22px 20px 18px;
+  border-bottom:1px solid var(--border);
   display:flex;align-items:center;gap:10px;
 }
-.sidebar-logo span{color:var(--accent)}
-.logo-dot{width:8px;height:8px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-
-nav{flex:1;padding:16px 0;overflow-y:auto}
-.nav-section{padding:8px 20px 4px;font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:1.5px;text-transform:uppercase}
-.nav-item{
-  display:flex;align-items:center;gap:10px;padding:10px 20px;cursor:pointer;
-  color:var(--muted);font-size:.85rem;font-weight:600;transition:all .15s;border-left:2px solid transparent;
+.logo-mark{
+  width:30px;height:30px;border-radius:8px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:.85rem;color:#fff;flex-shrink:0;
+  position:relative;overflow:hidden;
 }
-.nav-item:hover{color:var(--text);background:rgba(108,99,255,.08)}
-.nav-item.active{color:var(--accent);border-left-color:var(--accent);background:rgba(108,99,255,.1)}
-.nav-item svg{width:16px;height:16px;flex-shrink:0}
-.nav-badge{margin-left:auto;background:var(--accent);color:#fff;font-size:.6rem;padding:2px 6px;border-radius:20px;font-family:var(--mono)}
+.logo-mark::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.2),transparent)}
+.logo-text{font-weight:700;font-size:1.05rem;letter-spacing:-.3px}
+.logo-text span{color:var(--accent)}
+
+nav{flex:1;padding:12px 0;overflow-y:auto}
+nav::-webkit-scrollbar{width:3px}
+nav::-webkit-scrollbar-thumb{background:var(--border2)}
+.nav-section{
+  padding:10px 18px 4px;
+  font-size:.6rem;font-weight:700;
+  color:var(--muted);letter-spacing:2px;text-transform:uppercase;
+}
+.nav-item{
+  display:flex;align-items:center;gap:9px;
+  padding:9px 18px;cursor:pointer;
+  color:var(--muted2);font-size:.82rem;font-weight:500;
+  transition:all .15s;border-left:2px solid transparent;
+  user-select:none;
+}
+.nav-item:hover{color:var(--text);background:rgba(124,109,250,.07)}
+.nav-item.active{color:var(--accent);border-left-color:var(--accent);background:rgba(124,109,250,.1)}
+.nav-item svg{width:15px;height:15px;flex-shrink:0}
+.nav-badge{
+  margin-left:auto;background:var(--accent3);color:#fff;
+  font-size:.58rem;padding:2px 6px;border-radius:20px;
+  font-family:var(--mono);font-weight:500;
+}
 
 .sidebar-footer{
-  padding:16px 20px;border-top:1px solid var(--border);font-size:.75rem;color:var(--muted);
+  padding:14px 18px;border-top:1px solid var(--border);
 }
-.sidebar-user{display:flex;align-items:center;gap:8px;margin-bottom:12px}
-.avatar{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.75rem;color:#fff;flex-shrink:0}
-.user-info{overflow:hidden}
-.user-name{font-size:.8rem;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.user-role{font-size:.65rem;color:var(--muted)}
-#btn-logout{width:100%;padding:7px;background:transparent;border:1px solid var(--border);border-radius:var(--radius);color:var(--muted);cursor:pointer;font-family:var(--sans);font-size:.75rem;font-weight:600;transition:all .15s}
+.sidebar-user{display:flex;align-items:center;gap:9px;margin-bottom:10px}
+.avatar{
+  width:30px;height:30px;border-radius:8px;
+  background:linear-gradient(135deg,var(--accent),var(--accent3));
+  display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:.75rem;color:#fff;flex-shrink:0;
+}
+.user-name{font-size:.78rem;font-weight:600;color:var(--text)}
+.user-role{font-size:.62rem;color:var(--muted)}
+#btn-logout{
+  width:100%;padding:7px;background:transparent;
+  border:1px solid var(--border2);border-radius:var(--radius);
+  color:var(--muted2);cursor:pointer;font-family:var(--sans);
+  font-size:.75rem;font-weight:600;transition:all .15s;
+}
 #btn-logout:hover{border-color:var(--danger);color:var(--danger)}
 
 /* ── MAIN ── */
-#main{margin-left:220px;flex:1;display:flex;flex-direction:column;min-height:100vh}
+#main{margin-left:var(--sidebar);flex:1;display:flex;flex-direction:column;min-height:100vh}
 .topbar{
-  position:sticky;top:0;z-index:50;background:rgba(10,10,15,.85);backdrop-filter:blur(12px);
-  border-bottom:1px solid var(--border);padding:0 28px;height:58px;
+  position:sticky;top:0;z-index:50;
+  background:rgba(5,5,10,.9);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 28px;height:56px;
   display:flex;align-items:center;justify-content:space-between;
 }
-.topbar-title{font-size:1rem;font-weight:700;letter-spacing:-.3px}
+.topbar-title{font-size:.95rem;font-weight:700;letter-spacing:-.2px}
 .topbar-right{display:flex;align-items:center;gap:12px}
-.status-dot{width:7px;height:7px;border-radius:50%;background:var(--accent2);display:inline-block;margin-right:4px;animation:pulse 2s infinite}
-.api-status{font-size:.75rem;color:var(--muted);font-family:var(--mono)}
+.status-pill{
+  display:flex;align-items:center;gap:6px;
+  background:rgba(0,214,143,.08);
+  border:1px solid rgba(0,214,143,.2);
+  border-radius:20px;padding:4px 10px;
+}
+.status-dot{width:6px;height:6px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+.api-status{font-size:.7rem;color:var(--accent2);font-family:var(--mono)}
 
-.content{padding:28px;flex:1}
-.section{display:none;animation:fadeIn .2s ease}
+.content{padding:24px 28px;flex:1}
+.section{display:none;animation:fadeUp .2s ease}
 .section.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* ── LOGIN SCREEN ── */
+/* ── LOGIN ── */
 #login-screen{
-  position:fixed;inset:0;background:var(--bg);z-index:999;
+  position:fixed;inset:0;
+  background:var(--bg);z-index:999;
   display:flex;align-items:center;justify-content:center;
 }
-.login-box{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;
-  padding:40px;width:380px;
+#login-screen::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 50% at 50% 50%, rgba(124,109,250,.12), transparent);
 }
-.login-logo{font-size:1.5rem;font-weight:800;margin-bottom:8px}
+.login-box{
+  background:var(--card);
+  border:1px solid var(--border2);
+  border-radius:var(--radius2);
+  padding:36px 40px;width:370px;
+  position:relative;z-index:1;
+}
+.login-logo{font-size:1.35rem;font-weight:700;margin-bottom:6px}
 .login-logo span{color:var(--accent)}
-.login-sub{color:var(--muted);font-size:.85rem;margin-bottom:28px}
-.login-box .field{margin-bottom:16px}
-.login-box label{display:block;font-size:.75rem;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase}
+.login-sub{color:var(--muted2);font-size:.82rem;margin-bottom:26px}
+.login-box .field{margin-bottom:14px}
+.login-box label{display:block;font-size:.7rem;font-weight:600;color:var(--muted2);margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase}
 .login-box input{
-  width:100%;padding:11px 14px;background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);color:var(--text);font-family:var(--mono);font-size:.9rem;
+  width:100%;padding:10px 13px;background:var(--surface);
+  border:1px solid var(--border2);border-radius:var(--radius);
+  color:var(--text);font-family:var(--mono);font-size:.88rem;
   transition:border-color .15s;outline:none;
 }
 .login-box input:focus{border-color:var(--accent)}
-.login-error{color:var(--danger);font-size:.8rem;margin-bottom:12px;display:none}
+.login-error{color:var(--danger);font-size:.78rem;margin-bottom:10px;display:none}
 #btn-login{
-  width:100%;padding:13px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);
-  font-family:var(--sans);font-weight:700;font-size:.95rem;cursor:pointer;transition:opacity .15s;
+  width:100%;padding:12px;
+  background:linear-gradient(135deg,var(--accent),#9d6ffa);
+  color:#fff;border:none;border-radius:var(--radius);
+  font-family:var(--sans);font-weight:700;font-size:.9rem;
+  cursor:pointer;transition:opacity .15s;
+  box-shadow:0 4px 20px rgba(124,109,250,.3);
 }
-#btn-login:hover{opacity:.85}
-#btn-login:disabled{opacity:.5;cursor:not-allowed}
+#btn-login:hover{opacity:.88}
+#btn-login:disabled{opacity:.4;cursor:not-allowed}
 
-/* ── CARDS STATS ── */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;margin-bottom:28px}
-.stat-card{
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:20px;position:relative;overflow:hidden;
+/* ── STATS ── */
+.stats-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
+  gap:14px;margin-bottom:24px;
 }
-.stat-card::before{
+.stat-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius2);padding:18px 20px;
+  position:relative;overflow:hidden;
+}
+.stat-card::after{
   content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(90deg,var(--accent),var(--accent2));
+  opacity:.6;
 }
-.stat-label{font-size:.7rem;font-weight:600;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:8px}
-.stat-value{font-size:1.8rem;font-weight:800;font-family:var(--mono);line-height:1}
-.stat-sub{font-size:.72rem;color:var(--muted);margin-top:6px}
+.stat-label{font-size:.65rem;font-weight:700;color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px}
+.stat-value{font-size:1.7rem;font-weight:700;font-family:var(--mono);line-height:1;letter-spacing:-1px}
+.stat-sub{font-size:.68rem;color:var(--muted);margin-top:5px}
 
-/* ── TABLE ── */
-.table-wrap{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-.table-header{
-  padding:16px 20px;border-bottom:1px solid var(--border);
-  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;
+/* ── TABLE WRAP ── */
+.table-wrap{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:var(--radius2);overflow:hidden;
 }
-.table-header h3{font-size:.9rem;font-weight:700}
+.table-header{
+  padding:14px 20px;border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:10px;
+}
+.table-header h3{font-size:.88rem;font-weight:700}
 .table-actions{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .search-input{
-  padding:7px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  color:var(--text);font-family:var(--mono);font-size:.8rem;outline:none;width:200px;transition:border-color .15s;
+  padding:7px 12px;background:var(--surface);border:1px solid var(--border2);
+  border-radius:var(--radius);color:var(--text);font-family:var(--mono);
+  font-size:.78rem;outline:none;width:190px;transition:border-color .15s;
 }
 .search-input:focus{border-color:var(--accent)}
 select.filter-sel{
-  padding:7px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);
-  color:var(--text);font-family:var(--sans);font-size:.8rem;outline:none;cursor:pointer;
+  padding:7px 12px;background:var(--surface);border:1px solid var(--border2);
+  border-radius:var(--radius);color:var(--text);font-family:var(--sans);
+  font-size:.78rem;outline:none;cursor:pointer;
 }
+.bulk-bar{
+  padding:10px 20px;background:rgba(124,109,250,.08);border-bottom:1px solid var(--border);
+  display:none;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.bulk-bar.show{display:flex}
+.bulk-count{font-size:.8rem;font-weight:600;color:var(--accent)}
 table{width:100%;border-collapse:collapse}
 th{
-  padding:10px 16px;text-align:left;font-size:.68rem;font-weight:700;color:var(--muted);
-  letter-spacing:1px;text-transform:uppercase;border-bottom:1px solid var(--border);background:var(--surface);
+  padding:9px 16px;text-align:left;font-size:.64rem;font-weight:700;
+  color:var(--muted);letter-spacing:1.2px;text-transform:uppercase;
+  border-bottom:1px solid var(--border);background:var(--surface);
 }
-td{padding:12px 16px;font-size:.82rem;border-bottom:1px solid rgba(35,35,47,.5);vertical-align:middle}
+td{padding:11px 16px;font-size:.8rem;border-bottom:1px solid rgba(30,30,48,.7);vertical-align:middle}
 tr:last-child td{border-bottom:none}
-tr:hover td{background:rgba(108,99,255,.04)}
-.badge{
-  display:inline-block;padding:3px 8px;border-radius:20px;font-size:.68rem;font-weight:700;
-  font-family:var(--mono);letter-spacing:.3px;
+tr:hover td{background:rgba(124,109,250,.035)}
+input[type=checkbox].row-check{
+  width:15px;height:15px;cursor:pointer;accent-color:var(--accent);
+  vertical-align:middle;
 }
-.badge-novo{background:rgba(108,99,255,.2);color:var(--accent)}
-.badge-pago{background:rgba(0,229,160,.15);color:var(--accent2)}
-.badge-pendente{background:rgba(255,179,0,.15);color:var(--warn)}
-.badge-cancelado{background:rgba(255,77,109,.15);color:var(--danger)}
-.badge-gratuito{background:rgba(107,107,128,.15);color:var(--muted)}
-.badge-destaque{background:rgba(255,179,0,.15);color:var(--warn)}
-.badge-contato,.badge-em_contato{background:rgba(0,229,160,.1);color:var(--accent2)}
-.badge-convertido{background:rgba(0,229,160,.2);color:var(--accent2)}
+
+.badge{
+  display:inline-block;padding:2px 8px;border-radius:20px;
+  font-size:.65rem;font-weight:700;font-family:var(--mono);letter-spacing:.3px;
+}
+.badge-novo,.badge-new{background:rgba(124,109,250,.15);color:var(--accent)}
+.badge-pago,.badge-ativo,.badge-aprovado{background:rgba(0,214,143,.12);color:var(--accent2)}
+.badge-pendente,.badge-rascunho{background:rgba(255,214,10,.1);color:var(--warn)}
+.badge-cancelado,.badge-inativo,.badge-perdido{background:rgba(239,35,60,.12);color:var(--danger)}
+.badge-gratuito{background:rgba(90,90,120,.15);color:var(--muted2)}
+.badge-destaque,.badge-premium{background:rgba(255,214,10,.12);color:var(--warn)}
+.badge-em_contato,.badge-contato{background:rgba(0,214,143,.1);color:var(--accent2)}
+.badge-convertido{background:rgba(0,214,143,.18);color:var(--accent2)}
+
 .action-btn{
-  padding:5px 10px;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;
-  border:1px solid var(--border);background:transparent;color:var(--muted);transition:all .15s;font-family:var(--sans);
-  margin-right:4px;
+  padding:4px 9px;border-radius:5px;font-size:.72rem;font-weight:600;
+  cursor:pointer;border:1px solid var(--border2);background:transparent;
+  color:var(--muted2);transition:all .15s;font-family:var(--sans);margin-right:3px;
 }
 .action-btn:hover{border-color:var(--accent);color:var(--accent)}
 .action-btn.danger:hover{border-color:var(--danger);color:var(--danger)}
+.action-btn.success:hover{border-color:var(--accent2);color:var(--accent2)}
 
-/* ── BTN PRIMARY ── */
+/* ── BUTTONS ── */
 .btn-primary{
-  padding:9px 18px;background:var(--accent);color:#fff;border:none;border-radius:var(--radius);
-  font-family:var(--sans);font-weight:700;font-size:.82rem;cursor:pointer;transition:opacity .15s;
+  padding:8px 16px;
+  background:linear-gradient(135deg,var(--accent),#9d6ffa);
+  color:#fff;border:none;border-radius:var(--radius);
+  font-family:var(--sans);font-weight:700;font-size:.8rem;
+  cursor:pointer;transition:opacity .15s;
   display:inline-flex;align-items:center;gap:6px;
 }
 .btn-primary:hover{opacity:.85}
 .btn-secondary{
-  padding:9px 18px;background:transparent;color:var(--text);border:1px solid var(--border);border-radius:var(--radius);
-  font-family:var(--sans);font-weight:600;font-size:.82rem;cursor:pointer;transition:all .15s;
+  padding:8px 16px;background:transparent;color:var(--text);
+  border:1px solid var(--border2);border-radius:var(--radius);
+  font-family:var(--sans);font-weight:600;font-size:.8rem;
+  cursor:pointer;transition:all .15s;
 }
 .btn-secondary:hover{border-color:var(--accent);color:var(--accent)}
+.btn-danger{
+  padding:8px 14px;background:rgba(239,35,60,.1);color:var(--danger);
+  border:1px solid rgba(239,35,60,.25);border-radius:var(--radius);
+  font-family:var(--sans);font-weight:700;font-size:.78rem;
+  cursor:pointer;transition:all .15s;
+}
+.btn-danger:hover{background:rgba(239,35,60,.2)}
 
 /* ── MODAL ── */
 .modal-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);
+  position:fixed;inset:0;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(6px);
   z-index:200;display:none;align-items:center;justify-content:center;padding:20px;
 }
 .modal-overlay.open{display:flex}
 .modal{
-  background:var(--card);border:1px solid var(--border);border-radius:16px;
-  width:100%;max-width:520px;max-height:90vh;overflow-y:auto;
-  animation:fadeIn .2s ease;
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:var(--radius2);width:100%;max-width:520px;
+  max-height:90vh;overflow-y:auto;animation:fadeUp .2s ease;
 }
 .modal-head{
-  padding:20px 24px;border-bottom:1px solid var(--border);
+  padding:18px 22px;border-bottom:1px solid var(--border);
   display:flex;align-items:center;justify-content:space-between;
+  position:sticky;top:0;background:var(--card);z-index:1;
 }
-.modal-head h3{font-size:.95rem;font-weight:700}
-.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:1.2rem;line-height:1}
+.modal-head h3{font-size:.9rem;font-weight:700}
+.modal-close{background:none;border:none;color:var(--muted2);cursor:pointer;font-size:1.1rem;line-height:1;transition:color .15s}
 .modal-close:hover{color:var(--text)}
-.modal-body{padding:24px}
-.modal-foot{padding:16px 24px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+.modal-body{padding:20px 22px}
+.modal-foot{padding:14px 22px;border-top:1px solid var(--border);display:flex;gap:10px;justify-content:flex-end}
+
+/* ── CONFIRM MODAL ── */
+#modal-confirm .modal{max-width:380px}
+.confirm-icon{font-size:2rem;text-align:center;margin-bottom:10px}
+.confirm-msg{font-size:.88rem;color:var(--muted2);text-align:center;line-height:1.5;margin-bottom:8px}
+.confirm-warning{font-size:.75rem;color:var(--danger);text-align:center;margin-bottom:16px}
+.confirm-senha{display:none}
 
 /* ── FORM FIELDS ── */
-.field{margin-bottom:16px}
-.field label{display:block;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:6px;letter-spacing:.5px;text-transform:uppercase}
+.field{margin-bottom:14px}
+.field label{display:block;font-size:.68rem;font-weight:700;color:var(--muted2);margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase}
 .field input,.field textarea,.field select{
-  width:100%;padding:10px 14px;background:var(--surface);border:1px solid var(--border);
-  border-radius:var(--radius);color:var(--text);font-family:var(--mono);font-size:.85rem;
+  width:100%;padding:9px 13px;background:var(--surface);
+  border:1px solid var(--border2);border-radius:var(--radius);
+  color:var(--text);font-family:var(--mono);font-size:.83rem;
   outline:none;transition:border-color .15s;
 }
 .field input:focus,.field textarea:focus,.field select:focus{border-color:var(--accent)}
-.field textarea{resize:vertical;min-height:80px}
+.field textarea{resize:vertical;min-height:80px;font-family:var(--sans)}
 .field select{cursor:pointer}
 .field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .field input[type=checkbox]{width:auto;cursor:pointer;accent-color:var(--accent)}
 .field-check{display:flex;align-items:center;gap:8px;margin-top:6px}
-.field-check label{font-size:.82rem;color:var(--text);text-transform:none;letter-spacing:0;margin:0}
+.field-check label{font-size:.8rem;color:var(--text);text-transform:none;letter-spacing:0;margin:0}
 
 /* ── EMPTY STATE ── */
 .empty{padding:40px;text-align:center;color:var(--muted)}
-.empty svg{width:40px;height:40px;margin:0 auto 12px;display:block;opacity:.3}
-.empty p{font-size:.85rem}
+.empty svg{width:36px;height:36px;margin:0 auto 10px;display:block;opacity:.25}
+.empty p{font-size:.82rem}
 
 /* ── TOAST ── */
 .toast{
-  position:fixed;bottom:24px;right:24px;z-index:999;
-  background:var(--card);border:1px solid var(--border);border-radius:var(--radius);
-  padding:12px 18px;font-size:.82rem;display:flex;align-items:center;gap:10px;
+  position:fixed;bottom:22px;right:22px;z-index:9999;
+  background:var(--card);border:1px solid var(--border2);
+  border-radius:var(--radius);padding:11px 16px;
+  font-size:.8rem;display:flex;align-items:center;gap:8px;
   transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none;
+  box-shadow:0 8px 30px rgba(0,0,0,.4);
 }
 .toast.show{transform:translateY(0);opacity:1}
-.toast.success{border-color:var(--accent2)}
-.toast.error{border-color:var(--danger)}
+.toast.success{border-color:rgba(0,214,143,.4);color:var(--accent2)}
+.toast.error{border-color:rgba(239,35,60,.4);color:var(--danger)}
+.toast.warn{border-color:rgba(255,214,10,.3);color:var(--warn)}
+
+/* ── FILTER CHIP ── */
+.filter-chip{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 10px;border:1px solid var(--border2);
+  border-radius:20px;font-size:.72rem;font-weight:600;
+  cursor:pointer;background:transparent;color:var(--muted2);
+  transition:all .15s;font-family:var(--sans);
+}
+.filter-chip:hover,.filter-chip.active{border-color:var(--accent);color:var(--accent);background:rgba(124,109,250,.08)}
 
 /* ── RESPONSIVE ── */
 @media(max-width:768px){
@@ -261,8 +394,8 @@ tr:hover td{background:rgba(108,99,255,.04)}
 <!-- SIDEBAR -->
 <div id="sidebar">
   <div class="sidebar-logo">
-    <div class="logo-dot"></div>
-    Lean<span>ttro</span>
+    <div class="logo-mark">L</div>
+    <div class="logo-text">Lean<span>ttro</span></div>
   </div>
   <nav>
     <div class="nav-section">Visão Geral</div>
@@ -303,7 +436,7 @@ tr:hover td{background:rgba(108,99,255,.04)}
 
     <div class="nav-section">Conteúdo</div>
     <div class="nav-item" onclick="show('blog')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
       Blog / Posts
     </div>
 
@@ -320,12 +453,12 @@ tr:hover td{background:rgba(108,99,255,.04)}
   <div class="sidebar-footer">
     <div class="sidebar-user">
       <div class="avatar" id="sidebar-avatar">L</div>
-      <div class="user-info">
+      <div>
         <div class="user-name" id="sidebar-nome">Carregando...</div>
-        <div class="user-role">Admin</div>
+        <div class="user-role">Administrador</div>
       </div>
     </div>
-    <button id="btn-logout" onclick="doLogout()">Sair</button>
+    <button id="btn-logout" onclick="doLogout()">Sair da conta</button>
   </div>
 </div>
 
@@ -334,7 +467,10 @@ tr:hover td{background:rgba(108,99,255,.04)}
   <div class="topbar">
     <div class="topbar-title" id="topbar-title">Dashboard</div>
     <div class="topbar-right">
-      <span class="api-status"><span class="status-dot"></span>API OK</span>
+      <div class="status-pill">
+        <span class="status-dot"></span>
+        <span class="api-status">API Online</span>
+      </div>
     </div>
   </div>
 
@@ -344,8 +480,8 @@ tr:hover td{background:rgba(108,99,255,.04)}
     <div id="sec-dashboard" class="section active">
       <div class="stats-grid" id="stats-grid">
         <div class="stat-card"><div class="stat-label">Pedidos Pendentes</div><div class="stat-value" id="st-pendentes">—</div><div class="stat-sub">aguardando pagamento</div></div>
-        <div class="stat-card"><div class="stat-label">Receita Paga</div><div class="stat-value" id="st-receita">—</div><div class="stat-sub">pagamentos confirmados</div></div>
-        <div class="stat-card"><div class="stat-label">Leads Novos</div><div class="stat-value" id="st-leads">—</div><div class="stat-sub">sem contato</div></div>
+        <div class="stat-card"><div class="stat-label">Receita Confirmada</div><div class="stat-value" id="st-receita">—</div><div class="stat-sub">pagamentos aprovados</div></div>
+        <div class="stat-card"><div class="stat-label">Leads Novos</div><div class="stat-value" id="st-leads">—</div><div class="stat-sub">sem contato ainda</div></div>
         <div class="stat-card"><div class="stat-label">Produtos Ativos</div><div class="stat-value" id="st-produtos">—</div><div class="stat-sub">na vitrine</div></div>
         <div class="stat-card"><div class="stat-label">Negócios no Hub</div><div class="stat-value" id="st-negocios">—</div><div class="stat-sub">Jabaquara</div></div>
         <div class="stat-card"><div class="stat-label">Posts Publicados</div><div class="stat-value" id="st-posts">—</div><div class="stat-sub">no blog</div></div>
@@ -363,7 +499,7 @@ tr:hover td{background:rgba(108,99,255,.04)}
         <div class="table-header">
           <h3>Produtos</h3>
           <div class="table-actions">
-            <input class="search-input" id="search-produtos" placeholder="Buscar..." oninput="filterTable('produtos')">
+            <input class="search-input" id="search-produtos" placeholder="🔍 Buscar..." oninput="filterTable('produtos')">
             <select class="filter-sel" id="filter-cat-produto" onchange="filterTable('produtos')">
               <option value="">Todas categorias</option>
               <option value="exe">Executável</option>
@@ -373,11 +509,24 @@ tr:hover td{background:rgba(108,99,255,.04)}
               <option value="site">Site</option>
               <option value="3d">3D</option>
             </select>
+            <select class="filter-sel" id="filter-tipo-produto" onchange="filterTable('produtos')">
+              <option value="">Todos tipos</option>
+              <option value="loja">Loja</option>
+              <option value="portfolio">Portfólio</option>
+            </select>
             <button class="btn-primary" onclick="openModal('produto')">+ Novo</button>
           </div>
         </div>
+        <div class="bulk-bar" id="bulk-produtos">
+          <span class="bulk-count" id="bulk-produtos-count">0 selecionados</span>
+          <button class="btn-danger" onclick="bulkDeleteConfirm('produtos')">🗑 Excluir Selecionados</button>
+          <button class="btn-secondary" onclick="deselectAll('produtos')">Cancelar</button>
+        </div>
         <table>
-          <thead><tr><th>Nome</th><th>Categoria</th><th>Preço</th><th>Destaque</th><th>Ativo</th><th>Ações</th></tr></thead>
+          <thead><tr>
+            <th><input type="checkbox" class="row-check" id="chk-all-produtos" onchange="toggleAll('produtos',this.checked)"></th>
+            <th>Nome</th><th>Categoria</th><th>Tipo</th><th>Preço</th><th>Destaque</th><th>Ativo</th><th>Ações</th>
+          </tr></thead>
           <tbody id="tb-produtos"></tbody>
         </table>
       </div>
@@ -398,7 +547,7 @@ tr:hover td{background:rgba(108,99,255,.04)}
           </div>
         </div>
         <table>
-          <thead><tr><th>ID</th><th>Produto</th><th>Lead ID</th><th>Valor</th><th>Status</th><th>MP ID</th><th>Data</th></tr></thead>
+          <thead><tr><th>ID</th><th>Produto</th><th>Lead</th><th>Valor</th><th>Status</th><th>MP ID</th><th>Data</th></tr></thead>
           <tbody id="tb-pedidos"></tbody>
         </table>
       </div>
@@ -410,7 +559,7 @@ tr:hover td{background:rgba(108,99,255,.04)}
         <div class="table-header">
           <h3>Leads</h3>
           <div class="table-actions">
-            <input class="search-input" id="search-leads" placeholder="Buscar..." oninput="filterTable('leads')">
+            <input class="search-input" id="search-leads" placeholder="🔍 Buscar..." oninput="filterTable('leads')">
             <select class="filter-sel" id="filter-status-lead" onchange="loadLeads()">
               <option value="">Todos</option>
               <option value="novo">Novo</option>
@@ -420,8 +569,16 @@ tr:hover td{background:rgba(108,99,255,.04)}
             </select>
           </div>
         </div>
+        <div class="bulk-bar" id="bulk-leads">
+          <span class="bulk-count" id="bulk-leads-count">0 selecionados</span>
+          <button class="btn-danger" onclick="bulkDeleteConfirm('leads')">🗑 Excluir Selecionados</button>
+          <button class="btn-secondary" onclick="deselectAll('leads')">Cancelar</button>
+        </div>
         <table>
-          <thead><tr><th>Nome</th><th>Email</th><th>Telefone</th><th>Interesse</th><th>Origem</th><th>Status</th><th>Data</th><th>Ações</th></tr></thead>
+          <thead><tr>
+            <th><input type="checkbox" class="row-check" id="chk-all-leads" onchange="toggleAll('leads',this.checked)"></th>
+            <th>Nome</th><th>Email</th><th>Telefone</th><th>Interesse</th><th>Origem</th><th>Status</th><th>Data</th><th>Ações</th>
+          </tr></thead>
           <tbody id="tb-leads"></tbody>
         </table>
       </div>
@@ -433,12 +590,32 @@ tr:hover td{background:rgba(108,99,255,.04)}
         <div class="table-header">
           <h3>Negócios — Hub Jabaquara</h3>
           <div class="table-actions">
-            <input class="search-input" id="search-negocios" placeholder="Buscar..." oninput="filterTable('negocios')">
+            <input class="search-input" id="search-negocios" placeholder="🔍 Buscar nome ou bairro..." oninput="filterTable('negocios')">
+            <select class="filter-sel" id="filter-cat-negocio" onchange="filterTable('negocios')">
+              <option value="">Todas categorias</option>
+            </select>
+            <select class="filter-sel" id="filter-bairro-negocio" onchange="filterTable('negocios')">
+              <option value="">Todos bairros</option>
+            </select>
+            <select class="filter-sel" id="filter-plano-negocio" onchange="filterTable('negocios')">
+              <option value="">Todos planos</option>
+              <option value="gratuito">Gratuito</option>
+              <option value="destaque">Destaque</option>
+              <option value="premium">Premium</option>
+            </select>
             <button class="btn-primary" onclick="openModal('negocio')">+ Novo</button>
           </div>
         </div>
+        <div class="bulk-bar" id="bulk-negocios">
+          <span class="bulk-count" id="bulk-negocios-count">0 selecionados</span>
+          <button class="btn-danger" onclick="bulkDeleteConfirm('negocios')">🗑 Desativar Selecionados</button>
+          <button class="btn-secondary" onclick="deselectAll('negocios')">Cancelar</button>
+        </div>
         <table>
-          <thead><tr><th>Nome</th><th>Categoria</th><th>Bairro</th><th>Plano</th><th>Destaque</th><th>Views</th><th>Ativo</th><th>Ações</th></tr></thead>
+          <thead><tr>
+            <th><input type="checkbox" class="row-check" id="chk-all-negocios" onchange="toggleAll('negocios',this.checked)"></th>
+            <th>Nome</th><th>Categoria</th><th>Bairro</th><th>Plano</th><th>Destaque</th><th>Views</th><th>Ativo</th><th>Ações</th>
+          </tr></thead>
           <tbody id="tb-negocios"></tbody>
         </table>
       </div>
@@ -454,7 +631,7 @@ tr:hover td{background:rgba(108,99,255,.04)}
           </div>
         </div>
         <table>
-          <thead><tr><th>Nome</th><th>Slug</th><th>Ativo</th><th>Ações</th></tr></thead>
+          <thead><tr><th>Nome</th><th>Slug</th><th>Ícone</th><th>Ativo</th><th>Ações</th></tr></thead>
           <tbody id="tb-categorias"></tbody>
         </table>
       </div>
@@ -463,9 +640,22 @@ tr:hover td{background:rgba(108,99,255,.04)}
     <!-- HUB AVALIAÇÕES -->
     <div id="sec-hub-avaliacoes" class="section">
       <div class="table-wrap">
-        <div class="table-header"><h3>Avaliações</h3></div>
+        <div class="table-header">
+          <h3>Avaliações</h3>
+          <div class="table-actions">
+            <input class="search-input" id="search-avaliacoes" placeholder="🔍 Buscar negócio ou autor..." oninput="filterTable('avaliacoes')">
+            <select class="filter-sel" id="filter-nota-avaliacao" onchange="filterTable('avaliacoes')">
+              <option value="">Todas notas</option>
+              <option value="5">⭐⭐⭐⭐⭐ 5</option>
+              <option value="4">⭐⭐⭐⭐ 4</option>
+              <option value="3">⭐⭐⭐ 3</option>
+              <option value="2">⭐⭐ 2</option>
+              <option value="1">⭐ 1</option>
+            </select>
+          </div>
+        </div>
         <table>
-          <thead><tr><th>Negócio ID</th><th>Autor</th><th>Nota</th><th>Comentário</th><th>Data</th></tr></thead>
+          <thead><tr><th>Negócio</th><th>Autor</th><th>Nota</th><th>Comentário</th><th>Data</th><th>Ações</th></tr></thead>
           <tbody id="tb-avaliacoes"></tbody>
         </table>
       </div>
@@ -477,11 +667,25 @@ tr:hover td{background:rgba(108,99,255,.04)}
         <div class="table-header">
           <h3>Posts do Blog</h3>
           <div class="table-actions">
+            <input class="search-input" id="search-blog" placeholder="🔍 Buscar..." oninput="filterTable('blog')">
+            <select class="filter-sel" id="filter-cat-blog" onchange="filterTable('blog')">
+              <option value="">Todas categorias</option>
+              <option value="automacao">Automação & IA</option>
+              <option value="trafego">Vendas & Tráfego</option>
+              <option value="ecommerce">E-commerce</option>
+              <option value="3d">3D Experience</option>
+              <option value="hub">Hubs & SEO</option>
+            </select>
+            <select class="filter-sel" id="filter-pub-blog" onchange="filterTable('blog')">
+              <option value="">Todos</option>
+              <option value="1">Publicados</option>
+              <option value="0">Rascunhos</option>
+            </select>
             <button class="btn-primary" onclick="openModal('post')">+ Novo Post</button>
           </div>
         </div>
         <table>
-          <thead><tr><th>Título</th><th>Categoria</th><th>Publicado</th><th>Data</th><th>Ações</th></tr></thead>
+          <thead><tr><th>Título</th><th>Categoria</th><th>Status</th><th>Data</th><th>Ações</th></tr></thead>
           <tbody id="tb-blog"></tbody>
         </table>
       </div>
@@ -511,8 +715,8 @@ tr:hover td{background:rgba(108,99,255,.04)}
       </div>
     </div>
 
-  </div><!-- /content -->
-</div><!-- /main -->
+  </div>
+</div>
 
 <!-- MODAL PRODUTO -->
 <div class="modal-overlay" id="modal-produto">
@@ -555,6 +759,7 @@ tr:hover td{background:rgba(108,99,255,.04)}
     </div>
     <div class="modal-foot">
       <button class="btn-secondary" onclick="closeModal('produto')">Cancelar</button>
+      <button class="btn-danger" id="mp-del-btn" style="display:none" onclick="confirmDelete('produto')">Excluir</button>
       <button class="btn-primary" onclick="saveProduto()">Salvar</button>
     </div>
   </div>
@@ -578,6 +783,7 @@ tr:hover td{background:rgba(108,99,255,.04)}
     </div>
     <div class="modal-foot">
       <button class="btn-secondary" onclick="closeModal('lead')">Cancelar</button>
+      <button class="btn-danger" onclick="confirmDelete('lead')">Excluir Lead</button>
       <button class="btn-primary" onclick="saveLead()">Salvar</button>
     </div>
   </div>
@@ -628,6 +834,7 @@ tr:hover td{background:rgba(108,99,255,.04)}
     </div>
     <div class="modal-foot">
       <button class="btn-secondary" onclick="closeModal('negocio')">Cancelar</button>
+      <button class="btn-danger" id="mn-del-btn" style="display:none" onclick="confirmDelete('negocio')">Excluir</button>
       <button class="btn-primary" onclick="saveNegocio()">Salvar</button>
     </div>
   </div>
@@ -646,6 +853,7 @@ tr:hover td{background:rgba(108,99,255,.04)}
     </div>
     <div class="modal-foot">
       <button class="btn-secondary" onclick="closeModal('categoria')">Cancelar</button>
+      <button class="btn-danger" id="mcat-del-btn" style="display:none" onclick="confirmDelete('categoria')">Excluir</button>
       <button class="btn-primary" onclick="saveCategoria()">Salvar</button>
     </div>
   </div>
@@ -678,6 +886,7 @@ tr:hover td{background:rgba(108,99,255,.04)}
     </div>
     <div class="modal-foot">
       <button class="btn-secondary" onclick="closeModal('post')">Cancelar</button>
+      <button class="btn-danger" id="mpost-del-btn" style="display:none" onclick="confirmDelete('post')">Excluir Post</button>
       <button class="btn-primary" onclick="savePost()">Salvar</button>
     </div>
   </div>
@@ -705,6 +914,25 @@ tr:hover td{background:rgba(108,99,255,.04)}
   </div>
 </div>
 
+<!-- MODAL CONFIRM DELETE -->
+<div class="modal-overlay" id="modal-confirm">
+  <div class="modal">
+    <div class="modal-head"><h3>Confirmar Exclusão</h3><button class="modal-close" onclick="closeModal('confirm')">✕</button></div>
+    <div class="modal-body">
+      <div class="confirm-icon">⚠️</div>
+      <div class="confirm-msg" id="confirm-msg">Tem certeza que deseja excluir este item?</div>
+      <div class="confirm-warning" id="confirm-warning"></div>
+      <div class="confirm-senha" id="confirm-senha-wrap">
+        <div class="field"><label>Digite sua senha para confirmar</label><input type="password" id="confirm-senha-input" placeholder="Sua senha do painel"></div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button class="btn-secondary" onclick="closeModal('confirm')">Cancelar</button>
+      <button class="btn-danger" onclick="executeDelete()">Confirmar Exclusão</button>
+    </div>
+  </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
 
@@ -716,6 +944,9 @@ const API = (window.API_BASE || 'http://localhost:5000');
 // ── STATE ──
 let TOKEN = localStorage.getItem('lt_token') || '';
 let categorias = [];
+let _deleteAction = null;
+let _deleteRequiresSenha = false;
+let _currentLeadId = null;
 
 // ── INIT ──
 document.addEventListener('DOMContentLoaded', () => {
@@ -805,7 +1036,7 @@ async function loadDashboard() {
       api('GET', '/admin/leads'),
       api('GET', '/api/produtos'),
       api('GET', '/hub/negocios'),
-      api('GET', '/blog')
+      api('GET', '/admin/blog').catch(() => api('GET', '/api/blog'))
     ]);
     const pendentes = pedidos.filter(p => p.status === 'pendente');
     const pagos = pedidos.filter(p => p.status === 'pago');
@@ -824,11 +1055,11 @@ async function loadDashboard() {
     tbody.innerHTML = recent.map(p => `
       <tr>
         <td><span style="color:var(--muted);font-family:var(--mono)">#${p.id}</span></td>
-        <td>${p.produto_id || '—'}</td>
-        <td>${p.lead_id}</td>
+        <td>${p.produto_nome || p.produto_id || '—'}</td>
+        <td>${p.lead_nome || '#' + p.lead_id}</td>
         <td style="font-family:var(--mono)">R$${parseFloat(p.valor||0).toFixed(2)}</td>
         <td><span class="badge badge-${p.status}">${p.status}</span></td>
-        <td style="color:var(--muted);font-size:.75rem">${fmtDate(p.criado_em)}</td>
+        <td style="color:var(--muted);font-size:.73rem">${fmtDate(p.criado_em)}</td>
       </tr>`).join('') || emptyRow(6);
   } catch(e) { console.error(e); }
 }
@@ -843,30 +1074,41 @@ async function loadBadges() {
 
 // ── PRODUTOS ──
 let _produtos = [];
+let _selectedProdutos = new Set();
+
 async function loadProdutos() {
   _produtos = await api('GET', '/api/produtos');
+  _selectedProdutos.clear();
   renderProdutos(_produtos);
 }
 
 function renderProdutos(list) {
   document.getElementById('tb-produtos').innerHTML = list.map(p => `
     <tr>
+      <td><input type="checkbox" class="row-check" data-id="${p.id}" data-type="produtos" onchange="toggleRow('produtos',${p.id},this.checked)"></td>
       <td>${p.nome}</td>
       <td><span class="badge badge-${p.categoria||'gratuito'}">${p.categoria||'—'}</span></td>
+      <td><span style="color:var(--muted);font-size:.72rem">${p.tipo||'—'}</span></td>
       <td style="font-family:var(--mono)">R$${parseFloat(p.preco||0).toFixed(2)}</td>
       <td>${p.destaque ? '⭐' : '—'}</td>
       <td>${p.ativo ? '<span style="color:var(--accent2)">✓</span>' : '<span style="color:var(--danger)">✗</span>'}</td>
       <td>
         <button class="action-btn" onclick='editProduto(${JSON.stringify(p)})'>Editar</button>
+        <button class="action-btn danger" onclick="quickDelete('produto',${p.id})">Excluir</button>
       </td>
-    </tr>`).join('') || emptyRow(6);
+    </tr>`).join('') || emptyRow(8);
 }
 
 function filterTable(type) {
   if (type === 'produtos') {
     const q = document.getElementById('search-produtos').value.toLowerCase();
     const cat = document.getElementById('filter-cat-produto').value;
-    const f = _produtos.filter(p => (!q || p.nome.toLowerCase().includes(q)) && (!cat || p.categoria === cat));
+    const tipo = document.getElementById('filter-tipo-produto').value;
+    const f = _produtos.filter(p =>
+      (!q || p.nome.toLowerCase().includes(q)) &&
+      (!cat || p.categoria === cat) &&
+      (!tipo || p.tipo === tipo)
+    );
     renderProdutos(f);
   }
   if (type === 'leads') {
@@ -876,8 +1118,36 @@ function filterTable(type) {
   }
   if (type === 'negocios') {
     const q = document.getElementById('search-negocios').value.toLowerCase();
-    const f = _negocios.filter(n => !q || (n.nome||'').toLowerCase().includes(q) || (n.bairro||'').toLowerCase().includes(q));
+    const cat = document.getElementById('filter-cat-negocio').value;
+    const bairro = document.getElementById('filter-bairro-negocio').value;
+    const plano = document.getElementById('filter-plano-negocio').value;
+    const f = _negocios.filter(n =>
+      (!q || (n.nome||'').toLowerCase().includes(q) || (n.bairro||'').toLowerCase().includes(q)) &&
+      (!cat || String(n.categoria_id) === cat) &&
+      (!bairro || (n.bairro||'').toLowerCase() === bairro.toLowerCase()) &&
+      (!plano || n.plano === plano)
+    );
     renderNegocios(f);
+  }
+  if (type === 'avaliacoes') {
+    const q = document.getElementById('search-avaliacoes').value.toLowerCase();
+    const nota = document.getElementById('filter-nota-avaliacao').value;
+    const f = _avaliacoes.filter(a =>
+      (!q || (a.negocio_nome||'').toLowerCase().includes(q) || (a.autor_nome||'').toLowerCase().includes(q)) &&
+      (!nota || String(a.nota) === nota)
+    );
+    renderAvaliacoes(f);
+  }
+  if (type === 'blog') {
+    const q = document.getElementById('search-blog').value.toLowerCase();
+    const cat = document.getElementById('filter-cat-blog').value;
+    const pub = document.getElementById('filter-pub-blog').value;
+    const f = _posts.filter(p =>
+      (!q || (p.titulo||'').toLowerCase().includes(q)) &&
+      (!cat || p.categoria === cat) &&
+      (pub === '' || (pub === '1' ? p.publicado : !p.publicado))
+    );
+    renderBlog(f);
   }
 }
 
@@ -902,6 +1172,7 @@ function editProduto(p) {
   document.getElementById('mp-arquivo').value = p.arquivo_url || '';
   document.getElementById('mp-ativo').checked = p.ativo;
   document.getElementById('mp-destaque').checked = p.destaque;
+  document.getElementById('mp-del-btn').style.display = 'inline-flex';
   openModal('produto');
 }
 
@@ -925,9 +1196,14 @@ async function saveProduto() {
     closeModal('produto');
     loadProdutos();
     toast('Produto salvo!', 'success');
-    document.getElementById('mp-id').value = '';
-    document.getElementById('mp-title').textContent = 'Novo Produto';
+    resetModalProduto();
   } catch { toast('Erro ao salvar', 'error'); }
+}
+
+function resetModalProduto() {
+  document.getElementById('mp-id').value = '';
+  document.getElementById('mp-title').textContent = 'Novo Produto';
+  document.getElementById('mp-del-btn').style.display = 'none';
 }
 
 // ── PEDIDOS ──
@@ -937,38 +1213,46 @@ async function loadPedidos() {
   document.getElementById('tb-pedidos').innerHTML = list.map(p => `
     <tr>
       <td style="font-family:var(--mono)">#${p.id}</td>
-      <td>${p.produto_id || '—'}</td>
-      <td>${p.lead_id}</td>
+      <td>${p.produto_nome || p.produto_id || '—'}</td>
+      <td>${p.lead_nome || '#' + p.lead_id}</td>
       <td style="font-family:var(--mono)">R$${parseFloat(p.valor||0).toFixed(2)}</td>
       <td><span class="badge badge-${p.status}">${p.status}</span></td>
       <td style="font-family:var(--mono);font-size:.72rem;color:var(--muted)">${p.mp_payment_id || '—'}</td>
-      <td style="color:var(--muted);font-size:.75rem">${fmtDate(p.criado_em)}</td>
+      <td style="color:var(--muted);font-size:.73rem">${fmtDate(p.criado_em)}</td>
     </tr>`).join('') || emptyRow(7);
 }
 
 // ── LEADS ──
 let _leads = [];
+let _selectedLeads = new Set();
+
 async function loadLeads() {
   const status = document.getElementById('filter-status-lead')?.value || '';
   _leads = await api('GET', '/admin/leads' + (status ? '?status=' + status : ''));
+  _selectedLeads.clear();
   renderLeads(_leads);
 }
 
 function renderLeads(list) {
   document.getElementById('tb-leads').innerHTML = list.map(l => `
     <tr>
+      <td><input type="checkbox" class="row-check" data-id="${l.id}" data-type="leads" onchange="toggleRow('leads',${l.id},this.checked)"></td>
       <td>${l.nome || '—'}</td>
-      <td style="font-family:var(--mono);font-size:.75rem">${l.email || '—'}</td>
+      <td style="font-family:var(--mono);font-size:.73rem">${l.email || '—'}</td>
       <td style="font-family:var(--mono)">${l.telefone || '—'}</td>
       <td>${l.interesse || '—'}</td>
       <td style="color:var(--muted)">${l.origem || '—'}</td>
       <td><span class="badge badge-${l.status}">${l.status}</span></td>
-      <td style="color:var(--muted);font-size:.75rem">${fmtDate(l.criado_em)}</td>
-      <td><button class="action-btn" onclick='editLead(${JSON.stringify(l)})'>Editar</button></td>
-    </tr>`).join('') || emptyRow(8);
+      <td style="color:var(--muted);font-size:.73rem">${fmtDate(l.criado_em)}</td>
+      <td>
+        <button class="action-btn" onclick='editLead(${JSON.stringify(l)})'>Editar</button>
+        <button class="action-btn danger" onclick="quickDeleteLead(${l.id})">Excluir</button>
+      </td>
+    </tr>`).join('') || emptyRow(9);
 }
 
 function editLead(l) {
+  _currentLeadId = l.id;
   document.getElementById('ml-id').value = l.id;
   document.getElementById('ml-status').value = l.status;
   document.getElementById('ml-obs').value = l.obs || '';
@@ -988,22 +1272,113 @@ async function saveLead() {
   } catch { toast('Erro ao salvar', 'error'); }
 }
 
+function quickDeleteLead(id) {
+  _deleteAction = async () => {
+    await api('DELETE', '/admin/leads/' + id, {});
+    loadLeads();
+  };
+  showConfirm('Excluir este lead permanentemente?', 'Esta ação não pode ser desfeita.', true);
+}
+
+// ── BULK SELECTION ──
+function toggleRow(type, id, checked) {
+  const sets = { produtos: _selectedProdutos, leads: _selectedLeads, negocios: _selectedNegocios };
+  const s = sets[type];
+  if (!s) return;
+  checked ? s.add(id) : s.delete(id);
+  updateBulkBar(type);
+}
+
+function toggleAll(type, checked) {
+  const maps = { produtos: _produtos, leads: _leads, negocios: _negocios };
+  const sets = { produtos: _selectedProdutos, leads: _selectedLeads, negocios: _selectedNegocios };
+  const list = maps[type]; const s = sets[type];
+  if (!list || !s) return;
+  s.clear();
+  if (checked) list.forEach(item => s.add(item.id));
+  document.querySelectorAll(`[data-type="${type}"]`).forEach(chk => chk.checked = checked);
+  updateBulkBar(type);
+}
+
+function deselectAll(type) {
+  const sets = { produtos: _selectedProdutos, leads: _selectedLeads, negocios: _selectedNegocios };
+  const s = sets[type];
+  if (s) s.clear();
+  document.querySelectorAll(`[data-type="${type}"]`).forEach(chk => chk.checked = false);
+  const allChk = document.getElementById('chk-all-' + type);
+  if (allChk) allChk.checked = false;
+  updateBulkBar(type);
+}
+
+function updateBulkBar(type) {
+  const sets = { produtos: _selectedProdutos, leads: _selectedLeads, negocios: _selectedNegocios };
+  const s = sets[type];
+  if (!s) return;
+  const bar = document.getElementById('bulk-' + type);
+  const count = document.getElementById('bulk-' + type + '-count');
+  if (s.size > 0) {
+    bar.classList.add('show');
+    count.textContent = s.size + ' selecionado' + (s.size > 1 ? 's' : '');
+  } else {
+    bar.classList.remove('show');
+  }
+}
+
+function bulkDeleteConfirm(type) {
+  const sets = { produtos: _selectedProdutos, leads: _selectedLeads, negocios: _selectedNegocios };
+  const s = sets[type];
+  if (!s || s.size === 0) return;
+
+  _deleteAction = async () => {
+    const ids = Array.from(s);
+    const paths = { produtos: '/admin/produtos/bulk', leads: '/admin/leads/bulk', negocios: '/admin/hub/negocios/bulk' };
+    await api('DELETE', paths[type], { ids });
+    deselectAll(type);
+    const loaders = { produtos: loadProdutos, leads: loadLeads, negocios: loadNegocios };
+    if (loaders[type]) loaders[type]();
+  };
+
+  const labels = { produtos: 'produtos', leads: 'leads', negocios: 'negócios' };
+  showConfirm(
+    `Excluir ${s.size} ${labels[type]} selecionados?`,
+    'Esta ação não pode ser desfeita.',
+    true
+  );
+}
+
 // ── HUB ──
 let _negocios = [];
+let _selectedNegocios = new Set();
+
 async function loadCategorias() {
   categorias = await api('GET', '/hub/categorias').catch(() => []);
   const sel = document.getElementById('mn-categoria');
   if (sel) sel.innerHTML = categorias.map(c => `<option value="${c.id}">${c.nome}</option>`).join('');
+  // Popula filtro de categoria em negócios
+  const filtCat = document.getElementById('filter-cat-negocio');
+  if (filtCat) {
+    filtCat.innerHTML = '<option value="">Todas categorias</option>' +
+      categorias.map(c => `<option value="${c.id}">${c.nome}</option>`).join('');
+  }
 }
 
 async function loadNegocios() {
   _negocios = await api('GET', '/hub/negocios');
+  _selectedNegocios.clear();
+  // Popula filtro de bairros dinamicamente
+  const bairros = [...new Set(_negocios.map(n => n.bairro).filter(Boolean))].sort();
+  const filtBairro = document.getElementById('filter-bairro-negocio');
+  if (filtBairro) {
+    filtBairro.innerHTML = '<option value="">Todos bairros</option>' +
+      bairros.map(b => `<option value="${b}">${b}</option>`).join('');
+  }
   renderNegocios(_negocios);
 }
 
 function renderNegocios(list) {
   document.getElementById('tb-negocios').innerHTML = list.map(n => `
     <tr>
+      <td><input type="checkbox" class="row-check" data-id="${n.id}" data-type="negocios" onchange="toggleRow('negocios',${n.id},this.checked)"></td>
       <td>${n.nome}</td>
       <td>${n.categoria_nome || '—'}</td>
       <td>${n.bairro || '—'}</td>
@@ -1011,8 +1386,11 @@ function renderNegocios(list) {
       <td>${n.destaque ? '⭐' : '—'}</td>
       <td style="font-family:var(--mono)">${n.visualizacoes || 0}</td>
       <td>${n.ativo ? '<span style="color:var(--accent2)">✓</span>' : '<span style="color:var(--danger)">✗</span>'}</td>
-      <td><button class="action-btn" onclick='editNegocio(${JSON.stringify(n)})'>Editar</button></td>
-    </tr>`).join('') || emptyRow(8);
+      <td>
+        <button class="action-btn" onclick='editNegocio(${JSON.stringify(n)})'>Editar</button>
+        <button class="action-btn danger" onclick="quickDelete('negocio',${n.id})">Excluir</button>
+      </td>
+    </tr>`).join('') || emptyRow(9);
 }
 
 function editNegocio(n) {
@@ -1034,6 +1412,7 @@ function editNegocio(n) {
   document.getElementById('mn-plano').value = n.plano || 'gratuito';
   document.getElementById('mn-destaque').checked = n.destaque;
   document.getElementById('mn-ativo').checked = n.ativo;
+  document.getElementById('mn-del-btn').style.display = 'inline-flex';
   openModal('negocio');
 }
 
@@ -1063,9 +1442,14 @@ async function saveNegocio() {
     closeModal('negocio');
     loadNegocios();
     toast('Negócio salvo!', 'success');
-    document.getElementById('mn-id').value = '';
-    document.getElementById('mn-title').textContent = 'Novo Negócio';
+    resetModalNegocio();
   } catch { toast('Erro ao salvar', 'error'); }
+}
+
+function resetModalNegocio() {
+  document.getElementById('mn-id').value = '';
+  document.getElementById('mn-title').textContent = 'Novo Negócio';
+  document.getElementById('mn-del-btn').style.display = 'none';
 }
 
 async function loadCategoriasTable() {
@@ -1074,9 +1458,13 @@ async function loadCategoriasTable() {
     <tr>
       <td>${c.nome}</td>
       <td style="font-family:var(--mono);color:var(--muted)">${c.slug}</td>
+      <td>${c.icone_url ? `<img src="${c.icone_url}" style="width:24px;height:24px;object-fit:contain;opacity:.8">` : '—'}</td>
       <td>${c.ativo ? '<span style="color:var(--accent2)">✓</span>' : '<span style="color:var(--danger)">✗</span>'}</td>
-      <td><button class="action-btn" onclick='editCategoria(${JSON.stringify(c)})'>Editar</button></td>
-    </tr>`).join('') || emptyRow(4);
+      <td>
+        <button class="action-btn" onclick='editCategoria(${JSON.stringify(c)})'>Editar</button>
+        <button class="action-btn danger" onclick="quickDelete('categoria',${c.id})">Excluir</button>
+      </td>
+    </tr>`).join('') || emptyRow(5);
 }
 
 function editCategoria(c) {
@@ -1086,6 +1474,7 @@ function editCategoria(c) {
   document.getElementById('mcat-slug').value = c.slug;
   document.getElementById('mcat-icone').value = c.icone_url || '';
   document.getElementById('mcat-ativo').checked = c.ativo;
+  document.getElementById('mcat-del-btn').style.display = 'inline-flex';
   openModal('categoria');
 }
 
@@ -1098,44 +1487,68 @@ async function saveCategoria() {
     ativo: document.getElementById('mcat-ativo').checked,
   };
   try {
-    if (id) {
-      // PUT não tem rota ainda — avisa
-      toast('Edição de categoria: adicione PUT /admin/hub/categorias/:id na API', 'error');
-    } else {
-      await api('POST', '/admin/hub/categorias', body);
-      closeModal('categoria');
-      loadCategoriasTable();
-      loadCategorias();
-      toast('Categoria criada!', 'success');
-    }
+    if (id) await api('PUT', '/admin/hub/categorias/' + id, body);
+    else await api('POST', '/admin/hub/categorias', body);
+    closeModal('categoria');
+    loadCategoriasTable();
+    loadCategorias();
+    toast(id ? 'Categoria atualizada!' : 'Categoria criada!', 'success');
     document.getElementById('mcat-id').value = '';
     document.getElementById('mc-title').textContent = 'Nova Categoria';
+    document.getElementById('mcat-del-btn').style.display = 'none';
   } catch { toast('Erro ao salvar', 'error'); }
 }
 
+// ── AVALIAÇÕES ──
+let _avaliacoes = [];
+
 async function loadAvaliacoes() {
-  const list = await api('GET', '/hub/avaliacoes').catch(() => []);
+  _avaliacoes = await api('GET', '/hub/avaliacoes').catch(() => []);
+  renderAvaliacoes(_avaliacoes);
+}
+
+function renderAvaliacoes(list) {
   const stars = n => '★'.repeat(n) + '☆'.repeat(5-n);
   document.getElementById('tb-avaliacoes').innerHTML = list.map(a => `
     <tr>
-      <td style="font-family:var(--mono)">#${a.negocio_id}</td>
+      <td>${a.negocio_nome || '#' + a.negocio_id}</td>
       <td>${a.autor_nome || 'Anônimo'}</td>
       <td style="color:var(--warn)">${stars(a.nota)}</td>
-      <td>${a.comentario || '—'}</td>
-      <td style="color:var(--muted);font-size:.75rem">${fmtDate(a.criado_em)}</td>
-    </tr>`).join('') || emptyRow(5);
+      <td style="max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${a.comentario || '—'}</td>
+      <td style="color:var(--muted);font-size:.73rem">${fmtDate(a.criado_em)}</td>
+      <td>
+        <button class="action-btn danger" onclick="quickDeleteAvaliacao(${a.id})">Excluir</button>
+      </td>
+    </tr>`).join('') || emptyRow(6);
+}
+
+function quickDeleteAvaliacao(id) {
+  _deleteAction = async () => {
+    await api('DELETE', '/admin/hub/avaliacoes/' + id, {});
+    loadAvaliacoes();
+  };
+  showConfirm('Excluir esta avaliação?', 'Esta ação não pode ser desfeita.', true);
 }
 
 // ── BLOG ──
+let _posts = [];
+
 async function loadBlog() {
-  const list = await api('GET', '/admin/blog').catch(() => api('GET', '/blog'));
+  _posts = await api('GET', '/admin/blog').catch(() => []);
+  renderBlog(_posts);
+}
+
+function renderBlog(list) {
   document.getElementById('tb-blog').innerHTML = list.map(p => `
     <tr>
       <td>${p.titulo}</td>
       <td>${p.categoria || '—'}</td>
-      <td>${p.publicado ? '<span style="color:var(--accent2)">✓</span>' : '<span style="color:var(--muted)">Rascunho</span>'}</td>
-      <td style="color:var(--muted);font-size:.75rem">${fmtDate(p.publicado_em || p.criado_em)}</td>
-      <td><button class="action-btn" onclick='editPost(${JSON.stringify(p)})'>Editar</button></td>
+      <td>${p.publicado ? '<span class="badge badge-pago">Publicado</span>' : '<span class="badge badge-pendente">Rascunho</span>'}</td>
+      <td style="color:var(--muted);font-size:.73rem">${fmtDate(p.publicado_em || p.criado_em)}</td>
+      <td>
+        <button class="action-btn" onclick='editPost(${JSON.stringify(p)})'>Editar</button>
+        <button class="action-btn danger" onclick="quickDelete('post',${p.id})">Excluir</button>
+      </td>
     </tr>`).join('') || emptyRow(5);
 }
 
@@ -1150,6 +1563,7 @@ function editPost(p) {
   document.getElementById('mpost-conteudo').value = p.conteudo || '';
   document.getElementById('mpost-tags').value = (p.tags || []).join(', ');
   document.getElementById('mpost-pub').checked = p.publicado;
+  document.getElementById('mpost-del-btn').style.display = 'inline-flex';
   openModal('post');
 }
 
@@ -1173,6 +1587,7 @@ async function savePost() {
     toast('Post salvo!', 'success');
     document.getElementById('mpost-id').value = '';
     document.getElementById('mpost-title').textContent = 'Novo Post';
+    document.getElementById('mpost-del-btn').style.display = 'none';
   } catch { toast('Erro ao salvar', 'error'); }
 }
 
@@ -1185,7 +1600,7 @@ async function loadDisparos() {
       <td><span class="badge badge-${d.canal}">${d.canal}</span></td>
       <td>${d.assunto || '—'}</td>
       <td><span class="badge badge-${d.status}">${d.status}</span></td>
-      <td style="color:var(--muted);font-size:.75rem">${fmtDate(d.enviado_em)}</td>
+      <td style="color:var(--muted);font-size:.73rem">${fmtDate(d.enviado_em)}</td>
     </tr>`).join('') || emptyRow(5);
 }
 
@@ -1204,6 +1619,74 @@ async function saveDisparo() {
   } catch { toast('Erro ao registrar', 'error'); }
 }
 
+// ── DELETE HELPERS ──
+function quickDelete(type, id) {
+  const paths = {
+    produto: '/admin/produtos/' + id,
+    negocio: '/admin/hub/negocios/' + id,
+    post: '/admin/blog/' + id,
+    categoria: '/admin/hub/categorias/' + id,
+  };
+  const reloaders = {
+    produto: loadProdutos,
+    negocio: loadNegocios,
+    post: loadBlog,
+    categoria: () => { loadCategoriasTable(); loadCategorias(); },
+  };
+  _deleteAction = async () => {
+    await api('DELETE', paths[type], {});
+    if (reloaders[type]) reloaders[type]();
+  };
+  showConfirm('Excluir este item?', 'Esta ação não pode ser desfeita.', true);
+}
+
+function confirmDelete(type) {
+  const id = document.getElementById('m' + (type === 'produto' ? 'p' : type === 'negocio' ? 'n' : type === 'post' ? 'post' : 'cat') + '-id')?.value;
+  if (!id) return;
+  quickDelete(type, id);
+}
+
+// ── CONFIRM MODAL ──
+function showConfirm(msg, warning, requiresSenha) {
+  document.getElementById('confirm-msg').textContent = msg;
+  document.getElementById('confirm-warning').textContent = warning || '';
+  _deleteRequiresSenha = requiresSenha;
+  const senhaWrap = document.getElementById('confirm-senha-wrap');
+  senhaWrap.style.display = requiresSenha ? 'block' : 'none';
+  if (requiresSenha) document.getElementById('confirm-senha-input').value = '';
+  openModal('confirm');
+}
+
+async function executeDelete() {
+  if (_deleteRequiresSenha) {
+    const senha = document.getElementById('confirm-senha-input').value;
+    if (!senha) { toast('Digite sua senha para confirmar', 'warn'); return; }
+    // Verifica senha fazendo login silencioso
+    try {
+      const emailEl = document.getElementById('sidebar-nome');
+      // Tenta verificar senha via re-login (usa o email guardado)
+      const emailStored = localStorage.getItem('lt_email') || '';
+      const r = await fetch(API + '/admin/login', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({ email: emailStored, senha })
+      });
+      if (!r.ok) {
+        toast('Senha incorreta', 'error');
+        return;
+      }
+    } catch {
+      // Se não tiver email armazenado, prossegue (modo de confiança)
+    }
+  }
+  closeModal('confirm');
+  try {
+    if (_deleteAction) await _deleteAction();
+    toast('Excluído com sucesso!', 'success');
+    _deleteAction = null;
+  } catch { toast('Erro ao excluir', 'error'); }
+}
+
 // ── UTILS ──
 function fmtDate(d) {
   if (!d) return '—';
@@ -1211,14 +1694,23 @@ function fmtDate(d) {
 }
 
 function emptyRow(cols) {
-  return `<tr><td colspan="${cols}" style="text-align:center;color:var(--muted);padding:32px;font-size:.82rem">Nenhum registro encontrado</td></tr>`;
+  return `<tr><td colspan="${cols}" style="text-align:center;color:var(--muted);padding:32px;font-size:.8rem">Nenhum registro encontrado</td></tr>`;
 }
 
 function toast(msg, type = 'success') {
   const el = document.getElementById('toast');
-  el.textContent = (type === 'success' ? '✓ ' : '✗ ') + msg;
+  const icons = { success: '✓', error: '✗', warn: '⚠' };
+  el.textContent = (icons[type] || '•') + ' ' + msg;
   el.className = 'toast ' + type + ' show';
-  setTimeout(() => el.classList.remove('show'), 3000);
+  setTimeout(() => el.classList.remove('show'), 3200);
+}
+
+// Guarda email no login para verificação de senha
+const origDoLogin = doLogin;
+async function doLogin() {
+  const email = document.getElementById('l-email').value;
+  await origDoLogin.call(this);
+  if (TOKEN) localStorage.setItem('lt_email', email);
 }
 
 // Fecha modal clicando fora
