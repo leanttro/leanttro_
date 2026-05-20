@@ -1026,18 +1026,76 @@ footer{
 </section>
 
 <!-- ISCA MÉTRICAS -->
-<section class="metricas-section" id="metricas-isca">
+<section class="metricas-section" id="metricas-isca" style="background:var(--bg2);padding:72px 20px">
   <div class="container">
-    <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779243876/metricass_ktex0c.png" alt="Painel de métricas Leanttro" class="metricas-hero-img">
-    <h2>Veja seu site no Google agora — de graça</h2>
-    <p>Cole o ID do seu Google Analytics e veja cliques, impressões e palavras-chave em tempo real. Não tem GA4? A gente instala por R$150.</p>
-    <div class="metricas-form">
-      <input type="text" placeholder="Cole seu ID: G-XXXXXXXXXX" id="gaInput">
-      <button class="btn-metricas" onclick="window.location.href='/metricas'">Ver minhas métricas →</button>
+    <!-- CARD -->
+    <div style="background:var(--dark);border-radius:16px;overflow:hidden;display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:380px">
+
+      <!-- Conteúdo esquerdo -->
+      <div style="padding:44px 40px;display:flex;flex-direction:column;justify-content:center;gap:14px">
+        <div style="display:inline-flex;align-items:center;gap:6px;background:rgba(121,67,226,.25);border:1px solid rgba(121,67,226,.4);color:#c4b5f5;padding:4px 14px;border-radius:20px;font-size:.75rem;font-weight:700;letter-spacing:.4px;width:fit-content">
+          📊 Painel gratuito de métricas
+        </div>
+        <h2 style="font-family:var(--display);font-size:1.75rem;font-weight:800;color:#fff;line-height:1.2;letter-spacing:-.3px;margin:0">
+          Veja seu site no <span style="color:var(--accent)">Google</span> agora — de graça
+        </h2>
+        <p style="color:rgba(255,255,255,.7);font-size:.875rem;margin:0;line-height:1.6">
+          Você construiu o produto ou serviço, mas o Google <strong style="color:#fff">NÃO sabe que ele existe.</strong> A Leanttro tem a solução:
+        </p>
+        <div style="display:flex;flex-direction:column;gap:8px">
+          <div style="display:flex;align-items:flex-start;gap:10px;font-size:.875rem;color:rgba(255,255,255,.85)">
+            <span style="flex-shrink:0;margin-top:1px">📊</span>
+            <span><strong style="color:#fff">Google Analytics 4</strong> — Configuração da conta e instalação da tag no código do site.</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;font-size:.875rem;color:rgba(255,255,255,.85)">
+            <span style="flex-shrink:0;margin-top:1px">🔍</span>
+            <span><strong style="color:#fff">Google Search Console</strong> — Verificação do site e indexação de páginas.</span>
+          </div>
+          <div style="display:flex;align-items:flex-start;gap:10px;font-size:.875rem;color:rgba(255,255,255,.85)">
+            <span style="flex-shrink:0;margin-top:1px">📍</span>
+            <span><strong style="color:#fff">Google Business</strong> — Criação ou otimização do perfil da empresa.</span>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:2px">
+          <span style="font-size:1rem;color:rgba(255,255,255,.4);text-decoration:line-through">De R$250,00</span>
+          <span style="font-family:var(--display);font-size:1.8rem;font-weight:800;color:#fff">R$150,00</span>
+          <span style="font-size:.8rem;color:var(--accent);font-weight:600;background:rgba(0,229,160,.12);border:1px solid rgba(0,229,160,.3);padding:3px 10px;border-radius:99px">até dia 20/06</span>
+        </div>
+        <!-- Input + botão -->
+        <div style="display:flex;gap:8px;margin-top:4px">
+          <input id="gaInput" type="text" placeholder="G-XXXXXXXXXX"
+            style="flex:1;min-width:0;font-family:monospace;font-size:.92rem;font-weight:700;letter-spacing:1px;padding:11px 16px;border-radius:10px;border:1.5px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;outline:none"
+            onfocus="this.style.borderColor='#7943e2';this.style.background='rgba(121,67,226,.12)'"
+            onblur="this.style.borderColor='rgba(255,255,255,.2)';this.style.background='rgba(255,255,255,.08)'"
+          >
+          <button onclick="(function(){var v=document.getElementById('gaInput').value.trim().toUpperCase();var id=v?(!v.startsWith('G-')?'G-'+v:v):'';window.location.href=id?'/metricas?id='+id:'/metricas'})()"
+            style="padding:11px 22px;border-radius:10px;background:var(--primary);color:#fff;border:none;cursor:pointer;font-weight:700;font-size:.88rem;font-family:var(--sans);white-space:nowrap;box-shadow:0 4px 16px rgba(121,67,226,.4)"
+          >Ver minhas métricas →</button>
+        </div>
+        <p style="color:rgba(255,255,255,.35);font-size:.72rem;margin:0">
+          Encontre seu ID em analytics.google.com → Administrador → Fluxos de dados.
+        </p>
+      </div>
+
+      <!-- Imagem direita -->
+      <div style="position:relative;overflow:hidden">
+        <div style="position:absolute;inset:0;background:linear-gradient(90deg,var(--dark) 0%,transparent 45%);z-index:1"></div>
+        <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779243876/metricass_ktex0c.png" alt="Painel de métricas Leanttro" style="width:100%;height:100%;object-fit:cover;display:block;opacity:.9">
+      </div>
+
     </div>
-    <p class="metricas-note">Cria uma conta gratuita e acessa o painel completo. <a href="/metricas">Saiba mais</a></p>
   </div>
 </section>
+
+<style>
+@media(max-width:768px){
+  #metricas-isca > .container > div{grid-template-columns:1fr!important}
+  #metricas-isca > .container > div > div:last-child{min-height:200px}
+  #metricas-isca > .container > div > div:first-child{padding:28px 24px!important}
+  #metricas-isca > .container > div > div:first-child > div:nth-last-child(2){flex-direction:column!important}
+  #metricas-isca > .container > div > div:first-child > div:nth-last-child(2) button{width:100%}
+}
+</style>
 
 <!-- CASES -->
 <section class="section section-alt" id="cases">
