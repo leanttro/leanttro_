@@ -7,7 +7,7 @@ import psycopg2.extras
 import requests as req_ext
 from datetime import datetime, timedelta
 from functools import wraps
-from flask import Flask, request, jsonify, render_template
+from flask import Flask, request, jsonify, render_template, Response
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -175,6 +175,7 @@ def editar_lead(id):
     conn.commit(); cur.close(); conn.close()
     return jsonify({"ok": True})
 
+# ─── PÁGINAS ──────────────────────────────────────────────────────────────────
 @app.route("/negocio/<slug>")
 def pagina_negocio(slug):
     return render_template("negocio.html")
@@ -211,6 +212,98 @@ def pagina_loja():
 @app.route("/loja/<slug>")
 def pagina_produto(slug):
     return render_template("produto.html")
+
+@app.route("/<bairro_slug>")
+def pagina_bairro(bairro_slug):
+    # Rotas reservadas que não são bairros
+    ROTAS_RESERVADAS = {
+        'admin', 'blog', 'loja', 'leads', 'produtos', 'pedidos',
+        'hub', 'webhook', 'obrigado', 'erro', 'politica-de-privacidade',
+        'termos', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico',
+        'portfolio', 'metricas', 'negocio', 'categoria', 'api',
+        'seu-hub', 'seuhub'
+    }
+    if bairro_slug in ROTAS_RESERVADAS:
+        return "Not Found", 404
+    return render_template("bairro.html")
+
+# ─── PEDIDOS + MERCADO PAGO ───────────────────────────────────────────────────
+@app.route("/pedidos", methods=["POST"])
+def criar_pedido():
+    d = request.json
+    conn = get_db(); cur = conn.cursor()
+
+    # Busca produto
+    cur.execute("SELECT * FROM produtos WHERE id = %s AND ativo = true", (d["produto_id"],))
+    produto = cur.fetchone()
+    if not produto:
+        cur.close(); conn.close()
+        return jsonify({"erro": "Produto não encontrado"}), 404
+
+    # Cria pedido
+    cur.execute("""
+        INSERT INTO pedidos (produto_id, lead_id, valor, status)
+        VALUES (%s,%s,%s,'pendente') RETURNING id
+    """, (produto["id"], d["lead_id"], produto["preco"]))
+    pedido_id = cur.fetchone()["id"]
+    conn.commit()
+
+    # Gera link Mercado Pago
+    sdk = mercadopago.SDK(MP_TOKEN)
+    preference = sdk.preference().create({
+        "items": [{
+            "title": produto["nome"],
+            "quantity": 1,
+            "unit_price": float(produto["preco"])
+        }],
+        "external_reference": str(pedido_id),
+        "notification_url": os.environ.get("MP_WEBHOOK_URL", ""),
+        "back_urls": {
+            "success": os.environ.get("MP_SUCCESS_URL", ""),
+            "failure": os.environ.get("MP_FAILURE_URL", ""),
+        },
+        "auto_return": "approved"
+    })
+
+    link = preference["response"]["init_point"]
+    cur.close(); conn.close()
+    return jsonify({"pedido_id": pedido_id, "link_pagamento": link}), 201
+
+@app.route("/webhook/mp", methods=["POST"])
+def webhook_mp():
+    data = request.json or {}
+    if data.get("type") != "payment":
+        return jsonify({"ok": True})
+
+    sdk = mercadopago.SDK(MP_TOKEN)
+    payment_id = data.get("data", {}).get("id")
+    pagamento = sdk.payment().get(payment_id)
+    info = pagamento["response"]
+
+    if info.get("status") == "approved":
+        pedido_id = int(info.get("external_reference", 0))
+        conn = get_db(); cur = conn.cursor()
+        cur.execute("""
+            UPDATE pedidos SET status='pago', mp_payment_id=%s WHERE id=%s
+        """, (str(payment_id), pedido_id))
+        conn.commit(); cur.close(); conn.close()
+
+    return jsonify({"ok": True})
+
+@app.route("/admin/pedidos", methods=["GET"])
+@token_required
+def listar_pedidos():
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("""
+        SELECT p.*, pr.nome as produto_nome, l.nome as lead_nome, l.email as lead_email
+        FROM pedidos p
+        JOIN produtos pr ON pr.id = p.produto_id
+        JOIN leads l ON l.id = p.lead_id
+        ORDER BY p.criado_em DESC
+    """)
+    pedidos = cur.fetchall()
+    cur.close(); conn.close()
+    return jsonify(list(pedidos))
 
 # ─── GERAR HUB COM GROQ (proxy seguro — chave fica no servidor) ───────────────
 @app.route("/api/gerar-hub", methods=["POST"])
@@ -266,15 +359,48 @@ feirasderua.com.br com 328 mil impressões em 3 meses, guiadorodizio.com.br rank
 
 # ─── HUB DE NEGÓCIOS ──────────────────────────────────────────────────────────
 @app.route("/hub/categorias", methods=["GET"])
-def listar_categorias():
+def listar_hub_categorias():
     conn = get_db(); cur = conn.cursor()
     cur.execute("SELECT * FROM hub_categorias WHERE ativo = true ORDER BY nome")
     cats = cur.fetchall()
     cur.close(); conn.close()
     return jsonify(list(cats))
 
+@app.route("/admin/hub/categorias", methods=["POST"])
+@token_required
+def criar_categoria():
+    d = request.json
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("""
+        INSERT INTO hub_categorias (nome, slug, icone_url, ativo)
+        VALUES (%s,%s,%s,%s) RETURNING id
+    """, (d["nome"], d["slug"], d.get("icone_url"), d.get("ativo", True)))
+    novo_id = cur.fetchone()["id"]
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"id": novo_id}), 201
+
+@app.route("/admin/hub/categorias/<int:id>", methods=["PUT"])
+@token_required
+def editar_categoria(id):
+    d = request.json
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("""
+        UPDATE hub_categorias SET nome=%s, slug=%s, icone_url=%s, ativo=%s
+        WHERE id=%s
+    """, (d["nome"], d["slug"], d.get("icone_url"), d.get("ativo", True), id))
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True})
+
+@app.route("/admin/hub/categorias/<int:id>", methods=["DELETE"])
+@token_required
+def deletar_categoria(id):
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("UPDATE hub_categorias SET ativo = false WHERE id = %s", (id,))
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True})
+
 @app.route("/hub/negocios", methods=["GET"])
-def listar_negocios():
+def listar_hub_negocios():
     categoria = request.args.get("categoria")
     bairro    = request.args.get("bairro")
     conn = get_db(); cur = conn.cursor()
@@ -485,6 +611,109 @@ def registrar_disparo():
     novo_id = cur.fetchone()["id"]
     conn.commit(); cur.close(); conn.close()
     return jsonify({"id": novo_id}), 201
+
+# ─── SITEMAP ──────────────────────────────────────────────────────────────────
+@app.route("/sitemap.xml", methods=["GET"])
+def sitemap():
+    BASE_URL = os.environ.get("BASE_URL", "https://leanttro.com.br").rstrip("/")
+    now = datetime.utcnow().strftime("%Y-%m-%d")
+
+    urls = []
+
+    # Páginas estáticas
+    estaticas = [
+        ("", "1.0", "daily"),
+        ("/blog", "0.8", "daily"),
+        ("/loja", "0.8", "weekly"),
+        ("/portfolio", "0.7", "weekly"),
+        ("/seuhub", "0.8", "weekly"),
+        ("/metricas", "0.6", "monthly"),
+    ]
+    for path, priority, freq in estaticas:
+        urls.append(f"""  <url>
+    <loc>{BASE_URL}{path}</loc>
+    <lastmod>{now}</lastmod>
+    <changefreq>{freq}</changefreq>
+    <priority>{priority}</priority>
+  </url>""")
+
+    conn = get_db(); cur = conn.cursor()
+
+    # Posts do blog
+    cur.execute("SELECT slug, publicado_em FROM blog_posts WHERE publicado = true ORDER BY publicado_em DESC")
+    for row in cur.fetchall():
+        data = row["publicado_em"].strftime("%Y-%m-%d") if row["publicado_em"] else now
+        urls.append(f"""  <url>
+    <loc>{BASE_URL}/blog/{row['slug']}</loc>
+    <lastmod>{data}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>""")
+
+    # Produtos da loja
+    cur.execute("SELECT slug, updated_em FROM produtos WHERE ativo = true ORDER BY id DESC")
+    for row in cur.fetchall():
+        data = row["updated_em"].strftime("%Y-%m-%d") if row.get("updated_em") else now
+        urls.append(f"""  <url>
+    <loc>{BASE_URL}/loja/{row['slug']}</loc>
+    <lastmod>{data}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>""")
+
+    # Negócios do hub
+    cur.execute("SELECT slug, updated_em FROM hub_negocios WHERE ativo = true ORDER BY id DESC")
+    for row in cur.fetchall():
+        data = row["updated_em"].strftime("%Y-%m-%d") if row.get("updated_em") else now
+        urls.append(f"""  <url>
+    <loc>{BASE_URL}/negocio/{row['slug']}</loc>
+    <lastmod>{data}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>""")
+
+    # Categorias do hub (cada uma é uma página template)
+    cur.execute("SELECT slug FROM hub_categorias WHERE ativo = true ORDER BY nome")
+    for row in cur.fetchall():
+        urls.append(f"""  <url>
+    <loc>{BASE_URL}/categoria/{row['slug']}</loc>
+    <lastmod>{now}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>""")
+
+    # Bairros com negócios cadastrados (cada bairro é uma página template)
+    cur.execute("""
+        SELECT DISTINCT bairro FROM hub_negocios
+        WHERE ativo = true AND bairro IS NOT NULL AND bairro != ''
+        ORDER BY bairro
+    """)
+    for row in cur.fetchall():
+        bairro_slug = (
+            row["bairro"].lower()
+            .replace(" ", "-")
+            .replace("ã", "a").replace("â", "a").replace("á", "a").replace("à", "a")
+            .replace("ê", "e").replace("é", "e")
+            .replace("í", "i")
+            .replace("ô", "o").replace("ó", "o").replace("õ", "o")
+            .replace("ú", "u").replace("ü", "u")
+            .replace("ç", "c")
+        )
+        urls.append(f"""  <url>
+    <loc>{BASE_URL}/{bairro_slug}</loc>
+    <lastmod>{now}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>""")
+
+    cur.close(); conn.close()
+
+    xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
+    xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+    xml += "\n".join(urls)
+    xml += "\n</urlset>"
+
+    return Response(xml, mimetype="application/xml")
 
 # ─── MÉTRICAS PÚBLICA (Leanttro) ──────────────────────────────────────────────
 @app.route("/metricas")
