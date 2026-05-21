@@ -800,10 +800,7 @@ def index():
 # ── Config ──────────────────────────────────────────────────────────
 GOOGLE_CLIENT_ID     = os.environ.get("GOOGLE_CLIENT_ID", "")
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "")
-GOOGLE_REDIRECT_URI  = os.environ.get(
-    "GOOGLE_REDIRECT_URI",
-    "https://leanttro.com/api/metricas/oauth/callback"
-)
+GOOGLE_REDIRECT_URI  = os.environ.get("GOOGLE_REDIRECT_URI", "")
 
 SCOPES_METRICAS = [
     'https://www.googleapis.com/auth/webmasters.readonly',
