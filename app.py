@@ -979,25 +979,60 @@ def metricas_oauth_callback():
             scopes        = SCOPES_METRICAS,
         )
 
-        # Detecta o site do Search Console automaticamente
-        gsc_site = ""
-        try:
-            svc   = build('searchconsole', 'v1', credentials=creds, cache_discovery=False)
-            sites = svc.sites().list().execute()
-            entries = sites.get('siteEntry', [])
-            if entries:
-                gsc_site = entries[0].get('siteUrl', '')
-        except Exception:
-            pass
-
-        # Detecta a property GA4 automaticamente pelo GA ID
+        # Detecta a property GA4 que corresponde ao GA ID informado
         ga4_property = ""
+        gsc_site     = ""
         try:
             svc_admin = build('analyticsadmin', 'v1beta', credentials=creds, cache_discovery=False)
             props = svc_admin.properties().list(filter="parent:accounts/-").execute()
+            ga_id_num = ga_id.replace('G-', '').upper()
             for p in props.get('properties', []):
-                ga4_property = p.get('name', '')  # ex: "properties/123456789"
-                break
+                prop_name = p.get('name', '')  # ex: "properties/123456789"
+                try:
+                    # Busca os data streams da property para achar o que tem o GA ID certo
+                    streams = svc_admin.properties().dataStreams().list(parent=prop_name).execute()
+                    for s in streams.get('dataStreams', []):
+                        measurement_id = s.get('webStreamData', {}).get('measurementId', '')
+                        if measurement_id.replace('G-', '').upper() == ga_id_num:
+                            ga4_property = prop_name
+                            break
+                except Exception:
+                    pass
+                if ga4_property:
+                    break
+            # Fallback: se não achou pelo GA ID, pega a primeira
+            if not ga4_property and props.get('properties'):
+                ga4_property = props['properties'][0].get('name', '')
+        except Exception:
+            pass
+
+        # Detecta o site do Search Console que corresponde ao domínio do GA ID
+        try:
+            svc_sc  = build('searchconsole', 'v1', credentials=creds, cache_discovery=False)
+            sites   = svc_sc.sites().list().execute()
+            entries = sites.get('siteEntry', [])
+            # Tenta achar o site cujo domínio bate com a property GA4 encontrada
+            if ga4_property and entries:
+                try:
+                    stream_list = svc_admin.properties().dataStreams().list(parent=ga4_property).execute()
+                    stream_url  = ""
+                    for s in stream_list.get('dataStreams', []):
+                        stream_url = s.get('webStreamData', {}).get('defaultUri', '')
+                        if stream_url:
+                            break
+                    if stream_url:
+                        from urllib.parse import urlparse
+                        domain = urlparse(stream_url).netloc.replace('www.', '')
+                        for e in entries:
+                            site_url = e.get('siteUrl', '')
+                            if domain in site_url:
+                                gsc_site = site_url
+                                break
+                except Exception:
+                    pass
+            # Fallback: pega o primeiro site
+            if not gsc_site and entries:
+                gsc_site = entries[0].get('siteUrl', '')
         except Exception:
             pass
 
