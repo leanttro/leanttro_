@@ -905,47 +905,79 @@ def metricas_oauth_start():
     if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
         return "GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET não configurados.", 400
 
-    f = _flow()
-    auth_url, state = f.authorization_url(
-        access_type='offline',
-        include_granted_scopes='true',
-        prompt='consent',
-    )
-    session['oauth_state'] = state
-    session['oauth_ga_id'] = ga_id
-    return redirect(auth_url)
+    import urllib.parse, hashlib, base64, secrets
+    code_verifier  = secrets.token_urlsafe(64)
+    code_challenge = base64.urlsafe_b64encode(
+        hashlib.sha256(code_verifier.encode()).digest()
+    ).rstrip(b'=').decode()
+    state = f"{secrets.token_urlsafe(16)}.{ga_id}"
+
+    # Salva o code_verifier no JSON temporário (sem depender de sessão/cookie)
+    tokens = _load_tokens()
+    tokens[f"__pkce_{state}"] = code_verifier
+    _save_tokens(tokens)
+
+    params = urllib.parse.urlencode({
+        'client_id'            : GOOGLE_CLIENT_ID,
+        'redirect_uri'         : GOOGLE_REDIRECT_URI,
+        'response_type'        : 'code',
+        'scope'                : ' '.join(SCOPES_METRICAS),
+        'access_type'          : 'offline',
+        'prompt'               : 'consent',
+        'state'                : state,
+        'code_challenge'       : code_challenge,
+        'code_challenge_method': 'S256',
+    })
+    return redirect('https://accounts.google.com/o/oauth2/v2/auth?' + params)
 
 
 @app.route('/api/metricas/oauth/callback')
 def metricas_oauth_callback():
     """Callback do Google — salva o token associado ao GA ID."""
-    state = session.get('oauth_state', '')
-    ga_id = session.get('oauth_ga_id', '')
+    state = request.args.get('state', '')
+    code  = request.args.get('code', '')
 
-    if not ga_id:
-        return "Sessão expirada. Tente novamente.", 400
+    if not state or not code:
+        return "Parâmetros ausentes no callback.", 400
     if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
         return "Erro de configuração OAuth.", 400
 
-    f = Flow.from_client_config(
-        {
-            "web": {
-                "client_id"    : GOOGLE_CLIENT_ID,
-                "client_secret": GOOGLE_CLIENT_SECRET,
-                "auth_uri"     : "https://accounts.google.com/o/oauth2/auth",
-                "token_uri"    : "https://oauth2.googleapis.com/token",
-                "redirect_uris": [GOOGLE_REDIRECT_URI],
-            }
-        },
-        scopes       = SCOPES_METRICAS,
-        state        = state,
-        redirect_uri = GOOGLE_REDIRECT_URI,
-    )
+    # Recupera ga_id e code_verifier do state e do JSON temporário
+    ga_id = state.split('.')[-1] if '.' in state else ''
+    if not ga_id or not ga_id.startswith('G-'):
+        return "State inválido.", 400
+
+    tokens        = _load_tokens()
+    code_verifier = tokens.pop(f"__pkce_{state}", None)
+    _save_tokens(tokens)
+
+    if not code_verifier:
+        return "Code verifier não encontrado. Tente novamente.", 400
 
     try:
-        auth_response = request.url.replace('http://', 'https://')
-        f.fetch_token(authorization_response=auth_response)
-        creds = f.credentials
+        import urllib.parse
+        import requests as _req2
+        resp = _req2.post('https://oauth2.googleapis.com/token', data={
+            'client_id'    : GOOGLE_CLIENT_ID,
+            'client_secret': GOOGLE_CLIENT_SECRET,
+            'code'         : code,
+            'code_verifier': code_verifier,
+            'grant_type'   : 'authorization_code',
+            'redirect_uri' : GOOGLE_REDIRECT_URI,
+        })
+        tok_data = resp.json()
+        if 'error' in tok_data:
+            return f"Erro OAuth: {tok_data}", 400
+
+        from google.oauth2.credentials import Credentials as GCreds
+        creds = GCreds(
+            token         = tok_data.get('access_token'),
+            refresh_token = tok_data.get('refresh_token'),
+            token_uri     = 'https://oauth2.googleapis.com/token',
+            client_id     = GOOGLE_CLIENT_ID,
+            client_secret = GOOGLE_CLIENT_SECRET,
+            scopes        = SCOPES_METRICAS,
+        )
 
         # Detecta o site do Search Console automaticamente
         gsc_site = ""
