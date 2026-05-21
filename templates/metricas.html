@@ -981,10 +981,16 @@ async function carregarDadosReais(){
       }
     } else {
       document.getElementById('tbl-keywords').innerHTML = `<tr><td colspan="5" style="text-align:center;padding:16px;color:var(--muted);font-size:.8rem">Search Console não conectado.</td></tr>`;
+      ['tbl-gsc-device','tbl-gsc-pais','tbl-gsc-paginas'].forEach(id=>{
+        document.getElementById(id).innerHTML = `<tr><td colspan="3" style="text-align:center;padding:12px;color:var(--muted);font-size:.8rem">Não disponível.</td></tr>`;
+      });
       document.getElementById('bloco-gsc-extra').style.display = 'none';
     }
   } catch(err){
     document.getElementById('tbl-keywords').innerHTML = `<tr><td colspan="5" style="text-align:center;padding:16px;color:#d85a30;font-size:.8rem">Erro ao carregar Search Console.</td></tr>`;
+    ['tbl-gsc-device','tbl-gsc-pais','tbl-gsc-paginas'].forEach(id=>{
+      document.getElementById(id).innerHTML = `<tr><td colspan="3" style="text-align:center;padding:12px;color:#d85a30;font-size:.8rem">Erro ao carregar.</td></tr>`;
+    });
     document.getElementById('bloco-gsc-extra').style.display = 'none';
   }
 }
@@ -1096,20 +1102,17 @@ async function confirmarSelecao(){
 
 // Se voltou do OAuth (conectado=1), libera o painel automaticamente sem gate
 if(conectado && !isDemo){
+  // Captura lead anônimo via OAuth (sem nome/email, mas registra o GA ID)
   fetch('/leads',{
     method:'POST',
     headers:{'Content-Type':'application/json'},
     body:JSON.stringify({nome:'OAuth',email:'oauth@sem-email.com',origem:'metricas-oauth',interesse:'GA4: '+gaId})
   }).catch(e=>console.warn('Lead OAuth não salvo:',e));
   document.getElementById('gate-overlay').style.display = 'none';
-  document.getElementById('promo-banner').classList.remove('visible');
   const painel = document.getElementById('painel');
   painel.classList.add('liberado');
-  setTimeout(()=>{
-    renderDados();
-    carregarDadosReais();
-    painel.scrollIntoView({behavior:'smooth', block:'start'});
-  }, 100);
+  renderDados();
+  carregarDadosReais();
 }
 
 // Se voltou do OAuth pedindo seleção (?selecionar=1), libera painel e abre modal
@@ -1120,14 +1123,10 @@ if(selecionar && !isDemo){
     body:JSON.stringify({nome:'OAuth',email:'oauth@sem-email.com',origem:'metricas-oauth',interesse:'GA4: '+gaId})
   }).catch(e=>console.warn('Lead OAuth não salvo:',e));
   document.getElementById('gate-overlay').style.display = 'none';
-  document.getElementById('promo-banner').classList.remove('visible');
   const painelSel = document.getElementById('painel');
   painelSel.classList.add('liberado');
-  setTimeout(()=>{
-    renderDados();
-    painelSel.scrollIntoView({behavior:'smooth', block:'start'});
-    abrirModalSelecao();
-  }, 100);
+  renderDados();
+  abrirModalSelecao();
 }
 
 document.getElementById('g-wpp').addEventListener('keydown',e=>{if(e.key==='Enter')liberarPainel();});
