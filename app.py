@@ -889,10 +889,12 @@ def metricas_status():
     tokens = _load_tokens()
     tok    = tokens.get(ga_id, {})
     return jsonify({
-        "success"      : True,
-        "conectado"    : creds is not None and creds.valid,
-        "gsc_site"     : tok.get('gsc_site', ''),
-        "ga4_property" : tok.get('ga4_property', ''),
+        "success"        : True,
+        "conectado"      : creds is not None and creds.valid,
+        "gsc_site"       : tok.get('gsc_site', ''),
+        "ga4_property"   : tok.get('ga4_property', ''),
+        "all_properties" : tok.get('all_properties', []),
+        "gsc_sites"      : tok.get('gsc_sites', []),
     })
 
 
