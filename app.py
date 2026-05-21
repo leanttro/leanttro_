@@ -1155,12 +1155,49 @@ def metricas_gsc():
             'posicao'   : round(r.get('position', 0), 1),
         } for r in resp_kw.get('rows', [])]
 
+        # Por dispositivo
+        resp_dev = svc.searchanalytics().query(siteUrl=gsc_site, body={
+            'startDate' : start.strftime('%Y-%m-%d'),
+            'endDate'   : end.strftime('%Y-%m-%d'),
+            'dimensions': ['device'],
+            'rowLimit'  : 10,
+        }).execute()
+        por_device = [{
+            'device'    : r['keys'][0].upper(),
+            'cliques'   : r.get('clicks', 0),
+            'impressoes': r.get('impressions', 0),
+            'ctr'       : round(r.get('ctr', 0) * 100, 2),
+            'posicao'   : round(r.get('position', 0), 1),
+        } for r in resp_dev.get('rows', [])]
+
+        # Por país
+        resp_pais = svc.searchanalytics().query(siteUrl=gsc_site, body={
+            'startDate' : start.strftime('%Y-%m-%d'),
+            'endDate'   : end.strftime('%Y-%m-%d'),
+            'dimensions': ['country'],
+            'rowLimit'  : 10,
+            'orderBy'   : [{'fieldName': 'clicks', 'sortOrder': 'DESCENDING'}],
+        }).execute()
+        por_pais = [{
+            'pais'      : r['keys'][0],
+            'cliques'   : r.get('clicks', 0),
+            'impressoes': r.get('impressions', 0),
+        } for r in resp_pais.get('rows', [])]
+
         return jsonify({
             "success"     : True,
+            # totais flat (compatível com o frontend que lê dGSC.cliques direto)
+            "cliques"     : totais['cliques'],
+            "impressoes"  : totais['impressoes'],
+            "ctr"         : totais['ctr'],
+            "posicao"     : totais['posicao'],
             "totais"      : totais,
             "por_dia"     : por_dia,
+            "por_pagina"  : top_paginas,
             "top_paginas" : top_paginas,
             "top_keywords": top_keywords,
+            "por_device"  : por_device,
+            "por_pais"    : por_pais,
             "site"        : gsc_site,
             "periodo_dias": dias,
         })
