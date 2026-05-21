@@ -221,13 +221,21 @@ def pagina_loja():
 def pagina_produto(slug):
     return render_template("produto.html")
 
+@app.route("/termos")
+def pagina_termos():
+    return render_template("termos.html")
+
+@app.route("/privacidade")
+def pagina_privacidade():
+    return render_template("privacidade.html")
+
 @app.route("/<bairro_slug>")
 def pagina_bairro(bairro_slug):
     # Rotas reservadas que não são bairros
     ROTAS_RESERVADAS = {
         'admin', 'blog', 'loja', 'leads', 'produtos', 'pedidos',
         'hub', 'webhook', 'obrigado', 'erro', 'politica-de-privacidade',
-        'termos', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico',
+        'termos', 'privacidade', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico',
         'portfolio', 'metricas', 'negocio', 'categoria', 'api',
         'seu-hub', 'seuhub'
     }
