@@ -18,6 +18,8 @@ from googleapiclient.discovery import build
 app = Flask(__name__)
 CORS(app)
 app.secret_key = os.environ.get("SECRET_KEY", "troca-isso")
+app.config["SESSION_COOKIE_SECURE"] = True
+app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
 
 # ─── CONFIG VIA ENV ───────────────────────────────────────────────────────────
 DB_URL       = os.environ["DATABASE_URL"]        # postgresql://user:pass@host:port/db
