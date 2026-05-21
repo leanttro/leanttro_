@@ -297,6 +297,20 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 .success-title{font-family:var(--display);font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:4px}
 .success-sub{font-size:.875rem;color:var(--muted)}
 
+
+/* MODAL SELEÇÃO DE PROPERTY */
+.modal-overlay{position:fixed;inset:0;background:rgba(10,10,15,.7);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.hidden{display:none}
+.modal-box{background:#fff;border-radius:16px;padding:32px;max-width:560px;width:100%;box-shadow:0 16px 48px rgba(0,0,0,.2)}
+.modal-title{font-family:var(--display);font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:6px}
+.modal-sub{font-size:.875rem;color:var(--muted);margin-bottom:20px}
+.modal-label{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:6px;display:block}
+.modal-select{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:8px;font-family:var(--sans);font-size:.9rem;color:var(--text);background:#fff;margin-bottom:16px;cursor:pointer}
+.modal-select:focus{outline:none;border-color:var(--primary)}
+.btn-modal-confirm{width:100%;background:var(--primary);color:#fff;border:none;border-radius:8px;padding:13px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:var(--sans);transition:background .2s}
+.btn-modal-confirm:hover{background:var(--primary-d)}
+.modal-note{font-size:.75rem;color:var(--muted);text-align:center;margin-top:10px}
+
 /* TOAST */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--dark);color:#fff;padding:12px 20px;border-radius:10px;font-size:.875rem;font-weight:500;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none}
 .toast.show{transform:translateY(0);opacity:1}
@@ -574,7 +588,8 @@ if(isDemo){
 }
 
 // Checa se voltou do OAuth com ?conectado=1
-const conectado = params.get('conectado') === '1';
+const conectado  = params.get('conectado') === '1';
+const selecionar = params.get('selecionar') === '1';
 
 // ─── INPUT GA ID ──────────────────────────────────────────────────────
 function aplicarGaId(){
@@ -846,6 +861,53 @@ function liberarPainel(){
   }, 1400);
 }
 
+// ─── MODAL SELEÇÃO ───────────────────────────────────────────────────
+async function abrirModalSelecao(){
+  try {
+    const r = await fetch(`/api/metricas/status?ga_id=${gaId}`);
+    const d = await r.json();
+    const props    = d.all_properties || [];
+    const gscSites = d.gsc_sites || [];
+
+    const selProp = document.getElementById('sel-property');
+    const selGsc  = document.getElementById('sel-gsc');
+
+    selProp.innerHTML = props.length
+      ? props.map(p => `<option value="${p.name}">${p.displayName}${p.measurementId ? ' ('+p.measurementId+')' : ''}</option>`).join('')
+      : '<option value="">Nenhuma property encontrada</option>';
+
+    selGsc.innerHTML = gscSites.length
+      ? gscSites.map(s => `<option value="${s}">${s}</option>`).join('')
+      : '<option value="">Nenhum site encontrado no Search Console</option>';
+
+    document.getElementById('modal-selecao').classList.remove('hidden');
+  } catch(e) {
+    toast('Erro ao carregar propriedades. Tente novamente.');
+  }
+}
+
+async function confirmarSelecao(){
+  const ga4_property = document.getElementById('sel-property').value;
+  const gsc_site     = document.getElementById('sel-gsc').value;
+  if(!ga4_property){ toast('Selecione uma propriedade GA4.'); return; }
+
+  try {
+    const r = await fetch('/api/metricas/selecionar', {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({ga_id: gaId, ga4_property, gsc_site})
+    });
+    const d = await r.json();
+    if(!d.success){ toast('Erro ao salvar seleção.'); return; }
+
+    document.getElementById('modal-selecao').classList.add('hidden');
+    carregarDadosReais();
+    toast('✅ Propriedade selecionada!');
+  } catch(e) {
+    toast('Erro ao salvar. Tente novamente.');
+  }
+}
+
 // Se voltou do OAuth (conectado=1), libera o painel automaticamente sem gate
 if(conectado && !isDemo){
   // Captura lead anônimo via OAuth (sem nome/email, mas registra o GA ID)
@@ -861,6 +923,20 @@ if(conectado && !isDemo){
   carregarDadosReais();
 }
 
+// Se voltou do OAuth pedindo seleção (?selecionar=1), libera painel e abre modal
+if(selecionar && !isDemo){
+  fetch('/leads',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({nome:'OAuth',email:'oauth@sem-email.com',origem:'metricas-oauth',interesse:'GA4: '+gaId})
+  }).catch(e=>console.warn('Lead OAuth não salvo:',e));
+  document.getElementById('gate-overlay').style.display = 'none';
+  const painelSel = document.getElementById('painel');
+  painelSel.classList.add('liberado');
+  renderDados();
+  abrirModalSelecao();
+}
+
 document.getElementById('g-wpp').addEventListener('keydown',e=>{if(e.key==='Enter')liberarPainel();});
 document.getElementById('g-email').addEventListener('keydown',e=>{if(e.key==='Enter')liberarPainel();});
 
@@ -873,5 +949,20 @@ if(navClose)  navClose.addEventListener('click',()=>mobileNav.classList.remove('
 if(mobileNav) mobileNav.addEventListener('click',e=>{if(e.target===mobileNav)mobileNav.classList.remove('active')});
 function closeNav(){if(mobileNav)mobileNav.classList.remove('active');}
 </script>
+
+<!-- MODAL SELEÇÃO DE PROPERTY/SITE -->
+<div class="modal-overlay hidden" id="modal-selecao">
+  <div class="modal-box">
+    <div class="modal-title">🔧 Qual é o seu site?</div>
+    <p class="modal-sub">Encontramos mais de uma propriedade na sua conta Google. Selecione qual corresponde ao site que você quer analisar.</p>
+    <label class="modal-label" for="sel-property">Propriedade Google Analytics 4</label>
+    <select class="modal-select" id="sel-property"></select>
+    <label class="modal-label" for="sel-gsc">Site no Search Console <span style="font-weight:400;text-transform:none">(para palavras-chave)</span></label>
+    <select class="modal-select" id="sel-gsc"></select>
+    <button class="btn-modal-confirm" onclick="confirmarSelecao()">Ver meu diagnóstico →</button>
+    <p class="modal-note">Você só precisa fazer isso uma vez.</p>
+  </div>
+</div>
+
 </body>
 </html>
