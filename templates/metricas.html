@@ -341,14 +341,6 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 .btn-conectar-inline{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;border:none;border-radius:8px;padding:9px 18px;font-size:.82rem;font-weight:700;cursor:pointer;font-family:var(--sans);text-decoration:none;transition:background .2s;margin-top:4px}
 .btn-conectar-inline:hover{background:var(--primary-d)}
 
-/* PREVIEW LISTA DE FUNCIONALIDADES */
-.preview-list{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:520px;margin:0 auto 24px;text-align:left}
-@media(max-width:520px){.preview-list{grid-template-columns:1fr}}
-.preview-item{display:flex;align-items:flex-start;gap:10px;background:var(--bg2);border:1.5px solid var(--border);border-radius:10px;padding:12px 14px}
-.preview-item-icon{font-size:1.1rem;flex-shrink:0;margin-top:1px}
-.preview-item-text{font-size:.8rem;color:var(--text);line-height:1.4}
-.preview-item-text strong{display:block;font-weight:700;margin-bottom:2px;font-size:.82rem}
-
 /* TABELA PAGES BLUR */
 .tbl-pages-wrap{position:relative;overflow:hidden;border-radius:6px}
 .tbl-pages-blur{filter:blur(5px);pointer-events:none;user-select:none}
@@ -490,7 +482,6 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
   <!-- PAINEL REAL -->
   <div class="painel" id="painel">
 
-    <div id="bloco-ga4-dados" style="display:none">
     <div class="period-bar">
       <button class="period-btn" onclick="setPeriodo(7,this)">7 dias</button>
       <button class="period-btn active" onclick="setPeriodo(30,this)">30 dias</button>
@@ -579,7 +570,6 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 
     <!-- AVISO DADOS ESTIMADOS (removido — não há mais dados fake) -->
     <div id="aviso-estimado" style="display:none"></div>
-    </div><!-- /bloco-ga4-dados -->
 
     <!-- ══════════════════════════════════════════════════
          SEÇÃO DE PÁGINAS E KEYWORDS — DADOS REAIS VIA OAUTH
@@ -588,45 +578,9 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 
       <!-- Estado 1: ainda não conectou o Google -->
       <div class="google-connect-section" id="bloco-conectar">
-        <div class="google-connect-icon">🔍</div>
-        <div class="google-connect-title">Conecte o Google e veja seus dados reais</div>
-        <p class="google-connect-sub">Autorize uma vez e libere tudo isso — gratuito, somente leitura, sem alterar nada na sua conta.</p>
-
-        <div class="preview-list">
-          <div class="preview-item">
-            <span class="preview-item-icon">🔑</span>
-            <div class="preview-item-text"><strong>Palavras-chave orgânicas</strong>Queries, cliques, CTR e posição no Google.</div>
-          </div>
-          <div class="preview-item">
-            <span class="preview-item-icon">📈</span>
-            <div class="preview-item-text"><strong>Cliques e impressões</strong>Total e gráfico diário do Search Console.</div>
-          </div>
-          <div class="preview-item">
-            <span class="preview-item-icon">📊</span>
-            <div class="preview-item-text"><strong>Sessões, usuários e pageviews</strong>Dados reais do Google Analytics.</div>
-          </div>
-          <div class="preview-item">
-            <span class="preview-item-icon">🥧</span>
-            <div class="preview-item-text"><strong>Canais de tráfego</strong>Orgânico, direto, social e referência.</div>
-          </div>
-          <div class="preview-item">
-            <span class="preview-item-icon">📱</span>
-            <div class="preview-item-text"><strong>Cliques por dispositivo</strong>Mobile, desktop e tablet.</div>
-          </div>
-          <div class="preview-item">
-            <span class="preview-item-icon">🌍</span>
-            <div class="preview-item-text"><strong>Cliques por país</strong>De onde vem seu tráfego.</div>
-          </div>
-          <div class="preview-item">
-            <span class="preview-item-icon">📄</span>
-            <div class="preview-item-text"><strong>Páginas no Google</strong>URLs indexadas com cliques e posição.</div>
-          </div>
-          <div class="preview-item">
-            <span class="preview-item-icon">⏱️</span>
-            <div class="preview-item-text"><strong>Tempo médio por sessão</strong>Engajamento real dos visitantes.</div>
-          </div>
-        </div>
-
+        <div class="google-connect-icon">🔒</div>
+        <div class="google-connect-title">Veja suas páginas e palavras-chave reais</div>
+        <p class="google-connect-sub">Conecte sua conta Google para ver quais páginas do seu site recebem mais visitas e quais palavras-chave te trazem clientes — dados reais, só seus.</p>
         <a id="btn-conectar-google" href="#" class="btn-google" onclick="conectarGoogle(event)">
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
@@ -911,7 +865,6 @@ async function carregarDadosReais(){
   document.getElementById('bloco-conectar').style.display = 'none';
   document.getElementById('bloco-tabelas').style.display  = 'grid';
   document.getElementById('bloco-gsc-extra').style.display = 'block';
-  document.getElementById('bloco-ga4-dados').style.display = 'block';
 
   // Mostrar canvas, esconder placeholders
   ['chart-sessoes','chart-canais','chart-devices'].forEach(id=>{
