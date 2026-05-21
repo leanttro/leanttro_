@@ -979,74 +979,90 @@ def metricas_oauth_callback():
             scopes        = SCOPES_METRICAS,
         )
 
-        # Detecta a property GA4 que corresponde ao GA ID informado
-        ga4_property = ""
-        gsc_site     = ""
+        # Coleta todas as properties e streams da conta
+        all_properties = []
+        ga4_property_auto = ""
         try:
             svc_admin = build('analyticsadmin', 'v1beta', credentials=creds, cache_discovery=False)
             props = svc_admin.properties().list(filter="parent:accounts/-").execute()
             ga_id_num = ga_id.replace('G-', '').upper()
             for p in props.get('properties', []):
-                prop_name = p.get('name', '')  # ex: "properties/123456789"
+                prop_name    = p.get('name', '')
+                prop_display = p.get('displayName', prop_name)
+                stream_url   = ''
+                measurement_id = ''
                 try:
-                    # Busca os data streams da property para achar o que tem o GA ID certo
                     streams = svc_admin.properties().dataStreams().list(parent=prop_name).execute()
                     for s in streams.get('dataStreams', []):
-                        measurement_id = s.get('webStreamData', {}).get('measurementId', '')
-                        if measurement_id.replace('G-', '').upper() == ga_id_num:
-                            ga4_property = prop_name
+                        mid = s.get('webStreamData', {}).get('measurementId', '')
+                        url = s.get('webStreamData', {}).get('defaultUri', '')
+                        if mid:
+                            measurement_id = mid
+                            stream_url     = url
+                            if mid.replace('G-', '').upper() == ga_id_num:
+                                ga4_property_auto = prop_name
                             break
                 except Exception:
                     pass
-                if ga4_property:
-                    break
-            # Fallback: se não achou pelo GA ID, pega a primeira
-            if not ga4_property and props.get('properties'):
-                ga4_property = props['properties'][0].get('name', '')
+                all_properties.append({
+                    'name'          : prop_name,
+                    'displayName'   : prop_display,
+                    'measurementId' : measurement_id,
+                    'streamUrl'     : stream_url,
+                })
         except Exception:
             pass
 
-        # Detecta o site do Search Console que corresponde ao domínio do GA ID
+        # Coleta sites do Search Console
+        gsc_sites = []
         try:
             svc_sc  = build('searchconsole', 'v1', credentials=creds, cache_discovery=False)
             sites   = svc_sc.sites().list().execute()
-            entries = sites.get('siteEntry', [])
-            # Tenta achar o site cujo domínio bate com a property GA4 encontrada
-            if ga4_property and entries:
-                try:
-                    stream_list = svc_admin.properties().dataStreams().list(parent=ga4_property).execute()
-                    stream_url  = ""
-                    for s in stream_list.get('dataStreams', []):
-                        stream_url = s.get('webStreamData', {}).get('defaultUri', '')
-                        if stream_url:
-                            break
-                    if stream_url:
-                        from urllib.parse import urlparse
-                        domain = urlparse(stream_url).netloc.replace('www.', '')
-                        for e in entries:
-                            site_url = e.get('siteUrl', '')
-                            if domain in site_url:
-                                gsc_site = site_url
-                                break
-                except Exception:
-                    pass
-            # Fallback: pega o primeiro site
-            if not gsc_site and entries:
-                gsc_site = entries[0].get('siteUrl', '')
+            gsc_sites = [e.get('siteUrl', '') for e in sites.get('siteEntry', []) if e.get('siteUrl')]
         except Exception:
             pass
 
-        # Salva token indexado pelo GA ID
+        # Salva token + listas temporárias indexado pelo GA ID
         tokens = _load_tokens()
         tokens[ga_id] = {
-            'token'        : creds.token,
-            'refresh_token': creds.refresh_token,
-            'gsc_site'     : gsc_site,
-            'ga4_property' : ga4_property,
+            'token'           : creds.token,
+            'refresh_token'   : creds.refresh_token,
+            'gsc_site'        : '',
+            'ga4_property'    : ga4_property_auto,
+            'all_properties'  : all_properties,
+            'gsc_sites'       : gsc_sites,
         }
         _save_tokens(tokens)
 
-        return redirect(f'/metricas?id={ga_id}&conectado=1')
+        # Se achou a property pelo GA ID e só tem 1 site GSC, salva direto sem precisar de seleção
+        gsc_auto = ''
+        if gsc_sites:
+            if len(gsc_sites) == 1:
+                gsc_auto = gsc_sites[0]
+            elif ga4_property_auto:
+                # Tenta casar pelo domínio do stream
+                try:
+                    from urllib.parse import urlparse
+                    for prop in all_properties:
+                        if prop['name'] == ga4_property_auto and prop['streamUrl']:
+                            domain = urlparse(prop['streamUrl']).netloc.replace('www.', '')
+                            for s in gsc_sites:
+                                if domain in s:
+                                    gsc_auto = s
+                                    break
+                except Exception:
+                    pass
+
+        if gsc_auto:
+            tokens[ga_id]['gsc_site'] = gsc_auto
+            _save_tokens(tokens)
+
+        # Se achou tudo automaticamente, vai direto pro painel
+        if ga4_property_auto and gsc_auto:
+            return redirect(f'/metricas?id={ga_id}&conectado=1')
+
+        # Caso contrário, redireciona pra tela de seleção
+        return redirect(f'/metricas?id={ga_id}&selecionar=1')
 
     except Exception as e:
         return f"Erro no callback OAuth: {e}", 400
@@ -1322,5 +1338,27 @@ def metricas_ia_analise():
 # ═══════════════════════════════════════════════════════════════════
 
 # ─── RUN ──────────────────────────────────────────────────────────────────────
+
+# ─── SALVAR SELEÇÃO DE PROPERTY/SITE ─────────────────────────────────────────
+@app.route('/api/metricas/selecionar', methods=['POST'])
+def metricas_selecionar():
+    """Salva a property GA4 e site GSC escolhidos pelo usuário."""
+    data         = request.json or {}
+    ga_id        = data.get('ga_id', '').upper().strip()
+    ga4_property = data.get('ga4_property', '').strip()
+    gsc_site     = data.get('gsc_site', '').strip()
+
+    if not ga_id:
+        return jsonify({"success": False, "error": "ga_id não informado"}), 400
+
+    tokens = _load_tokens()
+    if ga_id not in tokens:
+        return jsonify({"success": False, "error": "Token não encontrado. Faça o OAuth novamente."}), 400
+
+    tokens[ga_id]['ga4_property'] = ga4_property
+    tokens[ga_id]['gsc_site']     = gsc_site
+    _save_tokens(tokens)
+    return jsonify({"success": True})
+
 if __name__ == "__main__":
     app.run(debug=os.environ.get("FLASK_DEBUG", "false").lower() == "true")
