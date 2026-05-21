@@ -93,16 +93,35 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 .hero-wave svg{display:block;width:100%}
 
 /* FILTROS */
-.filtros-section{background:#fff;padding:24px 0;border-bottom:1px solid var(--border);position:sticky;top:68px;z-index:100}
+.filtros-section{background:#fff;padding:16px 0;border-bottom:1px solid var(--border);position:sticky;top:68px;z-index:100}
 .filtros-inner{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .filtro-label{font-size:.82rem;font-weight:600;color:var(--muted);white-space:nowrap}
-.chips{display:flex;gap:8px;flex-wrap:wrap;flex:1}
-.chip{display:inline-flex;align-items:center;gap:6px;padding:7px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:.85rem;font-weight:500;color:var(--muted);cursor:pointer;transition:all .18s;white-space:nowrap;font-family:var(--sans)}
-.chip:hover{border-color:var(--primary);color:var(--primary)}
-.chip.active{background:var(--primary);border-color:var(--primary);color:#fff}
-.btn-loc{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:.85rem;font-weight:500;color:var(--muted);cursor:pointer;transition:all .18s;white-space:nowrap;margin-left:auto;font-family:var(--sans)}
+
+/* SLICER */
+.slicer-wrap{position:relative;flex:1;min-width:0}
+.slicer-btn{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:10px;border:1.5px solid var(--border);background:#fff;font-size:.88rem;font-weight:500;color:var(--text);cursor:pointer;transition:all .18s;white-space:nowrap;font-family:var(--sans);min-width:180px;max-width:100%}
+.slicer-btn:hover,.slicer-btn.open{border-color:var(--primary);color:var(--primary)}
+.slicer-btn .slicer-arrow{margin-left:auto;width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;transition:transform .2s;flex-shrink:0}
+.slicer-btn.open .slicer-arrow{transform:rotate(180deg)}
+.slicer-dropdown{display:none;position:absolute;top:calc(100% + 6px);left:0;min-width:220px;max-width:320px;background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);z-index:200;overflow:hidden}
+.slicer-dropdown.open{display:block}
+.slicer-search{width:100%;border:none;border-bottom:1px solid var(--border);padding:10px 14px;font-size:.85rem;font-family:var(--sans);outline:none;color:var(--text)}
+.slicer-list{max-height:260px;overflow-y:auto;overscroll-behavior:contain}
+.slicer-item{display:block;width:100%;text-align:left;padding:10px 14px;font-size:.88rem;font-family:var(--sans);background:none;border:none;cursor:pointer;color:var(--text);transition:background .12s}
+.slicer-item:hover{background:rgba(121,67,226,.06)}
+.slicer-item.active{background:rgba(121,67,226,.1);color:var(--primary);font-weight:600}
+.slicer-item-all{border-bottom:1px solid var(--border);font-weight:600}
+
+.btn-loc{display:inline-flex;align-items:center;gap:7px;padding:8px 16px;border-radius:10px;border:1.5px solid var(--border);background:#fff;font-size:.85rem;font-weight:500;color:var(--muted);cursor:pointer;transition:all .18s;white-space:nowrap;margin-left:auto;font-family:var(--sans)}
 .btn-loc:hover{border-color:var(--primary);color:var(--primary)}
 .btn-loc svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2}
+
+@media(max-width:768px){
+  .slicer-btn{min-width:0;width:100%}
+  .slicer-dropdown{min-width:0;width:100%;max-width:100%}
+  .filtros-inner{flex-direction:row;align-items:center}
+  .slicer-wrap{flex:1}
+}
 
 /* GRID */
 .section{padding:60px 0}
@@ -254,9 +273,21 @@ footer{background:var(--dark);padding:40px 20px 0}
   <div class="container">
     <div class="filtros-inner">
       <span class="filtro-label">Categoria:</span>
-      <div class="chips" id="chipsCategorias">
-        <button class="chip active" onclick="filtrarCategoria(this,'')">Todas</button>
+      <div class="slicer-wrap" id="slicerCatWrap">
+        <button class="slicer-btn" id="slicerCatBtn" onclick="toggleSlicer('slicerCatBtn','slicerCatDropdown')" type="button">
+          <svg style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/></svg>
+          <span id="slicerCatLabel">Todas as categorias</span>
+          <svg class="slicer-arrow" viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="slicer-dropdown" id="slicerCatDropdown">
+          <input class="slicer-search" type="text" placeholder="Buscar categoria..." oninput="filtrarSlicerSearch(this,'slicerCatList')" autocomplete="off">
+          <div class="slicer-list" id="slicerCatList">
+            <button class="slicer-item slicer-item-all active" data-slug="" onclick="selecionarCategoria(this,'')">Todas as categorias</button>
+          </div>
+        </div>
       </div>
+      <!-- container oculto mantém compatibilidade com JS original -->
+      <div style="display:none" id="chipsCategorias"></div>
       <button class="btn-loc" id="btnLoc" onclick="usarLocalizacao()">
         <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
         Perto de mim
@@ -375,7 +406,7 @@ function renderGrid(lista){
   const container=document.getElementById('negociosContainer');
   const sub=document.getElementById('gridSubtitulo');
   if(!lista.length){
-    container.innerHTML=`<div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Nenhum negócio encontrado</h3><p>Tente outra categoria ou <a href="https://wa.me/5511913324827" style="color:var(--primary)">cadastre o seu</a>.</p></div>`;
+    container.innerHTML=`<div class="empty-state"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg><h3>Nenhum negócio encontrado</h3><p>Tente outra categoria ou <a href="https://wa.me/5511999999999" style="color:var(--primary)">cadastre o seu</a>.</p></div>`;
     sub.textContent='Nenhum resultado';return;
   }
   sub.textContent=`${lista.length} negócio${lista.length!==1?'s':''} encontrado${lista.length!==1?'s':''}`;
@@ -416,7 +447,7 @@ async function init(){
   document.title = `Negócios no ${nomeBairro} — São Paulo | Leanttro Hub`;
   document.getElementById('pageDesc').setAttribute('content',`Encontre restaurantes, salões, mercados e serviços no ${nomeBairro}. Guia completo de negócios locais em São Paulo.`);
   document.getElementById('pageCanonical').setAttribute('href',`https://www.leanttro.com/${slugBairro}`);
-  document.getElementById('ctaWpp').href=`https://wa.me/5511913324827?text=Quero%20cadastrar%20meu%20neg%C3%B3cio%20no%20${encodeURIComponent(nomeBairro)}`;
+  document.getElementById('ctaWpp').href=`https://wa.me/5511999999999?text=Quero%20cadastrar%20meu%20neg%C3%B3cio%20no%20${encodeURIComponent(nomeBairro)}`;
 
   // Busca dados
   const [negocios, todosNegocios] = await Promise.all([
@@ -519,6 +550,60 @@ async function init(){
 
   filtrar();
 }
+
+/* ── SLICER ── */
+function toggleSlicer(btnId, dropId){
+  const btn=document.getElementById(btnId);
+  const drop=document.getElementById(dropId);
+  const isOpen=drop.classList.contains('open');
+  document.querySelectorAll('.slicer-dropdown.open').forEach(d=>d.classList.remove('open'));
+  document.querySelectorAll('.slicer-btn.open').forEach(b=>b.classList.remove('open'));
+  if(!isOpen){drop.classList.add('open');btn.classList.add('open');drop.querySelector('.slicer-search')&&drop.querySelector('.slicer-search').focus();}
+}
+document.addEventListener('click',function(e){
+  if(!e.target.closest('.slicer-wrap')){
+    document.querySelectorAll('.slicer-dropdown.open').forEach(d=>d.classList.remove('open'));
+    document.querySelectorAll('.slicer-btn.open').forEach(b=>b.classList.remove('open'));
+  }
+});
+function filtrarSlicerSearch(input,listId){
+  const q=input.value.toLowerCase();
+  document.querySelectorAll('#'+listId+' .slicer-item').forEach(item=>{
+    item.style.display=item.textContent.toLowerCase().includes(q)?'':'none';
+  });
+}
+function selecionarCategoria(el,slug){
+  document.querySelectorAll('#slicerCatList .slicer-item').forEach(i=>i.classList.remove('active'));
+  el.classList.add('active');
+  const label=document.getElementById('slicerCatLabel');
+  label.textContent=slug?el.textContent:'Todas as categorias';
+  document.getElementById('slicerCatDropdown').classList.remove('open');
+  document.getElementById('slicerCatBtn').classList.remove('open');
+  categoriaAtiva=slug;filtrar();
+}
+
+// Observer: quando JS original adiciona chips ocultos, replica no slicer
+(function(){
+  const observer = new MutationObserver(function(mutations){
+    mutations.forEach(function(m){
+      m.addedNodes.forEach(function(node){
+        if(node.nodeType===1 && node.classList.contains('chip') && node.parentElement && node.parentElement.id==='chipsCategorias'){
+          const slug=node.textContent==='Todas'?'':slugify(node.textContent);
+          const label=node.textContent==='Todas'?'Todas as categorias':node.textContent;
+          if(slug){
+            const item=document.createElement('button');
+            item.className='slicer-item';
+            item.dataset.slug=slug;
+            item.textContent=label;
+            item.onclick=function(){selecionarCategoria(this,slug)};
+            document.getElementById('slicerCatList').appendChild(item);
+          }
+        }
+      });
+    });
+  });
+  observer.observe(document.getElementById('chipsCategorias'),{childList:true});
+})();
 
 document.getElementById('hamburger').addEventListener('click',()=>document.getElementById('mobileNav').classList.add('active'));
 document.getElementById('navClose').addEventListener('click',()=>closeNav());
