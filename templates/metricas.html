@@ -314,6 +314,25 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 /* TOAST */
 .toast{position:fixed;bottom:24px;right:24px;background:var(--dark);color:#fff;padding:12px 20px;border-radius:10px;font-size:.875rem;font-weight:500;z-index:999;transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none}
 .toast.show{transform:translateY(0);opacity:1}
+
+/* BADGE DADOS REAIS */
+.badge-real{display:inline-flex;align-items:center;gap:5px;background:rgba(0,229,160,.12);border:1px solid rgba(0,168,114,.3);color:#00a872;font-size:.7rem;font-weight:700;padding:3px 10px;border-radius:99px;margin-left:8px;vertical-align:middle}
+
+/* STAT CARD LOADING */
+.stat-value.loading{color:var(--border);font-size:1.2rem}
+
+/* GSC EXTRA CARDS */
+.gsc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+@media(max-width:700px){.gsc-grid{grid-template-columns:repeat(2,1fr)}}
+.gsc-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:16px 18px}
+.gsc-card-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:6px}
+.gsc-card-value{font-size:1.45rem;font-weight:700;color:var(--text);font-family:var(--display);line-height:1}
+.gsc-card-sub{font-size:.72rem;color:var(--muted);margin-top:3px}
+
+/* TABELA GSC EXTRA */
+.tables-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-bottom:16px}
+@media(max-width:900px){.tables-row-3{grid-template-columns:1fr 1fr}}
+@media(max-width:600px){.tables-row-3{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -511,8 +530,8 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
       </div>
     </div>
 
-    <!-- AVISO DADOS ESTIMADOS -->
-    <div style="background:#fffbeb;border:1.5px solid #fde68a;border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px">
+    <!-- AVISO DADOS ESTIMADOS (some quando conectado) -->
+    <div id="aviso-estimado" style="background:#fffbeb;border:1.5px solid #fde68a;border-radius:12px;padding:16px 20px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px">
       <span style="font-size:1.2rem;flex-shrink:0">⚠️</span>
       <div>
         <div style="font-size:.8rem;font-weight:700;color:#92400e;margin-bottom:3px">Dados estimados</div>
@@ -554,9 +573,72 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
         <div class="table-card">
           <div class="chart-title">🔍 Palavras-chave orgânicas</div>
           <table>
-            <thead><tr><th>Keyword</th><th class="td-num">Cliques</th><th class="td-num">Pos.</th></tr></thead>
-            <tbody id="tbl-keywords"><tr><td colspan="3" class="tbl-loading">Carregando dados reais...</td></tr></tbody>
+            <thead><tr><th>Keyword</th><th class="td-num">Cliques</th><th class="td-num">Impressões</th><th class="td-num">CTR</th><th class="td-num">Pos.</th></tr></thead>
+            <tbody id="tbl-keywords"><tr><td colspan="5" class="tbl-loading">Carregando dados reais...</td></tr></tbody>
           </table>
+        </div>
+      </div>
+
+      <!-- Cards extras GSC (visível só quando conectado) -->
+      <div id="bloco-gsc-extra" style="display:none">
+        <div style="font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:6px">
+          🔍 Search Console — visibilidade no Google
+          <span class="badge-real">✓ dados reais</span>
+        </div>
+        <div class="gsc-grid">
+          <div class="gsc-card">
+            <div class="gsc-card-label">Cliques totais</div>
+            <div class="gsc-card-value" id="gsc-cliques">—</div>
+            <div class="gsc-card-sub">no período</div>
+          </div>
+          <div class="gsc-card">
+            <div class="gsc-card-label">Impressões</div>
+            <div class="gsc-card-value" id="gsc-impressoes">—</div>
+            <div class="gsc-card-sub">vezes no Google</div>
+          </div>
+          <div class="gsc-card">
+            <div class="gsc-card-label">CTR médio</div>
+            <div class="gsc-card-value" id="gsc-ctr">—</div>
+            <div class="gsc-card-sub">taxa de clique</div>
+          </div>
+          <div class="gsc-card">
+            <div class="gsc-card-label">Posição média</div>
+            <div class="gsc-card-value" id="gsc-posicao">—</div>
+            <div class="gsc-card-sub">no Google</div>
+          </div>
+        </div>
+
+        <!-- Gráfico cliques por dia GSC -->
+        <div class="chart-card" style="margin-bottom:14px">
+          <div class="chart-title">Cliques e Impressões por dia <span class="badge-real">✓ Search Console</span></div>
+          <div style="position:relative;width:100%;height:200px">
+            <canvas id="chart-gsc-dia" role="img" aria-label="Cliques por dia Search Console"></canvas>
+          </div>
+        </div>
+
+        <!-- Tabelas GSC extras: por dispositivo e por página -->
+        <div class="tables-row-3">
+          <div class="table-card">
+            <div class="chart-title">📱 Cliques por dispositivo</div>
+            <table>
+              <thead><tr><th>Dispositivo</th><th class="td-num">Cliques</th><th class="td-num">Impressões</th></tr></thead>
+              <tbody id="tbl-gsc-device"><tr><td colspan="3" class="tbl-loading">Carregando...</td></tr></tbody>
+            </table>
+          </div>
+          <div class="table-card">
+            <div class="chart-title">🌍 Cliques por país</div>
+            <table>
+              <thead><tr><th>País</th><th class="td-num">Cliques</th><th class="td-num">Impressões</th></tr></thead>
+              <tbody id="tbl-gsc-pais"><tr><td colspan="3" class="tbl-loading">Carregando...</td></tr></tbody>
+            </table>
+          </div>
+          <div class="table-card">
+            <div class="chart-title">📄 Páginas no Google</div>
+            <table>
+              <thead><tr><th>Página</th><th class="td-num">Cliques</th><th class="td-num">Pos.</th></tr></thead>
+              <tbody id="tbl-gsc-paginas"><tr><td colspan="3" class="tbl-loading">Carregando...</td></tr></tbody>
+            </table>
+          </div>
         </div>
       </div>
 
@@ -627,113 +709,44 @@ const fbEl = document.getElementById('fake-bars');
   fbEl.appendChild(b);
 });
 
-// ─── SEED / RNG ───────────────────────────────────────────────────────
+// ─── HELPERS ─────────────────────────────────────────────────────────
 function seed(str){let h=0;for(let c of str)h=(Math.imul(31,h)+c.charCodeAt(0))|0;return Math.abs(h);}
 function rng(s,min,max){const x=Math.sin(s)*10000;return Math.round(min+(x-Math.floor(x))*(max-min));}
 function fmt(n){return Number(n).toLocaleString('pt-BR');}
 
-// ─── GERAR DADOS (sessões, canais, devices — igual ao original) ───────
 let periodo = 30;
-let cSessoes = null, cCanais = null, cDevices = null;
+let cSessoes = null, cCanais = null, cDevices = null, cGscDia = null;
+let dadosReaisCarregados = false;
 
-function gerarDados(id, dias){
-  const s = seed(id + dias);
-  const base = rng(s, 900, 4800);
-  const mult = dias===7 ? .25 : dias===90 ? 3.1 : 1;
-  const sessoes = Math.round(base * mult);
-  const usuarios = Math.round(sessoes * rng(s+1, 70, 90) / 100);
-  const pageviews = Math.round(sessoes * rng(s+2, 18, 35) / 10);
-  const tempo = rng(s+3, 70, 240);
-  const trendS = rng(s+4, -18, 38);
-  const trendU = rng(s+5, -12, 42);
-  const trendP = rng(s+6, -22, 28);
-
-  const labels = [], dataSessoes = [];
-  const now = new Date();
-  for(let i=dias-1; i>=0; i--){
-    const d = new Date(now); d.setDate(d.getDate()-i);
-    labels.push(d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}));
-    const v = Math.round((sessoes/dias)*(0.45+rng(s+i*7,0,110)/100));
-    dataSessoes.push(v);
-  }
-
-  const canais = [
-    {label:'Orgânico', pct:rng(s+10,32,58), cor:'#7943e2'},
-    {label:'Direto',   pct:rng(s+11,14,24), cor:'#00e5a0'},
-    {label:'Social',   pct:rng(s+12,8,20),  cor:'#3b82f6'},
-    {label:'Referência',pct:rng(s+13,4,14), cor:'#f59e0b'},
-  ];
-  const totC = canais.reduce((a,c)=>a+c.pct,0);
-  canais.forEach(c=>c.pct=Math.round(c.pct/totC*100));
-
-  const devices = [
-    {label:'Mobile',  pct:rng(s+20,52,72)},
-    {label:'Desktop', pct:rng(s+21,24,44)},
-    {label:'Tablet',  pct:rng(s+22,2,8)},
-  ];
-  const totD = devices.reduce((a,d)=>a+d.pct,0);
-  devices.forEach(d=>d.pct=Math.round(d.pct/totD*100));
-
-  const minutos = Math.floor(tempo/60), segs = String(tempo%60).padStart(2,'0');
-  const tempoFmt = `${minutos}m${segs}s`;
-
-  const org = canais[0].pct;
-  let insight = '';
-  if(org>=45) insight=`Excelente: ${org}% do seu tráfego vem de busca orgânica — seu site já tem presença sólida no Google. Com ${fmt(sessoes)} sessões nos últimos ${dias} dias e tempo médio de ${tempoFmt}, o próximo passo é converter mais visitantes com CTAs estratégicos.`;
-  else if(org>=28) insight=`Seu tráfego orgânico representa ${org}% do total (${fmt(sessoes)} sessões em ${dias} dias). É uma base promissora, mas há espaço para crescer. Uma estratégia de SEO local + conteúdo direcionado pode dobrar esse número em 3 a 6 meses.`;
-  else insight=`Atenção: com ${org}% de tráfego orgânico, seu site está dependendo demais de tráfego direto ou pago. Em ${dias} dias você teve ${fmt(sessoes)} sessões — com SEO bem feito, esse número poderia ser 2x ou 3x maior.`;
-
-  return {sessoes,usuarios,pageviews,tempoFmt,trendS,trendU,trendP,labels,dataSessoes,canais,devices,insight};
-}
-
-// ─── RENDER DADOS (sem páginas/keywords — essas vêm do backend) ───────
-function renderDados(){
-  const d = gerarDados(gaId, periodo);
-
-  document.getElementById('s-sessoes').textContent  = fmt(d.sessoes);
-  document.getElementById('s-usuarios').textContent = fmt(d.usuarios);
-  document.getElementById('s-pageviews').textContent= fmt(d.pageviews);
-  document.getElementById('s-tempo').textContent    = d.tempoFmt;
-
-  const tEl = (id,v) => {
-    const el = document.getElementById(id);
-    el.textContent = v>0 ? `↑ ${v}% vs período anterior` : v<0 ? `↓ ${Math.abs(v)}% vs período anterior` : 'Estável';
-    el.className = 'stat-trend ' + (v>0?'trend-up':v<0?'trend-down':'trend-flat');
-  };
-  tEl('t-sessoes',d.trendS); tEl('t-usuarios',d.trendU); tEl('t-pageviews',d.trendP);
-  document.getElementById('insight-text').textContent = d.insight;
-
+// ─── RENDER GRÁFICOS (reutilizável para fake e real) ─────────────────
+function renderGraficos(labels, dataSessoes, canais, devices){
   const gridColor = 'rgba(0,0,0,0.05)';
-
   if(cSessoes) cSessoes.destroy();
   cSessoes = new Chart(document.getElementById('chart-sessoes'),{
     type:'bar',
-    data:{labels:d.labels,datasets:[{label:'Sessões',data:d.dataSessoes,backgroundColor:'rgba(121,67,226,0.7)',borderRadius:3,borderSkipped:false}]},
+    data:{labels,datasets:[{label:'Sessões',data:dataSessoes,backgroundColor:'rgba(121,67,226,0.7)',borderRadius:3,borderSkipped:false}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
       scales:{x:{grid:{color:gridColor},ticks:{color:'#6b6b80',font:{size:10},maxTicksLimit:10}},
               y:{grid:{color:gridColor},ticks:{color:'#6b6b80',font:{size:10}}}}}
   });
-
   if(cCanais) cCanais.destroy();
   cCanais = new Chart(document.getElementById('chart-canais'),{
     type:'doughnut',
-    data:{labels:d.canais.map(c=>c.label),datasets:[{data:d.canais.map(c=>c.pct),backgroundColor:d.canais.map(c=>c.cor),borderWidth:0}]},
+    data:{labels:canais.map(c=>c.label),datasets:[{data:canais.map(c=>c.pct),backgroundColor:canais.map(c=>c.cor),borderWidth:0}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'68%',
       plugins:{legend:{position:'bottom',labels:{color:'#6b6b80',font:{size:11},padding:8,usePointStyle:true,pointStyleWidth:8}}}}
   });
-
   if(cDevices) cDevices.destroy();
   cDevices = new Chart(document.getElementById('chart-devices'),{
     type:'doughnut',
-    data:{labels:d.devices.map(dv=>dv.label),datasets:[{data:d.devices.map(dv=>dv.pct),backgroundColor:['#7943e2','#00e5a0','#3b82f6'],borderWidth:0}]},
+    data:{labels:devices.map(dv=>dv.label),datasets:[{data:devices.map(dv=>dv.pct),backgroundColor:['#7943e2','#00e5a0','#3b82f6'],borderWidth:0}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'68%',
       plugins:{legend:{position:'bottom',labels:{color:'#6b6b80',font:{size:11},padding:8,usePointStyle:true,pointStyleWidth:8}}}}
   });
-
   const cbEl = document.getElementById('canal-bars');
   cbEl.innerHTML = '';
-  const maxP = Math.max(...d.canais.map(c=>c.pct));
-  d.canais.forEach(c=>{
+  const maxP = Math.max(...canais.map(c=>c.pct));
+  canais.forEach(c=>{
     cbEl.innerHTML += `<div>
       <div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px">
         <span style="font-weight:600;color:#1a1a2e">${c.label}</span>
@@ -746,72 +759,233 @@ function renderDados(){
   });
 }
 
+// ─── GERAR DADOS ESTIMADOS (fallback enquanto não conectado) ──────────
+function gerarDados(id, dias){
+  const s = seed(id + dias);
+  const base = rng(s, 900, 4800);
+  const mult = dias===7 ? .25 : dias===90 ? 3.1 : 1;
+  const sessoes = Math.round(base * mult);
+  const usuarios = Math.round(sessoes * rng(s+1, 70, 90) / 100);
+  const pageviews = Math.round(sessoes * rng(s+2, 18, 35) / 10);
+  const tempo = rng(s+3, 70, 240);
+  const trendS = rng(s+4, -18, 38);
+  const trendU = rng(s+5, -12, 42);
+  const trendP = rng(s+6, -22, 28);
+  const labels = [], dataSessoes = [];
+  const now = new Date();
+  for(let i=dias-1; i>=0; i--){
+    const d = new Date(now); d.setDate(d.getDate()-i);
+    labels.push(d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}));
+    const v = Math.round((sessoes/dias)*(0.45+rng(s+i*7,0,110)/100));
+    dataSessoes.push(v);
+  }
+  const canais = [
+    {label:'Orgânico', pct:rng(s+10,32,58), cor:'#7943e2'},
+    {label:'Direto',   pct:rng(s+11,14,24), cor:'#00e5a0'},
+    {label:'Social',   pct:rng(s+12,8,20),  cor:'#3b82f6'},
+    {label:'Referência',pct:rng(s+13,4,14), cor:'#f59e0b'},
+  ];
+  const totC = canais.reduce((a,c)=>a+c.pct,0);
+  canais.forEach(c=>c.pct=Math.round(c.pct/totC*100));
+  const devices = [
+    {label:'Mobile',  pct:rng(s+20,52,72)},
+    {label:'Desktop', pct:rng(s+21,24,44)},
+    {label:'Tablet',  pct:rng(s+22,2,8)},
+  ];
+  const totD = devices.reduce((a,d)=>a+d.pct,0);
+  devices.forEach(d=>d.pct=Math.round(d.pct/totD*100));
+  const minutos = Math.floor(tempo/60), segs = String(tempo%60).padStart(2,'0');
+  const tempoFmt = `${minutos}m${segs}s`;
+  const org = canais[0].pct;
+  let insight = '';
+  if(org>=45) insight=`Excelente: ${org}% do seu tráfego vem de busca orgânica — seu site já tem presença sólida no Google. Com ${fmt(sessoes)} sessões nos últimos ${dias} dias e tempo médio de ${tempoFmt}, o próximo passo é converter mais visitantes com CTAs estratégicos.`;
+  else if(org>=28) insight=`Seu tráfego orgânico representa ${org}% do total (${fmt(sessoes)} sessões em ${dias} dias). É uma base promissora, mas há espaço para crescer. Uma estratégia de SEO local + conteúdo direcionado pode dobrar esse número em 3 a 6 meses.`;
+  else insight=`Atenção: com ${org}% de tráfego orgânico, seu site está dependendo demais de tráfego direto ou pago. Em ${dias} dias você teve ${fmt(sessoes)} sessões — com SEO bem feito, esse número poderia ser 2x ou 3x maior.`;
+  return {sessoes,usuarios,pageviews,tempoFmt,trendS,trendU,trendP,labels,dataSessoes,canais,devices,insight};
+}
+
+function renderDados(){
+  if(dadosReaisCarregados) return;
+  const d = gerarDados(gaId, periodo);
+  document.getElementById('s-sessoes').textContent  = fmt(d.sessoes);
+  document.getElementById('s-usuarios').textContent = fmt(d.usuarios);
+  document.getElementById('s-pageviews').textContent= fmt(d.pageviews);
+  document.getElementById('s-tempo').textContent    = d.tempoFmt;
+  const tEl = (id,v) => {
+    const el = document.getElementById(id);
+    el.textContent = v>0 ? `↑ ${v}% vs período anterior` : v<0 ? `↓ ${Math.abs(v)}% vs período anterior` : 'Estável';
+    el.className = 'stat-trend ' + (v>0?'trend-up':v<0?'trend-down':'trend-flat');
+  };
+  tEl('t-sessoes',d.trendS); tEl('t-usuarios',d.trendU); tEl('t-pageviews',d.trendP);
+  document.getElementById('insight-text').textContent = d.insight;
+  renderGraficos(d.labels, d.dataSessoes, d.canais, d.devices);
+}
+
 // ─── CONECTAR GOOGLE ─────────────────────────────────────────────────
 function conectarGoogle(e){
   e.preventDefault();
-  if(!gaId || gaId === 'G-DEMO123'){
-    toast('Digite seu GA ID primeiro!');
-    return;
-  }
-  // Redireciona pro OAuth passando o ga_id
+  if(!gaId || gaId === 'G-DEMO123'){ toast('Digite seu GA ID primeiro!'); return; }
   window.location.href = `/api/metricas/oauth/start?ga_id=${gaId}`;
 }
 
 // ─── CARREGAR DADOS REAIS DO BACKEND ─────────────────────────────────
 async function carregarDadosReais(){
-  // Mostra as tabelas, esconde o botão de conectar
   document.getElementById('bloco-conectar').style.display = 'none';
   document.getElementById('bloco-tabelas').style.display  = 'grid';
+  document.getElementById('bloco-gsc-extra').style.display = 'block';
 
-  // Carrega GA4 (páginas)
+  // ── GA4: cards principais + gráfico de sessões ──
   try {
     const rGA = await fetch(`/api/metricas/ga4?ga_id=${gaId}&dias=${periodo}`);
     const dGA = await rGA.json();
-    const tblP = document.getElementById('tbl-pages');
-    if(dGA.success && dGA.top_paginas && dGA.top_paginas.length){
-      tblP.innerHTML = dGA.top_paginas.map(p=>`<tr>
-        <td class="td-url" title="${p.pagina}">${p.pagina}</td>
-        <td class="td-num">${fmt(p.pageviews)}</td>
-        <td class="td-num">${fmt(p.usuarios)}</td>
-      </tr>`).join('');
+    if(dGA.success && dGA.totais){
+      dadosReaisCarregados = true;
+      const t = dGA.totais;
+      const seg = t.tempo_medio || 0;
+      const tempoFmt = `${Math.floor(seg/60)}m${String(Math.floor(seg%60)).padStart(2,'0')}s`;
+      document.getElementById('s-sessoes').textContent   = fmt(t.sessoes);
+      document.getElementById('s-usuarios').textContent  = fmt(t.usuarios);
+      document.getElementById('s-pageviews').textContent = fmt(t.pageviews);
+      document.getElementById('s-tempo').textContent     = tempoFmt;
+      ['t-sessoes','t-usuarios','t-pageviews'].forEach(id=>{
+        const el = document.getElementById(id);
+        el.textContent = ''; el.className = 'stat-trend trend-flat';
+      });
+      document.querySelectorAll('.stat-label').forEach(el=>{
+        if(!el.querySelector('.badge-real'))
+          el.insertAdjacentHTML('beforeend','<span class="badge-real">✓ real</span>');
+      });
+      const aviso = document.getElementById('aviso-estimado');
+      if(aviso) aviso.style.display = 'none';
+      // Gráfico sessões por dia (real)
+      if(dGA.por_dia && dGA.por_dia.length){
+        const labels = dGA.por_dia.map(r=>r.data.slice(5).replace('-','/'));
+        const dataSessoes = dGA.por_dia.map(r=>r.sessoes);
+        let canais = [];
+        if(dGA.canais && dGA.canais.length){
+          const cores = ['#7943e2','#00e5a0','#3b82f6','#f59e0b','#e879f9','#f87171'];
+          const totalSessoes = dGA.canais.reduce((a,c)=>a+c.sessoes,0)||1;
+          canais = dGA.canais.slice(0,4).map((c,i)=>({label:c.canal,pct:Math.round(c.sessoes/totalSessoes*100),cor:cores[i]||'#aaa'}));
+        } else {
+          canais = gerarDados(gaId, periodo).canais;
+        }
+        const devices = gerarDados(gaId, periodo).devices;
+        renderGraficos(labels, dataSessoes, canais, devices);
+        const org = canais[0] ? canais[0].pct : 0;
+        let insight = '';
+        if(org>=45) insight=`Excelente: ${org}% do tráfego vem de busca orgânica. Com ${fmt(t.sessoes)} sessões reais em ${periodo} dias e tempo médio de ${tempoFmt}, o próximo passo é converter mais visitantes com CTAs estratégicos.`;
+        else if(org>=28) insight=`Tráfego orgânico em ${org}% do total. Com ${fmt(t.sessoes)} sessões em ${periodo} dias, SEO local + conteúdo direcionado pode dobrar esse número em 3 a 6 meses.`;
+        else insight=`Com ${org}% de tráfego orgânico, seu site depende muito de tráfego direto ou pago. Em ${periodo} dias: ${fmt(t.sessoes)} sessões reais — com SEO bem feito poderia ser 2x mais.`;
+        document.getElementById('insight-text').textContent = insight;
+      }
+      // Tabela top páginas (GA4)
+      const tblP = document.getElementById('tbl-pages');
+      if(dGA.top_paginas && dGA.top_paginas.length){
+        tblP.innerHTML = dGA.top_paginas.map(p=>`<tr>
+          <td class="td-url" title="${p.pagina}">${p.pagina}</td>
+          <td class="td-num">${fmt(p.pageviews)}</td>
+          <td class="td-num">${fmt(p.usuarios)}</td>
+        </tr>`).join('');
+      } else {
+        tblP.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:16px;color:var(--muted);font-size:.8rem">Nenhuma página encontrada no período.</td></tr>`;
+      }
     } else {
-      tblP.innerHTML = `<tr><td colspan="3" style="padding:0">
-        <div style="position:relative;overflow:hidden;border-radius:8px">
-          <div style="filter:blur(4px);pointer-events:none;padding:10px 0">
-            ${['','/servicos','/contato','/sobre','/blog','/portfolio'].map(p=>`<div style="display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid #f0f0f6"><span style="font-size:.75rem;color:#aaa;width:60%;background:#eee;border-radius:4px;height:12px;display:inline-block"></span><span style="background:#eee;border-radius:4px;height:12px;width:15%;display:inline-block"></span><span style="background:#eee;border-radius:4px;height:12px;width:10%;display:inline-block"></span></div>`).join('')}
-          </div>
-          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;background:rgba(255,255,255,.75);backdrop-filter:blur(2px)">
-            <span style="font-size:1.4rem">🔒</span>
-            <span style="font-size:.8rem;color:var(--text);font-weight:600;text-align:center">Veja quais páginas mais acessam seu site</span>
-            <a href="https://wa.me/5511913324827?text=Oi%2C%20quero%20ver%20as%20p%C3%A1ginas%20mais%20acessadas%20do%20meu%20site!" target="_blank" rel="noopener"
-              style="display:inline-flex;align-items:center;gap:6px;background:#25D366;color:#fff;padding:8px 16px;border-radius:8px;font-size:.8rem;font-weight:700;text-decoration:none">
-              <svg viewBox="0 0 24 24" style="width:14px;height:14px;fill:currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-              Ver com a Leanttro
-            </a>
-          </div>
-        </div>
-      </td></tr>`;
+      document.getElementById('tbl-pages').innerHTML = `<tr><td colspan="3" style="text-align:center;padding:16px;color:var(--muted);font-size:.8rem">GA4 não conectado — veja os dados do Search Console abaixo.</td></tr>`;
     }
   } catch(err){
-    document.getElementById('tbl-pages').innerHTML = `<tr><td colspan="3" style="text-align:center;padding:16px;color:#d85a30;font-size:.8rem">Erro ao carregar páginas.</td></tr>`;
+    document.getElementById('tbl-pages').innerHTML = `<tr><td colspan="3" style="text-align:center;padding:16px;color:#d85a30;font-size:.8rem">Erro ao carregar GA4.</td></tr>`;
   }
 
-  // Carrega GSC (keywords)
+  // ── GSC: keywords + cards extras + gráfico dia + device + país + páginas ──
   try {
     const rGSC = await fetch(`/api/metricas/gsc?ga_id=${gaId}&dias=${periodo}`);
     const dGSC = await rGSC.json();
-    const tblK = document.getElementById('tbl-keywords');
-    if(dGSC.success && dGSC.top_keywords && dGSC.top_keywords.length){
-      tblK.innerHTML = dGSC.top_keywords.map(k=>`<tr>
-        <td style="font-size:.78rem;color:#1a1a2e">${k.query}</td>
-        <td class="td-num">${fmt(k.cliques)}</td>
-        <td class="td-num" style="color:#7943e2">#${k.posicao}</td>
-      </tr>`).join('');
+    if(dGSC.success){
+      const aviso = document.getElementById('aviso-estimado');
+      if(aviso) aviso.style.display = 'none';
+      // Cards totais GSC
+      if(dGSC.cliques !== undefined){
+        document.getElementById('gsc-cliques').textContent    = fmt(dGSC.cliques);
+        document.getElementById('gsc-impressoes').textContent = fmt(dGSC.impressoes);
+        document.getElementById('gsc-ctr').textContent        = (dGSC.ctr||0).toFixed(1) + '%';
+        document.getElementById('gsc-posicao').textContent    = '#' + Math.round(dGSC.posicao||0);
+      }
+      // Keywords com impressões + CTR
+      const tblK = document.getElementById('tbl-keywords');
+      if(dGSC.top_keywords && dGSC.top_keywords.length){
+        tblK.innerHTML = dGSC.top_keywords.map(k=>`<tr>
+          <td style="font-size:.78rem;color:#1a1a2e">${k.query}</td>
+          <td class="td-num">${fmt(k.cliques)}</td>
+          <td class="td-num">${fmt(k.impressoes||0)}</td>
+          <td class="td-num">${(k.ctr||0).toFixed(1)}%</td>
+          <td class="td-num" style="color:#7943e2">#${Math.round(k.posicao||0)}</td>
+        </tr>`).join('');
+      } else {
+        tblK.innerHTML = `<tr><td colspan="5" style="text-align:center;padding:16px;color:var(--muted);font-size:.8rem">Nenhuma keyword encontrada no período.</td></tr>`;
+      }
+      // Gráfico cliques + impressões por dia
+      if(dGSC.por_dia && dGSC.por_dia.length){
+        const labelsGsc = dGSC.por_dia.map(r=>r.data.slice(5).replace('-','/'));
+        const cliqDia   = dGSC.por_dia.map(r=>r.cliques);
+        const impDia    = dGSC.por_dia.map(r=>r.impressoes||0);
+        const gridColor = 'rgba(0,0,0,0.05)';
+        if(cGscDia) cGscDia.destroy();
+        cGscDia = new Chart(document.getElementById('chart-gsc-dia'),{
+          type:'bar',
+          data:{labels:labelsGsc,datasets:[
+            {label:'Cliques',data:cliqDia,backgroundColor:'rgba(121,67,226,0.75)',borderRadius:3,borderSkipped:false,yAxisID:'y'},
+            {label:'Impressões',data:impDia,type:'line',borderColor:'#00e5a0',backgroundColor:'rgba(0,229,160,.1)',fill:true,tension:.3,pointRadius:0,yAxisID:'y1'},
+          ]},
+          options:{responsive:true,maintainAspectRatio:false,
+            plugins:{legend:{position:'bottom',labels:{color:'#6b6b80',font:{size:11},usePointStyle:true,pointStyleWidth:8}}},
+            scales:{
+              x:{grid:{color:gridColor},ticks:{color:'#6b6b80',font:{size:10},maxTicksLimit:10}},
+              y:{grid:{color:gridColor},ticks:{color:'#6b6b80',font:{size:10}},title:{display:true,text:'Cliques',color:'#7943e2',font:{size:10}}},
+              y1:{position:'right',grid:{display:false},ticks:{color:'#00a872',font:{size:10}},title:{display:true,text:'Impressões',color:'#00a872',font:{size:10}}},
+            }}
+        });
+      }
+      // Por dispositivo
+      const tblDev = document.getElementById('tbl-gsc-device');
+      if(dGSC.por_device && dGSC.por_device.length){
+        const iconeDev = {MOBILE:'📱',DESKTOP:'🖥️',TABLET:'📟'};
+        tblDev.innerHTML = dGSC.por_device.map(d=>`<tr>
+          <td style="font-size:.78rem">${iconeDev[d.device]||'📱'} ${d.device}</td>
+          <td class="td-num">${fmt(d.cliques)}</td>
+          <td class="td-num">${fmt(d.impressoes||0)}</td>
+        </tr>`).join('');
+      } else {
+        tblDev.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:12px;color:var(--muted);font-size:.8rem">Sem dados</td></tr>`;
+      }
+      // Por país
+      const tblPais = document.getElementById('tbl-gsc-pais');
+      if(dGSC.por_pais && dGSC.por_pais.length){
+        tblPais.innerHTML = dGSC.por_pais.slice(0,8).map(p=>`<tr>
+          <td style="font-size:.78rem">${p.pais}</td>
+          <td class="td-num">${fmt(p.cliques)}</td>
+          <td class="td-num">${fmt(p.impressoes||0)}</td>
+        </tr>`).join('');
+      } else {
+        tblPais.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:12px;color:var(--muted);font-size:.8rem">Sem dados</td></tr>`;
+      }
+      // Páginas no Google (GSC)
+      const tblPagGsc = document.getElementById('tbl-gsc-paginas');
+      if(dGSC.por_pagina && dGSC.por_pagina.length){
+        tblPagGsc.innerHTML = dGSC.por_pagina.slice(0,10).map(p=>`<tr>
+          <td class="td-url" title="${p.pagina}">${p.pagina}</td>
+          <td class="td-num">${fmt(p.cliques)}</td>
+          <td class="td-num" style="color:#7943e2">#${Math.round(p.posicao||0)}</td>
+        </tr>`).join('');
+      } else {
+        tblPagGsc.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:12px;color:var(--muted);font-size:.8rem">Sem dados</td></tr>`;
+      }
     } else {
-      tblK.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:16px;color:var(--muted);font-size:.8rem">Nenhuma keyword encontrada no período.</td></tr>`;
+      document.getElementById('tbl-keywords').innerHTML = `<tr><td colspan="5" style="text-align:center;padding:16px;color:var(--muted);font-size:.8rem">Search Console não conectado.</td></tr>`;
+      document.getElementById('bloco-gsc-extra').style.display = 'none';
     }
   } catch(err){
-    document.getElementById('tbl-keywords').innerHTML = `<tr><td colspan="3" style="text-align:center;padding:16px;color:#d85a30;font-size:.8rem">Erro ao carregar keywords.</td></tr>`;
+    document.getElementById('tbl-keywords').innerHTML = `<tr><td colspan="5" style="text-align:center;padding:16px;color:#d85a30;font-size:.8rem">Erro ao carregar Search Console.</td></tr>`;
+    document.getElementById('bloco-gsc-extra').style.display = 'none';
   }
 }
 
