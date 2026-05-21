@@ -9,16 +9,13 @@
 <meta name="author" content="Leanttro Tecnologia">
 <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
 <meta name="theme-color" content="#7943e2">
-
 <link rel="canonical" href="https://www.leanttro.com/metricas">
-
 <link rel="icon" type="image/png" sizes="32x32" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
 <link rel="icon" type="image/png" sizes="16x16" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
 <link rel="apple-touch-icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
 <link rel="shortcut icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
 <meta name="msapplication-TileImage" content="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
 <meta name="msapplication-TileColor" content="#7943e2">
-
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Leanttro Tecnologia">
 <meta property="og:url" content="https://www.leanttro.com/metricas">
@@ -29,7 +26,6 @@
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Painel de métricas Leanttro">
 <meta property="og:locale" content="pt_BR">
-
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Painel de Métricas Grátis — Leanttro">
 <meta name="twitter:description" content="Veja cliques, sessões e palavras-chave do seu site no Google — de graça. Sem login, sem plano.">
@@ -136,7 +132,7 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 .page-hero p{color:rgba(255,255,255,.85);font-size:1rem;max-width:500px;margin:0 auto}
 .ga-id-pill{display:inline-block;margin-top:14px;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:#fff;font-family:monospace;font-size:1rem;font-weight:700;padding:6px 18px;border-radius:99px;letter-spacing:1px}
 
-/* INPUT GA ID (quando veio sem ID) */
+/* INPUT GA ID */
 .ga-input-section{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);border-radius:12px;padding:18px 24px;margin-top:18px;max-width:480px;margin-left:auto;margin-right:auto;display:none}
 .ga-input-section.visible{display:block}
 .ga-input-label{color:rgba(255,255,255,.9);font-size:.85rem;font-weight:600;margin-bottom:10px;display:block}
@@ -144,8 +140,7 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 .ga-input-row input{
   flex:1;font-family:monospace;font-size:.95rem;font-weight:700;letter-spacing:1px;
   padding:9px 14px;border-radius:8px;border:1.5px solid rgba(255,255,255,.4);
-  background:rgba(255,255,255,.15);color:#fff;
-  transition:border-color .2s;
+  background:rgba(255,255,255,.15);color:#fff;transition:border-color .2s;
 }
 .ga-input-row input::placeholder{color:rgba(255,255,255,.5);font-weight:400;letter-spacing:0}
 .ga-input-row input:focus{outline:none;border-color:#fff;background:rgba(255,255,255,.22)}
@@ -157,18 +152,10 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 .ga-input-btn:hover{background:var(--accent);color:var(--dark)}
 .ga-input-note{color:rgba(255,255,255,.6);font-size:.75rem;margin-top:8px}
 
-/* PROMO BANNER (só aparece quando não tem G-ID válido, antes do gate) */
-.promo-banner{
-  background:var(--dark);border-radius:var(--radius);
-  padding:0;margin-bottom:28px;overflow:hidden;
-  display:none;
-}
+/* PROMO BANNER */
+.promo-banner{background:var(--dark);border-radius:var(--radius);padding:0;margin-bottom:28px;overflow:hidden;display:none;}
 .promo-banner.visible{display:block}
-.promo-inner{
-  display:grid;grid-template-columns:1fr 1fr;
-  align-items:stretch;
-  min-height:380px;
-}
+.promo-inner{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:380px;}
 @media(max-width:700px){.promo-inner{grid-template-columns:1fr}}
 .promo-content{padding:36px 32px;display:flex;flex-direction:column;justify-content:center;gap:16px}
 .promo-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(121,67,226,.25);border:1px solid rgba(121,67,226,.4);color:#c4b5f5;padding:4px 14px;border-radius:20px;font-size:.75rem;font-weight:700;letter-spacing:.4px;width:fit-content}
@@ -182,12 +169,7 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 .promo-de{font-size:1rem;color:rgba(255,255,255,.4);text-decoration:line-through}
 .promo-por{font-family:var(--display);font-size:1.8rem;font-weight:800;color:#fff}
 .promo-prazo{font-size:.8rem;color:var(--accent);font-weight:600;background:rgba(0,229,160,.12);border:1px solid rgba(0,229,160,.3);padding:3px 10px;border-radius:99px}
-.promo-cta{
-  display:inline-flex;align-items:center;gap:8px;
-  background:var(--primary);color:#fff;
-  padding:12px 24px;border-radius:8px;font-size:.9rem;font-weight:700;
-  text-decoration:none;transition:all .2s;width:fit-content;
-}
+.promo-cta{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:12px 24px;border-radius:8px;font-size:.9rem;font-weight:700;text-decoration:none;transition:all .2s;width:fit-content;}
 .promo-cta:hover{background:var(--primary-d);transform:translateY(-1px)}
 .promo-cta svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
 .promo-img-col{position:relative;overflow:hidden}
@@ -199,51 +181,27 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 /* MAIN */
 .main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
 
-/* GATE — LEAD WALL */
-.gate-overlay{
-  position:relative;margin-bottom:28px;
-}
-.gate-blur{
-  filter:blur(7px);pointer-events:none;user-select:none;
-  opacity:.75;border-radius:var(--radius);overflow:hidden;
-}
-.gate-card{
-  position:absolute;inset:0;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:16px;
-  background:rgba(255,255,255,.88);backdrop-filter:blur(2px);
-  border-radius:var(--radius);border:2px solid var(--primary);
-  padding:32px 24px;text-align:center;
-}
+/* GATE */
+.gate-overlay{position:relative;margin-bottom:28px;}
+.gate-blur{filter:blur(7px);pointer-events:none;user-select:none;opacity:.75;border-radius:var(--radius);overflow:hidden;}
+.gate-card{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;background:rgba(255,255,255,.88);backdrop-filter:blur(2px);border-radius:var(--radius);border:2px solid var(--primary);padding:32px 24px;text-align:center;}
 .gate-icon{font-size:2.4rem;line-height:1}
 .gate-title{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--text)}
 .gate-sub{font-size:.9rem;color:var(--muted);max-width:380px}
 .gate-fields{display:grid;grid-template-columns:1fr 1fr;gap:10px;width:100%;max-width:460px}
-.gate-fields input{
-  font-family:var(--sans);font-size:.9rem;padding:11px 14px;
-  border:1.5px solid var(--border);border-radius:8px;
-  background:#fff;color:var(--text);width:100%;
-  transition:border-color .2s;
-}
+.gate-fields input{font-family:var(--sans);font-size:.9rem;padding:11px 14px;border:1.5px solid var(--border);border-radius:8px;background:#fff;color:var(--text);width:100%;transition:border-color .2s;}
 .gate-fields input:focus{outline:none;border-color:var(--primary)}
-.btn-gate{
-  width:100%;max-width:460px;background:var(--primary);color:#fff;
-  border:none;border-radius:8px;padding:13px;font-size:.95rem;font-weight:700;
-  cursor:pointer;font-family:var(--sans);transition:background .2s;
-}
+.btn-gate{width:100%;max-width:460px;background:var(--primary);color:#fff;border:none;border-radius:8px;padding:13px;font-size:.95rem;font-weight:700;cursor:pointer;font-family:var(--sans);transition:background .2s;}
 .btn-gate:hover{background:var(--primary-d)}
 .gate-note{font-size:.75rem;color:var(--muted)}
 
-/* PAINEL PRINCIPAL — escondido até lead */
+/* PAINEL */
 .painel{display:none}
 .painel.liberado{display:block}
 
 /* PERÍODO */
 .period-bar{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
-.period-btn{
-  padding:6px 16px;border-radius:99px;font-size:.8rem;font-weight:600;
-  cursor:pointer;border:1.5px solid var(--border);background:transparent;
-  color:var(--muted);font-family:var(--sans);transition:all .15s;
-}
+.period-btn{padding:6px 16px;border-radius:99px;font-size:.8rem;font-weight:600;cursor:pointer;border:1.5px solid var(--border);background:transparent;color:var(--muted);font-family:var(--sans);transition:all .15s;}
 .period-btn:hover{color:var(--text);border-color:var(--primary)}
 .period-btn.active{background:var(--primary);color:#fff;border-color:var(--primary)}
 
@@ -264,17 +222,11 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 @media(max-width:700px){.charts-row{grid-template-columns:1fr}}
 .chart-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:20px}
 .chart-title{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:14px}
-
 .charts-row2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
 @media(max-width:700px){.charts-row2{grid-template-columns:1fr}}
 
 /* INSIGHT */
-.insight-card{
-  background:linear-gradient(135deg,rgba(121,67,226,.06) 0%,rgba(0,229,160,.05) 100%);
-  border:1.5px solid rgba(121,67,226,.22);border-radius:var(--radius);
-  padding:20px 24px;margin-bottom:16px;
-  display:flex;align-items:flex-start;gap:14px;
-}
+.insight-card{background:linear-gradient(135deg,rgba(121,67,226,.06) 0%,rgba(0,229,160,.05) 100%);border:1.5px solid rgba(121,67,226,.22);border-radius:var(--radius);padding:20px 24px;margin-bottom:16px;display:flex;align-items:flex-start;gap:14px;}
 .insight-dot{width:10px;height:10px;border-radius:50%;background:var(--primary);flex-shrink:0;margin-top:5px}
 .insight-label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.7px;color:var(--primary);margin-bottom:6px}
 .insight-text{font-size:.9rem;color:var(--text);line-height:1.65}
@@ -289,33 +241,41 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 .table-card tr:last-child td{border-bottom:none}
 .td-url{max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--muted);font-size:.75rem}
 .td-num{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
-.td-bar{width:60px}
-.mini-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden;margin-top:3px}
-.mini-bar-fill{height:100%;background:var(--primary);border-radius:3px}
 
-/* PRINT SCREEN SECTION */
-.screenshot-section{
+/* SEÇÃO DE LOGIN GOOGLE — dados reais de páginas/keywords */
+.google-connect-section{
   background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
-  padding:24px;margin-bottom:16px;text-align:center;
+  padding:32px;margin-bottom:16px;text-align:center;
 }
-.screenshot-section .chart-title{margin-bottom:16px;display:block}
-.screenshot-section img{width:100%;max-width:720px;border-radius:10px;box-shadow:var(--shadow-md);margin:0 auto;display:block}
-.screenshot-caption{font-size:.78rem;color:var(--muted);margin-top:12px;font-style:italic}
+.google-connect-section.conectado{text-align:left;padding:20px}
+.google-connect-icon{font-size:2.5rem;margin-bottom:12px}
+.google-connect-title{font-family:var(--display);font-size:1.2rem;font-weight:800;color:var(--text);margin-bottom:8px}
+.google-connect-sub{font-size:.875rem;color:var(--muted);max-width:420px;margin:0 auto 20px}
+.btn-google{
+  display:inline-flex;align-items:center;gap:10px;
+  background:#fff;color:#3c4043;
+  border:1.5px solid #dadce0;border-radius:8px;
+  padding:11px 22px;font-size:.9rem;font-weight:600;
+  cursor:pointer;font-family:var(--sans);text-decoration:none;
+  transition:box-shadow .2s;
+}
+.btn-google:hover{box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.btn-google svg{width:20px;height:20px;flex-shrink:0}
+.connect-note{font-size:.75rem;color:var(--muted);margin-top:12px}
+
+/* loading spinner dentro das tabelas */
+.tbl-loading{text-align:center;padding:24px;color:var(--muted);font-size:.85rem}
+.tbl-loading::before{content:'⏳ '}
 
 /* CTA FINAL */
-.cta-upgrade{
-  background:var(--dark);border-radius:var(--radius);padding:36px 32px;
-  text-align:center;margin-top:8px;
-}
+.cta-upgrade{background:var(--dark);border-radius:var(--radius);padding:36px 32px;text-align:center;margin-top:8px;}
 .cta-upgrade h2{font-family:var(--display);font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:8px}
 .cta-upgrade p{color:rgba(255,255,255,.75);font-size:.9rem;margin-bottom:24px;max-width:480px;margin-left:auto;margin-right:auto}
 .cta-upgrade-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-upgrade{background:var(--primary);color:#fff;padding:12px 28px;border-radius:8px;font-size:.9rem;font-weight:700;text-decoration:none;transition:background .2s}
-.btn-upgrade:hover{background:var(--primary-d)}
 .btn-upgrade-wpp{background:var(--accent);color:var(--dark);padding:12px 28px;border-radius:8px;font-size:.9rem;font-weight:700;text-decoration:none;transition:background .2s}
 .btn-upgrade-wpp:hover{background:var(--accent-d);color:#fff}
 
-/* FAKE PANEL (embaçado) */
+/* FAKE PANEL (blur do gate) */
 .fake-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:20px}
 @media(max-width:700px){.fake-stats{grid-template-columns:repeat(2,1fr)}}
 .fake-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:18px 20px}
@@ -390,8 +350,6 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
   <h1>Diagnóstico do seu site</h1>
   <p>Veja como seu site está performando no Google — cliques, sessões, canais e muito mais.</p>
   <div class="ga-id-pill" id="hero-ga-id">G-XXXXXXXXXX</div>
-
-  <!-- Caixa de input do G-ID — aparece só quando não veio pela URL -->
   <div class="ga-input-section" id="ga-input-section">
     <span class="ga-input-label">Digite seu código Google Analytics para ver o diagnóstico:</span>
     <div class="ga-input-row">
@@ -404,7 +362,7 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 
 <div class="main">
 
-  <!-- BANNER PROMOÇÃO — aparece quando não veio com G-ID válido -->
+  <!-- BANNER PROMOÇÃO -->
   <div class="promo-banner" id="promo-banner">
     <div class="promo-inner">
       <div class="promo-content">
@@ -412,18 +370,9 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
         <div class="promo-title">Seu negócio no <span>Google</span> em 48 horas</div>
         <p style="color:rgba(255,255,255,.7);font-size:.875rem">Você construiu o produto ou serviço, mas o Google <strong style="color:#fff">NÃO sabe que ele existe.</strong> A Leanttro tem a solução:</p>
         <div class="promo-items">
-          <div class="promo-item">
-            <span class="promo-item-icon">📊</span>
-            <span><strong>Google Analytics 4</strong> — Configuração da conta e instalação da tag no código do site.</span>
-          </div>
-          <div class="promo-item">
-            <span class="promo-item-icon">🔍</span>
-            <span><strong>Google Search Console</strong> — Verificação do site e indexação de páginas.</span>
-          </div>
-          <div class="promo-item">
-            <span class="promo-item-icon">📍</span>
-            <span><strong>Google Business</strong> — Criação ou otimização do perfil da empresa.</span>
-          </div>
+          <div class="promo-item"><span class="promo-item-icon">📊</span><span><strong>Google Analytics 4</strong> — Configuração da conta e instalação da tag no código do site.</span></div>
+          <div class="promo-item"><span class="promo-item-icon">🔍</span><span><strong>Google Search Console</strong> — Verificação do site e indexação de páginas.</span></div>
+          <div class="promo-item"><span class="promo-item-icon">📍</span><span><strong>Google Business</strong> — Criação ou otimização do perfil da empresa.</span></div>
         </div>
         <div class="promo-price-row">
           <span class="promo-de">De R$250,00</span>
@@ -442,10 +391,8 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
     </div>
   </div>
 
-  <!-- GATE: aparece até lead ser preenchido -->
+  <!-- GATE -->
   <div class="gate-overlay" id="gate-overlay">
-
-    <!-- PAINEL FALSO EMBAÇADO -->
     <div class="gate-blur">
       <div class="fake-stats">
         <div class="fake-card"><div class="fake-label"></div><div class="fake-value"></div><div class="fake-trend"></div></div>
@@ -454,9 +401,7 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
         <div class="fake-card"><div class="fake-label"></div><div class="fake-value"></div><div class="fake-trend"></div></div>
       </div>
       <div class="fake-row">
-        <div class="fake-chart">
-          <div class="fake-bars" id="fake-bars"></div>
-        </div>
+        <div class="fake-chart"><div class="fake-bars" id="fake-bars"></div></div>
         <div class="fake-donut"><div class="fake-circle"></div></div>
       </div>
       <div class="fake-stats" style="grid-template-columns:1fr 1fr">
@@ -464,8 +409,6 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
         <div class="fake-card" style="height:120px"></div>
       </div>
     </div>
-
-    <!-- FORMULÁRIO DE LEAD (por cima do blur) -->
     <div class="gate-card" id="gate-card">
       <div class="gate-icon">🔍</div>
       <div class="gate-title">Seu diagnóstico está pronto</div>
@@ -479,17 +422,14 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
       <button class="btn-gate" onclick="liberarPainel()">Ver meu diagnóstico grátis →</button>
       <p class="gate-note">Sem spam. Seus dados são usados apenas para contato da Leanttro.</p>
     </div>
-
-    <!-- SUCESSO (aparece depois do submit) -->
     <div class="success-msg" id="gate-success">
       <div class="success-icon">✅</div>
       <div class="success-title" id="success-title">Liberando seu painel...</div>
       <p class="success-sub">Carregando suas métricas</p>
     </div>
+  </div>
 
-  </div><!-- /gate-overlay -->
-
-  <!-- PAINEL REAL — aparece depois do lead -->
+  <!-- PAINEL REAL -->
   <div class="painel" id="painel">
 
     <div class="period-bar">
@@ -544,13 +484,6 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
       </div>
     </div>
 
-    <!-- PRINT SCREEN DO SISTEMA -->
-    <div class="screenshot-section">
-      <span class="chart-title">Exemplo real do painel de métricas</span>
-      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779243876/metricass_ktex0c.png" alt="Painel de métricas Leanttro — exemplo real" loading="lazy">
-      <p class="screenshot-caption">Visualização real do painel de métricas conectado ao Google Analytics 4 — disponível para clientes Leanttro.</p>
-    </div>
-
     <div class="charts-row2">
       <div class="chart-card">
         <div class="chart-title">Dispositivos</div>
@@ -564,29 +497,54 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
       </div>
     </div>
 
-    <div class="tables-row">
-      <div class="table-card">
-        <div class="chart-title">Páginas mais acessadas</div>
-        <table>
-          <thead><tr><th>Página</th><th class="td-num">Views</th><th class="td-num">Usuários</th></tr></thead>
-          <tbody id="tbl-pages"></tbody>
-        </table>
-      </div>
-      <div class="table-card">
-        <div class="chart-title">Palavras-chave orgânicas</div>
-        <table>
-          <thead><tr><th>Keyword</th><th class="td-num">Cliques</th><th class="td-num">Pos.</th></tr></thead>
-          <tbody id="tbl-keywords"></tbody>
-        </table>
-      </div>
-    </div>
+    <!-- ══════════════════════════════════════════════════
+         SEÇÃO DE PÁGINAS E KEYWORDS — DADOS REAIS VIA OAUTH
+         ══════════════════════════════════════════════════ -->
+    <div id="secao-dados-reais">
 
+      <!-- Estado 1: ainda não conectou o Google -->
+      <div class="google-connect-section" id="bloco-conectar">
+        <div class="google-connect-icon">🔒</div>
+        <div class="google-connect-title">Veja suas páginas e palavras-chave reais</div>
+        <p class="google-connect-sub">Conecte sua conta Google para ver quais páginas do seu site recebem mais visitas e quais palavras-chave te trazem clientes — dados reais, só seus.</p>
+        <a id="btn-conectar-google" href="#" class="btn-google" onclick="conectarGoogle(event)">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Conectar com Google
+        </a>
+        <p class="connect-note">Usamos somente leitura. Não alteramos nada na sua conta.</p>
+      </div>
+
+      <!-- Estado 2: conectou, carregando dados -->
+      <div class="tables-row" id="bloco-tabelas" style="display:none">
+        <div class="table-card">
+          <div class="chart-title">📄 Páginas mais acessadas</div>
+          <table>
+            <thead><tr><th>Página</th><th class="td-num">Views</th><th class="td-num">Usuários</th></tr></thead>
+            <tbody id="tbl-pages"><tr><td colspan="3" class="tbl-loading">Carregando dados reais...</td></tr></tbody>
+          </table>
+        </div>
+        <div class="table-card">
+          <div class="chart-title">🔍 Palavras-chave orgânicas</div>
+          <table>
+            <thead><tr><th>Keyword</th><th class="td-num">Cliques</th><th class="td-num">Pos.</th></tr></thead>
+            <tbody id="tbl-keywords"><tr><td colspan="3" class="tbl-loading">Carregando dados reais...</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+    </div><!-- /secao-dados-reais -->
+
+    <!-- CTA FINAL -->
     <div class="cta-upgrade">
-      <h2>Quer os dados reais do seu GA4?</h2>
-      <p>Conecte sua conta Google e veja métricas ao vivo — ou fale com a Leanttro para um diagnóstico completo com estratégia de crescimento incluída.</p>
+      <h2>Quer uma análise completa do seu site?</h2>
+      <p>A Leanttro analisa seus dados, identifica oportunidades e monta uma estratégia de crescimento personalizada para o seu negócio.</p>
       <div class="cta-upgrade-btns">
-        <a href="/metricas/conectar" class="btn-upgrade">Conectar Google Analytics →</a>
-        <a href="https://wa.me/5511913324827" class="btn-upgrade-wpp" target="_blank" rel="noopener">Falar com a Leanttro</a>
+        <a href="https://wa.me/5511913324827?text=Oi%2C%20vi%20meu%20diagn%C3%B3stico%20no%20painel%20da%20Leanttro%20e%20quero%20uma%20an%C3%A1lise%20completa!" class="btn-upgrade-wpp" target="_blank" rel="noopener">💬 Falar com a Leanttro</a>
       </div>
     </div>
 
@@ -598,34 +556,32 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
 <script>
-// ─── PEGAR G-ID DA URL ───────────────────────────────────────────────
+// ─── GA ID DA URL ────────────────────────────────────────────────────
 const params = new URLSearchParams(window.location.search);
 let gaId = (params.get('id') || params.get('g') || '').toUpperCase().trim();
 if(gaId && !gaId.startsWith('G-')) gaId = 'G-' + gaId;
-
 const isDemo = !gaId || gaId === 'G-DEMO' || gaId === 'G-DEMO123';
 
-// Atualiza o pill do hero
 document.getElementById('hero-ga-id').textContent = gaId || 'G-XXXXXXXXXX';
 
-// Se não veio G-ID válido pela URL: mostra input + banner promoção
 if(isDemo){
   document.getElementById('ga-input-section').classList.add('visible');
   document.getElementById('promo-banner').classList.add('visible');
-  gaId = 'G-DEMO123'; // fallback para gerar dados fake
+  gaId = 'G-DEMO123';
 } else {
-  // Veio com G-ID: esconde input e banner, segue normalmente
   document.getElementById('ga-input-section').classList.remove('visible');
   document.getElementById('promo-banner').classList.remove('visible');
 }
 
-// ─── APLICAR G-ID DIGITADO MANUALMENTE ───────────────────────────────
+// Checa se voltou do OAuth com ?conectado=1
+const conectado = params.get('conectado') === '1';
+
+// ─── INPUT GA ID ──────────────────────────────────────────────────────
 function aplicarGaId(){
   const val = document.getElementById('ga-input-field').value.trim().toUpperCase();
   if(!val){ toast('Digite o código G-XXXXXXXX para continuar.'); return; }
   let id = val;
   if(!id.startsWith('G-')) id = 'G-' + id;
-  // Atualiza a URL sem recarregar e aplica
   const url = new URL(window.location.href);
   url.searchParams.set('id', id);
   window.history.replaceState({}, '', url.toString());
@@ -635,18 +591,15 @@ function aplicarGaId(){
   document.getElementById('promo-banner').classList.remove('visible');
   toast('✅ Código aplicado: ' + gaId);
 }
-
-// Enter no input dispara aplicar
 document.getElementById('ga-input-field').addEventListener('keydown', function(e){
   if(e.key === 'Enter') aplicarGaId();
 });
 
-// ─── FAKE BARS (blur) ─────────────────────────────────────────────────
+// ─── FAKE BARS ────────────────────────────────────────────────────────
 const fbEl = document.getElementById('fake-bars');
-const fakeH = [40,65,35,80,55,90,45,70,60,85,50,75,40,95,55,65,30,80,70,60,85,45,75,55,90,40,65,80,50,70];
-fakeH.forEach(h=>{
-  const b=document.createElement('div');
-  b.className='fake-bar';b.style.height=h+'%';
+[40,65,35,80,55,90,45,70,60,85,50,75,40,95,55,65,30,80,70,60].forEach(h=>{
+  const b = document.createElement('div');
+  b.className = 'fake-bar'; b.style.height = h + '%';
   fbEl.appendChild(b);
 });
 
@@ -655,105 +608,81 @@ function seed(str){let h=0;for(let c of str)h=(Math.imul(31,h)+c.charCodeAt(0))|
 function rng(s,min,max){const x=Math.sin(s)*10000;return Math.round(min+(x-Math.floor(x))*(max-min));}
 function fmt(n){return Number(n).toLocaleString('pt-BR');}
 
-// ─── GERAR DADOS ──────────────────────────────────────────────────────
-let periodo=30;
-let cSessoes=null,cCanais=null,cDevices=null;
+// ─── GERAR DADOS (sessões, canais, devices — igual ao original) ───────
+let periodo = 30;
+let cSessoes = null, cCanais = null, cDevices = null;
 
-function gerarDados(id,dias){
-  const s=seed(id+dias);
-  const base=rng(s,900,4800);
-  const mult=dias===7?.25:dias===90?3.1:1;
-  const sessoes=Math.round(base*mult);
-  const usuarios=Math.round(sessoes*rng(s+1,70,90)/100);
-  const pageviews=Math.round(sessoes*rng(s+2,18,35)/10);
-  const tempo=rng(s+3,70,240);
-  const trendS=rng(s+4,-18,38);
-  const trendU=rng(s+5,-12,42);
-  const trendP=rng(s+6,-22,28);
+function gerarDados(id, dias){
+  const s = seed(id + dias);
+  const base = rng(s, 900, 4800);
+  const mult = dias===7 ? .25 : dias===90 ? 3.1 : 1;
+  const sessoes = Math.round(base * mult);
+  const usuarios = Math.round(sessoes * rng(s+1, 70, 90) / 100);
+  const pageviews = Math.round(sessoes * rng(s+2, 18, 35) / 10);
+  const tempo = rng(s+3, 70, 240);
+  const trendS = rng(s+4, -18, 38);
+  const trendU = rng(s+5, -12, 42);
+  const trendP = rng(s+6, -22, 28);
 
-  const labels=[];const dataSessoes=[];
-  const now=new Date();
-  for(let i=dias-1;i>=0;i--){
-    const d=new Date(now);d.setDate(d.getDate()-i);
+  const labels = [], dataSessoes = [];
+  const now = new Date();
+  for(let i=dias-1; i>=0; i--){
+    const d = new Date(now); d.setDate(d.getDate()-i);
     labels.push(d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}));
-    const v=Math.round((sessoes/dias)*(0.45+rng(s+i*7,0,110)/100));
+    const v = Math.round((sessoes/dias)*(0.45+rng(s+i*7,0,110)/100));
     dataSessoes.push(v);
   }
 
-  const canais=[
-    {label:'Orgânico',pct:rng(s+10,32,58),cor:'#7943e2'},
-    {label:'Direto',pct:rng(s+11,14,24),cor:'#00e5a0'},
-    {label:'Social',pct:rng(s+12,8,20),cor:'#3b82f6'},
-    {label:'Referência',pct:rng(s+13,4,14),cor:'#f59e0b'},
+  const canais = [
+    {label:'Orgânico', pct:rng(s+10,32,58), cor:'#7943e2'},
+    {label:'Direto',   pct:rng(s+11,14,24), cor:'#00e5a0'},
+    {label:'Social',   pct:rng(s+12,8,20),  cor:'#3b82f6'},
+    {label:'Referência',pct:rng(s+13,4,14), cor:'#f59e0b'},
   ];
-  const totC=canais.reduce((a,c)=>a+c.pct,0);
+  const totC = canais.reduce((a,c)=>a+c.pct,0);
   canais.forEach(c=>c.pct=Math.round(c.pct/totC*100));
 
-  const devices=[
-    {label:'Mobile',pct:rng(s+20,52,72)},
-    {label:'Desktop',pct:rng(s+21,24,44)},
-    {label:'Tablet',pct:rng(s+22,2,8)},
+  const devices = [
+    {label:'Mobile',  pct:rng(s+20,52,72)},
+    {label:'Desktop', pct:rng(s+21,24,44)},
+    {label:'Tablet',  pct:rng(s+22,2,8)},
   ];
-  const totD=devices.reduce((a,d)=>a+d.pct,0);
+  const totD = devices.reduce((a,d)=>a+d.pct,0);
   devices.forEach(d=>d.pct=Math.round(d.pct/totD*100));
 
-  const minutos=Math.floor(tempo/60),segs=String(tempo%60).padStart(2,'0');
-  const tempoFmt=`${minutos}m${segs}s`;
+  const minutos = Math.floor(tempo/60), segs = String(tempo%60).padStart(2,'0');
+  const tempoFmt = `${minutos}m${segs}s`;
 
-  // insight
-  const org=canais[0].pct;
-  let insight='';
-  if(org>=45)insight=`Excelente: ${org}% do seu tráfego vem de busca orgânica — isso significa que seu site já tem presença sólida no Google. Com ${fmt(sessoes)} sessões nos últimos ${dias} dias e tempo médio de ${tempoFmt}, o próximo passo é converter mais visitantes com CTAs estratégicos e páginas otimizadas.`;
-  else if(org>=28)insight=`Seu tráfego orgânico representa ${org}% do total (${fmt(sessoes)} sessões em ${dias} dias). É uma base promissora, mas há espaço grande para crescer. Uma estratégia de SEO local + conteúdo direcionado pode dobrar esse número em 3 a 6 meses sem gastar com anúncios.`;
-  else insight=`Atenção: com ${org}% de tráfego orgânico, seu site está dependendo demais de tráfego direto ou pago. Em ${dias} dias você teve ${fmt(sessoes)} sessões — com SEO bem feito, esse número poderia ser 2x ou 3x maior. Isso significa mais clientes sem pagar por clique.`;
+  const org = canais[0].pct;
+  let insight = '';
+  if(org>=45) insight=`Excelente: ${org}% do seu tráfego vem de busca orgânica — seu site já tem presença sólida no Google. Com ${fmt(sessoes)} sessões nos últimos ${dias} dias e tempo médio de ${tempoFmt}, o próximo passo é converter mais visitantes com CTAs estratégicos.`;
+  else if(org>=28) insight=`Seu tráfego orgânico representa ${org}% do total (${fmt(sessoes)} sessões em ${dias} dias). É uma base promissora, mas há espaço para crescer. Uma estratégia de SEO local + conteúdo direcionado pode dobrar esse número em 3 a 6 meses.`;
+  else insight=`Atenção: com ${org}% de tráfego orgânico, seu site está dependendo demais de tráfego direto ou pago. Em ${dias} dias você teve ${fmt(sessoes)} sessões — com SEO bem feito, esse número poderia ser 2x ou 3x maior.`;
 
-  // páginas simuladas
-  const slugs=['/','/servicos','/contato','/sobre','/blog/seo-local-sp','/portfolio','/blog/site-barato','/loja'];
-  const pages=slugs.slice(0,6).map((p,i)=>({
-    pagina:p,
-    pageviews:Math.round(pageviews*(rng(s+30+i,8,30)/100)),
-    usuarios:Math.round(usuarios*(rng(s+40+i,6,22)/100)),
-  })).sort((a,b)=>b.pageviews-a.pageviews);
-
-  const kws=[
-    'criação de sites jabaquara','agência digital são paulo','site profissional barato',
-    'automações whatsapp business','hub de tráfego orgânico','site para pequenas empresas sp',
-  ];
-  const keywords=kws.map((k,i)=>({
-    query:k,
-    cliques:rng(s+50+i,12,280),
-    posicao:(rng(s+60+i,10,80)/10).toFixed(1),
-  })).sort((a,b)=>b.cliques-a.cliques);
-
-  return{sessoes,usuarios,pageviews,tempoFmt,trendS,trendU,trendP,labels,dataSessoes,canais,devices,insight,pages,keywords};
+  return {sessoes,usuarios,pageviews,tempoFmt,trendS,trendU,trendP,labels,dataSessoes,canais,devices,insight};
 }
 
-// ─── RENDER ───────────────────────────────────────────────────────────
+// ─── RENDER DADOS (sem páginas/keywords — essas vêm do backend) ───────
 function renderDados(){
-  const d=gerarDados(gaId,periodo);
+  const d = gerarDados(gaId, periodo);
 
-  // stats
-  document.getElementById('s-sessoes').textContent=fmt(d.sessoes);
-  document.getElementById('s-usuarios').textContent=fmt(d.usuarios);
-  document.getElementById('s-pageviews').textContent=fmt(d.pageviews);
-  document.getElementById('s-tempo').textContent=d.tempoFmt;
+  document.getElementById('s-sessoes').textContent  = fmt(d.sessoes);
+  document.getElementById('s-usuarios').textContent = fmt(d.usuarios);
+  document.getElementById('s-pageviews').textContent= fmt(d.pageviews);
+  document.getElementById('s-tempo').textContent    = d.tempoFmt;
 
-  const tEl=(id,v)=>{
-    const el=document.getElementById(id);
-    el.textContent=v>0?`↑ ${v}% vs período anterior`:v<0?`↓ ${Math.abs(v)}% vs período anterior`:'Estável';
-    el.className='stat-trend '+(v>0?'trend-up':v<0?'trend-down':'trend-flat');
+  const tEl = (id,v) => {
+    const el = document.getElementById(id);
+    el.textContent = v>0 ? `↑ ${v}% vs período anterior` : v<0 ? `↓ ${Math.abs(v)}% vs período anterior` : 'Estável';
+    el.className = 'stat-trend ' + (v>0?'trend-up':v<0?'trend-down':'trend-flat');
   };
-  tEl('t-sessoes',d.trendS);tEl('t-usuarios',d.trendU);tEl('t-pageviews',d.trendP);
+  tEl('t-sessoes',d.trendS); tEl('t-usuarios',d.trendU); tEl('t-pageviews',d.trendP);
+  document.getElementById('insight-text').textContent = d.insight;
 
-  // insight
-  document.getElementById('insight-text').textContent=d.insight;
+  const gridColor = 'rgba(0,0,0,0.05)';
 
-  const textColor=getComputedStyle(document.body).getPropertyValue('color').trim()||'#6b6b80';
-  const gridColor='rgba(0,0,0,0.05)';
-
-  // chart sessoes
-  if(cSessoes)cSessoes.destroy();
-  cSessoes=new Chart(document.getElementById('chart-sessoes'),{
+  if(cSessoes) cSessoes.destroy();
+  cSessoes = new Chart(document.getElementById('chart-sessoes'),{
     type:'bar',
     data:{labels:d.labels,datasets:[{label:'Sessões',data:d.dataSessoes,backgroundColor:'rgba(121,67,226,0.7)',borderRadius:3,borderSkipped:false}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},
@@ -761,30 +690,27 @@ function renderDados(){
               y:{grid:{color:gridColor},ticks:{color:'#6b6b80',font:{size:10}}}}}
   });
 
-  // chart canais (donut)
-  if(cCanais)cCanais.destroy();
-  cCanais=new Chart(document.getElementById('chart-canais'),{
+  if(cCanais) cCanais.destroy();
+  cCanais = new Chart(document.getElementById('chart-canais'),{
     type:'doughnut',
     data:{labels:d.canais.map(c=>c.label),datasets:[{data:d.canais.map(c=>c.pct),backgroundColor:d.canais.map(c=>c.cor),borderWidth:0}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'68%',
       plugins:{legend:{position:'bottom',labels:{color:'#6b6b80',font:{size:11},padding:8,usePointStyle:true,pointStyleWidth:8}}}}
   });
 
-  // chart devices (donut)
-  if(cDevices)cDevices.destroy();
-  cDevices=new Chart(document.getElementById('chart-devices'),{
+  if(cDevices) cDevices.destroy();
+  cDevices = new Chart(document.getElementById('chart-devices'),{
     type:'doughnut',
     data:{labels:d.devices.map(dv=>dv.label),datasets:[{data:d.devices.map(dv=>dv.pct),backgroundColor:['#7943e2','#00e5a0','#3b82f6'],borderWidth:0}]},
     options:{responsive:true,maintainAspectRatio:false,cutout:'68%',
       plugins:{legend:{position:'bottom',labels:{color:'#6b6b80',font:{size:11},padding:8,usePointStyle:true,pointStyleWidth:8}}}}
   });
 
-  // canal bars
-  const cbEl=document.getElementById('canal-bars');
-  cbEl.innerHTML='';
-  const maxP=Math.max(...d.canais.map(c=>c.pct));
+  const cbEl = document.getElementById('canal-bars');
+  cbEl.innerHTML = '';
+  const maxP = Math.max(...d.canais.map(c=>c.pct));
   d.canais.forEach(c=>{
-    cbEl.innerHTML+=`<div>
+    cbEl.innerHTML += `<div>
       <div style="display:flex;justify-content:space-between;font-size:.78rem;margin-bottom:4px">
         <span style="font-weight:600;color:#1a1a2e">${c.label}</span>
         <span style="color:#6b6b80">${c.pct}%</span>
@@ -794,95 +720,152 @@ function renderDados(){
       </div>
     </div>`;
   });
+}
 
-  // tabela páginas
-  const tblP=document.getElementById('tbl-pages');
-  tblP.innerHTML=d.pages.map(p=>`<tr>
-    <td class="td-url" title="${p.pagina}">${p.pagina}</td>
-    <td class="td-num">${fmt(p.pageviews)}</td>
-    <td class="td-num">${fmt(p.usuarios)}</td>
-  </tr>`).join('');
+// ─── CONECTAR GOOGLE ─────────────────────────────────────────────────
+function conectarGoogle(e){
+  e.preventDefault();
+  if(!gaId || gaId === 'G-DEMO123'){
+    toast('Digite seu GA ID primeiro!');
+    return;
+  }
+  // Redireciona pro OAuth passando o ga_id
+  window.location.href = `/api/metricas/oauth/start?ga_id=${gaId}`;
+}
 
-  // tabela keywords
-  const tblK=document.getElementById('tbl-keywords');
-  tblK.innerHTML=d.keywords.map(k=>`<tr>
-    <td style="font-size:.78rem;color:#1a1a2e">${k.query}</td>
-    <td class="td-num">${fmt(k.cliques)}</td>
-    <td class="td-num" style="color:#7943e2">#${k.posicao}</td>
-  </tr>`).join('');
+// ─── CARREGAR DADOS REAIS DO BACKEND ─────────────────────────────────
+async function carregarDadosReais(){
+  // Mostra as tabelas, esconde o botão de conectar
+  document.getElementById('bloco-conectar').style.display = 'none';
+  document.getElementById('bloco-tabelas').style.display  = 'grid';
+
+  // Carrega GA4 (páginas)
+  try {
+    const rGA = await fetch(`/api/metricas/ga4?ga_id=${gaId}&dias=${periodo}`);
+    const dGA = await rGA.json();
+    const tblP = document.getElementById('tbl-pages');
+    if(dGA.success && dGA.top_paginas && dGA.top_paginas.length){
+      tblP.innerHTML = dGA.top_paginas.map(p=>`<tr>
+        <td class="td-url" title="${p.pagina}">${p.pagina}</td>
+        <td class="td-num">${fmt(p.pageviews)}</td>
+        <td class="td-num">${fmt(p.usuarios)}</td>
+      </tr>`).join('');
+    } else {
+      tblP.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:16px;color:var(--muted);font-size:.8rem">Nenhuma página encontrada no período.</td></tr>`;
+    }
+  } catch(err){
+    document.getElementById('tbl-pages').innerHTML = `<tr><td colspan="3" style="text-align:center;padding:16px;color:#d85a30;font-size:.8rem">Erro ao carregar páginas.</td></tr>`;
+  }
+
+  // Carrega GSC (keywords)
+  try {
+    const rGSC = await fetch(`/api/metricas/gsc?ga_id=${gaId}&dias=${periodo}`);
+    const dGSC = await rGSC.json();
+    const tblK = document.getElementById('tbl-keywords');
+    if(dGSC.success && dGSC.top_keywords && dGSC.top_keywords.length){
+      tblK.innerHTML = dGSC.top_keywords.map(k=>`<tr>
+        <td style="font-size:.78rem;color:#1a1a2e">${k.query}</td>
+        <td class="td-num">${fmt(k.cliques)}</td>
+        <td class="td-num" style="color:#7943e2">#${k.posicao}</td>
+      </tr>`).join('');
+    } else {
+      tblK.innerHTML = `<tr><td colspan="3" style="text-align:center;padding:16px;color:var(--muted);font-size:.8rem">Nenhuma keyword encontrada no período.</td></tr>`;
+    }
+  } catch(err){
+    document.getElementById('tbl-keywords').innerHTML = `<tr><td colspan="3" style="text-align:center;padding:16px;color:#d85a30;font-size:.8rem">Erro ao carregar keywords.</td></tr>`;
+  }
+}
+
+// ─── VERIFICAR STATUS DE CONEXÃO ──────────────────────────────────────
+async function verificarConexao(){
+  if(!gaId || gaId === 'G-DEMO123') return;
+  try {
+    const r = await fetch(`/api/metricas/status?ga_id=${gaId}`);
+    const d = await r.json();
+    if(d.conectado){
+      carregarDadosReais();
+    }
+    // Se não conectado: botão de conectar já aparece por padrão
+  } catch(e){
+    // silencioso — botão de conectar já está visível
+  }
 }
 
 // ─── PERÍODO ──────────────────────────────────────────────────────────
-function setPeriodo(dias,btn){
-  periodo=dias;
+function setPeriodo(dias, btn){
+  periodo = dias;
   document.querySelectorAll('.period-btn').forEach(b=>b.classList.remove('active'));
   btn.classList.add('active');
   renderDados();
+  // Se já está conectado, recarrega os dados reais também
+  if(document.getElementById('bloco-tabelas').style.display !== 'none'){
+    carregarDadosReais();
+  }
 }
 
 // ─── TOAST ────────────────────────────────────────────────────────────
 function toast(msg){
-  const t=document.getElementById('toast');
-  t.textContent=msg;t.classList.add('show');
-  setTimeout(()=>t.classList.remove('show'),3000);
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'), 3000);
 }
 
 // ─── LIBERAR PAINEL ───────────────────────────────────────────────────
 function liberarPainel(){
-  const nome=document.getElementById('g-nome').value.trim();
-  const email=document.getElementById('g-email').value.trim();
+  const nome  = document.getElementById('g-nome').value.trim();
+  const email = document.getElementById('g-email').value.trim();
+  if(!nome){ document.getElementById('g-nome').focus(); toast('Digite seu nome para continuar.'); return; }
+  if(!email||!email.includes('@')){ document.getElementById('g-email').focus(); toast('Digite um e-mail válido.'); return; }
 
-  if(!nome){document.getElementById('g-nome').focus();toast('Digite seu nome para continuar.');return;}
-  if(!email||!email.includes('@')){document.getElementById('g-email').focus();toast('Digite um e-mail válido.');return;}
+  const empresa = document.getElementById('g-empresa').value.trim();
+  const wpp     = document.getElementById('g-wpp').value.trim();
 
-  const empresa=document.getElementById('g-empresa').value.trim();
-  const wpp=document.getElementById('g-wpp').value.trim();
+  fetch('/leads',{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({nome,email,telefone:wpp,empresa,origem:'metricas',interesse:'GA4: '+gaId})
+  }).catch(e=>console.warn('Lead não salvo:',e));
 
-  // Salva no banco via /leads (mesmo endpoint do site)
-  fetch('/leads', {
-    method: 'POST',
-    headers: {'Content-Type': 'application/json'},
-    body: JSON.stringify({
-      nome:      nome,
-      email:     email,
-      telefone:  wpp,
-      empresa:   empresa,
-      origem:    'metricas',
-      interesse: 'GA4: ' + gaId
-    })
-  }).catch(function(e){ console.warn('Lead não salvo:', e); });
-
-  // Esconde o gate, mostra sucesso brevemente, depois abre o painel
-  document.getElementById('gate-card').style.display='none';
-  const suc=document.getElementById('gate-success');
-  document.getElementById('success-title').textContent=`Liberando painel para ${nome.split(' ')[0]}...`;
+  document.getElementById('gate-card').style.display = 'none';
+  const suc = document.getElementById('gate-success');
+  document.getElementById('success-title').textContent = `Liberando painel para ${nome.split(' ')[0]}...`;
   suc.classList.add('show');
 
   setTimeout(()=>{
-    document.getElementById('gate-overlay').style.display='none';
-    // Esconde o banner de promoção após liberar o painel
+    document.getElementById('gate-overlay').style.display = 'none';
     document.getElementById('promo-banner').classList.remove('visible');
-    const painel=document.getElementById('painel');
+    const painel = document.getElementById('painel');
     painel.classList.add('liberado');
     renderDados();
+    // Verifica se já tem conexão Google e carrega dados reais
+    verificarConexao();
+    // Se voltou do OAuth, mostra os dados direto
+    if(conectado) carregarDadosReais();
     painel.scrollIntoView({behavior:'smooth',block:'start'});
     toast('✅ Diagnóstico liberado!');
-  },1400);
+  }, 1400);
 }
 
-// Enter no último campo dispara o submit
+// Se voltou do OAuth (conectado=1), libera o painel automaticamente sem gate
+if(conectado && !isDemo){
+  document.getElementById('gate-overlay').style.display = 'none';
+  const painel = document.getElementById('painel');
+  painel.classList.add('liberado');
+  renderDados();
+  carregarDadosReais();
+}
+
 document.getElementById('g-wpp').addEventListener('keydown',e=>{if(e.key==='Enter')liberarPainel();});
 document.getElementById('g-email').addEventListener('keydown',e=>{if(e.key==='Enter')liberarPainel();});
 
 // ── MOBILE NAV ──
-const hamburger=document.getElementById('hamburger');
-const mobileNav=document.getElementById('mobileNav');
-const navClose=document.getElementById('navClose');
-if(hamburger){hamburger.addEventListener('click',()=>mobileNav.classList.add('active'));}
-if(navClose){navClose.addEventListener('click',()=>mobileNav.classList.remove('active'));}
-if(mobileNav){mobileNav.addEventListener('click',e=>{if(e.target===mobileNav)mobileNav.classList.remove('active')});}
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobileNav');
+const navClose  = document.getElementById('navClose');
+if(hamburger) hamburger.addEventListener('click',()=>mobileNav.classList.add('active'));
+if(navClose)  navClose.addEventListener('click',()=>mobileNav.classList.remove('active'));
+if(mobileNav) mobileNav.addEventListener('click',e=>{if(e.target===mobileNav)mobileNav.classList.remove('active')});
 function closeNav(){if(mobileNav)mobileNav.classList.remove('active');}
-
 </script>
 </body>
 </html>
