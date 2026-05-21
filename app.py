@@ -1,4 +1,6 @@
 import os
+import json
+import datetime as _dt
 import jwt
 import bcrypt
 import mercadopago
@@ -7,11 +9,15 @@ import psycopg2.extras
 import requests as req_ext
 from datetime import datetime, timedelta
 from functools import wraps
-from flask import Flask, request, jsonify, render_template, Response
+from flask import Flask, request, jsonify, render_template, Response, session, redirect
 from flask_cors import CORS
+from google.oauth2.credentials import Credentials
+from google_auth_oauthlib.flow import Flow
+from googleapiclient.discovery import build
 
 app = Flask(__name__)
 CORS(app)
+app.secret_key = os.environ.get("SECRET_KEY", "troca-isso")
 
 # ─── CONFIG VIA ENV ───────────────────────────────────────────────────────────
 DB_URL       = os.environ["DATABASE_URL"]        # postgresql://user:pass@host:port/db
@@ -316,7 +322,7 @@ def gerar_hub():
         return jsonify({"erro": "Informe ao menos o site ou a descrição do negócio."}), 400
 
     prompt = f"""Você é um consultor sênior de SEO e marketing digital da Leanttro Tecnologia. \
-O serviço "Seu Hub" instala um hub de negócios locais dentro do domínio do cliente, \
+O serviço \"Seu Hub\" instala um hub de negócios locais dentro do domínio do cliente, \
 gerando tráfego orgânico no Google sem pagar por anúncios.
 
 Dados do cliente:
@@ -729,7 +735,7 @@ def sitemap():
     <priority>0.8</priority>
   </url>""")
 
-    # Categorias do hub (cada uma é uma página template)
+    # Categorias do hub
     cur.execute("SELECT slug FROM hub_categorias WHERE ativo = true ORDER BY nome")
     for row in cur.fetchall():
         urls.append(f"""  <url>
@@ -739,7 +745,7 @@ def sitemap():
     <priority>0.8</priority>
   </url>""")
 
-    # Bairros com negócios cadastrados (cada bairro é uma página template)
+    # Bairros com negócios cadastrados
     cur.execute("""
         SELECT DISTINCT bairro FROM hub_negocios
         WHERE ativo = true AND bairro IS NOT NULL AND bairro != ''
@@ -785,6 +791,469 @@ def painel():
 @app.route("/")
 def index():
     return render_template("index.html")
+
+
+# ═══════════════════════════════════════════════════════════════════
+# BLOCO: MÉTRICAS — GOOGLE OAUTH2 + GSC + GA4  (multi-tenant por GA ID)
+# ═══════════════════════════════════════════════════════════════════
+
+# ── Config ──────────────────────────────────────────────────────────
+GOOGLE_CLIENT_ID     = os.environ.get("GOOGLE_CLIENT_ID", "")
+GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", "")
+GOOGLE_REDIRECT_URI  = os.environ.get(
+    "GOOGLE_REDIRECT_URI",
+    "https://leanttro.com/api/metricas/oauth/callback"
+)
+
+SCOPES_METRICAS = [
+    'https://www.googleapis.com/auth/webmasters.readonly',
+    'https://www.googleapis.com/auth/analytics.readonly',
+]
+
+# Arquivo onde os tokens são salvos por GA ID (ex: G-H7F6WRRVS7)
+BASE_DIR     = os.path.dirname(os.path.abspath(__file__))
+TOKENS_FILE  = os.path.join(BASE_DIR, 'data', 'metricas_tokens.json')
+
+
+# ── Helpers de token ────────────────────────────────────────────────
+
+def _load_tokens() -> dict:
+    try:
+        if os.path.exists(TOKENS_FILE):
+            with open(TOKENS_FILE, 'r') as f:
+                return json.load(f)
+    except Exception:
+        pass
+    return {}
+
+
+def _save_tokens(data: dict):
+    os.makedirs(os.path.dirname(TOKENS_FILE), exist_ok=True)
+    with open(TOKENS_FILE, 'w') as f:
+        json.dump(data, f)
+
+
+def _get_creds(ga_id: str):
+    """Retorna Credentials válidas para o GA ID informado, ou None."""
+    tokens = _load_tokens()
+    tok    = tokens.get(ga_id)
+    if not tok:
+        return None
+    creds = Credentials(
+        token         = tok.get('token'),
+        refresh_token = tok.get('refresh_token'),
+        token_uri     = 'https://oauth2.googleapis.com/token',
+        client_id     = GOOGLE_CLIENT_ID,
+        client_secret = GOOGLE_CLIENT_SECRET,
+        scopes        = SCOPES_METRICAS,
+    )
+    if creds.expired and creds.refresh_token:
+        try:
+            from google.auth.transport.requests import Request as GRequest
+            creds.refresh(GRequest())
+            tok['token']   = creds.token
+            tokens[ga_id]  = tok
+            _save_tokens(tokens)
+        except Exception as e:
+            print(f"[metricas] Falha ao renovar token para {ga_id}: {e}")
+            return None
+    return creds
+
+
+def _flow():
+    """Cria o Flow OAuth padrão."""
+    return Flow.from_client_config(
+        {
+            "web": {
+                "client_id"    : GOOGLE_CLIENT_ID,
+                "client_secret": GOOGLE_CLIENT_SECRET,
+                "auth_uri"     : "https://accounts.google.com/o/oauth2/auth",
+                "token_uri"    : "https://oauth2.googleapis.com/token",
+                "redirect_uris": [GOOGLE_REDIRECT_URI],
+            }
+        },
+        scopes       = SCOPES_METRICAS,
+        redirect_uri = GOOGLE_REDIRECT_URI,
+    )
+
+
+# ── Rotas ────────────────────────────────────────────────────────────
+
+@app.route('/api/metricas/status')
+def metricas_status():
+    """Retorna se o GA ID da sessão já tem token válido."""
+    ga_id = request.args.get('ga_id', '').upper().strip()
+    if not ga_id:
+        return jsonify({"success": False, "error": "ga_id não informado"}), 400
+
+    creds  = _get_creds(ga_id)
+    tokens = _load_tokens()
+    tok    = tokens.get(ga_id, {})
+    return jsonify({
+        "success"      : True,
+        "conectado"    : creds is not None and creds.valid,
+        "gsc_site"     : tok.get('gsc_site', ''),
+        "ga4_property" : tok.get('ga4_property', ''),
+    })
+
+
+@app.route('/api/metricas/oauth/start')
+def metricas_oauth_start():
+    """Inicia o fluxo OAuth. Recebe ?ga_id=G-XXXXX na query."""
+    ga_id = request.args.get('ga_id', '').upper().strip()
+    if not ga_id or not ga_id.startswith('G-'):
+        return "GA ID inválido. Ex: G-H7F6WRRVS7", 400
+    if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
+        return "GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET não configurados.", 400
+
+    f = _flow()
+    auth_url, state = f.authorization_url(
+        access_type='offline',
+        include_granted_scopes='true',
+        prompt='consent',
+    )
+    session['oauth_state'] = state
+    session['oauth_ga_id'] = ga_id
+    return redirect(auth_url)
+
+
+@app.route('/api/metricas/oauth/callback')
+def metricas_oauth_callback():
+    """Callback do Google — salva o token associado ao GA ID."""
+    state = session.get('oauth_state', '')
+    ga_id = session.get('oauth_ga_id', '')
+
+    if not ga_id:
+        return "Sessão expirada. Tente novamente.", 400
+    if not GOOGLE_CLIENT_ID or not GOOGLE_CLIENT_SECRET:
+        return "Erro de configuração OAuth.", 400
+
+    f = Flow.from_client_config(
+        {
+            "web": {
+                "client_id"    : GOOGLE_CLIENT_ID,
+                "client_secret": GOOGLE_CLIENT_SECRET,
+                "auth_uri"     : "https://accounts.google.com/o/oauth2/auth",
+                "token_uri"    : "https://oauth2.googleapis.com/token",
+                "redirect_uris": [GOOGLE_REDIRECT_URI],
+            }
+        },
+        scopes       = SCOPES_METRICAS,
+        state        = state,
+        redirect_uri = GOOGLE_REDIRECT_URI,
+    )
+
+    try:
+        auth_response = request.url.replace('http://', 'https://')
+        f.fetch_token(authorization_response=auth_response)
+        creds = f.credentials
+
+        # Detecta o site do Search Console automaticamente
+        gsc_site = ""
+        try:
+            svc   = build('searchconsole', 'v1', credentials=creds, cache_discovery=False)
+            sites = svc.sites().list().execute()
+            entries = sites.get('siteEntry', [])
+            if entries:
+                gsc_site = entries[0].get('siteUrl', '')
+        except Exception:
+            pass
+
+        # Detecta a property GA4 automaticamente pelo GA ID
+        ga4_property = ""
+        try:
+            svc_admin = build('analyticsadmin', 'v1beta', credentials=creds, cache_discovery=False)
+            props = svc_admin.properties().list(filter="parent:accounts/-").execute()
+            for p in props.get('properties', []):
+                ga4_property = p.get('name', '')  # ex: "properties/123456789"
+                break
+        except Exception:
+            pass
+
+        # Salva token indexado pelo GA ID
+        tokens = _load_tokens()
+        tokens[ga_id] = {
+            'token'        : creds.token,
+            'refresh_token': creds.refresh_token,
+            'gsc_site'     : gsc_site,
+            'ga4_property' : ga4_property,
+        }
+        _save_tokens(tokens)
+
+        return redirect(f'/metricas?id={ga_id}&conectado=1')
+
+    except Exception as e:
+        return f"Erro no callback OAuth: {e}", 400
+
+
+@app.route('/api/metricas/gsc')
+def metricas_gsc():
+    """Retorna dados reais do Search Console para o GA ID informado."""
+    ga_id = request.args.get('ga_id', '').upper().strip()
+    dias  = int(request.args.get('dias', 28))
+
+    if not ga_id:
+        return jsonify({"success": False, "error": "ga_id não informado"}), 400
+
+    creds = _get_creds(ga_id)
+    if not creds or not creds.valid:
+        return jsonify({"success": False, "error": "Search Console não conectado. Faça login com o Google."}), 401
+
+    tokens   = _load_tokens()
+    gsc_site = tokens.get(ga_id, {}).get('gsc_site', '')
+    if not gsc_site:
+        return jsonify({"success": False, "error": "Nenhum site encontrado no Search Console."}), 400
+
+    try:
+        svc   = build('searchconsole', 'v1', credentials=creds, cache_discovery=False)
+        end   = _dt.date.today() - _dt.timedelta(days=3)
+        start = end - _dt.timedelta(days=dias)
+
+        # Totais por dia
+        resp_dia = svc.searchanalytics().query(siteUrl=gsc_site, body={
+            'startDate' : start.strftime('%Y-%m-%d'),
+            'endDate'   : end.strftime('%Y-%m-%d'),
+            'dimensions': ['date'],
+            'rowLimit'  : 90,
+        }).execute()
+
+        por_dia = []
+        total_cliques = total_impressoes = total_ctr_sum = total_pos_sum = 0
+        rows = resp_dia.get('rows', [])
+        for row in rows:
+            cl = row.get('clicks', 0)
+            im = row.get('impressions', 0)
+            ct = round(row.get('ctr', 0) * 100, 2)
+            po = round(row.get('position', 0), 1)
+            por_dia.append({'data': row['keys'][0], 'cliques': cl, 'impressoes': im, 'ctr': ct, 'posicao': po})
+            total_cliques    += cl
+            total_impressoes += im
+            total_ctr_sum    += ct
+            total_pos_sum    += po
+
+        n = len(rows) or 1
+        totais = {
+            'cliques'   : total_cliques,
+            'impressoes': total_impressoes,
+            'ctr'       : round(total_ctr_sum / n, 1),
+            'posicao'   : round(total_pos_sum / n, 1),
+        }
+
+        # Top páginas
+        resp_pg = svc.searchanalytics().query(siteUrl=gsc_site, body={
+            'startDate' : start.strftime('%Y-%m-%d'),
+            'endDate'   : end.strftime('%Y-%m-%d'),
+            'dimensions': ['page'],
+            'rowLimit'  : 10,
+            'orderBy'   : [{'fieldName': 'clicks', 'sortOrder': 'DESCENDING'}],
+        }).execute()
+        top_paginas = [{
+            'pagina'    : r['keys'][0],
+            'cliques'   : r.get('clicks', 0),
+            'impressoes': r.get('impressions', 0),
+            'ctr'       : round(r.get('ctr', 0) * 100, 2),
+            'posicao'   : round(r.get('position', 0), 1),
+        } for r in resp_pg.get('rows', [])]
+
+        # Top keywords
+        resp_kw = svc.searchanalytics().query(siteUrl=gsc_site, body={
+            'startDate' : start.strftime('%Y-%m-%d'),
+            'endDate'   : end.strftime('%Y-%m-%d'),
+            'dimensions': ['query'],
+            'rowLimit'  : 10,
+            'orderBy'   : [{'fieldName': 'clicks', 'sortOrder': 'DESCENDING'}],
+        }).execute()
+        top_keywords = [{
+            'query'     : r['keys'][0],
+            'cliques'   : r.get('clicks', 0),
+            'impressoes': r.get('impressions', 0),
+            'ctr'       : round(r.get('ctr', 0) * 100, 2),
+            'posicao'   : round(r.get('position', 0), 1),
+        } for r in resp_kw.get('rows', [])]
+
+        return jsonify({
+            "success"     : True,
+            "totais"      : totais,
+            "por_dia"     : por_dia,
+            "top_paginas" : top_paginas,
+            "top_keywords": top_keywords,
+            "site"        : gsc_site,
+            "periodo_dias": dias,
+        })
+
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/metricas/ga4')
+def metricas_ga4():
+    """Retorna dados reais do GA4 para o GA ID informado."""
+    ga_id = request.args.get('ga_id', '').upper().strip()
+    dias  = int(request.args.get('dias', 28))
+
+    if not ga_id:
+        return jsonify({"success": False, "error": "ga_id não informado"}), 400
+
+    creds = _get_creds(ga_id)
+    if not creds or not creds.valid:
+        return jsonify({"success": False, "error": "Google Analytics não conectado."}), 401
+
+    tokens      = _load_tokens()
+    ga4_property = tokens.get(ga_id, {}).get('ga4_property', '')
+
+    if not ga4_property:
+        ga4_property = request.args.get('property', '')
+    if not ga4_property:
+        return jsonify({"success": False, "error": "Property GA4 não encontrada. Informe ?property=properties/XXXXXXXXX"}), 400
+
+    try:
+        svc   = build('analyticsdata', 'v1beta', credentials=creds, cache_discovery=False)
+        end   = _dt.date.today() - _dt.timedelta(days=1)
+        start = end - _dt.timedelta(days=dias)
+
+        # Sessões por dia
+        resp_dia = svc.properties().runReport(property=ga4_property, body={
+            'dateRanges': [{'startDate': start.strftime('%Y-%m-%d'), 'endDate': end.strftime('%Y-%m-%d')}],
+            'dimensions': [{'name': 'date'}],
+            'metrics'   : [{'name': 'sessions'}, {'name': 'activeUsers'}, {'name': 'screenPageViews'}],
+            'orderBys'  : [{'dimension': {'dimensionName': 'date'}}],
+        }).execute()
+
+        por_dia = []
+        for row in resp_dia.get('rows', []):
+            dt = row['dimensionValues'][0]['value']
+            por_dia.append({
+                'data'     : f"{dt[:4]}-{dt[4:6]}-{dt[6:]}",
+                'sessoes'  : int(row['metricValues'][0]['value']),
+                'usuarios' : int(row['metricValues'][1]['value']),
+                'pageviews': int(row['metricValues'][2]['value']),
+            })
+
+        # Totais gerais
+        resp_tot = svc.properties().runReport(property=ga4_property, body={
+            'dateRanges': [{'startDate': start.strftime('%Y-%m-%d'), 'endDate': end.strftime('%Y-%m-%d')}],
+            'metrics'   : [
+                {'name': 'sessions'},
+                {'name': 'activeUsers'},
+                {'name': 'screenPageViews'},
+                {'name': 'averageSessionDuration'},
+            ],
+        }).execute()
+
+        totais = {'sessoes': 0, 'usuarios': 0, 'pageviews': 0, 'tempo_medio': 0}
+        if resp_tot.get('rows'):
+            mv = resp_tot['rows'][0]['metricValues']
+            totais = {
+                'sessoes'    : int(mv[0]['value']),
+                'usuarios'   : int(mv[1]['value']),
+                'pageviews'  : int(mv[2]['value']),
+                'tempo_medio': round(float(mv[3]['value']), 0),
+            }
+
+        # Canais de tráfego
+        resp_cn = svc.properties().runReport(property=ga4_property, body={
+            'dateRanges': [{'startDate': start.strftime('%Y-%m-%d'), 'endDate': end.strftime('%Y-%m-%d')}],
+            'dimensions': [{'name': 'sessionDefaultChannelGroup'}],
+            'metrics'   : [{'name': 'sessions'}, {'name': 'activeUsers'}],
+            'orderBys'  : [{'metric': {'metricName': 'sessions'}, 'desc': True}],
+            'limit'     : 8,
+        }).execute()
+
+        canais = [{
+            'canal'   : r['dimensionValues'][0]['value'],
+            'sessoes' : int(r['metricValues'][0]['value']),
+            'usuarios': int(r['metricValues'][1]['value']),
+        } for r in resp_cn.get('rows', [])]
+
+        # Top páginas
+        resp_pg = svc.properties().runReport(property=ga4_property, body={
+            'dateRanges': [{'startDate': start.strftime('%Y-%m-%d'), 'endDate': end.strftime('%Y-%m-%d')}],
+            'dimensions': [{'name': 'pagePath'}],
+            'metrics'   : [{'name': 'screenPageViews'}, {'name': 'activeUsers'}],
+            'orderBys'  : [{'metric': {'metricName': 'screenPageViews'}, 'desc': True}],
+            'limit'     : 10,
+        }).execute()
+
+        top_paginas = [{
+            'pagina'   : r['dimensionValues'][0]['value'],
+            'pageviews': int(r['metricValues'][0]['value']),
+            'usuarios' : int(r['metricValues'][1]['value']),
+        } for r in resp_pg.get('rows', [])]
+
+        return jsonify({
+            "success"     : True,
+            "totais"      : totais,
+            "por_dia"     : por_dia,
+            "canais"      : canais,
+            "top_paginas" : top_paginas,
+            "periodo_dias": dias,
+        })
+
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route('/api/metricas/ia-analise', methods=['POST'])
+def metricas_ia_analise():
+    """Gera análise IA com Groq a partir dos dados GSC + GA4."""
+    data    = request.json or {}
+    gsc     = data.get('gsc', {})
+    ga4     = data.get('ga4', {})
+    periodo = data.get('periodo', 28)
+
+    partes = []
+    if gsc:
+        partes.append(
+            f"Search Console ({periodo} dias): {gsc.get('cliques', 0)} cliques, "
+            f"{gsc.get('impressoes', 0)} impressões, CTR {gsc.get('ctr', 0)}%, "
+            f"posição média {gsc.get('posicao', 0)}."
+        )
+    if ga4:
+        seg = ga4.get('tempo_medio', 0)
+        partes.append(
+            f"Analytics ({periodo} dias): {ga4.get('sessoes', 0)} sessões, "
+            f"{ga4.get('usuarios', 0)} usuários, {ga4.get('pageviews', 0)} visualizações, "
+            f"tempo médio {int(seg // 60)}m{int(seg % 60)}s."
+        )
+
+    if not partes:
+        return jsonify({"success": False, "error": "Sem dados para analisar."}), 400
+
+    prompt = (
+        "Você é um especialista em marketing digital e SEO. "
+        "Analise os dados abaixo e dê um diagnóstico direto e acionável em 3-4 frases. "
+        "Aponte o ponto mais crítico, o que está bom e 1 ação concreta para melhorar. "
+        "Seja objetivo, sem jargões desnecessários.\n\n"
+        "Dados: " + " ".join(partes)
+    )
+
+    try:
+        import requests as _req
+        resp = _req.post(
+            "https://api.groq.com/openai/v1/chat/completions",
+            headers={
+                "Authorization": f"Bearer {GROQ_KEY}",
+                "Content-Type" : "application/json",
+            },
+            json={
+                "model"      : "llama-3.3-70b-versatile",
+                "temperature": 0.5,
+                "max_tokens" : 300,
+                "messages"   : [
+                    {"role": "system", "content": "Você é um analista de marketing digital direto e prático. Responda em português do Brasil."},
+                    {"role": "user",   "content": prompt},
+                ],
+            },
+            timeout=20,
+        )
+        analise = resp.json()['choices'][0]['message']['content'].strip()
+        return jsonify({"success": True, "analise": analise})
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+# ═══════════════════════════════════════════════════════════════════
+# FIM DO BLOCO DE MÉTRICAS
+# ═══════════════════════════════════════════════════════════════════
 
 # ─── RUN ──────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
