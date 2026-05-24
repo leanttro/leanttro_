@@ -1725,14 +1725,6 @@ async function apiGet(path) {
     }
   }
 
-  // Tenta obter localização silenciosamente ao carregar
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      pos => applyUserLocation(pos.coords.latitude, pos.coords.longitude),
-      () => {} // silencioso se negado
-    );
-  }
-
   if (btnLoc) {
     btnLoc.addEventListener('click', async () => {
       if (!navigator.geolocation) { alert('Geolocalização não suportada neste navegador.'); return; }
