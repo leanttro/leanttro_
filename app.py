@@ -109,11 +109,14 @@ def criar_produto():
     d = request.json
     preco = d.get("preco")
     preco = float(preco) if preco not in (None, "", "null") else 0.0
+    preco_json = d.get("preco_json")
+    if preco_json is not None and not isinstance(preco_json, str):
+        preco_json = json.dumps(preco_json)
     conn = get_db(); cur = conn.cursor()
     cur.execute("""
-        INSERT INTO produtos (nome, slug, descricao, categoria, preco, arquivo_url, imagem_url, ativo, destaque, tipo)
-        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id
-    """, (d["nome"], d["slug"], d.get("descricao"), d.get("categoria"), preco,
+        INSERT INTO produtos (nome, slug, descricao, categoria, preco, preco_json, arquivo_url, imagem_url, ativo, destaque, tipo)
+        VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s) RETURNING id
+    """, (d["nome"], d["slug"], d.get("descricao"), d.get("categoria"), preco, preco_json,
           d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False),
           d.get("tipo", "loja")))
     novo_id = cur.fetchone()["id"]
@@ -126,12 +129,15 @@ def editar_produto(id):
     d = request.json
     preco = d.get("preco")
     preco = float(preco) if preco not in (None, "", "null") else 0.0
+    preco_json = d.get("preco_json")
+    if preco_json is not None and not isinstance(preco_json, str):
+        preco_json = json.dumps(preco_json)
     conn = get_db(); cur = conn.cursor()
     cur.execute("""
-        UPDATE produtos SET nome=%s, slug=%s, descricao=%s, categoria=%s, preco=%s,
+        UPDATE produtos SET nome=%s, slug=%s, descricao=%s, categoria=%s, preco=%s, preco_json=%s,
         arquivo_url=%s, imagem_url=%s, ativo=%s, destaque=%s, tipo=%s, updated_em=now()
         WHERE id=%s
-    """, (d["nome"], d["slug"], d.get("descricao"), d.get("categoria"), preco,
+    """, (d["nome"], d["slug"], d.get("descricao"), d.get("categoria"), preco, preco_json,
           d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False),
           d.get("tipo", "loja"), id))
     conn.commit(); cur.close(); conn.close()
