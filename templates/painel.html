@@ -727,7 +727,11 @@ input[type=checkbox].row-check{
       <div class="field"><label>Nome</label><input id="mp-nome" placeholder="Nome do produto"></div>
       <div class="field-row">
         <div class="field"><label>Slug</label><input id="mp-slug" placeholder="nome-do-produto"></div>
-        <div class="field"><label>Preço (R$)</label><input id="mp-preco" type="number" step="0.01" placeholder="97.00"></div>
+        <div class="field"><label>Preço Único (R$)</label><input id="mp-preco-unico" type="number" step="0.01" placeholder="97.00"></div>
+      </div>
+      <div class="field-row">
+        <div class="field"><label>Setup (R$)</label><input id="mp-preco-setup" type="number" step="0.01" placeholder="500.00"></div>
+        <div class="field"><label>Mensalidade (R$/mês)</label><input id="mp-preco-mensal" type="number" step="0.01" placeholder="97.00"></div>
       </div>
       <div class="field-row">
         <div class="field"><label>Categoria</label>
@@ -1141,7 +1145,18 @@ function editProduto(p) {
   document.getElementById('mp-id').value = p.id;
   document.getElementById('mp-nome').value = p.nome;
   document.getElementById('mp-slug').value = p.slug;
-  document.getElementById('mp-preco').value = p.preco;
+  document.getElementById('mp-preco-unico').value = '';
+  document.getElementById('mp-preco-setup').value = '';
+  document.getElementById('mp-preco-mensal').value = '';
+  const pj = p.preco_json ? (typeof p.preco_json === 'string' ? JSON.parse(p.preco_json) : p.preco_json) : null;
+  if (pj && (pj.setup != null || pj.mensal != null)) {
+    document.getElementById('mp-preco-setup').value = pj.setup != null ? pj.setup : '';
+    document.getElementById('mp-preco-mensal').value = pj.mensal != null ? pj.mensal : '';
+  } else if (pj && pj.unico != null) {
+    document.getElementById('mp-preco-unico').value = pj.unico;
+  } else {
+    document.getElementById('mp-preco-unico').value = p.preco || '';
+  }
   document.getElementById('mp-categoria').value = p.categoria || 'exe';
   document.getElementById('mp-tipo').value = p.tipo || 'loja';
   document.getElementById('mp-desc').value = p.descricao || '';
@@ -1155,10 +1170,22 @@ function editProduto(p) {
 
 async function saveProduto() {
   const id = document.getElementById('mp-id').value;
+  const _unico  = parseFloat(document.getElementById('mp-preco-unico').value);
+  const _setup  = parseFloat(document.getElementById('mp-preco-setup').value);
+  const _mensal = parseFloat(document.getElementById('mp-preco-mensal').value);
+  let preco_json, preco;
+  if (!isNaN(_setup) || !isNaN(_mensal)) {
+    preco_json = { setup: isNaN(_setup) ? null : _setup, mensal: isNaN(_mensal) ? null : _mensal };
+    preco = !isNaN(_setup) ? _setup : (_mensal || 0);
+  } else {
+    preco_json = { unico: isNaN(_unico) ? 0 : _unico };
+    preco = isNaN(_unico) ? 0 : _unico;
+  }
   const body = {
     nome: document.getElementById('mp-nome').value,
     slug: document.getElementById('mp-slug').value,
-    preco: parseFloat(document.getElementById('mp-preco').value),
+    preco,
+    preco_json,
     categoria: document.getElementById('mp-categoria').value,
     tipo: document.getElementById('mp-tipo').value,
     descricao: document.getElementById('mp-desc').value,
