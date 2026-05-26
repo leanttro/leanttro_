@@ -316,6 +316,15 @@ function formatPreco(v) {
   return Number(v).toLocaleString('pt-BR', {style:'currency', currency:'BRL'});
 }
 
+function formatPrecoJson(p) {
+  const j = p.preco_json;
+  if (!j) return p.preco ? formatPreco(p.preco) : 'Consulte';
+  if (j.setup && j.mensal) return `${formatPreco(j.setup)} setup + ${formatPreco(j.mensal)}/mês`;
+  if (j.mensal) return `${formatPreco(j.mensal)}/mês`;
+  if (j.unico) return formatPreco(j.unico);
+  return 'Consulte';
+}
+
 function parseMarkdownBasic(text) {
   if (!text) return '';
   // Se já tem tags HTML, retorna direto
@@ -420,8 +429,8 @@ function getSlugFromPath() {
       badge.style.display = 'inline-flex';
     }
     document.getElementById('heroNome').textContent = p.nome;
-    if (p.preco) {
-      document.getElementById('heroPreco').innerHTML = `<small>a partir de</small>${formatPreco(p.preco)}`;
+    if (p.preco || p.preco_json) {
+      document.getElementById('heroPreco').innerHTML = formatPrecoJson(p);
     }
 
     // Breadcrumb
@@ -446,7 +455,7 @@ function getSlugFromPath() {
       sb.textContent = p.categoria;
       sb.style.display = 'inline-block';
     }
-    document.getElementById('sidebarPreco').innerHTML = p.preco ? formatPreco(p.preco) : 'Consulte';
+    document.getElementById('sidebarPreco').innerHTML = formatPrecoJson(p);
 
     // Botão comprar — abre WhatsApp com mensagem pré-preenchida
     document.getElementById('btnComprar').addEventListener('click', () => {
@@ -469,7 +478,7 @@ function getSlugFromPath() {
             ${imgHtml}
             <div>
               <div class="sidebar-outro-nome">${o.nome}</div>
-              ${o.preco ? `<div class="sidebar-outro-preco">${formatPreco(o.preco)}</div>` : ''}
+              ${o.preco || o.preco_json ? `<div class="sidebar-outro-preco">${formatPrecoJson(o)}</div>` : ''}
             </div>
           </a>`;
         }).join('');
