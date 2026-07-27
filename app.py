@@ -189,6 +189,11 @@ def editar_lead(id):
     conn.commit(); cur.close(); conn.close()
     return jsonify({"ok": True})
 
+# ─── ADS.TXT (AdSense) ────────────────────────────────────────────────────────
+@app.route("/ads.txt")
+def ads_txt():
+    return Response("google.com, pub-7617881885143728, DIRECT, f08c47fec0942fa0\n", mimetype="text/plain")
+
 # ─── PÁGINAS ──────────────────────────────────────────────────────────────────
 @app.route("/negocio/<slug>")
 def pagina_negocio(slug):
