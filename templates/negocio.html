@@ -88,6 +88,13 @@ nav.desktop-nav ul li a:hover{color:var(--primary);background:rgba(108,99,255,.0
 
 /* BREADCRUMB */
 .breadcrumb-bar{background:var(--bg2);border-bottom:1px solid var(--border);padding:10px 20px}
+.aviso-automatico{background:var(--primary);padding:10px 20px}
+.aviso-automatico-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;text-align:center}
+.aviso-automatico-texto{font-size:.85em;color:#fff;font-weight:600;margin:0}
+.aviso-automatico-texto strong{font-weight:800}
+.aviso-automatico-btn{display:inline-flex;align-items:center;gap:6px;background:#1a1a1a;border:1.5px solid #1a1a1a;color:#fff;font-size:.82em;font-weight:700;padding:6px 14px;border-radius:30px;white-space:nowrap;transition:background .2s}
+.aviso-automatico-btn:hover{background:#000}
+@media(max-width:600px){.aviso-automatico-texto{font-size:.8em}}
 .breadcrumb{display:flex;align-items:center;gap:6px;font-size:.82rem;color:var(--muted);max-width:1200px;margin:0 auto;flex-wrap:wrap}
 .breadcrumb a{color:var(--muted);transition:color .15s}
 .breadcrumb a:hover{color:var(--primary)}
@@ -343,6 +350,14 @@ footer{background:var(--dark);color:#fff;padding:40px 20px 24px}
 <!-- CONTEÚDO REAL (inicialmente oculto) -->
 <div id="negocioContent" style="display:none">
 
+  <!-- AVISO CADASTRO AUTOMÁTICO -->
+  <div class="aviso-automatico">
+    <div class="aviso-automatico-inner">
+      <p class="aviso-automatico-texto">Este negócio foi cadastrado automaticamente com dados públicos. <strong>É o dono(a)?</strong></p>
+      <a id="btnSolicitarRemocao" href="#" target="_blank" rel="noopener nofollow" class="aviso-automatico-btn">Solicitar remoção/atualização</a>
+    </div>
+  </div>
+
   <!-- HERO -->
   <div class="negocio-hero">
     <div id="heroBg"></div>
@@ -554,9 +569,9 @@ footer{background:var(--dark);color:#fff;padding:40px 20px 24px}
   </div>
 </footer>
 
-<!-- WHATSAPP FLUTUANTE -->
-<a href="https://wa.me/5511913324827" target="_blank" rel="noopener"
-  style="position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s"
+<!-- WHATSAPP FLUTUANTE (só aparece quando o negócio tem WhatsApp) -->
+<a id="wppFloat" href="#" target="_blank" rel="noopener"
+  style="display:none;position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s"
   onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'" aria-label="WhatsApp">
   <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
 </a>
@@ -808,10 +823,32 @@ async function init(){
   }
 
   // CONTATOS SIDEBAR
-  if(negocio.whatsapp){
+  // Número de WhatsApp: só o do próprio negócio. Se não tiver cadastrado,
+  // tenta achar um telefone dentro da descrição. Nunca usa o número da Leanttro.
+  function extrairTelefoneDescricao(desc){
+    if(!desc) return null;
+    const m = desc.match(/\(?\d{2}\)?[\s.-]?9?\d{4}[\s.-]?\d{4}/);
+    return m ? m[0].replace(/\D/g,'') : null;
+  }
+  let wppNumero = negocio.whatsapp ? negocio.whatsapp.replace(/\D/g,'') : null;
+  if(!wppNumero){
+    wppNumero = extrairTelefoneDescricao(negocio.descricao || negocio.resumo || '');
+  }
+  if(wppNumero){
     const wppLink=document.getElementById('btnWpp');
-    wppLink.href=`https://wa.me/55${negocio.whatsapp.replace(/\D/g,'')}`;
+    wppLink.href=`https://wa.me/55${wppNumero}`;
     wppLink.style.display='flex';
+
+    const wppFloat=document.getElementById('wppFloat');
+    wppFloat.href=`https://wa.me/55${wppNumero}`;
+    wppFloat.style.display='flex';
+  }
+
+  // AVISO CADASTRO AUTOMÁTICO — botão de solicitar remoção/atualização (vai sempre para a Leanttro)
+  const btnRemocao=document.getElementById('btnSolicitarRemocao');
+  if(btnRemocao){
+    const textoRemocao=`Olá, quero solicitar a remoção do negócio ${negocio.nome} (${negocio.categoria_nome||''}) cadastrado na Leanttro Hub, ou adicionar/atualizar meu negócio. Página: ${location.href}`;
+    btnRemocao.href=`https://wa.me/5511913324827?text=${encodeURIComponent(textoRemocao)}`;
   }
   if(negocio.telefone){
     const telLink=document.getElementById('btnTel');
