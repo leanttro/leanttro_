@@ -189,9 +189,11 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 .proj-card:hover .proj-card-img img{transform:scale(1.04)}
 .proj-card-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary);opacity:.5}
 /* Card com post do Instagram embedado (vídeo 9:16) — não mexe no restante do layout */
-.proj-card-img-ig{height:auto;aspect-ratio:9/16;background:#fafafa;position:relative}
-.proj-card-img-ig .instagram-media{margin:0 !important;min-width:0 !important;width:100% !important}
-.proj-card-img-ig iframe{width:100% !important}
+.proj-card-img-ig{height:auto;aspect-ratio:9/16;background:#fafafa;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center}
+.proj-card-img-ig .instagram-media{margin:0 auto !important}
+/* Card com vídeo próprio hospedado (Cloudinary etc) — sem redirect, toca liso */
+.proj-card-img-video{height:auto;aspect-ratio:9/16;background:#0a0a0a;position:relative;overflow:hidden}
+.proj-card-img-video video{width:100%;height:100%;object-fit:cover;display:block}
 .proj-card-body{padding:20px 22px 16px;flex:1;display:flex;flex-direction:column;gap:8px}
 .proj-badge{display:inline-block;background:rgba(121,67,226,.08);color:var(--primary);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;align-self:flex-start}
 .proj-card-body h3{font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--text);line-height:1.35}
@@ -394,6 +396,12 @@ function isInstagramUrl(url) {
   return typeof url === 'string' && /instagram\.com\/(p|reel|tv)\//i.test(url);
 }
 
+// Detecta se imagem_url é um vídeo próprio hospedado (Cloudinary, mp4, webm, etc) — toca direto no site, sem sair pro Instagram
+function isVideoUrl(url) {
+  if (typeof url !== 'string') return false;
+  return /\.(mp4|webm|ogg|mov|m3u8)(\?.*)?$/i.test(url) || /\/video\/upload\//i.test(url);
+}
+
 // Carrega o script oficial do Instagram uma única vez e processa os embeds da página
 function processInstagramEmbeds() {
   if (window.instgrm && window.instgrm.Embeds) {
@@ -411,9 +419,13 @@ function processInstagramEmbeds() {
 
 function renderCard(p) {
   let img;
-  if (isInstagramUrl(p.imagem_url)) {
+  if (isVideoUrl(p.imagem_url)) {
+    img = `<div class="proj-card-img proj-card-img-video">
+      <video src="${p.imagem_url}" muted loop autoplay playsinline preload="metadata"></video>
+    </div>`;
+  } else if (isInstagramUrl(p.imagem_url)) {
     img = `<div class="proj-card-img proj-card-img-ig">
-      <blockquote class="instagram-media" data-instgrm-permalink="${p.imagem_url}" data-instgrm-version="14" style="margin:0;width:100%"></blockquote>
+      <blockquote class="instagram-media" data-instgrm-permalink="${p.imagem_url}" data-instgrm-version="14" style="margin:0 auto"></blockquote>
     </div>`;
   } else if (p.imagem_url) {
     img = `<div class="proj-card-img"><img src="${p.imagem_url}" alt="${p.nome}" loading="lazy"></div>`;
