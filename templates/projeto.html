@@ -72,6 +72,8 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 /* IMAGEM DESTAQUE */
 .projeto-img-destaque{border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border);margin:36px 0}
 .projeto-img-destaque img{width:100%;max-height:520px;object-fit:cover;display:block}
+.projeto-img-destaque-ig{border:none;display:flex;justify-content:center;background:#fafafa;padding:8px 0}
+.projeto-img-destaque-ig .instagram-media{max-width:400px !important;width:100% !important}
 
 /* LAYOUT 2 COLUNAS */
 .projeto-layout{display:grid;grid-template-columns:1fr 320px;gap:48px;padding:36px 0 80px;align-items:start}
@@ -313,6 +315,26 @@ function parseMarkdownBasic(text) {
     .replace(/<p><\/p>/g, '');
 }
 
+// Detecta se imagem_url é na verdade um link de post/reel do Instagram
+function isInstagramUrl(url) {
+  return typeof url === 'string' && /instagram\.com\/(p|reel|tv)\//i.test(url);
+}
+
+// Carrega o script oficial do Instagram uma única vez e processa os embeds da página
+function processInstagramEmbeds() {
+  if (window.instgrm && window.instgrm.Embeds) {
+    window.instgrm.Embeds.process();
+    return;
+  }
+  if (document.getElementById('ig-embed-script')) return;
+  const s = document.createElement('script');
+  s.id = 'ig-embed-script';
+  s.async = true;
+  s.src = 'https://www.instagram.com/embed.js';
+  s.onload = () => { if (window.instgrm) window.instgrm.Embeds.process(); };
+  document.body.appendChild(s);
+}
+
 function getSlugFromPath() {
   const parts = window.location.pathname.split('/');
   return parts[parts.length - 1] || parts[parts.length - 2];
@@ -336,7 +358,7 @@ function getSlugFromPath() {
       "@type": "CreativeWork",
       "name": p.nome,
       "description": p.descricao ? p.descricao.replace(/<[^>]*>/g,'').slice(0,200) : '',
-      "image": p.imagem_url || '',
+      "image": isInstagramUrl(p.imagem_url) ? '' : (p.imagem_url || ''),
       "url": window.location.href,
       "creator": { "@type": "Organization", "name": "Leanttro Tecnologia", "url": "https://leanttro.com" }
     };
@@ -355,8 +377,13 @@ function getSlugFromPath() {
     // Breadcrumb
     document.getElementById('breadcrumbNome').textContent = p.nome;
 
-    // Imagem de destaque
-    if (p.imagem_url) {
+    // Imagem de destaque (ou vídeo do Instagram, se imagem_url for um link de post/reel)
+    if (isInstagramUrl(p.imagem_url)) {
+      const imgDest = document.getElementById('projetoImgDestaque');
+      imgDest.className = 'projeto-img-destaque projeto-img-destaque-ig';
+      imgDest.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${p.imagem_url}" data-instgrm-version="14" style="margin:0 auto;width:100%"></blockquote>`;
+      processInstagramEmbeds();
+    } else if (p.imagem_url) {
       const imgDest = document.getElementById('projetoImgDestaque');
       imgDest.className = 'projeto-img-destaque';
       imgDest.innerHTML = `<img src="${p.imagem_url}" alt="${p.nome}" loading="eager">`;
@@ -373,9 +400,12 @@ function getSlugFromPath() {
       const sidebarOutros = document.getElementById('sidebarOutros');
       if (outros.length) {
         sidebarOutros.innerHTML = outros.map(o => {
-          const imgHtml = o.imagem_url
-            ? `<div class="sidebar-outro-img"><img src="${o.imagem_url}" alt="${o.nome}"></div>`
-            : `<div class="sidebar-outro-img"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>`;
+          // Post do Instagram fica pequeno demais pra embedar na sidebar — mostra ícone de vídeo
+          const imgHtml = isInstagramUrl(o.imagem_url)
+            ? `<div class="sidebar-outro-img"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>`
+            : o.imagem_url
+              ? `<div class="sidebar-outro-img"><img src="${o.imagem_url}" alt="${o.nome}"></div>`
+              : `<div class="sidebar-outro-img"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>`;
           return `<a href="/portfolio/${o.slug}" class="sidebar-outro-card">
             ${imgHtml}
             <div>
