@@ -72,8 +72,9 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 /* IMAGEM DESTAQUE */
 .projeto-img-destaque{border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border);margin:36px 0}
 .projeto-img-destaque img{width:100%;max-height:520px;object-fit:cover;display:block}
-.projeto-img-destaque-ig{border:none;display:flex;justify-content:center;background:#fafafa;padding:8px 0}
-.projeto-img-destaque-ig .instagram-media{max-width:400px !important;width:100% !important}
+.projeto-img-destaque-ig{border:none;display:flex;justify-content:center;background:#fafafa;padding:8px 0;max-width:400px;margin-left:auto;margin-right:auto}
+.projeto-img-destaque-video{border-radius:var(--radius);overflow:hidden;border:1.5px solid var(--border);margin:36px 0;background:#000}
+.projeto-img-destaque-video video{width:100%;max-height:600px;display:block}
 
 /* LAYOUT 2 COLUNAS */
 .projeto-layout{display:grid;grid-template-columns:1fr 320px;gap:48px;padding:36px 0 80px;align-items:start}
@@ -101,7 +102,7 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 .sidebar-outro-card:last-child{border-bottom:none}
 .sidebar-outro-card:hover{opacity:.75}
 .sidebar-outro-img{width:52px;height:52px;border-radius:8px;flex-shrink:0;background:linear-gradient(135deg,rgba(121,67,226,.12),rgba(121,67,226,.04));display:flex;align-items:center;justify-content:center;color:var(--primary);overflow:hidden}
-.sidebar-outro-img img{width:100%;height:100%;object-fit:cover}
+.sidebar-outro-img img,.sidebar-outro-img video{width:100%;height:100%;object-fit:cover}
 .sidebar-outro-nome{font-size:.82rem;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:2px}
 .sidebar-outro-cat{font-size:.75rem;color:var(--muted)}
 
@@ -320,6 +321,12 @@ function isInstagramUrl(url) {
   return typeof url === 'string' && /instagram\.com\/(p|reel|tv)\//i.test(url);
 }
 
+// Detecta se imagem_url é um vídeo próprio hospedado (Cloudinary, mp4, webm, etc) — toca direto no site, sem sair pro Instagram
+function isVideoUrl(url) {
+  if (typeof url !== 'string') return false;
+  return /\.(mp4|webm|ogg|mov|m3u8)(\?.*)?$/i.test(url) || /\/video\/upload\//i.test(url);
+}
+
 // Carrega o script oficial do Instagram uma única vez e processa os embeds da página
 function processInstagramEmbeds() {
   if (window.instgrm && window.instgrm.Embeds) {
@@ -358,7 +365,7 @@ function getSlugFromPath() {
       "@type": "CreativeWork",
       "name": p.nome,
       "description": p.descricao ? p.descricao.replace(/<[^>]*>/g,'').slice(0,200) : '',
-      "image": isInstagramUrl(p.imagem_url) ? '' : (p.imagem_url || ''),
+      "image": (isInstagramUrl(p.imagem_url) || isVideoUrl(p.imagem_url)) ? '' : (p.imagem_url || ''),
       "url": window.location.href,
       "creator": { "@type": "Organization", "name": "Leanttro Tecnologia", "url": "https://leanttro.com" }
     };
@@ -377,11 +384,15 @@ function getSlugFromPath() {
     // Breadcrumb
     document.getElementById('breadcrumbNome').textContent = p.nome;
 
-    // Imagem de destaque (ou vídeo do Instagram, se imagem_url for um link de post/reel)
-    if (isInstagramUrl(p.imagem_url)) {
+    // Imagem de destaque (vídeo próprio hospedado, vídeo do Instagram, ou imagem)
+    if (isVideoUrl(p.imagem_url)) {
+      const imgDest = document.getElementById('projetoImgDestaque');
+      imgDest.className = 'projeto-img-destaque projeto-img-destaque-video';
+      imgDest.innerHTML = `<video src="${p.imagem_url}" controls playsinline preload="metadata"></video>`;
+    } else if (isInstagramUrl(p.imagem_url)) {
       const imgDest = document.getElementById('projetoImgDestaque');
       imgDest.className = 'projeto-img-destaque projeto-img-destaque-ig';
-      imgDest.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${p.imagem_url}" data-instgrm-version="14" style="margin:0 auto;width:100%"></blockquote>`;
+      imgDest.innerHTML = `<blockquote class="instagram-media" data-instgrm-permalink="${p.imagem_url}" data-instgrm-version="14" style="margin:0 auto"></blockquote>`;
       processInstagramEmbeds();
     } else if (p.imagem_url) {
       const imgDest = document.getElementById('projetoImgDestaque');
@@ -401,7 +412,9 @@ function getSlugFromPath() {
       if (outros.length) {
         sidebarOutros.innerHTML = outros.map(o => {
           // Post do Instagram fica pequeno demais pra embedar na sidebar — mostra ícone de vídeo
-          const imgHtml = isInstagramUrl(o.imagem_url)
+          const imgHtml = isVideoUrl(o.imagem_url)
+            ? `<div class="sidebar-outro-img"><video src="${o.imagem_url}" muted playsinline preload="metadata" style="pointer-events:none"></video></div>`
+            : isInstagramUrl(o.imagem_url)
             ? `<div class="sidebar-outro-img"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg></div>`
             : o.imagem_url
               ? `<div class="sidebar-outro-img"><img src="${o.imagem_url}" alt="${o.nome}"></div>`
