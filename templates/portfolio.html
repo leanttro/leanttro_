@@ -188,6 +188,10 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 .proj-card-img img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s}
 .proj-card:hover .proj-card-img img{transform:scale(1.04)}
 .proj-card-img-placeholder{width:100%;height:100%;display:flex;align-items:center;justify-content:center;color:var(--primary);opacity:.5}
+/* Card com post do Instagram embedado (vídeo 9:16) — não mexe no restante do layout */
+.proj-card-img-ig{height:auto;aspect-ratio:9/16;background:#fafafa;position:relative}
+.proj-card-img-ig .instagram-media{margin:0 !important;min-width:0 !important;width:100% !important}
+.proj-card-img-ig iframe{width:100% !important}
 .proj-card-body{padding:20px 22px 16px;flex:1;display:flex;flex-direction:column;gap:8px}
 .proj-badge{display:inline-block;background:rgba(121,67,226,.08);color:var(--primary);font-size:.72rem;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.5px;align-self:flex-start}
 .proj-card-body h3{font-family:var(--display);font-size:1.05rem;font-weight:700;color:var(--text);line-height:1.35}
@@ -385,10 +389,37 @@ const filtrosCat = document.getElementById('filtrosCat');
 let allProjetos = [];
 let activeCat = '';
 
+// Detecta se imagem_url é na verdade um link de post/reel do Instagram
+function isInstagramUrl(url) {
+  return typeof url === 'string' && /instagram\.com\/(p|reel|tv)\//i.test(url);
+}
+
+// Carrega o script oficial do Instagram uma única vez e processa os embeds da página
+function processInstagramEmbeds() {
+  if (window.instgrm && window.instgrm.Embeds) {
+    window.instgrm.Embeds.process();
+    return;
+  }
+  if (document.getElementById('ig-embed-script')) return; // já está carregando
+  const s = document.createElement('script');
+  s.id = 'ig-embed-script';
+  s.async = true;
+  s.src = 'https://www.instagram.com/embed.js';
+  s.onload = () => { if (window.instgrm) window.instgrm.Embeds.process(); };
+  document.body.appendChild(s);
+}
+
 function renderCard(p) {
-  const img = p.imagem_url
-    ? `<div class="proj-card-img"><img src="${p.imagem_url}" alt="${p.nome}" loading="lazy"></div>`
-    : `<div class="proj-card-img"><div class="proj-card-img-placeholder"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div></div>`;
+  let img;
+  if (isInstagramUrl(p.imagem_url)) {
+    img = `<div class="proj-card-img proj-card-img-ig">
+      <blockquote class="instagram-media" data-instgrm-permalink="${p.imagem_url}" data-instgrm-version="14" style="margin:0;width:100%"></blockquote>
+    </div>`;
+  } else if (p.imagem_url) {
+    img = `<div class="proj-card-img"><img src="${p.imagem_url}" alt="${p.nome}" loading="lazy"></div>`;
+  } else {
+    img = `<div class="proj-card-img"><div class="proj-card-img-placeholder"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div></div>`;
+  }
   const desc = p.descricao ? p.descricao.replace(/<[^>]*>/g,'').slice(0,100) + (p.descricao.length > 100 ? '…' : '') : '';
   return `<a href="/portfolio/${p.slug}" class="proj-card">
     ${img}
@@ -422,6 +453,7 @@ function renderGrid() {
     return;
   }
   grid.innerHTML = filtered.map(renderCard).join('');
+  processInstagramEmbeds(); // ativa os widgets do Instagram recém-inseridos no grid
 }
 
 (async function() {
