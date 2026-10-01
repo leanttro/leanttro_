@@ -74,9 +74,7 @@ nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
 
 /* GRID */
 .section{padding:36px 0 72px}
-.prod-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:32px}
-@media(max-width:900px){.prod-grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:580px){.prod-grid{grid-template-columns:1fr}}
+.prod-grid{display:grid;grid-template-columns:1fr;gap:20px;margin-top:32px}
 
 /* CARD */
 .prod-card{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);overflow:hidden;transition:all .25s;display:flex;flex-direction:column;text-decoration:none;color:inherit}
@@ -217,9 +215,9 @@ footer{background:var(--dark);padding:32px 20px}
     </div>
 
     <div class="prod-grid" id="prodGrid">
-      <div class="skel-card"><div class="skeleton skel-img"></div><div class="skel-body"><div class="skeleton skel-badge"></div><div class="skeleton skel-title"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line-short"></div><div class="skeleton skel-preco"></div><div class="skeleton skel-btn"></div></div></div>
-      <div class="skel-card"><div class="skeleton skel-img"></div><div class="skel-body"><div class="skeleton skel-badge"></div><div class="skeleton skel-title"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line-short"></div><div class="skeleton skel-preco"></div><div class="skeleton skel-btn"></div></div></div>
-      <div class="skel-card"><div class="skeleton skel-img"></div><div class="skel-body"><div class="skeleton skel-badge"></div><div class="skeleton skel-title"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line-short"></div><div class="skeleton skel-preco"></div><div class="skeleton skel-btn"></div></div></div>
+      <div class="skel-card"><div class="skel-body"><div class="skeleton skel-badge"></div><div class="skeleton skel-title"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line-short"></div><div class="skeleton skel-preco"></div><div class="skeleton skel-btn"></div></div></div>
+      <div class="skel-card"><div class="skel-body"><div class="skeleton skel-badge"></div><div class="skeleton skel-title"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line-short"></div><div class="skeleton skel-preco"></div><div class="skeleton skel-btn"></div></div></div>
+      <div class="skel-card"><div class="skel-body"><div class="skeleton skel-badge"></div><div class="skeleton skel-title"></div><div class="skeleton skel-line"></div><div class="skeleton skel-line-short"></div><div class="skeleton skel-preco"></div><div class="skeleton skel-btn"></div></div></div>
     </div>
   </div>
 </section>
@@ -273,12 +271,8 @@ function formatPreco(v) {
 }
 
 function renderCard(p) {
-  const img = p.imagem_url
-    ? `<div class="prod-card-img"><img src="${p.imagem_url}" alt="${p.nome}" loading="lazy"></div>`
-    : `<div class="prod-card-img"><div class="prod-card-img-placeholder"><svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div></div>`;
   const desc = p.descricao ? p.descricao.replace(/<[^>]*>/g,'').slice(0,100) + (p.descricao.length > 100 ? '…' : '') : '';
   return `<a href="/loja/${p.slug}" class="prod-card">
-    ${img}
     <div class="prod-card-body">
       ${p.categoria ? `<span class="prod-badge">${p.categoria}</span>` : ''}
       <h3>${p.nome}</h3>
