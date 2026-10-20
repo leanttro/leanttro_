@@ -194,6 +194,22 @@ def editar_lead(id):
 def ads_txt():
     return Response("google.com, pub-7617881885143728, DIRECT, f08c47fec0942fa0\n", mimetype="text/plain")
 
+# ─── ROBOTS.TXT ───────────────────────────────────────────────────────────────
+@app.route("/robots.txt")
+def robots_txt():
+    base = os.environ.get("BASE_URL", "https://www.leanttro.com").rstrip("/")
+    txt = (
+        "User-agent: *\n"
+        "Allow: /\n"
+        "Disallow: /admin\n"
+        "Disallow: /api/\n"
+        "Disallow: /webhook/\n"
+        "Disallow: /pedidos\n"
+        "\n"
+        f"Sitemap: {base}/sitemap.xml\n"
+    )
+    return Response(txt, mimetype="text/plain")
+
 # ─── PÁGINAS ──────────────────────────────────────────────────────────────────
 @app.route("/negocio/<slug>")
 def pagina_negocio(slug):
@@ -699,7 +715,7 @@ def registrar_disparo():
 # ─── SITEMAP ──────────────────────────────────────────────────────────────────
 @app.route("/sitemap.xml", methods=["GET"])
 def sitemap():
-    BASE_URL = os.environ.get("BASE_URL", "https://www.leanttro.com.br").rstrip("/")
+    BASE_URL = os.environ.get("BASE_URL", "https://www.leanttro.com").rstrip("/")
     now = datetime.utcnow().strftime("%Y-%m-%d")
 
     urls = []
