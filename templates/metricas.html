@@ -163,31 +163,6 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 .ga-input-btn:hover{background:var(--accent);color:var(--dark)}
 .ga-input-note{color:rgba(255,255,255,.6);font-size:.75rem;margin-top:8px}
 
-/* PROMO BANNER */
-.promo-banner{background:var(--dark);border-radius:var(--radius);padding:0;margin-bottom:28px;overflow:hidden;display:none;}
-.promo-banner.visible{display:block}
-.promo-inner{display:grid;grid-template-columns:1fr 1fr;align-items:stretch;min-height:380px;}
-@media(max-width:700px){.promo-inner{grid-template-columns:1fr}}
-.promo-content{padding:36px 32px;display:flex;flex-direction:column;justify-content:center;gap:16px}
-.promo-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(121,67,226,.25);border:1px solid rgba(121,67,226,.4);color:#c4b5f5;padding:4px 14px;border-radius:20px;font-size:.75rem;font-weight:700;letter-spacing:.4px;width:fit-content}
-.promo-title{font-family:var(--display);font-size:1.6rem;font-weight:800;color:#fff;line-height:1.2}
-.promo-title span{color:var(--accent)}
-.promo-items{display:flex;flex-direction:column;gap:8px}
-.promo-item{display:flex;align-items:flex-start;gap:10px;font-size:.875rem;color:rgba(255,255,255,.85)}
-.promo-item-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
-.promo-item strong{color:#fff}
-.promo-price-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-top:4px}
-.promo-de{font-size:1rem;color:rgba(255,255,255,.4);text-decoration:line-through}
-.promo-por{font-family:var(--display);font-size:1.8rem;font-weight:800;color:#fff}
-.promo-prazo{font-size:.8rem;color:var(--accent);font-weight:600;background:rgba(0,229,160,.12);border:1px solid rgba(0,229,160,.3);padding:3px 10px;border-radius:99px}
-.promo-cta{display:inline-flex;align-items:center;gap:8px;background:var(--primary);color:#fff;padding:12px 24px;border-radius:8px;font-size:.9rem;font-weight:700;text-decoration:none;transition:all .2s;width:fit-content;}
-.promo-cta:hover{background:var(--primary-d);transform:translateY(-1px)}
-.promo-cta svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
-.promo-img-col{position:relative;overflow:hidden}
-@media(max-width:700px){.promo-img-col{min-height:220px}}
-.promo-img-col img{width:100%;height:100%;object-fit:cover;display:block;opacity:.9}
-.promo-img-overlay{position:absolute;inset:0;background:linear-gradient(90deg,var(--dark) 0%,transparent 40%)}
-@media(max-width:700px){.promo-img-overlay{background:linear-gradient(180deg,transparent 0%,var(--dark) 80%)}}
 
 /* MAIN */
 .main{max-width:1100px;margin:0 auto;padding:32px 20px 60px}
@@ -431,34 +406,6 @@ header{background:#fff;border-bottom:1px solid var(--border);padding:0 20px;posi
 
 <div class="main">
 
-  <!-- BANNER PROMOÇÃO -->
-  <div class="promo-banner" id="promo-banner">
-    <div class="promo-inner">
-      <div class="promo-content">
-        <div class="promo-badge">🎯 Promoção por tempo limitado</div>
-        <div class="promo-title">Seu negócio no <span>Google</span> em 48 horas</div>
-        <p style="color:rgba(255,255,255,.7);font-size:.875rem">Você construiu o produto ou serviço, mas o Google <strong style="color:#fff">NÃO sabe que ele existe.</strong> A Leanttro tem a solução:</p>
-        <div class="promo-items">
-          <div class="promo-item"><span class="promo-item-icon">📊</span><span><strong>Google Analytics 4</strong> — Configuração da conta e instalação da tag no código do site.</span></div>
-          <div class="promo-item"><span class="promo-item-icon">🔍</span><span><strong>Google Search Console</strong> — Verificação do site e indexação de páginas.</span></div>
-          <div class="promo-item"><span class="promo-item-icon">📍</span><span><strong>Google Business</strong> — Criação ou otimização do perfil da empresa.</span></div>
-        </div>
-        <div class="promo-price-row">
-          <span class="promo-de">De R$250,00</span>
-          <span class="promo-por">R$150,00</span>
-          <span class="promo-prazo">até dia 20/06</span>
-        </div>
-        <a href="https://wa.me/5511913324827?text=Oi%2C%20vi%20a%20promo%C3%A7%C3%A3o%20no%20diagn%C3%B3stico%20e%20quero%20colocar%20meu%20neg%C3%B3cio%20no%20Google!" class="promo-cta" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/></svg>
-          Quero meu negócio no Google agora!
-        </a>
-      </div>
-      <div class="promo-img-col">
-        <div class="promo-img-overlay"></div>
-        <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779243876/metricass_ktex0c.png" alt="Painel de métricas Leanttro" loading="lazy">
-      </div>
-    </div>
-  </div>
 
   <!-- GATE -->
   <div class="gate-overlay" id="gate-overlay">
@@ -770,11 +717,9 @@ document.getElementById('hero-ga-id').textContent = gaId || 'G-XXXXXXXXXX';
 
 if(isDemo){
   document.getElementById('ga-input-section').classList.add('visible');
-  document.getElementById('promo-banner').classList.add('visible');
   gaId = 'G-DEMO123';
 } else {
   document.getElementById('ga-input-section').classList.remove('visible');
-  document.getElementById('promo-banner').classList.remove('visible');
 }
 
 // Checa se voltou do OAuth com ?conectado=1
@@ -793,7 +738,6 @@ function aplicarGaId(){
   gaId = id;
   document.getElementById('hero-ga-id').textContent = gaId;
   document.getElementById('ga-input-section').classList.remove('visible');
-  document.getElementById('promo-banner').classList.remove('visible');
   toast('✅ Código aplicado: ' + gaId);
 }
 document.getElementById('ga-input-field').addEventListener('keydown', function(e){
@@ -1160,7 +1104,6 @@ function liberarPainel(){
 
   setTimeout(()=>{
     document.getElementById('gate-overlay').style.display = 'none';
-    document.getElementById('promo-banner').classList.remove('visible');
     const painel = document.getElementById('painel');
     painel.classList.add('liberado');
     renderDados();
