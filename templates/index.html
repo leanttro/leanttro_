@@ -314,6 +314,37 @@ a:focus-visible,summary:focus-visible{outline:3px solid #7943e2;outline-offset:2
 .rv{flex:0 0 84%;scroll-snap-align:start}
 .rv-nav{display:flex}
 }
+
+/* Projeto personalizado 3D (destaque final) */
+.case3d{margin-top:22px;display:grid;grid-template-columns:1.15fr .85fr;gap:0;overflow:hidden;border:0;border-radius:18px;background:linear-gradient(135deg,#120b24 0%,#2a1566 55%,#4a2aae 100%);color:#fff;box-shadow:0 22px 50px #4a2aae40}
+.case3d-img{position:relative;display:flex;align-items:center;justify-content:center;background:#0b0618;padding:18px}
+.case3d-img img{display:block;width:100%;height:auto;border-radius:12px;object-fit:contain}
+.case3d-badge{position:absolute;top:30px;left:30px;background:#fff;color:#4a2aae;font-weight:800;font-size:13px;padding:7px 14px;border-radius:999px;box-shadow:0 6px 18px #0006}
+.case3d-body{padding:36px 34px;display:flex;flex-direction:column;justify-content:center}
+.case3d-body h3{font-size:28px;letter-spacing:-1px;margin:0 0 10px;color:#fff}
+.case3d-body p{font-size:14.5px;line-height:1.6;color:#e4ddff;margin:0}
+.case3d-list{list-style:none;padding:0;margin:20px 0 24px;display:grid;gap:10px;font-size:13.5px;line-height:1.4;color:#fff}
+.case3d-list li{display:flex;gap:9px}.case3d-list li:before{content:"✓";color:#b79cf5;font-weight:800}
+.case3d .btn{background:#fff;color:#4a2aae;box-shadow:0 8px 24px #0005}
+.case3d .btn.line{background:transparent;color:#fff;border:1px solid #ffffff99;box-shadow:none}
+@media(max-width:900px){.case3d{grid-template-columns:1fr}.case3d-img{padding:14px}.case3d-badge{top:24px;left:24px}.case3d-body{padding:24px 20px}.case3d-body h3{font-size:24px}}
+
+/* Formulário de contato (alternativa ao WhatsApp) */
+.leadform{max-width:640px;margin:0 auto;padding:30px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 14px 36px #7943e21f}
+.leadform h3{font-size:24px;letter-spacing:-.8px;margin:0 0 6px;color:var(--ink)}
+.leadform .lf-sub{font-size:14px;line-height:1.5;color:var(--muted);margin:0 0 20px}
+.lf-row{display:grid;gap:14px;margin-bottom:14px}
+.lf-field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:var(--ink)}
+.lf-field input,.lf-field select{font:inherit;font-weight:500;font-size:15px;padding:13px 14px;border:1px solid #cfd6da;border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.lf-field input:focus,.lf-field select:focus{outline:2px solid #7943e2;outline-offset:1px;border-color:#7943e2}
+.lf-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.leadform .btn{width:100%;cursor:pointer;font-family:inherit}
+.leadform .btn[disabled]{opacity:.6;cursor:wait}
+.lf-msg{margin:14px 0 0;font-size:14px;line-height:1.5;min-height:20px}
+.lf-msg.ok{color:#1a7f4b;font-weight:700}.lf-msg.err{color:#b3261e;font-weight:700}
+.lf-alt{margin:14px 0 0;font-size:13px;color:var(--muted);text-align:center}
+.lf-alt a{color:#6532cf;font-weight:800;text-decoration:underline}
+@media(max-width:600px){.leadform{padding:22px 18px}}
 </style>
 </head>
 <body>
@@ -524,6 +555,47 @@ a:focus-visible,summary:focus-visible{outline:3px solid #7943e2;outline-offset:2
 </div>
 </article>
 </div>
+<article class="case3d">
+<div class="case3d-img">
+<span class="case3d-badge">Projeto personalizado em 3D</span>
+<img src="https://directus.leanttro.com/assets/1369c478-b8d9-4f60-8e79-109051fdc6b2?quality=80&format=webp" alt="Site em 3D da Creapes, produtora audiovisual" loading="lazy" decoding="async">
+</div>
+<div class="case3d-body">
+<h3>Creapes</h3>
+<p>Site da produtora audiovisual com experiência em 3D, criado do zero para a marca. Um projeto personalizado, para quem quer um site que ninguém tem igual.</p>
+<ul class="case3d-list"><li>Visual 3D feito sob medida</li><li>Design exclusivo, sem template</li><li>Valor sob orçamento, conforme o projeto</li></ul>
+<div class="case-actions">
+<a class="btn" href="https://www.creapes.com.br/" target="_blank" rel="noopener">Ver o site em 3D</a>
+<a class="btn line" data-wa="case-3d-creapes" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Vi%20o%20projeto%203D%20da%20Creapes%20e%20quero%20um%20site%20em%203D.">Quero um site em 3D</a>
+</div>
+</div>
+</article>
+</div>
+</section>
+
+<section id="contato" aria-labelledby="lfTitle">
+<div class="wrap">
+<div class="head"><p class="label">Orçamento</p>
+<h2 id="lfTitle">Prefere que <em>eu te chame?</em></h2>
+<p class="sub">Deixe seu nome e WhatsApp. Eu entro em contato para entender o que você precisa.</p></div>
+<form class="leadform" id="leadForm" novalidate>
+<div class="lf-row">
+<label class="lf-field">Seu nome<input type="text" name="nome" autocomplete="name" required maxlength="80" placeholder="Como posso te chamar?"></label>
+<label class="lf-field">WhatsApp com DDD<input type="tel" name="telefone" autocomplete="tel" inputmode="tel" required maxlength="20" placeholder="(11) 91234-5678"></label>
+<label class="lf-field">O que você precisa?
+<select name="interesse">
+<option value="Site de 1 página">Site de 1 página (landing page)</option>
+<option value="Site profissional">Site profissional (até 5 páginas)</option>
+<option value="Site em 3D">Site em 3D, projeto personalizado</option>
+<option value="Sistema sob medida">Sistema sob medida</option>
+<option value="Ainda não sei">Ainda não sei, quero ajuda</option>
+</select></label>
+</div>
+<input class="lf-hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+<button class="btn" type="submit" id="lfBtn">Quero receber meu orçamento</button>
+<p class="lf-msg" id="lfMsg" role="status" aria-live="polite"></p>
+<p class="lf-alt">Prefere conversar agora? <a data-wa="form-alt" href="https://wa.me/5511913324827?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento.">Chamar no WhatsApp</a></p>
+</form>
 </div>
 </section>
 
@@ -600,6 +672,36 @@ s.addEventListener("scroll",u,{passive:true});window.addEventListener("resize",u
 function up(){var m=t.scrollWidth-t.clientWidth,r=m>0?t.scrollLeft/m:0,w=f.parentNode.clientWidth,fw=f.offsetWidth;f.style.marginLeft=Math.max(0,(w-fw)*r)+"px";p.disabled=t.scrollLeft<=2;n.disabled=t.scrollLeft>=m-2}
 function go(d){var c=t.querySelector(".rv");t.scrollBy({left:d*(c.offsetWidth+16),behavior:"smooth"})}
 p.onclick=function(){go(-1)};n.onclick=function(){go(1)};t.addEventListener("scroll",up,{passive:true});window.addEventListener("resize",up);up();
+})();
+</script>
+<script>
+(function(){
+  var LEADS_URL='/leads'; // se a landing estiver em outro domínio, troque pela URL completa do app.py, ex.: https://SEU-APP.com/leads
+  var f=document.getElementById('leadForm'); if(!f) return;
+  var btn=document.getElementById('lfBtn'), msg=document.getElementById('lfMsg');
+  function say(t,c){msg.textContent=t;msg.className='lf-msg '+(c||'')}
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(f.site.value) return; // honeypot: robô
+    var nome=f.nome.value.trim(), tel=f.telefone.value.replace(/\D/g,'');
+    if(nome.length<2){say('Digite seu nome.','err');f.nome.focus();return}
+    if(tel.length<10||tel.length>13){say('Digite o WhatsApp com DDD, por exemplo (11) 91234-5678.','err');f.telefone.focus();return}
+    btn.disabled=true; say('Enviando...');
+    var gclid=/[?&]gclid=/.test(location.search);
+    fetch(LEADS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
+      nome:nome, telefone:f.telefone.value.trim(), email:'', empresa:'',
+      origem:gclid?'google-ads':'landing', interesse:f.interesse.value
+    })}).then(function(r){
+      if(!r.ok) throw new Error('http '+r.status);
+      try{
+        gtag('event','form_lead',{event_category:'lead',event_label:f.interesse.value});
+        if(typeof ADS_CONVERSION!=='undefined'&&ADS_CONVERSION){gtag('event','conversion',{send_to:ADS_CONVERSION,value:1.0,currency:'BRL'})}
+      }catch(err){}
+      f.reset(); say('Recebi seu contato! Vou te responder pelo WhatsApp.','ok');
+    }).catch(function(){
+      say('Não consegui enviar agora. Chame direto no WhatsApp, é rápido.','err');
+    }).then(function(){btn.disabled=false});
+  });
 })();
 </script>
 </body>
