@@ -676,10 +676,32 @@ p.onclick=function(){go(-1)};n.onclick=function(){go(1)};t.addEventListener("scr
 </script>
 <script>
 (function(){
-  var LEADS_URL='/leads'; // se a landing estiver em outro domínio, troque pela URL completa do app.py, ex.: https://SEU-APP.com/leads
+  var LEADS_URL='/leads'; // banco do app.py (opcional: se a landing estiver em outro domínio, use a URL completa)
+  var EMAIL_AVISO='leanttro@gmail.com'; // e-mail do FormSubmit; depois de ativar, troque pelo código aleatório que ele envia
   var f=document.getElementById('leadForm'); if(!f) return;
   var btn=document.getElementById('lfBtn'), msg=document.getElementById('lfMsg');
   function say(t,c){msg.textContent=t;msg.className='lf-msg '+(c||'')}
+
+  // Aviso por e-mail (FormSubmit), dispara em paralelo ao envio para o banco
+  function avisoEmail(d){
+    return fetch('https://formsubmit.co/ajax/'+EMAIL_AVISO,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({
+        _subject:'Novo lead pelo site Leanttro',
+        _template:'table',
+        _captcha:'false',
+        Formulario:'Landing page (Google Ads)',
+        Nome:d.nome, WhatsApp:d.telefone, Interesse:d.interesse, Origem:d.origem
+      })
+    }).then(function(r){return r.ok}).catch(function(){return false});
+  }
+  function salvaBanco(d){
+    return fetch(LEADS_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({nome:d.nome,telefone:d.telefone,email:'',empresa:'',origem:d.origem,interesse:d.interesse})
+    }).then(function(r){return r.ok}).catch(function(){return false});
+  }
+
   f.addEventListener('submit',function(e){
     e.preventDefault();
     if(f.site.value) return; // honeypot: robô
@@ -687,20 +709,20 @@ p.onclick=function(){go(-1)};n.onclick=function(){go(1)};t.addEventListener("scr
     if(nome.length<2){say('Digite seu nome.','err');f.nome.focus();return}
     if(tel.length<10||tel.length>13){say('Digite o WhatsApp com DDD, por exemplo (11) 91234-5678.','err');f.telefone.focus();return}
     btn.disabled=true; say('Enviando...');
-    var gclid=/[?&]gclid=/.test(location.search);
-    fetch(LEADS_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({
-      nome:nome, telefone:f.telefone.value.trim(), email:'', empresa:'',
-      origem:gclid?'google-ads':'landing', interesse:f.interesse.value
-    })}).then(function(r){
-      if(!r.ok) throw new Error('http '+r.status);
-      try{
-        gtag('event','form_lead',{event_category:'lead',event_label:f.interesse.value});
-        if(typeof ADS_CONVERSION!=='undefined'&&ADS_CONVERSION){gtag('event','conversion',{send_to:ADS_CONVERSION,value:1.0,currency:'BRL'})}
-      }catch(err){}
-      f.reset(); say('Recebi seu contato! Vou te responder pelo WhatsApp.','ok');
-    }).catch(function(){
-      say('Não consegui enviar agora. Chame direto no WhatsApp, é rápido.','err');
-    }).then(function(){btn.disabled=false});
+    var d={nome:nome, telefone:f.telefone.value.trim(), interesse:f.interesse.value,
+           origem:/[?&]gclid=/.test(location.search)?'google-ads':'landing'};
+    Promise.all([salvaBanco(d),avisoEmail(d)]).then(function(r){
+      if(r[0]||r[1]){ // deu certo se pelo menos um dos dois recebeu
+        try{
+          gtag('event','form_lead',{event_category:'lead',event_label:d.interesse});
+          if(typeof ADS_CONVERSION!=='undefined'&&ADS_CONVERSION){gtag('event','conversion',{send_to:ADS_CONVERSION,value:1.0,currency:'BRL'})}
+        }catch(err){}
+        f.reset(); say('Recebi seu contato! Vou te responder pelo WhatsApp.','ok');
+      }else{
+        say('Não consegui enviar agora. Chame direto no WhatsApp, é rápido.','err');
+      }
+      btn.disabled=false;
+    });
   });
 })();
 </script>
