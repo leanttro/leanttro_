@@ -231,6 +231,27 @@ select.filter-sel{
   display:none;align-items:center;gap:12px;flex-wrap:wrap;
 }
 .bulk-bar.show{display:flex}
+.ms{position:relative}
+.ms-btn{min-width:170px;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ms-btn.active{border-color:var(--accent);color:var(--accent)}
+.ms-panel{display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:60;width:300px;
+  background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);
+  box-shadow:0 12px 32px rgba(0,0,0,.55);padding:8px}
+.ms.open .ms-panel{display:block}
+.ms-search{width:100%;padding:7px 10px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);
+  color:var(--text);font-family:var(--sans);font-size:.78rem;outline:none;margin-bottom:6px}
+.ms-actions{display:flex;gap:6px;margin-bottom:6px}
+.ms-actions button{flex:1;padding:5px 8px;font-size:.7rem;background:transparent;border:1px solid var(--border2);
+  border-radius:6px;color:var(--muted2);cursor:pointer;font-family:var(--sans)}
+.ms-actions button:hover{border-color:var(--accent);color:var(--accent)}
+.ms-list{max-height:260px;overflow-y:auto}
+.ms-item{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:6px;font-size:.78rem;cursor:pointer;color:var(--text)}
+.ms-item:hover{background:rgba(124,109,250,.12)}
+.ms-item input{accent-color:var(--accent);cursor:pointer}
+.ms-item .ms-n{margin-left:auto;color:var(--muted);font-family:var(--mono);font-size:.68rem}
+.ms-empty{padding:12px;text-align:center;color:var(--muted);font-size:.75rem}
+tr.row-inativo td{opacity:.45}
+tr.row-inativo td:last-child,tr.row-inativo td:first-child{opacity:1}
 .bulk-count{font-size:.8rem;font-weight:600;color:var(--accent)}
 table{width:100%;border-collapse:collapse}
 th{
@@ -595,24 +616,42 @@ input[type=checkbox].row-check{
           <h3>Negócios — Hub Jabaquara</h3>
           <div class="table-actions">
             <input class="search-input" id="search-negocios" placeholder="🔍 Buscar nome ou bairro..." oninput="filterTable('negocios')">
-            <select class="filter-sel" id="filter-cat-negocio" onchange="filterTable('negocios')">
-              <option value="">Todas categorias</option>
-            </select>
-            <select class="filter-sel" id="filter-bairro-negocio" onchange="filterTable('negocios')">
-              <option value="">Todos bairros</option>
-            </select>
+            <div class="ms" id="ms-cat">
+              <button type="button" class="filter-sel ms-btn" onclick="msToggleOpen('cat')"><span id="ms-cat-label">Todas categorias</span><span>▾</span></button>
+              <div class="ms-panel">
+                <input class="ms-search" placeholder="Buscar categoria..." oninput="msRender('cat')">
+                <div class="ms-actions"><button type="button" onclick="msAll('cat')">✓ Selecionar todas</button><button type="button" onclick="msClear('cat')">Limpar</button></div>
+                <div class="ms-list"></div>
+              </div>
+            </div>
+            <div class="ms" id="ms-bairro">
+              <button type="button" class="filter-sel ms-btn" onclick="msToggleOpen('bairro')"><span id="ms-bairro-label">Todos bairros</span><span>▾</span></button>
+              <div class="ms-panel">
+                <input class="ms-search" placeholder="Buscar bairro..." oninput="msRender('bairro')">
+                <div class="ms-actions"><button type="button" onclick="msAll('bairro')">✓ Selecionar todos</button><button type="button" onclick="msClear('bairro')">Limpar</button></div>
+                <div class="ms-list"></div>
+              </div>
+            </div>
             <select class="filter-sel" id="filter-plano-negocio" onchange="filterTable('negocios')">
               <option value="">Todos planos</option>
               <option value="gratuito">Gratuito</option>
               <option value="destaque">Destaque</option>
               <option value="premium">Premium</option>
             </select>
+            <select class="filter-sel" id="filter-ativo-negocio" onchange="filterTable('negocios')">
+              <option value="">Ativos e inativos</option>
+              <option value="1">Só ativos</option>
+              <option value="0">Só inativos</option>
+            </select>
             <button class="btn-primary" onclick="openModal('negocio')">+ Novo</button>
           </div>
         </div>
         <div class="bulk-bar" id="bulk-negocios">
           <span class="bulk-count" id="bulk-negocios-count">0 selecionados</span>
-          <button class="btn-danger" onclick="bulkDeleteConfirm('negocios')">🗑 Desativar Selecionados</button>
+          <button class="btn-primary" onclick="bulkSetAtivo(true)">✓ Ativar selecionados</button>
+          <button class="btn-secondary" onclick="bulkSetAtivo(false)">⏸ Desativar selecionados</button>
+          <button class="btn-secondary" onclick="ativarSoSelecionados()">★ Ativar só os selecionados (desativar o resto)</button>
+          <button class="btn-danger" onclick="bulkDeleteConfirm('negocios')">🗑 Excluir selecionados</button>
           <button class="btn-secondary" onclick="deselectAll('negocios')">Cancelar</button>
         </div>
         <table>
@@ -1105,14 +1144,16 @@ function filterTable(type) {
   }
   if (type === 'negocios') {
     const q = document.getElementById('search-negocios').value.toLowerCase();
-    const cat = document.getElementById('filter-cat-negocio').value;
-    const bairro = document.getElementById('filter-bairro-negocio').value;
+    const cats = _ms.cat.sel;
+    const bairros = _ms.bairro.sel;
     const plano = document.getElementById('filter-plano-negocio').value;
+    const ativoF = document.getElementById('filter-ativo-negocio').value;
     const f = _negocios.filter(n =>
       (!q || (n.nome||'').toLowerCase().includes(q) || (n.bairro||'').toLowerCase().includes(q)) &&
-      (!cat || String(n.categoria_id) === cat) &&
-      (!bairro || (n.bairro||'').toLowerCase() === bairro.toLowerCase()) &&
-      (!plano || n.plano === plano)
+      (cats.size === 0 || cats.has(String(n.categoria_id))) &&
+      (bairros.size === 0 || bairros.has((n.bairro||'').trim().toLowerCase())) &&
+      (!plano || n.plano === plano) &&
+      (!ativoF || (ativoF === '1') === !!n.ativo)
     );
     renderNegocios(f);
   }
@@ -1303,6 +1344,16 @@ function toggleAll(type, checked) {
   const sets = { produtos: _selectedProdutos, leads: _selectedLeads, negocios: _selectedNegocios };
   const s = sets[type];
   if (!s) return;
+  if (type === 'negocios') {
+    // Marca/desmarca só as linhas visíveis (filtradas), preservando o resto da seleção
+    document.querySelectorAll(`[data-type="negocios"]`).forEach(chk => {
+      const id = parseInt(chk.dataset.id);
+      chk.checked = checked;
+      checked ? s.add(id) : s.delete(id);
+    });
+    updateBulkBar(type);
+    return;
+  }
   s.clear();
   // Seleciona apenas os IDs visíveis na tabela (filtrados), não toda a lista
   if (checked) {
@@ -1360,6 +1411,116 @@ function bulkDeleteConfirm(type) {
   );
 }
 
+// ── MULTI-SELECT (filtros categoria/bairro) ──
+const _ms = { cat: { opts: [], sel: new Set() }, bairro: { opts: [], sel: new Set() } };
+const _msText = { cat: ['Todas categorias', 'categoria', 'categorias'], bairro: ['Todos bairros', 'bairro', 'bairros'] };
+const _esc = t => String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+
+function msSetOptions(key, opts) {
+  _ms[key].opts = opts;
+  const valid = new Set(opts.map(o => o.value));
+  _ms[key].sel = new Set([..._ms[key].sel].filter(v => valid.has(v)));
+  msRender(key);
+}
+function msRender(key) {
+  const root = document.getElementById('ms-' + key);
+  if (!root) return;
+  const q = root.querySelector('.ms-search').value.trim().toLowerCase();
+  const st = _ms[key];
+  const html = st.opts.map((o, i) => ({ o, i }))
+    .filter(x => !q || x.o.label.toLowerCase().includes(q))
+    .map(x => `<label class="ms-item"><input type="checkbox" ${st.sel.has(x.o.value) ? 'checked' : ''} onchange="msToggleItem('${key}',${x.i},this.checked)"><span>${_esc(x.o.label)}</span><span class="ms-n">${x.o.count}</span></label>`)
+    .join('');
+  root.querySelector('.ms-list').innerHTML = html || '<div class="ms-empty">Nada encontrado</div>';
+  msLabel(key);
+}
+function msLabel(key) {
+  const st = _ms[key], t = _msText[key];
+  const lbl = document.getElementById('ms-' + key + '-label');
+  const n = st.sel.size;
+  if (n === 0) lbl.textContent = t[0];
+  else if (n === 1) lbl.textContent = st.opts.find(o => st.sel.has(o.value))?.label || ('1 ' + t[1]);
+  else lbl.textContent = n + ' ' + t[2];
+  document.querySelector('#ms-' + key + ' .ms-btn').classList.toggle('active', n > 0);
+}
+function msToggleOpen(key) {
+  const root = document.getElementById('ms-' + key);
+  const wasOpen = root.classList.contains('open');
+  document.querySelectorAll('.ms.open').forEach(e => e.classList.remove('open'));
+  if (!wasOpen) { root.classList.add('open'); root.querySelector('.ms-search').focus(); }
+}
+function msToggleItem(key, i, checked) {
+  const v = _ms[key].opts[i].value;
+  checked ? _ms[key].sel.add(v) : _ms[key].sel.delete(v);
+  msLabel(key);
+  filterTable('negocios');
+}
+function msAll(key) {
+  // Seleciona todas as opções visíveis na busca atual
+  const root = document.getElementById('ms-' + key);
+  const q = root.querySelector('.ms-search').value.trim().toLowerCase();
+  _ms[key].opts.filter(o => !q || o.label.toLowerCase().includes(q)).forEach(o => _ms[key].sel.add(o.value));
+  msRender(key);
+  filterTable('negocios');
+}
+function msClear(key) {
+  _ms[key].sel.clear();
+  msRender(key);
+  filterTable('negocios');
+}
+document.addEventListener('click', e => {
+  if (!e.target.closest('.ms')) document.querySelectorAll('.ms.open').forEach(x => x.classList.remove('open'));
+});
+
+// ── ATIVAR / DESATIVAR NEGÓCIOS (sem excluir) ──
+function negocioBody(n, ativo) {
+  return {
+    categoria_id: n.categoria_id, nome: n.nome, slug: n.slug,
+    bairro: n.bairro ?? '', cidade: n.cidade ?? '', endereco: n.endereco ?? '',
+    lat: n.lat ?? null, lng: n.lng ?? null,
+    telefone: n.telefone ?? '', whatsapp: n.whatsapp ?? '',
+    site_url: n.site_url ?? '', foto_url: n.foto_url ?? '', descricao: n.descricao ?? '',
+    plano: n.plano || 'gratuito', destaque: !!n.destaque, ativo: !!ativo,
+  };
+}
+async function setAtivoNegocios(list, ativo) {
+  const todo = list.filter(n => !!n.ativo !== !!ativo);   // só quem realmente muda
+  const BATCH = 8;
+  for (let i = 0; i < todo.length; i += BATCH) {
+    toast(`${ativo ? 'Ativando' : 'Desativando'}... ${Math.min(i + BATCH, todo.length)}/${todo.length}`, 'warn');
+    await Promise.all(todo.slice(i, i + BATCH).map(n =>
+      api('PUT', '/admin/hub/negocios/' + n.id, negocioBody(n, ativo)).catch(() => null)));
+  }
+  return todo.length;
+}
+async function bulkSetAtivo(ativo) {
+  const ids = _selectedNegocios;
+  if (ids.size === 0) return;
+  const list = _negocios.filter(n => ids.has(n.id));
+  const qtd = await setAtivoNegocios(list, ativo);
+  await loadNegocios();
+  const falhas = list.filter(n => !!_negocios.find(x => x.id === n.id)?.ativo !== ativo).length;
+  if (falhas) toast(`${qtd - falhas} alterados, ${falhas} falharam`, 'error');
+  else toast(`${qtd} negócio(s) ${ativo ? 'ativado(s)' : 'desativado(s)'}!`, 'success');
+}
+async function ativarSoSelecionados() {
+  const ids = _selectedNegocios;
+  if (ids.size === 0) return;
+  const outros = _negocios.filter(n => !ids.has(n.id));
+  if (!confirm(`Ativar os ${ids.size} selecionados e DESATIVAR os outros ${outros.length} negócios (de todas as categorias/bairros)?\n\nNada será excluído.`)) return;
+  await setAtivoNegocios(_negocios.filter(n => ids.has(n.id)), true);
+  await setAtivoNegocios(outros, false);
+  await loadNegocios();
+  toast('Pronto! Só os selecionados ficaram ativos.', 'success');
+}
+async function toggleNegocioAtivo(id) {
+  const n = _negocios.find(x => x.id === id);
+  if (!n) return;
+  await api('PUT', '/admin/hub/negocios/' + id, negocioBody(n, !n.ativo)).catch(() => null);
+  await loadNegocios();
+  toast(n.ativo ? 'Negócio desativado' : 'Negócio ativado', 'success');
+}
+
 // ── HUB ──
 let _negocios = [];
 let _selectedNegocios = new Set();
@@ -1369,30 +1530,35 @@ async function loadCategorias() {
   const sel = document.getElementById('mn-categoria');
   if (sel) sel.innerHTML = categorias.map(c => `<option value="${c.id}">${c.nome}</option>`).join('');
   // Popula filtro de categoria em negócios
-  const filtCat = document.getElementById('filter-cat-negocio');
-  if (filtCat) {
-    filtCat.innerHTML = '<option value="">Todas categorias</option>' +
-      categorias.map(c => `<option value="${c.id}">${c.nome}</option>`).join('');
-  }
+  const catCount = {};
+  _negocios.forEach(n => { catCount[n.categoria_id] = (catCount[n.categoria_id]||0) + 1; });
+  msSetOptions('cat', categorias.map(c => ({ value: String(c.id), label: c.nome, count: catCount[c.id]||0 })));
 }
 
 async function loadNegocios() {
   _negocios = await api('GET', '/hub/negocios');
   _selectedNegocios.clear();
   // Popula filtro de bairros dinamicamente
-  const bairros = [...new Set(_negocios.map(n => n.bairro).filter(Boolean))].sort();
-  const filtBairro = document.getElementById('filter-bairro-negocio');
-  if (filtBairro) {
-    filtBairro.innerHTML = '<option value="">Todos bairros</option>' +
-      bairros.map(b => `<option value="${b}">${b}</option>`).join('');
-  }
-  renderNegocios(_negocios);
+  const bMap = {};
+  _negocios.forEach(n => {
+    const b = (n.bairro||'').trim();
+    if (!b) return;
+    const k = b.toLowerCase();
+    if (!bMap[k]) bMap[k] = { value: k, label: b, count: 0 };
+    bMap[k].count++;
+  });
+  msSetOptions('bairro', Object.values(bMap).sort((a,b) => a.label.localeCompare(b.label, 'pt-BR')));
+  // Atualiza contagem das categorias também
+  const catCount = {};
+  _negocios.forEach(n => { catCount[n.categoria_id] = (catCount[n.categoria_id]||0) + 1; });
+  msSetOptions('cat', (categorias||[]).map(c => ({ value: String(c.id), label: c.nome, count: catCount[c.id]||0 })));
+  filterTable('negocios');
 }
 
 function renderNegocios(list) {
   document.getElementById('tb-negocios').innerHTML = list.map(n => `
-    <tr>
-      <td><input type="checkbox" class="row-check" data-id="${n.id}" data-type="negocios" onchange="toggleRow('negocios',${n.id},this.checked)"></td>
+    <tr class="${n.ativo ? '' : 'row-inativo'}">
+      <td><input type="checkbox" class="row-check" data-id="${n.id}" data-type="negocios" ${_selectedNegocios.has(n.id) ? 'checked' : ''} onchange="toggleRow('negocios',${n.id},this.checked)"></td>
       <td>${n.nome}</td>
       <td>${n.categoria_nome || '—'}</td>
       <td>${n.bairro || '—'}</td>
@@ -1402,9 +1568,13 @@ function renderNegocios(list) {
       <td>${n.ativo ? '<span style="color:var(--accent2)">✓</span>' : '<span style="color:var(--danger)">✗</span>'}</td>
       <td>
         <button class="action-btn" onclick='editNegocio(${JSON.stringify(n)})'>Editar</button>
+        <button class="action-btn ${n.ativo ? '' : 'success'}" onclick="toggleNegocioAtivo(${n.id})">${n.ativo ? 'Desativar' : 'Ativar'}</button>
         <button class="action-btn danger" onclick="quickDelete('negocio',${n.id})">Excluir</button>
       </td>
     </tr>`).join('') || emptyRow(9);
+  const allChk = document.getElementById('chk-all-negocios');
+  if (allChk) allChk.checked = list.length > 0 && list.every(n => _selectedNegocios.has(n.id));
+  updateBulkBar('negocios');
 }
 
 function editNegocio(n) {
