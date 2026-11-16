@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MNBQCEXP3R"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-MNBQCEXP3R');
+</script>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7617881885143728"
      crossorigin="anonymous"></script>
 <meta charset="UTF-8">
@@ -18,7 +27,7 @@
 <link rel="shortcut icon" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
 <meta name="msapplication-TileImage" content="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
 <meta name="msapplication-TileColor" content="#7943e2">
-<link rel="canonical" id="canonical" href="https://www.leanttro.com/blog">
+<link rel="canonical" id="canonical" href="https://www.leanttro.com/conteudo">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Leanttro Tecnologia">
 <meta property="og:title" id="og-title" content="">
@@ -34,771 +43,401 @@
 <script id="json-ld" type="application/ld+json">{}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
-:root{
-  --primary:#7943e2;--primary-d:#5c2ec4;--accent:#00e5a0;
-  --dark:#0a0a0f;--text:#1a1a2e;--muted:#6b6b80;
-  --border:#e4e4f0;--bg:#ffffff;--bg2:#f8f8fc;
-  --radius:12px;--sans:'Inter',sans-serif;--display:'Montserrat',sans-serif;
-  --shadow:0 4px 24px rgba(108,99,255,0.10);--shadow-md:0 8px 32px rgba(108,99,255,0.16);
-  --max-prose:740px;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
-.container{max-width:1200px;margin:0 auto;padding:0 20px}
-a{text-decoration:none;color:inherit}
-img{max-width:100%;display:block}
+:root{--purple:#7028ef;--purple2:#8b4cff;--deep:#1c0b3d;--ink:#19142e;--muted:#6d6680;--line:#e8def9;--pale:#f7f3ff;--max:1160px;--prose:760px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#fff;color:var(--ink);font-family:"DM Sans",Arial,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}a{color:inherit;text-decoration:none}img{max-width:100%}[hidden]{display:none!important}.container{width:min(var(--max),calc(100% - 64px));margin:auto}
 
-/* ── HEADER ── */
-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 20px}
-.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
-.logo img{height:38px;width:auto}
-nav.desktop-nav ul{list-style:none;display:flex;gap:4px}
-nav.desktop-nav ul li a{padding:8px 14px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--muted);transition:all .15s;white-space:nowrap}
-nav.desktop-nav ul li a:hover{color:var(--primary);background:rgba(108,99,255,.07)}
-nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
-.header-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.btn-wpp-header{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:9px 18px;border-radius:8px;font-size:.875rem;font-weight:600;transition:all .2s;white-space:nowrap}
-.btn-wpp-header:hover{background:#1da850;transform:translateY(-1px)}
-.btn-wpp-header svg{width:17px;height:17px;flex-shrink:0}
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text)}
-.hamburger svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2}
-.mobile-nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;justify-content:center;align-items:center;opacity:0;transition:opacity .25s}
-.mobile-nav-overlay.active{display:flex;opacity:1}
-.mobile-nav-overlay ul{list-style:none;text-align:center}
-.mobile-nav-overlay ul li{margin:18px 0}
-.mobile-nav-overlay ul li a{color:#fff;font-family:var(--display);font-size:1.8rem;font-weight:700}
-.mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
+/* ── CABEÇALHO PADRÃO ── */
+header.sh{height:auto;position:relative;z-index:30;width:100%;background:#7943e2;color:#fff;box-shadow:0 2px 14px #0002}
+.sh-wrap{width:min(1180px,calc(100% - 64px));margin:auto;height:80px;display:flex;align-items:center;gap:36px}
+.sh-logo img{display:block;height:40px;width:auto;filter:brightness(0) invert(1)}
+.sh-menu{display:flex;gap:28px;margin-left:auto;font-size:14px;font-weight:600;align-items:center}
+.sh-menu a{color:#fff}.sh-menu a:hover,.sh-menu a.active{color:#e7dcff}
+.sh-wa{background:#071421;color:#fff;font-weight:800;font-size:13px;padding:11px 18px;border-radius:22px;white-space:nowrap}
+.sh-toggle{display:none;background:none;border:1px solid #ffffff70;color:#fff;border-radius:10px;padding:8px;cursor:pointer}
+@media(max-width:900px){.sh-wrap{gap:12px;height:68px}.sh-logo img{height:34px}.sh-wa{margin-left:auto}.sh-toggle{display:block}
+.sh-menu{display:none;position:absolute;top:100%;left:0;right:0;margin:0;background:#7943e2;padding:20px 24px;flex-direction:column;align-items:flex-start;gap:20px;border-top:1px solid #ffffff30;box-shadow:0 10px 20px #0003}.sh-menu.open{display:flex}}
+@media(max-width:680px){.sh-wrap{width:calc(100% - 38px)}}
 
-/* ── BREADCRUMB ── */
-.breadcrumb{padding:18px 0 0;font-size:.82rem;color:var(--muted)}
-.breadcrumb a{color:var(--muted);transition:color .15s}
-.breadcrumb a:hover{color:var(--primary)}
-.breadcrumb span{margin:0 6px;opacity:.5}
+/* ── FAIXA DE PROPAGANDA (topo) ── */
+.notice{background:linear-gradient(90deg,#7c39ee,#6330d4);color:white;text-align:center;padding:12px 16px;font-size:12px;font-weight:700}.notice-inner{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap}.notice a{background:#170b2b;color:white;padding:8px 15px;border-radius:25px;font-size:11px;font-weight:800;white-space:nowrap}
 
 /* ── HERO DO POST ── */
-.post-hero{
-  background:var(--primary);position:relative;overflow:hidden;
-  padding:56px 20px 0;
-}
-.post-hero::before{
-  content:'';position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-}
-.post-hero-inner{position:relative;z-index:1;max-width:var(--max-prose);margin:0 auto;padding-bottom:52px}
-.post-hero-meta{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:16px}
-.post-hero-cat{display:inline-block;background:rgba(255,255,255,.2);color:#fff;font-size:.72rem;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.05em}
-.post-hero-date{font-size:.8rem;color:rgba(255,255,255,.65)}
-.post-hero h1{font-family:var(--display);font-size:2.4rem;font-weight:800;color:#fff;line-height:1.15;letter-spacing:-.5px;margin-bottom:16px}
-.post-hero-resumo{font-size:1.05rem;color:rgba(255,255,255,.8);line-height:1.65;max-width:600px}
-.post-hero-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}
-.post-hero-tag{font-size:.72rem;padding:3px 10px;border-radius:12px;background:rgba(255,255,255,.12);color:rgba(255,255,255,.8);font-weight:600}
-.hero-wave{display:block;width:100%;margin-top:-5px;line-height:0;position:relative;z-index:2}
-.hero-wave svg{display:block;width:100%}
+.profile-hero{background:linear-gradient(110deg,#eee9ff 0%,#e6edff 52%,#e3f5f4 100%);position:relative;overflow:hidden}.profile-hero:after{content:"";position:absolute;right:-60px;top:-100px;width:360px;height:430px;border:2px solid #fff8;border-radius:90px;transform:rotate(35deg);box-shadow:0 0 0 45px #fff2,0 0 0 90px #fff2}
+.post-hero{position:relative;z-index:1;padding:46px 0 44px;max-width:860px}
+.post-meta{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:14px}.category{display:inline-flex;background:#7938e7;color:#fff;border-radius:20px;padding:6px 13px;font-size:10px;font-weight:900;text-transform:uppercase}.post-date{font-size:12px;color:#625b76}
+.post-hero h1{font:900 clamp(28px,4vw,42px)/1.1 Manrope,sans-serif;letter-spacing:-1.3px;margin:0 0 14px}
+.post-resumo{font-size:16px;line-height:1.6;color:#33274e;margin:0;max-width:680px}
+.post-tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:18px}.post-tag{font-size:11px;padding:4px 11px;border-radius:14px;background:#fff9;color:#5a2fc2;font-weight:700;border:1px solid #d9c9fb}
+.crumbs{padding:11px 0;color:#766d8b;font-size:11px}.crumbs a{color:#6d35d9}
 
-/* ── IMAGEM DESTAQUE ── */
-.post-cover{max-width:var(--max-prose);margin:-32px auto 0;padding:0 20px;position:relative;z-index:3}
-.post-cover img{width:100%;border-radius:var(--radius);box-shadow:var(--shadow-md);max-height:440px;object-fit:cover}
+/* ── CAPA ── */
+.post-cover{margin:26px 0 0}.post-cover img{width:100%;max-height:440px;object-fit:cover;border-radius:14px;box-shadow:0 12px 30px #39136d1f;display:block}
 
-/* ── LAYOUT PRINCIPAL ── */
-.post-layout{
-  display:grid;
-  grid-template-columns:1fr minmax(0,var(--max-prose)) 280px 1fr;
-  gap:0;
-  padding:48px 0 80px;
-}
-.post-main{grid-column:2;padding-right:48px}
-.post-sidebar{grid-column:3;padding-top:4px}
+/* ── LAYOUT ── */
+.post-layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:36px;align-items:start;padding:34px 0 20px}
+.post-main{min-width:0;max-width:var(--prose)}
+.post-sidebar{display:grid;gap:17px;position:sticky;top:20px}
 
-/* ── CONTEÚDO PROSA ── */
-.post-content{font-size:1.02rem;line-height:1.8;color:var(--text)}
-.post-content h2{font-family:var(--display);font-size:1.55rem;font-weight:800;color:var(--text);margin:2.4em 0 .7em;letter-spacing:-.3px;line-height:1.2}
-.post-content h3{font-family:var(--display);font-size:1.2rem;font-weight:700;color:var(--text);margin:2em 0 .6em}
-.post-content h4{font-weight:700;margin:1.6em 0 .5em}
-.post-content p{margin-bottom:1.4em}
-.post-content ul,.post-content ol{margin:0 0 1.4em 1.4em}
-.post-content li{margin-bottom:.5em}
-.post-content a{color:var(--primary);text-decoration:underline;text-underline-offset:3px}
-.post-content a:hover{color:var(--primary-d)}
-.post-content blockquote{
-  border-left:3px solid var(--primary);margin:2em 0;padding:1.2em 1.6em;
-  background:rgba(121,67,226,.05);border-radius:0 var(--radius) var(--radius) 0;
-  font-style:italic;color:var(--muted);
-}
-.post-content blockquote p{margin:0}
-.post-content code{background:var(--bg2);padding:2px 7px;border-radius:5px;font-size:.88em;font-family:'JetBrains Mono','Fira Code',monospace;color:var(--primary)}
-.post-content pre{background:var(--dark);color:#e8e8f0;padding:20px 24px;border-radius:var(--radius);overflow-x:auto;margin:1.6em 0;font-size:.88rem;line-height:1.6}
-.post-content pre code{background:none;padding:0;color:inherit;font-size:inherit}
-.post-content img{border-radius:var(--radius);margin:1.6em 0;box-shadow:var(--shadow)}
-.post-content table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.92rem}
-.post-content th{background:var(--bg2);padding:10px 14px;text-align:left;font-weight:600;border:1px solid var(--border)}
-.post-content td{padding:10px 14px;border:1px solid var(--border)}
-.post-content tr:nth-child(even) td{background:var(--bg2)}
-.post-content hr{border:none;border-top:1px solid var(--border);margin:2.4em 0}
+/* ── PROSA ── */
+.post-content{font-size:17px;line-height:1.8;color:#2a2340}
+.post-content h2{font:900 26px/1.2 Manrope,sans-serif;letter-spacing:-.6px;color:var(--ink);margin:2.2em 0 .7em}
+.post-content h3{font:800 20px/1.25 Manrope,sans-serif;color:var(--ink);margin:1.9em 0 .6em}
+.post-content h4{font-weight:800;margin:1.6em 0 .5em}
+.post-content p{margin:0 0 1.4em}
+.post-content ul,.post-content ol{margin:0 0 1.4em 1.4em;padding:0}.post-content li{margin-bottom:.5em}
+.post-content a{color:var(--purple);text-decoration:underline;text-underline-offset:3px}
+.post-content blockquote{border-left:4px solid var(--purple2);margin:2em 0;padding:1.1em 1.5em;background:var(--pale);border-radius:0 12px 12px 0;font-style:italic;color:var(--muted)}.post-content blockquote p{margin:0}
+.post-content code{background:var(--pale);padding:2px 7px;border-radius:5px;font-size:.88em;font-family:'JetBrains Mono','Fira Code',monospace;color:var(--purple)}
+.post-content pre{background:#14092d;color:#e8e8f0;padding:20px 24px;border-radius:12px;overflow-x:auto;margin:1.6em 0;font-size:.88rem;line-height:1.6}.post-content pre code{background:none;padding:0;color:inherit;font-size:inherit}
+.post-content img{border-radius:12px;margin:1.6em 0;box-shadow:0 8px 24px #39136d1a;height:auto}
+.post-content table{width:100%;border-collapse:collapse;margin:1.6em 0;font-size:.92rem;display:block;overflow-x:auto}.post-content th{background:var(--pale);padding:10px 14px;text-align:left;font-weight:700;border:1px solid var(--line)}.post-content td{padding:10px 14px;border:1px solid var(--line)}
+.post-content hr{border:none;border-top:1px solid var(--line);margin:2.4em 0}
 
-/* ── SEPARADOR FINAL DO ARTIGO ── */
-.post-end-bar{display:flex;align-items:center;gap:16px;margin:3em 0 2.5em;padding-top:2em;border-top:1px solid var(--border)}
-.post-end-bar span{font-size:.8rem;color:var(--muted);white-space:nowrap}
-.post-end-bar hr{flex:1;border:none;border-top:1px solid var(--border)}
+/* ── PROPAGANDA NO MEIO DO ARTIGO ── */
+.post-content .inline-promo{display:flex;align-items:center;gap:16px;margin:2.2em 0;padding:18px 20px;border-radius:14px;color:#fff;background:radial-gradient(circle at 95% 0%,#9a56ff55,transparent 35%),linear-gradient(120deg,#762ee7,#3e138d);box-shadow:0 9px 20px #4b16952b;line-height:1.4}
+.inline-promo .ip-ico{font-size:28px;flex-shrink:0}.inline-promo strong{display:block;font:900 16px Manrope,sans-serif;margin-bottom:3px}.inline-promo span{font-size:13px;color:#eee5ff}
+.inline-promo>div{flex:1;min-width:0}
+.post-content .inline-promo a{flex-shrink:0;background:#fff;color:#6422d8;border-radius:25px;padding:10px 16px;font-size:12px;font-weight:900;text-decoration:none;white-space:nowrap}
 
-/* ── TAGS RODAPÉ DO POST ── */
-.post-tags-end{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:2.5em}
-.post-tag-end{
-  font-size:.78rem;padding:5px 14px;border-radius:20px;
-  border:1.5px solid var(--border);color:var(--muted);font-weight:600;transition:all .2s;
-}
-.post-tag-end:hover{border-color:var(--primary);color:var(--primary)}
-
-/* ── SHARE ── */
-.share-box{background:var(--bg2);border-radius:var(--radius);padding:24px;margin-bottom:2.5em}
-.share-box h3{font-family:var(--display);font-size:.85rem;font-weight:700;margin-bottom:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.share-btns{display:flex;gap:10px;flex-wrap:wrap}
-.share-btn{
-  display:inline-flex;align-items:center;gap:7px;padding:9px 16px;
-  border-radius:8px;font-size:.8rem;font-weight:600;cursor:pointer;border:none;
-  transition:all .2s;text-decoration:none;
-}
-.share-btn-wpp{background:#25D366;color:#fff}
-.share-btn-wpp:hover{background:#1da850}
-.share-btn-copy{background:var(--primary);color:#fff}
-.share-btn-copy:hover{background:var(--primary-d)}
-.share-btn svg{width:16px;height:16px;flex-shrink:0}
-.copy-feedback{font-size:.75rem;color:var(--accent);opacity:0;transition:opacity .3s;margin-left:4px}
-.copy-feedback.show{opacity:1}
+.post-end-bar{display:flex;align-items:center;gap:16px;margin:2.6em 0 1.8em}.post-end-bar span{font-size:12px;color:var(--muted);white-space:nowrap}.post-end-bar hr{flex:1;border:none;border-top:1px solid var(--line);margin:0}
+.post-tags-end{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:1.8em}.post-tag-end{font-size:12px;padding:5px 13px;border-radius:20px;border:1px solid var(--line);color:var(--muted);font-weight:700;background:#fbf9ff}
+.share-box{border:1px solid var(--line);border-radius:12px;background:#fff;padding:20px 21px;box-shadow:0 5px 18px #39136d08}
+.share-box h3{font:800 14px Manrope,sans-serif;margin:0 0 13px}
+.share-btns{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+.share-btn{display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;font:800 12px "DM Sans",sans-serif;cursor:pointer;border:0;color:#fff}
+.share-btn svg{width:16px;height:16px;flex-shrink:0}.share-btn-wpp{background:#19ca69}.share-btn-wpp:hover{background:#12b85c}.share-btn-copy{background:linear-gradient(100deg,#8038ef,#6123d6)}
+.copy-feedback{font-size:11px;opacity:0;transition:opacity .3s;margin-left:2px}.copy-feedback.show{opacity:1}
 
 /* ── SIDEBAR ── */
-.sidebar-sticky{position:sticky;top:88px}
-.sidebar-card{background:var(--bg2);border:1.5px solid var(--border);border-radius:var(--radius);padding:24px;margin-bottom:20px}
-.sidebar-card h3{font-family:var(--display);font-size:.82rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:16px}
-.sidebar-posts{display:flex;flex-direction:column;gap:14px}
-.sidebar-post{display:flex;gap:12px;align-items:flex-start;transition:opacity .2s}
-.sidebar-post:hover{opacity:.75}
-.sidebar-post-thumb{
-  width:56px;height:56px;border-radius:8px;object-fit:cover;flex-shrink:0;
-  background:linear-gradient(135deg,rgba(121,67,226,.1),rgba(0,229,160,.06));
-  display:flex;align-items:center;justify-content:center;font-size:1.3rem;
-}
-.sidebar-post-thumb img{width:56px;height:56px;border-radius:8px;object-fit:cover}
-.sidebar-post-info{flex:1;min-width:0}
-.sidebar-post-info span{display:block;font-size:.7rem;color:var(--muted);margin-bottom:3px}
-.sidebar-post-info strong{display:block;font-size:.82rem;font-weight:600;color:var(--text);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.panel{border:1px solid var(--line);border-radius:12px;background:#fff;padding:20px 21px;box-shadow:0 5px 18px #39136d08}
+.panel-title{display:flex;align-items:center;gap:10px;font:800 15px Manrope,sans-serif;margin:0 0 15px}.panel-title .ico{color:#7634e9;font-size:19px}
+.sidebar-posts{display:grid;gap:14px}.sidebar-post{display:flex;gap:12px;align-items:flex-start}.sidebar-post:hover strong{color:var(--purple)}
+.sidebar-post-thumb{width:56px;height:56px;border-radius:9px;flex-shrink:0;background:linear-gradient(145deg,#8c4cff,#4d16d0);display:grid;place-items:center;font-size:1.3rem;overflow:hidden;color:#fff}.sidebar-post-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.sidebar-post-info{flex:1;min-width:0}.sidebar-post-info span{display:block;font-size:10px;color:var(--muted);margin-bottom:3px;font-weight:700;text-transform:uppercase}.sidebar-post-info strong{display:-webkit-box;font-size:13px;font-weight:700;line-height:1.35;overflow:hidden;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.promo-side{border-radius:12px;padding:23px 19px;text-align:center;color:white;background:radial-gradient(circle at 90% 0%,#9a56ff55,transparent 32%),linear-gradient(145deg,#762ee7,#3e138d);position:relative;overflow:hidden;box-shadow:0 9px 20px #4b16952b}.promo-side:after{content:"✦";position:absolute;right:15px;top:12px;color:#ffffff2b;font-size:45px}.rocket{font-size:35px;margin-bottom:7px}.promo-side h3{font:900 19px/1.16 Manrope,sans-serif;margin:0 0 9px}.promo-side p{font-size:12px;line-height:1.5;color:#eee5ff;margin:0 0 15px}.promo-side a{display:block;background:#fff;color:#6422d8;border-radius:25px;padding:11px 12px;font-size:11px;font-weight:900}
 
-/* SIDEBAR CTA */
-.sidebar-cta{background:var(--primary);border-radius:var(--radius);padding:24px;color:#fff;margin-bottom:20px}
-.sidebar-cta h3{font-family:var(--display);font-size:1rem;font-weight:800;margin-bottom:8px;line-height:1.3}
-.sidebar-cta p{font-size:.82rem;color:rgba(255,255,255,.8);margin-bottom:16px;line-height:1.5}
-.sidebar-cta .btn-sidebarwpp{
-  display:flex;align-items:center;justify-content:center;gap:7px;
-  background:#fff;color:var(--primary);padding:10px 16px;border-radius:8px;
-  font-size:.82rem;font-weight:700;transition:all .2s;width:100%;
-}
-.sidebar-cta .btn-sidebarwpp:hover{background:var(--bg2);transform:translateY(-1px)}
+/* ── PROPAGANDA FINAL ── */
+.wide-promo{margin:34px 0 25px;border-radius:13px;overflow:hidden;min-height:190px;background:radial-gradient(circle at 100% 0%,#7939e8 0,transparent 30%),linear-gradient(105deg,#762de9 0%,#291052 50%,#190a36 100%);color:#fff;display:grid;grid-template-columns:34% 1fr;align-items:center;gap:15px;padding:22px 34px;position:relative;box-shadow:0 9px 23px #36106d26}.wide-promo:after{content:"✦  ✦";position:absolute;right:20px;top:15px;color:#ffffff20;font-size:40px;letter-spacing:16px}.mockup{height:145px;display:flex;align-items:center;justify-content:center;position:relative}.laptop{width:220px;height:130px;border:7px solid #171322;border-bottom:12px solid #171322;border-radius:9px;background:linear-gradient(135deg,#1c0c3d,#5b22b7);box-shadow:0 12px 22px #0005;display:flex;align-items:center;justify-content:center;position:relative}.laptop:after{content:"";position:absolute;bottom:-17px;left:-19px;width:245px;height:7px;background:linear-gradient(#eee,#9a9a9a);border-radius:0 0 9px 9px}.screen-copy{padding:12px;color:#fff;font:800 13px/1.2 Manrope,sans-serif;width:100%}.screen-copy small{display:block;color:#b68aff;font-size:7px;margin-bottom:9px}.screen-copy b{font-size:17px}.screen-copy span{display:block;background:#8b45ff;border-radius:10px;width:80px;padding:5px;margin-top:9px;font-size:7px}.wide-copy{position:relative;z-index:1;max-width:610px}.wide-copy h2{font:900 clamp(22px,2.7vw,29px)/1.1 Manrope,sans-serif;letter-spacing:-.7px;margin:0 0 10px}.wide-copy h2 span{color:#b98aff}.wide-copy p{font-size:14px;line-height:1.5;color:#eee5ff;margin:0 0 15px}.white-btn{display:inline-flex;align-items:center;gap:9px;background:#fff;color:#24113f;border-radius:25px;padding:11px 18px;font-size:12px;font-weight:900}
+.services{margin:0 0 29px}.section-kicker{display:flex;align-items:center;gap:9px;color:#7028ef;font-size:12px;font-weight:900;margin-bottom:5px}.section-kicker:before{content:"";width:22px;height:3px;background:#7028ef}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:14px}.section-head h2{font:900 22px Manrope,sans-serif;letter-spacing:-.6px;margin:0}.section-head>a{font-size:11px;font-weight:900;color:#7028ef;white-space:nowrap}.service-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.service-card{border:1px solid var(--line);border-radius:11px;padding:15px;display:flex;gap:13px;align-items:center;background:#fff;box-shadow:0 5px 14px #38136d09;transition:.2s}.service-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px #38136d16;border-color:#cbb4f6}.service-icon{width:48px;height:48px;border-radius:13px;background:#f0e8ff;color:#7428ed;display:grid;place-items:center;font-size:23px;flex-shrink:0}.service-card h3{font:800 13px Manrope,sans-serif;margin:0 0 5px}.service-card p{font-size:11px;line-height:1.4;color:#716983;margin:0}
 
-/* ── CTA FINAL (ANTES DO FOOTER) ── */
-.post-cta{background:var(--primary);padding:72px 20px;text-align:center;position:relative;overflow:hidden}
-.post-cta::before{
-  content:'';position:absolute;inset:0;
-  background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E");
-}
-.post-cta-inner{position:relative;z-index:1;max-width:600px;margin:0 auto}
-.post-cta-badge{display:inline-block;background:rgba(255,255,255,.2);color:#fff;font-size:.72rem;font-weight:700;padding:4px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:20px}
-.post-cta h2{font-family:var(--display);font-size:2.2rem;font-weight:800;color:#fff;margin-bottom:12px;letter-spacing:-.4px;line-height:1.2}
-.post-cta p{color:rgba(255,255,255,.8);font-size:1rem;margin-bottom:32px;line-height:1.6}
-.post-cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
-.btn-cta-p{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;background:#fff;color:var(--primary);font-family:var(--display);font-size:.9rem;font-weight:700;transition:all .2s}
-.btn-cta-p:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.2)}
-.btn-cta-s{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;border-radius:10px;background:rgba(255,255,255,.15);color:#fff;font-size:.9rem;font-weight:600;border:1.5px solid rgba(255,255,255,.3);transition:all .2s}
-.btn-cta-s:hover{background:rgba(255,255,255,.25)}
-.btn-cta-s svg{width:18px;height:18px;fill:currentColor;flex-shrink:0}
-
-/* ── POSTS RELACIONADOS ── */
-.related-section{padding:56px 0 72px;background:var(--bg2)}
-.related-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:32px}
-.related-header h2{font-family:var(--display);font-size:1.4rem;font-weight:800;color:var(--text)}
-.related-header a{font-size:.85rem;color:var(--primary);font-weight:600}
-.related-header a:hover{text-decoration:underline}
-.related-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:24px}
-.related-card{
-  background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);
-  overflow:hidden;transition:all .25s;display:flex;flex-direction:column;
-}
-.related-card:hover{border-color:var(--primary);transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.related-thumb{width:100%;height:170px;object-fit:cover;display:block;background:var(--bg2)}
-.related-thumb-placeholder{width:100%;height:170px;background:linear-gradient(135deg,rgba(121,67,226,.1),rgba(0,229,160,.06));display:flex;align-items:center;justify-content:center;font-size:2.4rem}
-.related-body{padding:20px;flex:1;display:flex;flex-direction:column;gap:8px}
-.related-cat{display:inline-block;background:rgba(121,67,226,.1);color:var(--primary);font-size:.68rem;font-weight:700;padding:3px 10px;border-radius:20px;text-transform:uppercase;letter-spacing:.04em}
-.related-body h3{font-family:var(--display);font-size:1rem;font-weight:700;color:var(--text);line-height:1.35}
-.related-body p{font-size:.84rem;color:var(--muted);line-height:1.55;flex:1}
-.related-footer{padding:14px 20px 16px;border-top:1px solid var(--border);display:flex;justify-content:flex-end}
-.btn-ler{display:inline-flex;align-items:center;gap:6px;color:var(--primary);font-size:.8rem;font-weight:600}
-.btn-ler svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.5}
-
-/* ── FOOTER ── */
-footer{background:var(--dark);padding:40px 20px 0}
-.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;gap:32px;flex-wrap:wrap;padding-bottom:32px;border-bottom:1px solid rgba(255,255,255,.08)}
-.footer-logo img{height:32px;filter:brightness(0) invert(1);opacity:.9}
-.footer-divider{width:1px;height:40px;background:rgba(255,255,255,.12);flex-shrink:0}
-.footer-text{flex:1}
-.footer-text strong{display:block;color:#fff;font-family:var(--display);font-size:.95rem;margin-bottom:4px}
-.footer-text span{color:rgba(255,255,255,.45);font-size:.82rem}
-.footer-links{display:flex;gap:10px;flex-wrap:wrap}
-.f-btn{display:inline-flex;align-items:center;gap:7px;padding:9px 16px;border-radius:8px;font-size:.82rem;font-weight:600;transition:all .2s}
-.f-btn-site{background:rgba(255,255,255,.08);color:rgba(255,255,255,.75)}.f-btn-site:hover{background:rgba(255,255,255,.15);color:#fff}
-.f-btn-wpp{background:rgba(37,211,102,.15);color:#25D366}.f-btn-wpp:hover{background:rgba(37,211,102,.25)}
-.footer-bottom{max-width:1200px;margin:0 auto;padding:16px 0;text-align:center;font-size:.78rem;color:rgba(255,255,255,.3)}
-.footer-bottom a{color:rgba(255,255,255,.45)}.footer-bottom a:hover{color:#fff}
-
-/* ── WPP FLUTUANTE ── */
-.wpp-float{position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s}
-.wpp-float:hover{transform:scale(1.1)}
+/* ── CONTINUE LENDO ── */
+.related{margin:0 0 40px}.related-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.related-card{border:1px solid var(--line);border-radius:11px;overflow:hidden;background:#fff;box-shadow:0 5px 13px #3e1a7410;transition:.2s;display:flex;flex-direction:column;min-width:0}.related-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px #49208018}
+.related-thumb{height:125px;position:relative;background:radial-gradient(circle at 70% 35%,#9e83ce,#211436 58%,#0b0913);display:grid;place-items:center;font-size:42px;color:#fff;overflow:hidden}.related-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.related-tag{position:absolute;z-index:2;bottom:8px;left:12px;background:#7627ed;color:#fff;padding:5px 11px;border-radius:18px;font-size:10px;font-weight:900}
+.related-body{padding:12px 13px 13px;flex:1}.related-body h3{font:800 14px/1.25 Manrope,sans-serif;margin:0 0 7px}.related-body p{font-size:12px;line-height:1.5;color:#716982;margin:0 0 9px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}.related-body .more{color:#6b20e9;font-size:11px;font-weight:900}
 
 /* ── ESTADOS ── */
-.loading-hero{padding:120px 20px;text-align:center;background:var(--primary)}
-.loading-hero svg{width:40px;height:40px;stroke:rgba(255,255,255,.4);fill:none;stroke-width:1.5;margin:0 auto;display:block;animation:spin .9s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.error-state{padding:100px 20px;text-align:center;min-height:60vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.error-state h1{font-family:var(--display);font-size:2rem;font-weight:800;margin-bottom:12px}
-.error-state p{color:var(--muted);margin-bottom:24px}
-.error-state a{color:var(--primary);font-weight:600;text-decoration:underline}
-#post-wrapper{display:none}
+.state{text-align:center;padding:100px 20px;color:var(--muted);font-size:15px;min-height:50vh}.state h1{font:900 28px Manrope,sans-serif;color:var(--ink);margin:0 0 8px}.state a{color:#6d35d9;font-weight:700}
+@keyframes spin{to{transform:rotate(360deg)}}.spinner{width:38px;height:38px;border:3px solid #e3d8fb;border-top-color:#7028ef;border-radius:50%;margin:0 auto 14px;animation:spin .9s linear infinite}
 
-/* ── RESPONSIVE ── */
-@media(max-width:1100px){
-  .post-layout{grid-template-columns:1fr minmax(0,1fr) 240px 0}
-  .post-sidebar{display:none}
-}
-@media(max-width:768px){
-  nav.desktop-nav,.btn-wpp-header{display:none}
-  .hamburger{display:block}
-  .post-hero h1{font-size:1.8rem}
-  .post-layout{display:block;padding:32px 20px 60px}
-  .post-main{padding-right:0}
-  .post-sidebar{display:none}
-  .post-cover{margin:-20px 0 0;padding:0}
-  .post-cover img{border-radius:0}
-  .related-grid{grid-template-columns:1fr}
-}
+/* ── RODAPÉ PADRÃO ── */
+footer{background:linear-gradient(110deg,#100a20,#1c0b3b);color:#fff;padding:28px 0 16px;margin-top:8px}.footer-main{display:grid;grid-template-columns:1fr 2fr 1fr;gap:20px;align-items:center;padding-bottom:18px;border-bottom:1px solid #ffffff25}.footer-logo{font:italic 900 27px Manrope,sans-serif;letter-spacing:-1.8px}.footer-brand p{font-size:12px;color:#ddd3ee;line-height:1.4;margin:5px 0 0}.footer-links{display:flex;justify-content:center;gap:24px;font-size:12px}.social{display:flex;justify-content:flex-end;gap:17px;font-size:18px;font-weight:800}.copyright{text-align:center;padding-top:14px;color:#d0c7dc;font-size:11px}.copyright a{text-decoration:underline}
+.wpp-float{position:fixed;bottom:24px;right:24px;background:#25D366;color:#fff;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(37,211,102,.4);z-index:999;transition:transform .2s}.wpp-float:hover{transform:scale(1.1)}
+
+/* ── RESPONSIVO ── */
+@media(max-width:1000px){.container{width:calc(100% - 40px)}.post-layout{grid-template-columns:1fr}.post-sidebar{position:static;grid-template-columns:1fr 1fr;align-items:start}.post-main{max-width:none}.service-grid{gap:9px}.service-card{padding:11px;gap:9px}.service-icon{width:40px;height:40px}.wide-promo{padding:20px}}
+@media(max-width:650px){.container{width:calc(100% - 32px)}.notice{font-size:11px}.post-hero{padding:30px 0 30px}.post-resumo{font-size:14px}.post-content{font-size:16px}.post-content h2{font-size:22px}.post-content .inline-promo{flex-direction:column;align-items:flex-start;text-align:left}.post-sidebar{grid-template-columns:1fr}.wide-promo{grid-template-columns:1fr;gap:0;text-align:center;padding:19px 18px}.mockup{height:130px;order:2}.wide-copy{order:1}.wide-copy h2{font-size:23px}.wide-copy p{font-size:12px}.section-head h2{font-size:19px}.service-grid{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.footer-main{grid-template-columns:1fr;gap:15px}.footer-links{justify-content:flex-start;flex-wrap:wrap;gap:15px}.social{justify-content:flex-start}}
 </style>
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <a href="/" class="logo-link">
-      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" height="38">
-    </a>
-    <nav class="desktop-nav" aria-label="Navegação principal">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/seuhub">Seu Hub</a></li>
-        <li><a href="/loja">Loja</a></li>
-        <li><a href="/portfolio">Portfólio</a></li>
-        <li><a href="/blog" class="ativo">Blog</a></li>
-        <li><a href="/metricas">Métricas Grátis</a></li>
-        <li><a href="#orcamento">Orçamento</a></li>
-      </ul>
-    </nav>
-    <div class="header-cta">
-      <a href="https://wa.me/5511913324827" class="btn-wpp-header" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
-      </a>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
-    </div>
-  </div>
-</header>
+<!-- CABEÇALHO PADRÃO -->
+<header class="sh"><div class="sh-wrap"><a class="sh-logo" href="/" aria-label="Leanttro"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="40"></a><nav class="sh-menu" id="shMenu" aria-label="Principal"><a href="/plataformas">Plataformas</a><a href="/sites">Sites</a><a href="/loja">Loja</a><a class="active" href="/conteudo">Conteúdo</a></nav><a class="sh-wa" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20conversar%20sobre%20um%20projeto%20com%20a%20Leanttro." target="_blank" rel="noopener">WhatsApp</a><button class="sh-toggle" id="shToggle" aria-label="Abrir menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
 
-<!-- MOBILE NAV -->
-<div class="mobile-nav-overlay" id="mobileNav">
-  <button class="mobile-nav-close" id="navClose">×</button>
-  <ul>
-    <li><a href="/" onclick="closeNav()">Home</a></li>
-    <li><a href="/seuhub" onclick="closeNav()">Seu Hub</a></li>
-    <li><a href="/loja" onclick="closeNav()">Loja</a></li>
-    <li><a href="/blog" onclick="closeNav()">Blog</a></li>
-    <li><a href="https://wa.me/5511913324827" onclick="closeNav()">WhatsApp</a></li>
-  </ul>
+<!-- PROPAGANDA #1 — faixa no topo -->
+<div class="notice"><div class="container notice-inner"><span>✦ &nbsp;Quer aparecer no Google sem pagar anúncio? Sites a partir de R$499.</span><a href="https://wa.me/5511913324827?text=Vi%20um%20artigo%20no%20blog%20da%20Leanttro%20e%20quero%20saber%20mais" target="_blank" rel="noopener">Falar no WhatsApp →</a></div></div>
+
+<!-- CARREGANDO -->
+<div id="loading-state" class="state"><div class="spinner"></div>Carregando artigo…</div>
+
+<!-- ERRO 404 -->
+<div id="error-state" class="state" hidden>
+  <h1>Post não encontrado</h1>
+  <p>O artigo que você está procurando não existe ou foi removido.</p>
+  <a href="/conteudo">← Voltar para o conteúdo</a>
 </div>
 
-<!-- LOADING STATE (visível enquanto carrega) -->
-<div id="loading-state">
-  <div class="loading-hero">
-    <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
-  </div>
-</div>
+<!-- POST (oculto até carregar) -->
+<div id="post-wrapper" hidden>
 
-<!-- ERRO 404 (oculto por padrão) -->
-<div id="error-state" style="display:none">
-  <div class="error-state">
-    <h1>Post não encontrado</h1>
-    <p>O artigo que você está procurando não existe ou foi removido.</p>
-    <a href="/blog">← Voltar para o blog</a>
-  </div>
-</div>
-
-<!-- CONTEÚDO DO POST (oculto até carregar) -->
-<div id="post-wrapper">
-
-  <!-- BREADCRUMB -->
-  <div style="background:#fff;border-bottom:1px solid var(--border)">
-    <div class="container">
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/">Home</a><span>/</span>
-        <a href="/blog">Blog</a><span>/</span>
-        <span id="bc-titulo" style="color:var(--text)"></span>
-      </nav>
-    </div>
-  </div>
-
-  <!-- HERO DO POST -->
-  <section class="post-hero" id="post-hero">
-    <div class="post-hero-inner">
-      <div class="post-hero-meta">
-        <span class="post-hero-cat" id="hero-cat"></span>
-        <span class="post-hero-date" id="hero-date"></span>
-      </div>
+  <div class="profile-hero"><div class="container">
+    <div class="post-hero">
+      <div class="post-meta"><span class="category" id="hero-cat"></span><span class="post-date" id="hero-date"></span></div>
       <h1 id="hero-titulo"></h1>
-      <p class="post-hero-resumo" id="hero-resumo"></p>
-      <div class="post-hero-tags" id="hero-tags"></div>
+      <p class="post-resumo" id="hero-resumo"></p>
+      <div class="post-tags" id="hero-tags"></div>
     </div>
-    <div class="hero-wave">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,90 L0,55 C180,15 360,75 540,35 C720,-5 900,65 1080,30 C1260,-5 1380,20 1440,5 L1440,90 Z" fill="#ffffff"/>
-      </svg>
-    </div>
-  </section>
+  </div></div>
 
-  <!-- IMAGEM DE CAPA (se existir) -->
-  <div class="post-cover" id="post-cover" style="display:none">
-    <img id="cover-img" src="" alt="">
-  </div>
+  <div class="container crumbs"><a href="/">Home</a> &nbsp;›&nbsp; <a href="/conteudo">Conteúdo</a> &nbsp;›&nbsp; <span id="bc-titulo"></span></div>
 
-  <!-- LAYOUT PRINCIPAL -->
-  <div class="post-layout">
-    <!-- CONTEÚDO -->
-    <main class="post-main" id="post-main">
-      <article class="post-content" id="post-content"></article>
+  <div class="container">
+    <div class="post-cover" id="post-cover" hidden><img id="cover-img" src="" alt=""></div>
 
-      <!-- SEPARADOR -->
-      <div class="post-end-bar">
-        <hr><span>Fim do artigo</span><hr>
-      </div>
+    <div class="post-layout">
+      <main class="post-main" id="post-main">
+        <article class="post-content" id="post-content"></article>
 
-      <!-- TAGS -->
-      <div class="post-tags-end" id="post-tags-end"></div>
+        <div class="post-end-bar"><hr><span>Fim do artigo</span><hr></div>
+        <div class="post-tags-end" id="post-tags-end"></div>
 
-      <!-- SHARE -->
-      <div class="share-box">
-        <h3>Compartilhar artigo</h3>
-        <div class="share-btns">
-          <a id="btn-share-wpp" href="#" target="_blank" rel="noopener" class="share-btn share-btn-wpp">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            WhatsApp
-          </a>
-          <button class="share-btn share-btn-copy" id="btn-copy">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-            Copiar link
-            <span class="copy-feedback" id="copy-feedback">✓ Copiado!</span>
-          </button>
-        </div>
-      </div>
-    </main>
-
-    <!-- SIDEBAR -->
-    <aside class="post-sidebar">
-      <div class="sidebar-sticky">
-        <!-- CTA Sidebar -->
-        <div class="sidebar-cta">
-          <h3>Quer aparecer no Google também?</h3>
-          <p>Sites, hubs e automações que geram tráfego orgânico — a partir de R$499.</p>
-          <a href="https://wa.me/5511913324827?text=Vi%20um%20artigo%20no%20blog%20da%20Leanttro%20e%20quero%20saber%20mais" target="_blank" rel="noopener" class="btn-sidebarwpp">
-            <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-            Falar no WhatsApp
-          </a>
-        </div>
-
-        <!-- Posts recentes -->
-        <div class="sidebar-card">
-          <h3>Leia também</h3>
-          <div class="sidebar-posts" id="sidebar-posts">
-            <div style="color:var(--muted);font-size:.8rem">Carregando…</div>
+        <div class="share-box">
+          <h3>Compartilhar artigo</h3>
+          <div class="share-btns">
+            <a id="btn-share-wpp" href="#" target="_blank" rel="noopener" class="share-btn share-btn-wpp">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
+              WhatsApp
+            </a>
+            <button type="button" class="share-btn share-btn-copy" id="btn-copy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+              Copiar link
+              <span class="copy-feedback" id="copy-feedback">✓ Copiado!</span>
+            </button>
           </div>
         </div>
+      </main>
+
+      <aside class="post-sidebar">
+        <!-- PROPAGANDA #2 — sidebar -->
+        <section class="promo-side"><div class="rocket">🚀</div><h3>Quer aparecer no Google também?</h3><p>Sites, hubs e automações que geram tráfego orgânico — a partir de R$499.</p><a href="https://wa.me/5511913324827?text=Vi%20um%20artigo%20no%20blog%20da%20Leanttro%20e%20quero%20saber%20mais" target="_blank" rel="noopener">Falar no WhatsApp &nbsp; →</a></section>
+        <section class="panel"><h2 class="panel-title"><span class="ico">✎</span> Leia também</h2>
+          <div class="sidebar-posts" id="sidebar-posts"><div style="color:var(--muted);font-size:12px">Carregando…</div></div>
+        </section>
+      </aside>
+    </div>
+
+    <!-- PROPAGANDA #3 — banner grande -->
+    <section class="wide-promo">
+      <div class="mockup"><div class="laptop"><div class="screen-copy"><small>LEANTTRO.</small>Seu negócio<br><b>mais digital.</b><span>Conheça nossos serviços →</span></div></div></div>
+      <div class="wide-copy"><h2>Seu negócio também merece<br><span>uma presença digital profissional.</span></h2><p>Criamos sites que apresentam sua empresa, fortalecem sua presença online e ajudam você a conquistar novos clientes.</p><a class="white-btn" href="/sites">Conheça os serviços da Leanttro &nbsp; →</a></div>
+    </section>
+
+    <section class="services">
+      <div class="section-kicker">Nossos serviços</div><div class="section-head"><h2>Soluções completas para o seu negócio.</h2><a href="/">Conheça a Leanttro&nbsp; →</a></div>
+      <div class="service-grid">
+        <a class="service-card" href="/sites"><div class="service-icon">▣</div><div><h3>Sites profissionais</h3><p>Sites modernos e responsivos para sua empresa.</p></div></a>
+        <a class="service-card" href="/plataformas"><div class="service-icon">▱</div><div><h3>Plataformas digitais</h3><p>Sistemas e plataformas sob medida para suas necessidades.</p></div></a>
+        <a class="service-card" href="/"><div class="service-icon">ϟ</div><div><h3>Automações e IA</h3><p>Automatize processos e potencialize seus resultados.</p></div></a>
       </div>
-    </aside>
+    </section>
+
+    <section class="related" id="related-section" hidden>
+      <div class="section-head"><h2>Continue lendo</h2><a href="/conteudo">Ver todo o conteúdo&nbsp; →</a></div>
+      <div class="related-grid" id="related-grid"></div>
+    </section>
   </div>
-
-  <!-- CTA FINAL -->
-  <section class="post-cta">
-    <div class="post-cta-inner">
-      <div class="post-cta-badge">✦ Leanttro Tecnologia</div>
-      <h2>Quer aparecer no Google também?</h2>
-      <p>Sites a partir de R$499, hubs de tráfego orgânico e automações com IA que colocam seu negócio no Google sem pagar por clique.</p>
-      <div class="post-cta-btns">
-        <a href="/seuhub" class="btn-cta-p">✦ Quero meu hub</a>
-        <a href="https://wa.me/5511913324827?text=Vi%20o%20blog%20da%20Leanttro%20e%20quero%20saber%20mais" target="_blank" rel="noopener" class="btn-cta-s">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-          Falar no WhatsApp
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- POSTS RELACIONADOS -->
-  <section class="related-section">
-    <div class="container">
-      <div class="related-header">
-        <h2>Continue lendo</h2>
-        <a href="/blog">Ver todos os artigos →</a>
-      </div>
-      <div class="related-grid" id="related-grid">
-        <!-- preenchido via JS -->
-      </div>
-    </div>
-  </section>
 
 </div><!-- /post-wrapper -->
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-logo"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro"></div>
-    <div class="footer-divider"></div>
-    <div class="footer-text">
-      <strong>Leanttro Tecnologia</strong>
-      <span>Sites, hubs e automações — Jabaquara, São Paulo<br>© 2026 Leanttro. Todos os direitos reservados.</span>
-    </div>
-    <div class="footer-links">
-      <a href="https://leanttro.com" class="f-btn f-btn-site">🌐 leanttro.com</a>
-      <a href="https://wa.me/5511913324827" class="f-btn f-btn-wpp" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor" width="16" height="16"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
-      </a>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <a href="/politica-de-privacidade">Política de Privacidade</a> · <a href="/termos">Termos</a> · Desenvolvido com ❤️ pela <a href="https://leanttro.com">Leanttro</a>
-  </div>
-</footer>
+<footer><div class="container"><div class="footer-main"><div class="footer-brand"><a class="footer-logo" href="/">LEANTTRO.</a><p>Tecnologia que impulsiona<br>seu negócio.</p></div><nav class="footer-links"><a href="/plataformas">Plataformas</a><a href="/sites">Sites</a><a href="/loja">Loja</a><a href="/conteudo">Conteúdo</a></nav><div class="social"><a href="https://instagram.com/leanttro" target="_blank" rel="noopener" aria-label="Instagram">◎</a></div></div><div class="copyright">© 2026 Leanttro. Todos os direitos reservados. · <a href="/privacidade">Privacidade</a> · <a href="/termos">Termos de Uso</a></div></div></footer>
 
 <!-- WPP FLUTUANTE -->
 <a href="https://wa.me/5511913324827" class="wpp-float" target="_blank" rel="noopener" aria-label="WhatsApp">
-  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.555 4.118 1.527 5.845L.057 23.926a.5.5 0 0 0 .606.63l6.257-1.643A11.944 11.944 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.89a9.875 9.875 0 0 1-5.031-1.374l-.36-.214-3.733.98.997-3.636-.235-.374A9.856 9.856 0 0 1 2.11 12C2.11 6.527 6.527 2.11 12 2.11c5.474 0 9.89 4.417 9.89 9.89 0 5.474-4.416 9.89-9.89 9.89z"/></svg>
 </a>
 
 <script>
 const API_BASE = '';
 
-const CAT_LABELS = {
-  automacao:'Automação & IA',
-  trafego:'Vendas & Tráfego',
-  ecommerce:'E-commerce',
-  '3d':'3D Experience',
-  hub:'Hubs & SEO'
-};
-const CAT_ICONS = {
-  automacao:'🤖', trafego:'📈', ecommerce:'🛒', '3d':'🎮', hub:'🌐'
-};
+const CAT_LABELS = {automacao:'Automação & IA',trafego:'Vendas & Tráfego',ecommerce:'E-commerce','3d':'3D Experience',hub:'Hubs & SEO'};
+const CAT_ICONS = {automacao:'🤖',trafego:'📈',ecommerce:'🛒','3d':'🎮',hub:'🌐'};
+const WA_POST = 'https://wa.me/5511913324827?text=Vi%20um%20artigo%20no%20blog%20da%20Leanttro%20e%20quero%20saber%20mais';
 
-// ── Pega o slug da URL ────────────────────────────────────────────────────────
-function getSlug() {
-  // Suporta /blog/meu-post e /blog/meu-post/
+const $ = id => document.getElementById(id);
+const esc = t => String(t==null?'':t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+// ── Pega o slug da URL (/blog/meu-post ou /blog/meu-post/) ────────────────────
+function getSlug(){
   const parts = window.location.pathname.replace(/\/$/, '').split('/');
-  return parts[parts.length - 1] || null;
+  return new URLSearchParams(location.search).get('slug') || parts[parts.length-1] || null;
+}
+function fmtDate(d){
+  if(!d) return '';
+  return new Date(d).toLocaleDateString('pt-BR',{day:'2-digit',month:'long',year:'numeric'});
 }
 
-function fmtDate(d) {
-  if (!d) return '';
-  return new Date(d).toLocaleDateString('pt-BR', {day:'2-digit', month:'long', year:'numeric'});
-}
-
-// ── Renderiza Markdown simples ────────────────────────────────────────────────
-// Suporte básico para posts escritos em Markdown. Se o painel salvar HTML direto,
-// o innerHTML já cuida. Se vier Markdown, esta função converte.
-function mdToHtml(md) {
-  if (!md) return '';
-  // Se já parece HTML, devolve como está
-  if (/^<[a-zA-Z]/.test(md.trim())) return md;
-
+// ── Markdown simples (se o painel salvar HTML direto, devolve como está) ──────
+function escHtml(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function mdToHtml(md){
+  if(!md) return '';
+  if(/^<[a-zA-Z]/.test(md.trim())) return md;
   let html = md
-    // Headings
-    .replace(/^#### (.+)$/gm, '<h4>$1</h4>')
-    .replace(/^### (.+)$/gm, '<h3>$1</h3>')
-    .replace(/^## (.+)$/gm, '<h2>$1</h2>')
-    .replace(/^# (.+)$/gm, '<h2>$1</h2>')
-    // HR
-    .replace(/^---$/gm, '<hr>')
-    // Blockquote
-    .replace(/^> (.+)$/gm, '<blockquote><p>$1</p></blockquote>')
-    // Code block (fenced)
-    .replace(/```[\w]*\n([\s\S]*?)```/g, (_, code) => `<pre><code>${escHtml(code.trim())}</code></pre>`)
-    // Inline code
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    // Bold
-    .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-    // Italic
-    .replace(/\*(.+?)\*/g, '<em>$1</em>')
-    // Images
-    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g, '<img src="$2" alt="$1">')
-    // Links
-    .replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>')
-    // Unordered list
-    .replace(/^\s*[-*] (.+)$/gm, '<li>$1</li>')
-    // Ordered list
-    .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
-    // Wrap consecutive <li> in <ul>
-    .replace(/(<li>[\s\S]+?<\/li>)(?=\s*<li>|$)/g, (m) => `<ul>${m}</ul>`)
-    // Paragraphs (double newline)
-    .replace(/\n\n+/g, '</p><p>')
-    // Line breaks
-    .replace(/\n/g, '<br>');
-
-  // Wrap in paragraph if not already a block element
-  if (!/^<(h[1-6]|ul|ol|blockquote|pre|hr|img)/.test(html.trim())) {
-    html = `<p>${html}</p>`;
-  }
+    .replace(/^#### (.+)$/gm,'<h4>$1</h4>')
+    .replace(/^### (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^## (.+)$/gm,'<h2>$1</h2>')
+    .replace(/^# (.+)$/gm,'<h2>$1</h2>')
+    .replace(/^---$/gm,'<hr>')
+    .replace(/^> (.+)$/gm,'<blockquote><p>$1</p></blockquote>')
+    .replace(/```[\w]*\n([\s\S]*?)```/g,(_,code)=>`<pre><code>${escHtml(code.trim())}</code></pre>`)
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/\*\*(.+?)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*(.+?)\*/g,'<em>$1</em>')
+    .replace(/!\[([^\]]*)\]\(([^)]+)\)/g,'<img src="$2" alt="$1">')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2" target="_blank" rel="noopener">$1</a>')
+    .replace(/^\s*[-*] (.+)$/gm,'<li>$1</li>')
+    .replace(/^\d+\. (.+)$/gm,'<li>$1</li>')
+    .replace(/(<li>[\s\S]+?<\/li>)(?=\s*<li>|$)/g,m=>`<ul>${m}</ul>`)
+    .replace(/\n\n+/g,'</p><p>')
+    .replace(/\n/g,'<br>');
+  if(!/^<(h[1-6]|ul|ol|blockquote|pre|hr|img)/.test(html.trim())) html = `<p>${html}</p>`;
   return html;
 }
 
-function escHtml(s) {
-  return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-}
-
-// ── Injeta JSON-LD de Article ─────────────────────────────────────────────────
-function injectJsonLd(post) {
+// ── JSON-LD de Article ────────────────────────────────────────────────────────
+function injectJsonLd(post){
   const url = `https://www.leanttro.com/blog/${post.slug}`;
   const ld = {
-    "@context": "https://schema.org",
-    "@graph": [
+    "@context":"https://schema.org",
+    "@graph":[
       {
-        "@type": "Article",
-        "@id": `${url}#article`,
-        "headline": post.titulo,
-        "description": post.resumo || '',
-        "image": post.imagem_url
-          ? { "@type": "ImageObject", "url": post.imagem_url }
-          : undefined,
-        "datePublished": post.publicado_em || post.criado_em || undefined,
-        "dateModified": post.updated_em || post.publicado_em || post.criado_em || undefined,
-        "author": {
-          "@type": "Person",
-          "name": "Leandro Andrade",
-          "url": "https://www.leanttro.com/"
-        },
-        "publisher": {
-          "@type": "Organization",
-          "@id": "https://www.leanttro.com/#organization",
-          "name": "Leanttro Tecnologia",
-          "logo": {
-            "@type": "ImageObject",
-            "url": "https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png"
-          }
-        },
-        "mainEntityOfPage": {
-          "@type": "WebPage",
-          "@id": url
-        },
-        "keywords": (post.tags || []).join(', ') || undefined,
-        "articleSection": CAT_LABELS[post.categoria] || post.categoria || undefined,
-        "inLanguage": "pt-BR",
-        "url": url
+        "@type":"Article","@id":`${url}#article`,
+        "headline":post.titulo,"description":post.resumo||'',
+        "image":post.imagem_url?{"@type":"ImageObject","url":post.imagem_url}:undefined,
+        "datePublished":post.publicado_em||post.criado_em||undefined,
+        "dateModified":post.updated_em||post.publicado_em||post.criado_em||undefined,
+        "author":{"@type":"Person","name":"Leandro Andrade","url":"https://www.leanttro.com/"},
+        "publisher":{"@type":"Organization","@id":"https://www.leanttro.com/#organization","name":"Leanttro Tecnologia",
+          "logo":{"@type":"ImageObject","url":"https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png"}},
+        "mainEntityOfPage":{"@type":"WebPage","@id":url},
+        "keywords":(post.tags||[]).join(', ')||undefined,
+        "articleSection":CAT_LABELS[post.categoria]||post.categoria||undefined,
+        "inLanguage":"pt-BR","url":url
       },
       {
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.leanttro.com/" },
-          { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://www.leanttro.com/blog" },
-          { "@type": "ListItem", "position": 3, "name": post.titulo, "item": url }
+        "@type":"BreadcrumbList",
+        "itemListElement":[
+          {"@type":"ListItem","position":1,"name":"Home","item":"https://www.leanttro.com/"},
+          {"@type":"ListItem","position":2,"name":"Conteúdo","item":"https://www.leanttro.com/conteudo"},
+          {"@type":"ListItem","position":3,"name":post.titulo,"item":url}
         ]
       }
     ]
   };
-  // Remove undefined fields
-  document.getElementById('json-ld').textContent = JSON.stringify(ld, (_, v) => v === undefined ? undefined : v, 2);
+  $('json-ld').textContent = JSON.stringify(ld,(_,v)=>v===undefined?undefined:v,2);
 }
 
-// ── Atualiza todas as metatags SEO ────────────────────────────────────────────
-function updateSeo(post) {
+// ── Metatags SEO ──────────────────────────────────────────────────────────────
+function updateSeo(post){
   const url = `https://www.leanttro.com/blog/${post.slug}`;
   const title = `${post.titulo} | Blog Leanttro`;
   const desc = post.resumo || 'Artigo do blog da Leanttro Tecnologia — SEO, automações e tráfego orgânico.';
   const img = post.imagem_url || 'https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png';
-
-  document.getElementById('page-title').textContent = title;
-  document.title = title;
-  document.getElementById('meta-desc').setAttribute('content', desc);
-  document.getElementById('canonical').setAttribute('href', url);
-  document.getElementById('og-title').setAttribute('content', title);
-  document.getElementById('og-desc').setAttribute('content', desc);
-  document.getElementById('og-image').setAttribute('content', img);
-  document.getElementById('og-url').setAttribute('content', url);
-  document.getElementById('tw-title').setAttribute('content', title);
-  document.getElementById('tw-desc').setAttribute('content', desc);
-  document.getElementById('tw-image').setAttribute('content', img);
+  $('page-title').textContent = title; document.title = title;
+  $('meta-desc').setAttribute('content',desc);
+  $('canonical').setAttribute('href',url);
+  $('og-title').setAttribute('content',title); $('og-desc').setAttribute('content',desc);
+  $('og-image').setAttribute('content',img);  $('og-url').setAttribute('content',url);
+  $('tw-title').setAttribute('content',title); $('tw-desc').setAttribute('content',desc);
+  $('tw-image').setAttribute('content',img);
 }
 
-// ── Preenche a página com os dados do post ────────────────────────────────────
-function renderPost(post) {
+// ── Propaganda no meio do artigo (depois do 3º bloco, se o texto for longo) ────
+function inserirPromoNoMeio(){
+  const art = $('post-content');
+  const blocos = Array.from(art.children);
+  if(blocos.length < 6) return;
+  const promo = document.createElement('aside');
+  promo.className = 'inline-promo';
+  promo.innerHTML = `<div class="ip-ico">✦</div><div><strong>Quer aparecer no Google também?</strong><span>Sites, hubs e automações que geram tráfego orgânico — a partir de R$499.</span></div><a href="${WA_POST}" target="_blank" rel="noopener">Falar no WhatsApp →</a>`;
+  blocos[2].insertAdjacentElement('afterend', promo);
+}
+
+// ── Preenche a página ─────────────────────────────────────────────────────────
+function renderPost(post){
   const catLabel = CAT_LABELS[post.categoria] || post.categoria || 'Artigo';
-  const dateStr = fmtDate(post.publicado_em || post.criado_em);
   const pageUrl = `https://www.leanttro.com/blog/${post.slug}`;
 
-  // Breadcrumb
-  document.getElementById('bc-titulo').textContent = post.titulo;
+  $('bc-titulo').textContent = post.titulo;
+  $('hero-cat').textContent = catLabel;
+  $('hero-date').textContent = fmtDate(post.publicado_em || post.criado_em);
+  $('hero-titulo').textContent = post.titulo;
+  if(post.resumo) $('hero-resumo').textContent = post.resumo; else $('hero-resumo').hidden = true;
 
-  // Hero
-  document.getElementById('hero-cat').textContent = catLabel;
-  document.getElementById('hero-date').textContent = dateStr;
-  document.getElementById('hero-titulo').textContent = post.titulo;
-  document.getElementById('hero-resumo').textContent = post.resumo || '';
+  const tagsHero = $('hero-tags');
+  (post.tags||[]).forEach(t=>{const s=document.createElement('span');s.className='post-tag';s.textContent='#'+t;tagsHero.appendChild(s)});
 
-  // Tags no hero
-  const tagsHero = document.getElementById('hero-tags');
-  (post.tags || []).forEach(t => {
-    const s = document.createElement('span');
-    s.className = 'post-hero-tag';
-    s.textContent = '#' + t;
-    tagsHero.appendChild(s);
-  });
-
-  // Imagem de capa
-  if (post.imagem_url) {
-    const coverEl = document.getElementById('post-cover');
-    document.getElementById('cover-img').src = post.imagem_url;
-    document.getElementById('cover-img').alt = post.titulo;
-    coverEl.style.display = 'block';
+  if(post.imagem_url){
+    $('cover-img').src = post.imagem_url; $('cover-img').alt = post.titulo;
+    $('post-cover').hidden = false;
   }
 
-  // Conteúdo
-  document.getElementById('post-content').innerHTML = mdToHtml(post.conteudo || '');
+  $('post-content').innerHTML = mdToHtml(post.conteudo || '');
+  inserirPromoNoMeio();
 
-  // Tags rodapé
-  const tagsEnd = document.getElementById('post-tags-end');
-  (post.tags || []).forEach(t => {
-    const a = document.createElement('a');
-    a.href = `/blog?tag=${encodeURIComponent(t)}`;
-    a.className = 'post-tag-end';
-    a.textContent = '#' + t;
-    tagsEnd.appendChild(a);
-  });
+  const tagsEnd = $('post-tags-end');
+  (post.tags||[]).forEach(t=>{const s=document.createElement('span');s.className='post-tag-end';s.textContent='#'+t;tagsEnd.appendChild(s)});
+  if(!(post.tags||[]).length) tagsEnd.hidden = true;
 
-  // Share links
-  const wppMsg = encodeURIComponent(`Vi esse artigo da Leanttro e achei muito útil: ${pageUrl}`);
-  document.getElementById('btn-share-wpp').href = `https://wa.me/?text=${wppMsg}`;
+  $('btn-share-wpp').href = `https://wa.me/?text=${encodeURIComponent(`Vi esse artigo da Leanttro e achei muito útil: ${pageUrl}`)}`;
 
-  // JSON-LD + SEO
   injectJsonLd(post);
   updateSeo(post);
 }
 
-// ── Carrega posts relacionados (mesma categoria ou todos) ─────────────────────
-async function loadRelated(currentSlug, categoria) {
-  try {
+// ── Posts relacionados (mesma categoria, com fallback p/ outros) ──────────────
+async function loadRelated(currentSlug, categoria){
+  try{
     const r = await fetch(`${API_BASE}/api/blog`);
     const list = await r.json();
-    if (!Array.isArray(list)) return;
+    if(!Array.isArray(list)) return;
 
-    // Filtra: mesma categoria, exceto post atual; fallback para outros posts
-    let related = list.filter(p => p.slug !== currentSlug && p.categoria === categoria);
-    if (related.length < 3) {
-      const outros = list.filter(p => p.slug !== currentSlug && p.categoria !== categoria);
-      related = [...related, ...outros].slice(0, 3);
-    } else {
-      related = related.slice(0, 3);
-    }
+    let related = list.filter(p=>p.slug!==currentSlug && p.categoria===categoria);
+    if(related.length < 3){
+      const outros = list.filter(p=>p.slug!==currentSlug && p.categoria!==categoria);
+      related = [...related,...outros].slice(0,3);
+    }else related = related.slice(0,3);
+    if(!related.length) return;
 
-    // Sidebar
-    const sidebarEl = document.getElementById('sidebar-posts');
-    sidebarEl.innerHTML = '';
-    related.slice(0, 4).forEach(p => {
-      const catLabel = CAT_LABELS[p.categoria] || p.categoria || 'Artigo';
+    $('sidebar-posts').innerHTML = related.slice(0,4).map(p=>{
       const thumb = p.imagem_url
-        ? `<div class="sidebar-post-thumb"><img src="${p.imagem_url}" alt="${p.titulo}" loading="lazy"></div>`
+        ? `<div class="sidebar-post-thumb"><img src="${esc(p.imagem_url)}" alt="${esc(p.titulo)}" loading="lazy"></div>`
         : `<div class="sidebar-post-thumb">${CAT_ICONS[p.categoria]||'✍️'}</div>`;
-      sidebarEl.insertAdjacentHTML('beforeend', `
-        <a href="/blog/${p.slug}" class="sidebar-post">
-          ${thumb}
-          <div class="sidebar-post-info">
-            <span>${catLabel}</span>
-            <strong>${p.titulo}</strong>
-          </div>
-        </a>
-      `);
-    });
+      return `<a href="/blog/${encodeURIComponent(p.slug||'')}" class="sidebar-post">${thumb}<div class="sidebar-post-info"><span>${esc(CAT_LABELS[p.categoria]||p.categoria||'Artigo')}</span><strong>${esc(p.titulo)}</strong></div></a>`;
+    }).join('');
 
-    // Grid de relacionados
-    const gridEl = document.getElementById('related-grid');
-    gridEl.innerHTML = '';
-    related.forEach(p => {
-      const catLabel = CAT_LABELS[p.categoria] || p.categoria || 'Artigo';
-      const thumb = p.imagem_url
-        ? `<img src="${p.imagem_url}" alt="${p.titulo}" class="related-thumb" loading="lazy">`
-        : `<div class="related-thumb-placeholder">${CAT_ICONS[p.categoria]||'✍️'}</div>`;
-      gridEl.insertAdjacentHTML('beforeend', `
-        <a href="/blog/${p.slug}" class="related-card">
-          ${thumb}
-          <div class="related-body">
-            <span class="related-cat">${catLabel}</span>
-            <h3>${p.titulo}</h3>
-            <p>${p.resumo || ''}</p>
-          </div>
-          <div class="related-footer">
-            <span class="btn-ler">Ler artigo <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></span>
-          </div>
-        </a>
-      `);
-    });
-  } catch(e) {
-    // Silencia erro de relacionados — não crítico
-  }
+    $('related-grid').innerHTML = related.map(p=>{
+      const cat = CAT_LABELS[p.categoria]||p.categoria||'Artigo';
+      const thumb = p.imagem_url ? `<img src="${esc(p.imagem_url)}" alt="${esc(p.titulo)}" loading="lazy">` : (CAT_ICONS[p.categoria]||'✍️');
+      return `<a href="/blog/${encodeURIComponent(p.slug||'')}" class="related-card"><div class="related-thumb">${thumb}<span class="related-tag">${esc(cat)}</span></div><div class="related-body"><h3>${esc(p.titulo)}</h3>${p.resumo?`<p>${esc(p.resumo)}</p>`:''}<span class="more">Ler artigo →</span></div></a>`;
+    }).join('');
+    $('related-section').hidden = false;
+  }catch(e){ /* não crítico */ }
 }
 
-// ── Copy link ────────────────────────────────────────────────────────────────
-document.getElementById('btn-copy').addEventListener('click', () => {
-  navigator.clipboard.writeText(window.location.href).then(() => {
-    const fb = document.getElementById('copy-feedback');
-    fb.classList.add('show');
-    setTimeout(() => fb.classList.remove('show'), 2500);
+// ── Copiar link ───────────────────────────────────────────────────────────────
+$('btn-copy').addEventListener('click',()=>{
+  navigator.clipboard.writeText(window.location.href).then(()=>{
+    const fb = $('copy-feedback'); fb.classList.add('show');
+    setTimeout(()=>fb.classList.remove('show'),2500);
   });
 });
 
-// ── Nav mobile ───────────────────────────────────────────────────────────────
-document.getElementById('hamburger').addEventListener('click', () => document.getElementById('mobileNav').classList.add('active'));
-document.getElementById('navClose').addEventListener('click', closeNav);
-function closeNav() { document.getElementById('mobileNav').classList.remove('active'); }
+// ── Menu mobile do cabeçalho ──────────────────────────────────────────────────
+const shT=$('shToggle'), shM=$('shMenu');
+shT.addEventListener('click',()=>{const o=shM.classList.toggle('open');shT.setAttribute('aria-expanded',String(o))});
+shM.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{shM.classList.remove('open');shT.setAttribute('aria-expanded','false')}));
 
 // ── Inicialização ─────────────────────────────────────────────────────────────
-async function init() {
+async function init(){
   const slug = getSlug();
-  if (!slug || slug === 'blog') {
-    window.location.href = '/blog';
-    return;
-  }
-
-  try {
+  if(!slug || slug==='blog'){ window.location.href='/conteudo'; return; }
+  try{
     const r = await fetch(`${API_BASE}/api/blog/${encodeURIComponent(slug)}`);
-    if (!r.ok) throw new Error('not found');
+    if(!r.ok) throw new Error('not found');
     const post = await r.json();
-    if (post.erro) throw new Error(post.erro);
-
-    // Oculta loading, exibe post
-    document.getElementById('loading-state').style.display = 'none';
-    document.getElementById('post-wrapper').style.display = 'block';
-
+    if(post.erro) throw new Error(post.erro);
+    $('loading-state').hidden = true;
+    $('post-wrapper').hidden = false;
     renderPost(post);
     loadRelated(slug, post.categoria);
-
-  } catch(e) {
-    document.getElementById('loading-state').style.display = 'none';
-    document.getElementById('error-state').style.display = 'block';
+  }catch(e){
+    $('loading-state').hidden = true;
+    $('error-state').hidden = false;
   }
 }
-
 init();
 </script>
 </body>
