@@ -275,7 +275,7 @@ body .chat-options {
 @media(max-width:900px){.site-header .menu{display:none}.site-header .nav{gap:12px;height:68px}.site-header .logo img{height:34px}.site-header .nav-wa{margin-left:auto}}
 
 /* ===== SLIDES: setas + bolinhas ===== */
-.hc-track{transition:transform 1s cubic-bezier(.65,0,.35,1)}
+.hc-track{transition:none!important;width:100%}.hc-sticky{background:#080711}.hc-track>.section{min-width:100%;max-width:100%;flex:0 0 100%}
 .hc-track>.section{padding:20px 0 76px}
 .hc-ui{position:absolute;left:0;right:0;bottom:16px;z-index:5;display:flex;align-items:center;justify-content:center;gap:16px;pointer-events:none}
 .hc-ui>*{pointer-events:auto}
@@ -443,7 +443,7 @@ document.getElementById('year').textContent=new Date().getFullYear();
   function warm(i){ for(var k=Math.max(0,i-1);k<=Math.min(n-1,i+2);k++){ [].forEach.call(slides[k].querySelectorAll('img[loading=lazy]'),function(im){ im.loading='eager'; }); } }
   function show(i){
     idx=i; warm(i);
-    track.style.transform='translate3d('+(-i*slideW)+'px,0,0)';
+    track.style.transform='translate3d('+(-i*100)+'%,0,0)';
     dots.forEach(function(d,k){ d.classList.toggle('on',k===i); });
     prev.disabled=(i===0); next.disabled=(i===n-1);
     placeUi();
@@ -460,7 +460,7 @@ document.getElementById('year').textContent=new Date().getFullYear();
   // troca de slide: pula a posição de rolagem (o slide fica fixo na tela) e anima a troca
   function go(i){
     if(i<0||i>n-1) return;
-    lockUntil=Date.now()+(reduce?150:1100);
+    lockUntil=Date.now()+250;
     if(!pinned()) window.scrollTo({top:absTop(),behavior:'instant'});
     window.scrollTo({top:absTop()+i*slideH,behavior:'instant'});
     show(i);
@@ -479,8 +479,7 @@ document.getElementById('year').textContent=new Date().getFullYear();
       var h=w.offsetHeight, k=h>avail?avail/h:1;
       w.style.transform=k<1?'scale('+k+')':'none';
     });
-    var t=track.style.transition; track.style.transition='none';
-    show(idx); track.offsetHeight; track.style.transition=reduce?'none':t;
+    show(idx);
     if(pinned()) window.scrollTo({top:absTop()+idx*slideH,behavior:'instant'});
     placeUi();
   }
