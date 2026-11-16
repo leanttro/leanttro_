@@ -152,15 +152,62 @@ def deletar_produto(id):
     return jsonify({"ok": True})
 
 # ─── LEADS ────────────────────────────────────────────────────────────────────
+import re as _re
+import time as _time
+_LEAD_HITS = {}   # ip -> [timestamps] (limite simples em memória)
+
+def _tel_valido(t):
+    """Aceita celular/fixo BR (com ou sem +55). Recusa DDD inválido e números repetidos."""
+    d = _re.sub(r"\D", "", t or "")
+    if d.startswith("55") and len(d) in (12, 13):
+        d = d[2:]
+    if len(d) not in (10, 11):
+        return None
+    if d[0] == "0" or d[1] == "0":                      # DDD inválido
+        return None
+    num = d[2:]
+    if len(set(num)) <= 2:                              # 99999999, 12121212...
+        return None
+    if len(num) == 9 and num[0] != "9":                 # celular começa com 9
+        return None
+    if len(num) == 8 and num[0] not in "2345":          # fixo começa 2-5
+        return None
+    return d
+
 @app.route("/leads", methods=["POST"])
 def capturar_lead():
-    d = request.json
+    d = request.get_json(silent=True) or {}
+
+    # honeypot: se algum campo escondido vier preenchido, finge sucesso e descarta
+    if d.get("website") or d.get("hp") or d.get("_gotcha"):
+        return jsonify({"id": 0}), 201
+
+    # limite por IP: 5 envios por hora
+    ip = (request.headers.get("X-Forwarded-For", request.remote_addr) or "").split(",")[0].strip()
+    agora = _time.time()
+    hits = [t for t in _LEAD_HITS.get(ip, []) if agora - t < 3600]
+    if len(hits) >= 5:
+        return jsonify({"erro": "Muitas tentativas. Tente novamente mais tarde."}), 429
+    hits.append(agora); _LEAD_HITS[ip] = hits
+
+    nome = str(d.get("nome") or "").strip()[:120]
+    if len(_re.findall(r"[A-Za-zÀ-ÿ]", nome)) < 2:
+        return jsonify({"erro": "Informe seu nome."}), 400
+
+    tel = _tel_valido(str(d.get("telefone") or ""))
+    if not tel:
+        return jsonify({"erro": "Informe um WhatsApp válido com DDD."}), 400
+
+    email = str(d.get("email") or "").strip()[:160]
+    empresa = str(d.get("empresa") or "").strip()[:160]
+    origem = str(d.get("origem") or "site").strip()[:40]
+    interesse = str(d.get("interesse") or "").strip()[:160]
+
     conn = get_db(); cur = conn.cursor()
     cur.execute("""
         INSERT INTO leads (nome, email, telefone, empresa, origem, interesse, status)
         VALUES (%s,%s,%s,%s,%s,%s,'novo') RETURNING id
-    """, (d.get("nome"), d.get("email"), d.get("telefone"), d.get("empresa"),
-          d.get("origem", "site"), d.get("interesse")))
+    """, (nome, email, tel, empresa, origem, interesse))
     novo_id = cur.fetchone()["id"]
     conn.commit(); cur.close(); conn.close()
     return jsonify({"id": novo_id}), 201
