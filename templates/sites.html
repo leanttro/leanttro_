@@ -813,6 +813,7 @@ p.onclick=function(){go(-1)};n.onclick=function(){go(1)};t.addEventListener("scr
   window.scrollTo({top:0,left:0,behavior:'instant'});
 
   // entrada: rolar / deslizar / setas
+  var MOB=matchMedia('(max-width:900px)').matches;
   function push(d){ if(exploded) return; target=Math.max(0,Math.min(1,target+d)); }
   var openedAt=0, fwd=0;
   function back(to){
@@ -829,7 +830,7 @@ p.onclick=function(){go(-1)};n.onclick=function(){go(1)};t.addEventListener("scr
   addEventListener('touchmove',function(e){
     if(ty===null) return; var y=e.touches[0].clientY;
     if(exploded){ if(y-ty>40 && window.scrollY<=0 && Date.now()-openedAt>900){back(.9);ty=y} return; }
-    push((ty-y)/(innerHeight*.42)); ty=y;
+    push((ty-y)/(innerHeight*(MOB?.3:.42))); ty=y;
   },{passive:true});
   addEventListener('touchend',function(){ty=null});
   addEventListener('keydown',function(e){
@@ -843,18 +844,19 @@ p.onclick=function(){go(-1)};n.onclick=function(){go(1)};t.addEventListener("scr
 
   function explode(){
     if(exploded) return; exploded=true; target=1;
-    root.classList.remove('locked'); openedAt=Date.now();
+    if(MOB){ setTimeout(function(){ if(exploded) root.classList.remove('locked'); },1300); } else root.classList.remove('locked');
+    openedAt=Date.now();
     setTimeout(function(){stage.classList.add('gone')},250);
   }
 
   function frame(ms){
     var t=ms/1000, w=reduce?0:1;
-    cur+=(target-cur)*.1; sx+=(mx-sx)*.06; sy+=(my-sy)*.06;
+    cur+=(target-cur)*(MOB?.18:.1); sx+=(mx-sx)*.06; sy+=(my-sy)*.06;
     var p=cur, E0=.46, sp=p*p*(3-2*p), e=E0+(1-E0)*sp, tl=1-e;
     var fl=Math.sin(t*.9)*.6*w*(1-p);
     device.style.transform='perspective(1400px) translate3d('+(sx*10*tl)+'px,'+((5+fl*2)*tl)+'vh,0) rotateY('+(-16*tl+sx*5*tl)+'deg) rotateX('+(9*tl-sy*4*tl)+'deg) rotateZ('+(-3*tl+fl*.4)+'deg) scale('+(.42+.58*e)+')';
-    screen.style.borderWidth=(26*tl)+'px';
-    screen.style.borderRadius=(44*tl)+'px';
+    screen.style.borderWidth=((MOB?10:26)*tl)+'px';
+    screen.style.borderRadius=((MOB?22:44)*tl)+'px';
     screen.style.boxShadow=tl>.02?'0 0 110px rgba(0,224,255,'+(.4*tl)+'),0 40px 90px rgba(0,0,0,'+(.6*tl)+')':'none';
     if(hint) hint.style.opacity=Math.max(0,.55*(1-p*8)).toFixed(3);
     thumb.style.top=(p*(170-32))+'px';
