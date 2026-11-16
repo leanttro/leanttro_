@@ -232,7 +232,9 @@ select.filter-sel{
 }
 .bulk-bar.show{display:flex}
 .ms{position:relative}
-.ms-btn{min-width:170px;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.ms-btn{min-width:170px;text-align:left;display:flex;justify-content:space-between;align-items:center;gap:8px;
+  padding:7px 12px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);
+  color:var(--text);font-family:var(--sans);font-size:.78rem;outline:none;cursor:pointer}
 .ms-btn.active{border-color:var(--accent);color:var(--accent)}
 .ms-panel{display:none;position:absolute;top:calc(100% + 4px);left:0;z-index:60;width:300px;
   background:var(--card);border:1px solid var(--border2);border-radius:var(--radius);
@@ -646,8 +648,9 @@ input[type=checkbox].row-check{
             <button class="btn-primary" onclick="openModal('negocio')">+ Novo</button>
           </div>
         </div>
-        <div class="bulk-bar" id="bulk-negocios">
+        <div class="bulk-bar show" id="bulk-negocios">
           <span class="bulk-count" id="bulk-negocios-count">0 selecionados</span>
+          <button class="btn-secondary" onclick="selecionarTodosFiltrados()">☑ Selecionar todos os filtrados</button>
           <button class="btn-primary" onclick="bulkSetAtivo(true)">✓ Ativar selecionados</button>
           <button class="btn-secondary" onclick="bulkSetAtivo(false)">⏸ Desativar selecionados</button>
           <button class="btn-secondary" onclick="ativarSoSelecionados()">★ Ativar só os selecionados (desativar o resto)</button>
@@ -1365,6 +1368,12 @@ function toggleAll(type, checked) {
   updateBulkBar(type);
 }
 
+function selecionarTodosFiltrados() {
+  toggleAll('negocios', true);
+  const c = document.getElementById('chk-all-negocios');
+  if (c) c.checked = true;
+}
+
 function deselectAll(type) {
   const sets = { produtos: _selectedProdutos, leads: _selectedLeads, negocios: _selectedNegocios };
   const s = sets[type];
@@ -1385,7 +1394,8 @@ function updateBulkBar(type) {
     bar.classList.add('show');
     count.textContent = s.size + ' selecionado' + (s.size > 1 ? 's' : '');
   } else {
-    bar.classList.remove('show');
+    count.textContent = '0 selecionados';
+    if (type !== 'negocios') bar.classList.remove('show');
   }
 }
 
@@ -1495,7 +1505,7 @@ async function setAtivoNegocios(list, ativo) {
 }
 async function bulkSetAtivo(ativo) {
   const ids = _selectedNegocios;
-  if (ids.size === 0) return;
+  if (ids.size === 0) { toast('Marque os negócios na tabela primeiro', 'warn'); return; }
   const list = _negocios.filter(n => ids.has(n.id));
   const qtd = await setAtivoNegocios(list, ativo);
   await loadNegocios();
@@ -1505,7 +1515,7 @@ async function bulkSetAtivo(ativo) {
 }
 async function ativarSoSelecionados() {
   const ids = _selectedNegocios;
-  if (ids.size === 0) return;
+  if (ids.size === 0) { toast('Marque os negócios na tabela primeiro', 'warn'); return; }
   const outros = _negocios.filter(n => !ids.has(n.id));
   if (!confirm(`Ativar os ${ids.size} selecionados e DESATIVAR os outros ${outros.length} negócios (de todas as categorias/bairros)?\n\nNada será excluído.`)) return;
   await setAtivoNegocios(_negocios.filter(n => ids.has(n.id)), true);
