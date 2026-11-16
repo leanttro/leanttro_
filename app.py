@@ -512,6 +512,21 @@ def listar_hub_negocios():
     if bairro:
         filters.append("LOWER(n.bairro) LIKE %s")
         params.append(f"%{bairro.lower()}%")
+    # "Perto de mim": lat/lng do visitante -> ordena por distância (haversine, km)
+    import math
+    lat  = request.args.get("lat", type=float)
+    lng  = request.args.get("lng", type=float)
+    raio = request.args.get("raio", type=float)
+    dist_sql = None
+    if (lat is not None and lng is not None and math.isfinite(lat) and math.isfinite(lng)
+            and -90 <= lat <= 90 and -180 <= lng <= 180):
+        la = "(CASE WHEN n.lat::text ~ '^-?[0-9.]+$' THEN n.lat::text::float8 END)"
+        lo = "(CASE WHEN n.lng::text ~ '^-?[0-9.]+$' THEN n.lng::text::float8 END)"
+        dist_sql = (f"(2*6371*asin(sqrt(least(1.0, power(sin(radians({la} - {lat:.6f})/2),2) + "
+                    f"cos(radians({lat:.6f}))*cos(radians({la}))*power(sin(radians({lo} - {lng:.6f})/2),2)))))")
+        filters.append(f"{la} IS NOT NULL AND {lo} IS NOT NULL")
+        if raio and math.isfinite(raio) and raio > 0:
+            filters.append(f"{dist_sql} <= {min(raio, 500):.3f}")
     where = " AND ".join(filters)
 
     # Sem "limit" o comportamento é o antigo (devolve tudo) — outras páginas continuam funcionando.
@@ -527,10 +542,11 @@ def listar_hub_negocios():
             SELECT n.id, n.nome, n.slug, n.endereco, n.bairro, n.cidade, n.telefone, n.whatsapp,
                    n.foto_url, n.plano, n.destaque, n.categoria_id,
                    c.nome as categoria_nome, c.slug as categoria_slug
+                   {(", " + dist_sql + " AS distancia_km") if dist_sql else ""}
             FROM hub_negocios n
             JOIN hub_categorias c ON c.id = n.categoria_id
             WHERE {where}
-            ORDER BY n.destaque DESC, n.visualizacoes DESC NULLS LAST, n.id DESC
+            ORDER BY {(dist_sql + " ASC, n.id") if dist_sql else "n.destaque DESC, n.visualizacoes DESC NULLS LAST, n.id DESC"}
             LIMIT %s OFFSET %s
         """, params + [limit, offset])
         negocios = cur.fetchall()
