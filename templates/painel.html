@@ -645,6 +645,8 @@ input[type=checkbox].row-check{
               <option value="1">Só ativos</option>
               <option value="0">Só inativos</option>
             </select>
+            <button class="btn-secondary" onclick="document.getElementById('gsc-file').click()" title="Carregue o Páginas.csv exportado do Google Search Console">📊 Tráfego Google</button>
+            <input type="file" id="gsc-file" accept=".csv" style="display:none" onchange="carregarGSC(this)">
             <button class="btn-primary" onclick="openModal('negocio')">+ Novo</button>
           </div>
         </div>
@@ -654,7 +656,6 @@ input[type=checkbox].row-check{
           <button class="btn-primary" onclick="bulkSetAtivo(true)">✓ Ativar selecionados</button>
           <button class="btn-secondary" onclick="bulkSetAtivo(false)">⏸ Desativar selecionados</button>
           <button class="btn-secondary" onclick="ativarSoSelecionados()">★ Ativar só os selecionados (desativar o resto)</button>
-          <button class="btn-danger" onclick="bulkDeleteConfirm('negocios')">🗑 Excluir selecionados</button>
           <button class="btn-secondary" onclick="deselectAll('negocios')">Cancelar</button>
         </div>
         <table>
@@ -1439,7 +1440,7 @@ function msRender(key) {
   const st = _ms[key];
   const html = st.opts.map((o, i) => ({ o, i }))
     .filter(x => !q || x.o.label.toLowerCase().includes(q))
-    .map(x => `<label class="ms-item"><input type="checkbox" ${st.sel.has(x.o.value) ? 'checked' : ''} onchange="msToggleItem('${key}',${x.i},this.checked)"><span>${_esc(x.o.label)}</span><span class="ms-n">${x.o.count}</span></label>`)
+    .map(x => `<label class="ms-item"><input type="checkbox" ${st.sel.has(x.o.value) ? 'checked' : ''} onchange="msToggleItem('${key}',${x.i},this.checked)"><span>${_esc(x.o.label)}</span><span class="ms-n">${x.o.countText ?? x.o.count}</span></label>`)
     .join('');
   root.querySelector('.ms-list').innerHTML = html || '<div class="ms-empty">Nada encontrado</div>';
   msLabel(key);
@@ -1482,6 +1483,29 @@ document.addEventListener('click', e => {
   if (!e.target.closest('.ms')) document.querySelectorAll('.ms.open').forEach(x => x.classList.remove('open'));
 });
 
+// ── TRÁFEGO DO GOOGLE SEARCH CONSOLE ──
+let _gsc = null;
+function carregarGSC(input) {
+  const f = input.files[0];
+  if (!f) return;
+  const rd = new FileReader();
+  rd.onload = () => {
+    const map = {};
+    rd.result.split(/\r?\n/).slice(1).forEach(line => {
+      const m = line.match(/\/negocio\/([^,\/?#]+),(\d+),(\d+)/);
+      if (m) map[decodeURIComponent(m[1]).toLowerCase()] = { cl: +m[2], im: +m[3] };
+    });
+    _gsc = map;
+    input.value = '';
+    const comTrafego = _negocios.filter(n => _gsc[(n.slug||'').toLowerCase()]);
+    loadNegocios().then(() => {
+      const bairrosCom = new Set(comTrafego.map(n => (n.bairro||'').trim().toLowerCase()).filter(Boolean));
+      toast(`${comTrafego.length} negócios e ${bairrosCom.size} bairros com tráfego. Bairros ordenados por cliques.`, 'success');
+    });
+  };
+  rd.readAsText(f, 'utf-8');
+}
+
 // ── ATIVAR / DESATIVAR NEGÓCIOS (sem excluir) ──
 function negocioBody(n, ativo) {
   return {
@@ -1507,7 +1531,10 @@ async function bulkSetAtivo(ativo) {
   const ids = _selectedNegocios;
   if (ids.size === 0) { toast('Marque os negócios na tabela primeiro', 'warn'); return; }
   const list = _negocios.filter(n => ids.has(n.id));
-  const qtd = await setAtivoNegocios(list, ativo);
+  let qtd;
+  const r = await api('POST', '/admin/hub/negocios/ativo-bulk', { ids: [...ids], ativo }).catch(() => null);
+  if (r && r.ok) qtd = r.afetados;
+  else qtd = await setAtivoNegocios(list, ativo);   // fallback: um PUT por negócio
   await loadNegocios();
   const falhas = list.filter(n => !!_negocios.find(x => x.id === n.id)?.ativo !== ativo).length;
   if (falhas) toast(`${qtd - falhas} alterados, ${falhas} falharam`, 'error');
@@ -1518,8 +1545,11 @@ async function ativarSoSelecionados() {
   if (ids.size === 0) { toast('Marque os negócios na tabela primeiro', 'warn'); return; }
   const outros = _negocios.filter(n => !ids.has(n.id));
   if (!confirm(`Ativar os ${ids.size} selecionados e DESATIVAR os outros ${outros.length} negócios (de todas as categorias/bairros)?\n\nNada será excluído.`)) return;
-  await setAtivoNegocios(_negocios.filter(n => ids.has(n.id)), true);
-  await setAtivoNegocios(outros, false);
+  const r = await api('POST', '/admin/hub/negocios/ativo-bulk', { ids: [...ids], exclusivo: true }).catch(() => null);
+  if (!(r && r.ok)) {   // fallback: um PUT por negócio
+    await setAtivoNegocios(_negocios.filter(n => ids.has(n.id)), true);
+    await setAtivoNegocios(outros, false);
+  }
   await loadNegocios();
   toast('Pronto! Só os selecionados ficaram ativos.', 'success');
 }
@@ -1546,7 +1576,9 @@ async function loadCategorias() {
 }
 
 async function loadNegocios() {
-  _negocios = await api('GET', '/hub/negocios');
+  // Painel precisa ver TODOS (inclusive inativos); cai para a rota antiga se a nova não existir ainda
+  _negocios = await api('GET', '/admin/hub/negocios').catch(() => null);
+  if (!Array.isArray(_negocios)) _negocios = await api('GET', '/hub/negocios');
   _selectedNegocios.clear();
   // Popula filtro de bairros dinamicamente
   const bMap = {};
@@ -1554,10 +1586,19 @@ async function loadNegocios() {
     const b = (n.bairro||'').trim();
     if (!b) return;
     const k = b.toLowerCase();
-    if (!bMap[k]) bMap[k] = { value: k, label: b, count: 0 };
+    if (!bMap[k]) bMap[k] = { value: k, label: b, count: 0, cl: 0, im: 0 };
     bMap[k].count++;
+    const g = _gsc && _gsc[(n.slug||'').toLowerCase()];
+    if (g) { bMap[k].cl += g.cl; bMap[k].im += g.im; }
   });
-  msSetOptions('bairro', Object.values(bMap).sort((a,b) => a.label.localeCompare(b.label, 'pt-BR')));
+  let bOpts = Object.values(bMap);
+  if (_gsc) {
+    bOpts.sort((a,b) => (b.cl - a.cl) || (b.im - a.im) || a.label.localeCompare(b.label, 'pt-BR'));
+    bOpts.forEach(o => o.countText = `${o.cl} cliques · ${o.im} imp · ${o.count} neg`);
+  } else {
+    bOpts.sort((a,b) => a.label.localeCompare(b.label, 'pt-BR'));
+  }
+  msSetOptions('bairro', bOpts);
   // Atualiza contagem das categorias também
   const catCount = {};
   _negocios.forEach(n => { catCount[n.categoria_id] = (catCount[n.categoria_id]||0) + 1; });
