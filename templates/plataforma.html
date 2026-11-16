@@ -1,0 +1,643 @@
+<!doctype html>
+<html lang="pt-BR" class="locked">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://directus.leanttro.com" crossorigin><link rel="preconnect" href="https://res.cloudinary.com" crossorigin><link rel="preload" as="image" href="https://directus.leanttro.com/assets/c4152172-b29b-4dca-bb6e-63e1e2a3c2f8?width=900&quality=75&format=webp" imagesrcset="https://directus.leanttro.com/assets/c4152172-b29b-4dca-bb6e-63e1e2a3c2f8?width=600&quality=75&format=webp 600w, https://directus.leanttro.com/assets/c4152172-b29b-4dca-bb6e-63e1e2a3c2f8?width=900&quality=75&format=webp 900w, https://directus.leanttro.com/assets/c4152172-b29b-4dca-bb6e-63e1e2a3c2f8?width=1200&quality=75&format=webp 1200w" imagesizes="(max-width:850px) 92vw, 590px" fetchpriority="high">
+<meta name="description" content="A Leanttro desenvolve plataformas web para negócios: marketplaces, portais, classificados e catálogos com painel administrativo e recursos sob medida.">
+<title>Desenvolvimento de Plataformas Web | Leanttro</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#080711;--panel:#100d20;--panel2:#17112b;--purple:#742cff;--violet:#a34cff;--text:#f7f4ff;--muted:#c7c1dc;--line:#2c2048;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:0}body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;line-height:1.55}a{color:inherit;text-decoration:none}button,a{ -webkit-tap-highlight-color:transparent}.wrap{width:min(1160px,calc(100% - 40px));margin:auto}.site-header{position:relative;top:auto;z-index:20;background:rgba(8,7,17,.9);backdrop-filter:blur(16px);border-bottom:1px solid rgba(163,76,255,.16)}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}.logo{font-weight:1000;font-size:24px;letter-spacing:-1.8px;font-style:italic;white-space:nowrap}.logo span{color:var(--violet)}.nav-links{display:flex;align-items:center;gap:25px;color:#e4def6;font-size:13px}.nav-links a:hover{color:#c18cff}.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border:1px solid transparent;border-radius:999px;padding:13px 20px;font-weight:750;font-size:14px;background:linear-gradient(110deg,#6420ef,#8b35ff);color:white;box-shadow:0 8px 30px #6928ff30;transition:transform .2s,filter .2s;cursor:pointer}.btn:hover{transform:translateY(-2px);filter:brightness(1.12)}.btn.outline{background:transparent;border-color:#8842ff;box-shadow:none}.btn.small{padding:10px 15px;font-size:12px}.hero{position:relative;overflow:hidden;padding:76px 0 48px;background:radial-gradient(ellipse at 78% 35%,#42138b65 0,transparent 42%),linear-gradient(120deg,#090812,#0b0816 70%,#170a30)}.hero-grid{display:grid;grid-template-columns:1fr 1.05fr;align-items:center;gap:42px}.eyebrow{color:#bd8aff;text-transform:uppercase;font-weight:850;letter-spacing:1.7px;font-size:12px}.hero h1{font-size:clamp(38px,5vw,65px);line-height:.99;letter-spacing:-2.8px;margin:18px 0 20px;max-width:650px}.gradient{background:linear-gradient(90deg,#8c42ff,#d09cff);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{font-size:17px;color:var(--muted);max-width:520px}.actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}.hero-note{display:flex;gap:14px;flex-wrap:wrap;margin-top:27px;color:#d6cbea;font-size:12px}.hero-note span:before{content:"✓";color:#b987ff;margin-right:7px;font-weight:900}.device-stage{position:relative;min-height:380px;display:flex;align-items:center;justify-content:center}.glow{position:absolute;width:75%;height:60%;background:#7126ff55;filter:blur(75px);border-radius:50%}.laptop{position:relative;width:100%;max-width:590px;transform:perspective(1100px) rotateY(-5deg)}.screen{background:#dcd8f6;border:7px solid #272337;border-bottom-width:12px;border-radius:15px;padding:10px;box-shadow:0 0 0 1px #8c69ff,0 20px 60px #0009}.browserbar{height:18px;display:flex;gap:5px;align-items:center;padding:0 6px}.browserbar i{width:6px;height:6px;border-radius:50%;background:#8d7ea8}.mock-site{background:#f8f7ff;color:#1b1740;border-radius:8px;overflow:hidden;min-height:240px}.mock-top{display:flex;justify-content:space-between;align-items:center;padding:12px 15px;font-size:10px;font-weight:800;border-bottom:1px solid #e4e0f2}.mock-brand{color:#5b26d9;font-weight:950;font-size:15px}.mock-hero{padding:18px;display:grid;grid-template-columns:1fr 1fr;gap:12px;background:linear-gradient(120deg,#f7f5ff,#ded7ff)}.mock-hero h3{font-size:21px;line-height:1.05;margin:12px 0}.mock-hero p{font-size:10px;color:#625b7e;margin:0}.house{min-height:140px;border-radius:9px;background:linear-gradient(145deg,#8fb3d8,#d9e6f1 45%,#686e7d 46%,#f1e5cf 47%,#b7a68f);position:relative;overflow:hidden}.house:before{content:"";position:absolute;left:14%;right:12%;bottom:12%;height:58%;background:linear-gradient(90deg,#ddd7ca 0 35%,#b7d4e9 35% 48%,#eee8dc 48% 70%,#8fb8d3 70%);clip-path:polygon(0 25%,50% 0,100% 25%,100% 100%,0 100%);box-shadow:0 8px 12px #3335}.mock-search{margin:12px 0 0;padding:9px 12px;border-radius:7px;background:white;border:1px solid #ded6f7;color:#8c83a5;font-size:10px}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}.property{background:#fff;border-radius:7px;padding:6px;box-shadow:0 2px 8px #382a6312}.property .mini-house{height:48px;border-radius:5px;background:linear-gradient(150deg,#b9d6e9,#edf0ed 40%,#8c887d 41%,#ded3bd 42%)}.property b{display:block;font-size:8px;margin-top:5px}.property small{font-size:7px;color:#6c6481}.laptop-base{height:13px;background:linear-gradient(#77738c,#262333);margin:-1px -4% 0;border-radius:0 0 25px 25px;box-shadow:0 18px 22px #0008}.phone{position:absolute;right:-4px;bottom:15px;width:112px;padding:6px;border-radius:20px;background:#1e1b2d;border:2px solid #aaa1c9;box-shadow:0 15px 35px #0008;transform:rotate(4deg)}.phone-screen{background:#f9f7ff;color:#24164b;border-radius:14px;min-height:180px;padding:8px}.phone-screen .mini-house{height:70px;border-radius:7px;background:linear-gradient(150deg,#b9d6e9,#edf0ed 40%,#8c887d 41%,#ded3bd 42%)}.phone-screen b{font-size:9px;display:block;margin:8px 0}.phone-screen small{font-size:7px}.phone-button{display:block;background:#7029f6;color:#fff;text-align:center;border-radius:10px;padding:6px;font-size:7px;margin-top:8px}.trust-strip{background:#100c1d;border-block:1px solid #25163e}.trust{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;padding:19px 0}.trust div{text-align:center;color:#ddd3f6;font-size:13px}.trust strong{color:white;display:block;font-size:14px}.section{padding:76px 0;border-bottom:1px solid #211632}.section{background:#080711}.section.alt{background:radial-gradient(ellipse at 0% 50%,#6a28d040,transparent 45%),linear-gradient(180deg,#1d0f45,#150a33);border-bottom-color:#3a2273}.section.alt+.section,.section+.section.alt{border-top:1px solid #3a2273}#plataforma{background:#fff;color:#1a1038;border-bottom-color:#e4dcf7}#plataforma .eyebrow{color:#6a26d9}#plataforma h2{color:#1a1038}#plataforma .gradient{background:linear-gradient(90deg,#6420ef,#a34cff);-webkit-background-clip:text;background-clip:text;color:transparent}#plataforma p{color:#4b4468}#plataforma .checks{color:#2a2145}#plataforma .ui-card{border-color:#b9a5ff;box-shadow:0 18px 50px #5b2fd128,0 4px 14px #5b2fd114}.split{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:56px}.split.reverse .copy{order:2}.split.reverse .visual{order:1}.section h2{font-size:clamp(28px,3.5vw,43px);line-height:1.06;letter-spacing:-1.4px;margin:12px 0 16px}.section p{color:var(--muted);margin:0 0 18px}.checks{list-style:none;padding:0;margin:20px 0 0;display:grid;gap:9px;color:#e5def5;font-size:14px}.checks li:before{content:"✓";display:inline-grid;place-items:center;width:19px;height:19px;border-radius:50%;background:#6f2bea;color:white;font-size:12px;font-weight:900;margin-right:10px}.visual{min-width:0}.ui-card{background:linear-gradient(140deg,#f7f5ff,#e6e0ff);color:#201844;border:1px solid #a28aff;border-radius:15px;padding:17px;box-shadow:0 0 35px #762aff22,0 18px 45px #0003;overflow:hidden}.ui-top{display:flex;align-items:center;justify-content:space-between;gap:10px;font-weight:850;font-size:13px;padding-bottom:13px;border-bottom:1px solid #d4cbed}.pill{font-size:9px;background:#e0d5ff;color:#5920c9;padding:5px 8px;border-radius:99px}.filter-row{display:flex;gap:7px;flex-wrap:wrap;margin:12px 0}.filter{font-size:9px;background:white;border:1px solid #d8d0ef;border-radius:6px;padding:7px 9px;color:#5d5477}.property-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px}.property.large .mini-house{height:82px}.property.large b{font-size:10px}.property.large small{font-size:9px}.dashboard{display:grid;grid-template-columns:100px 1fr;gap:12px;min-height:240px}.sidebar{background:#21164a;color:#e4d9ff;border-radius:9px;padding:13px 9px;font-size:10px}.sidebar strong{display:block;font-size:12px;margin-bottom:15px}.sidebar span{display:block;padding:7px 0;color:#c5b5f1}.dash-main{min-width:0}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:13px 0}.stat{padding:10px 7px;background:white;border-radius:7px;font-size:9px;color:#6b6086}.stat b{display:block;color:#4f21bd;font-size:17px}.chart{height:90px;background:linear-gradient(180deg,#e1d7ff,#fff);border-radius:8px;position:relative;overflow:hidden;padding:10px}.chart svg{width:100%;height:100%}.table-ui{width:100%;border-collapse:collapse;font-size:10px}.table-ui th,.table-ui td{text-align:left;padding:10px 6px;border-bottom:1px solid #ded7f2}.table-ui th{color:#766b91}.status{color:#16774b;background:#d9f6e7;border-radius:20px;padding:3px 6px;font-size:9px}.saved{color:#752bfa;font-size:20px}.pricing-ui{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:14px}.plan{background:white;border:1px solid #ddd4f5;border-radius:9px;padding:14px 10px;text-align:center}.plan.featured{border:2px solid #8037ff;transform:translateY(-5px)}.plan h4{margin:0 0 8px;font-size:12px}.plan strong{display:block;font-size:21px;color:#4e22b8}.plan small{font-size:9px;color:#6e6486}.plan button{margin-top:12px;border:0;background:#6e2bf4;color:white;border-radius:99px;padding:7px 10px;font-size:10px;font-weight:800}.blog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:13px}.blog-post{background:white;border-radius:8px;padding:8px}.blog-image{height:70px;border-radius:5px;background:linear-gradient(145deg,#a9c9e0,#e5e2d9 45%,#9c9589 46%,#d7c7b1)}.blog-post b{font-size:10px;display:block;margin-top:8px}.blog-post small{font-size:9px;color:#776d91}.chat-ui{max-width:460px;margin:auto;background:#f9f7ff;border-radius:15px;padding:17px;color:#281b4e}.chat-head{display:flex;gap:10px;align-items:center;font-weight:850;border-bottom:1px solid #e4ddf4;padding-bottom:12px}.bot-icon{width:34px;height:34px;border-radius:11px;background:#7029f5;color:white;display:grid;place-items:center}.bubble{margin:14px 0;background:#ece5ff;padding:12px;border-radius:12px;font-size:12px}.chat-options{display:flex;gap:7px;flex-wrap:wrap}.chat-options span{font-size:10px;border:1px solid #cfc1f1;border-radius:99px;padding:7px 9px}.case-visual{display:grid;grid-template-columns:1fr;gap:10px;align-items:center}.case-visual .screen{border-width:5px;padding:5px}.case-visual .mock-site{min-height:190px}.case-visual .mock-hero h3{font-size:17px}.investment{padding:35px 0;background:linear-gradient(100deg,#21104a,#100b20);border:1px solid #382064;border-radius:20px;display:grid;grid-template-columns:.8fr 1fr auto;align-items:center;gap:25px;margin:0 auto}.investment .price{font-size:clamp(38px,5vw,60px);font-weight:950;letter-spacing:-2px;line-height:1}.investment .price small{display:block;font-size:11px;letter-spacing:1px;color:#c39cff;text-transform:uppercase}.investment p{margin:0;color:#d8cfea;font-size:14px}.cta-section{text-align:center;padding:80px 0;background:radial-gradient(ellipse at center,#42137d70,transparent 65%)}.cta-section h2{font-size:clamp(32px,4vw,48px);margin:10px auto;max-width:760px;line-height:1.05}.cta-section p{color:var(--muted);max-width:620px;margin:15px auto 25px}.site-footer{border-top:1px solid #2b1b43;padding:30px 0;color:#bcb2d3;font-size:12px}.footer-row{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.footer-links{display:flex;gap:18px;flex-wrap:wrap}.footer-links a:hover{color:white}.menu-toggle{display:none;background:none;border:1px solid #4d2d79;color:white;border-radius:8px;padding:8px 11px;font-size:18px}
+@media(max-width:850px){.nav-links{gap:13px;font-size:12px}.nav>.btn{display:none}.hero-grid,.split{grid-template-columns:1fr;gap:28px}.hero{padding-top:50px}.hero-copy{text-align:center}.hero-copy p{margin-inline:auto}.actions,.hero-note{justify-content:center}.device-stage{min-height:320px;max-width:650px;width:100%;margin:auto}.split.reverse .copy,.split.reverse .visual{order:initial}.section{padding:58px 0}.trust{grid-template-columns:repeat(2,1fr)}.investment{margin:0 20px;grid-template-columns:1fr 1fr;padding:25px}.investment .btn{grid-column:1/-1;justify-self:start}}
+@media(max-width:600px){.wrap{width:min(100% - 30px,1160px)}.nav{height:66px}.logo{font-size:21px}.menu-toggle{display:block}.nav-links{display:none;position:absolute;left:15px;right:15px;top:65px;background:#100c20;border:1px solid #39245b;border-radius:12px;padding:16px;flex-direction:column;align-items:stretch;gap:0}.nav-links.open{display:flex}.nav-links a{padding:12px}.hero h1{font-size:clamp(36px,11vw,52px);letter-spacing:-1.8px}.hero p{font-size:15px}.hero{padding:44px 0 32px}.device-stage{min-height:250px}.screen{padding:6px;border-width:5px;border-bottom-width:8px}.mock-site{min-height:190px}.mock-hero{padding:10px;gap:8px}.mock-hero h3{font-size:16px}.mock-hero p{font-size:8px}.house{min-height:110px}.cards{padding:7px;gap:5px}.property .mini-house{height:35px}.phone{width:86px;right:-4px;bottom:0}.phone-screen{min-height:140px;padding:6px}.phone-screen .mini-house{height:45px}.trust{gap:8px}.trust div{font-size:11px}.trust strong{font-size:12px}.section{padding:45px 0}.section h2{font-size:30px}.section p{font-size:14px}.ui-card{padding:11px;border-radius:11px}.property-grid{gap:5px}.property.large .mini-house{height:53px}.property.large b{font-size:8px}.property.large small{font-size:7px}.dashboard{grid-template-columns:75px 1fr;gap:7px}.sidebar{padding:9px 6px;font-size:8px}.sidebar strong{font-size:10px}.sidebar span{padding:6px 0}.stat{padding:7px 5px;font-size:8px}.stat b{font-size:13px}.chart{height:70px;padding:5px}.table-ui{font-size:8px}.table-ui th,.table-ui td{padding:7px 3px}.pricing-ui{gap:5px}.plan{padding:10px 5px}.plan h4{font-size:10px}.plan strong{font-size:16px}.plan small{font-size:8px}.blog-grid{gap:5px}.blog-post{padding:5px}.blog-image{height:48px}.blog-post b{font-size:8px}.blog-post small{font-size:7px}.chat-ui{padding:12px}.case-visual{grid-template-columns:1fr}.case-visual .mock-site{min-height:150px}.investment{grid-template-columns:1fr;margin:0;padding:22px;gap:14px}.investment .price{font-size:48px}.investment .btn{grid-column:auto}.cta-section{padding:58px 0}.footer-row{align-items:flex-start;flex-direction:column}.footer-links{gap:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+
+.hero h1,.section h2,.cta-section h2{font-family:Anton,Impact,"Arial Narrow Bold","Haettenschweiler",sans-serif;font-weight:400;text-transform:uppercase;letter-spacing:.01em}
+.hero h1{font-size:clamp(38px,5vw,68px);line-height:.92;margin:18px 0 22px;max-width:none}
+.section h2{font-size:clamp(30px,3.8vw,48px);line-height:1.02;letter-spacing:0;margin:14px 0 20px}
+.cta-section h2{font-size:clamp(34px,4.6vw,58px);line-height:.95;max-width:900px}
+.t-sm,.t-xl{display:block;width:fit-content}
+.cta-section .t-sm,.cta-section .t-xl{margin-inline:auto}
+.t-sm{font-size:.46em;letter-spacing:.16em;line-height:1.5;color:var(--t-sm,#cdbcf7);margin-bottom:.12em}
+.t-xl{font-size:1.34em;line-height:1.02;letter-spacing:0}
+.hero h1 .t-xl{font-size:1.34em;line-height:1.02}
+.t-xl+.t-xl,.t-xl+.t-sm{margin-top:.02em}
+.t-out{color:#f7f3ff;-webkit-text-stroke:0;text-shadow:none}
+#plataforma{--t-sm:#5d5280}
+#plataforma .t-out{color:#1a1038;-webkit-text-stroke:0;text-shadow:none}
+.t-xl.gradient{padding-right:.04em}
+@media(max-width:600px){.section h2{font-size:32px;line-height:1.05}.hero h1{font-size:clamp(34px,10vw,48px);letter-spacing:0;line-height:1}.cta-section h2{font-size:34px;line-height:1.05}.t-xl{font-size:1.22em;line-height:1.04}.hero h1 .t-xl{font-size:1.22em;line-height:1.04}.t-out{-webkit-text-stroke:0;text-shadow:none}}
+
+
+/* CORREÇÃO DEFINITIVA: títulos totalmente preenchidos, sem contorno */
+.t-out, .hero h1 .t-out, .section h2 .t-out, .cta-section h2 .t-out {
+  color: #f7f3ff !important;
+  -webkit-text-fill-color: #f7f3ff !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  paint-order: normal !important;
+}
+#plataforma .t-out {
+  color: #1a1038 !important;
+  -webkit-text-fill-color: #1a1038 !important;
+  -webkit-text-stroke: 0 !important;
+}
+
+/* Typography accessibility pass: larger, stronger body copy on desktop and mobile */
+body { font-size: 18px; font-weight: 450; }
+p, li { font-size: 1.08em; font-weight: 500; }
+.nav-links, .footer-links { font-size: 14px; font-weight: 600; }
+.btn { font-size: 15px; font-weight: 800; }
+.btn.small { font-size: 13px; font-weight: 800; }
+.eyebrow { font-size: 13px; font-weight: 900; }
+.hero p, .section p, .cta-section p { font-size: 18px; font-weight: 500; line-height: 1.7; }
+.hero-note, .trust div { font-size: 14px; font-weight: 600; }
+.trust strong { font-size: 15px; font-weight: 800; }
+.checks { font-size: 16px; font-weight: 550; gap: 11px; }
+.ui-top { font-size: 14px; font-weight: 850; }
+.pill { font-size: 11px; font-weight: 750; }
+.filter { font-size: 11px; font-weight: 650; }
+.property b { font-size: 10px; font-weight: 800; }
+.property small { font-size: 9px; font-weight: 600; }
+.stat { font-size: 10px; font-weight: 650; }
+.stat b { font-weight: 900; }
+.sidebar { font-size: 11px; font-weight: 650; }
+.sidebar strong { font-size: 13px; font-weight: 900; }
+.table-ui { font-size: 11px; font-weight: 550; }
+.table-ui th { font-weight: 800; }
+.status { font-size: 10px; font-weight: 800; }
+.plan h4 { font-size: 13px; font-weight: 850; }
+.plan small, .blog-post small { font-size: 10px; font-weight: 600; }
+.blog-post b { font-size: 11px; font-weight: 800; }
+.chat-head { font-size: 15px; font-weight: 850; }
+.bubble { font-size: 14px; font-weight: 500; line-height: 1.6; }
+.chat-options span { font-size: 11px; font-weight: 700; }
+.site-footer { font-size: 13px; font-weight: 550; }
+@media (max-width: 850px) {
+  body { font-size: 17px; }
+  .nav-links { font-size: 14px; }
+  .hero p, .section p, .cta-section p { font-size: 17px; }
+  .checks { font-size: 15px; }
+}
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  .nav-links { font-size: 15px; }
+  .btn { font-size: 14px; }
+  .btn.small { font-size: 13px; }
+  .eyebrow { font-size: 12px; }
+  .hero p, .section p, .cta-section p { font-size: 16px; line-height: 1.7; }
+  .hero-note, .trust div { font-size: 12px; }
+  .trust strong { font-size: 13px; }
+  .checks { font-size: 14px; gap: 12px; }
+  .ui-top { font-size: 12px; }
+  .pill { font-size: 10px; }
+  .filter { font-size: 10px; }
+  .property b { font-size: 9px; }
+  .property small { font-size: 8px; }
+  .stat { font-size: 9px; }
+  .sidebar { font-size: 9px; }
+  .sidebar strong { font-size: 11px; }
+  .table-ui { font-size: 9px; }
+  .status { font-size: 9px; }
+  .plan h4 { font-size: 11px; }
+  .plan small, .blog-post small { font-size: 9px; }
+  .blog-post b { font-size: 9px; }
+  .chat-head { font-size: 13px; }
+  .bubble { font-size: 12px; }
+  .chat-options span { font-size: 10px; }
+  .site-footer { font-size: 12px; }
+}
+
+
+/* Mobile-only alignment pass: keep the header/navigation unchanged */
+@media (max-width: 600px) {
+  /* Center hero content, while leaving header and navigation as-is */
+  .hero, .hero-content, .hero-copy, .hero-text, .hero-inner {
+    text-align: center;
+  }
+  .hero .eyebrow,
+  .hero h1,
+  .hero h2,
+  .hero p,
+  .hero .hero-note,
+  .hero .trust,
+  .hero .checks {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .hero .trust,
+  .hero .checks {
+    justify-content: center;
+  }
+  .hero .hero-actions,
+  .hero .actions,
+  .hero .button-row {
+    justify-content: center;
+  }
+
+  /* Center section content and headings on mobile */
+  .section,
+  .section .section-copy,
+  .section .section-content,
+  .section .section-text,
+  .section .section-header,
+  .section .eyebrow,
+  .section h2,
+  .section h3,
+  .section p,
+  .section .checks,
+  .section ul {
+    text-align: center;
+  }
+  .section .eyebrow,
+  .section h2,
+  .section h3,
+  .section p {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .section .checks,
+  .section ul {
+    list-style-position: inside;
+    padding-left: 0;
+  }
+  .section .checks li,
+  .section li {
+    text-align: center;
+  }
+
+  /* Center CTA and footer content, but do not affect the header */
+  .cta-section,
+  .cta-section .section-copy,
+  .cta-section h2,
+  .cta-section p,
+  .cta-section .eyebrow {
+    text-align: center;
+  }
+  .cta-section .hero-actions,
+  .cta-section .actions,
+  .cta-section .button-row {
+    justify-content: center;
+  }
+  .site-footer,
+  .site-footer p,
+  .site-footer .footer-links {
+    text-align: center;
+    justify-content: center;
+  }
+}
+
+
+/* Typography update: Montserrat everywhere except headings/titles */
+body,
+body p,
+body li,
+body a,
+body button,
+body input,
+body textarea,
+body select,
+body label,
+body small,
+body strong,
+body span,
+body div,
+body nav,
+body footer,
+body header,
+body section,
+body article,
+body aside,
+body .eyebrow,
+body .checks,
+body .trust,
+body .btn,
+body .nav-links,
+body .footer-links,
+body .hero-note,
+body .pill,
+body .filter,
+body .property,
+body .stat,
+body .sidebar,
+body .table-ui,
+body .status,
+body .plan,
+body .blog-post,
+body .chat-head,
+body .bubble,
+body .chat-options {
+  font-family: 'Montserrat', sans-serif !important;
+}
+/* Original heading typography preserved: display titles keep the original Anton/Impact styling. */
+
+
+/* FIX: keep the original display typeface on every title element and nested span.
+   The Montserrat rule for body spans must not override the title font. */
+.hero h1,
+.hero h1 *,
+.section h2,
+.section h2 *,
+.cta-section h2,
+.cta-section h2 * {
+  font-family: Anton, Impact, "Arial Narrow Bold", "Haettenschweiler", sans-serif !important;
+}
+
+
+/* ===== Seção 01 = tela cheia | Seções 02–07 = carrossel horizontal guiado pela rolagem vertical ===== */
+:root{--hh:0px}
+@media(max-width:600px){:root{--hh:0px}}
+.hcarousel{position:relative}
+.hc-sticky{position:sticky;top:var(--hh);height:calc(100vh - var(--hh));overflow:hidden}
+.hc-track{display:flex;height:100%;width:100%;will-change:transform}
+.hc-track>.section{flex:0 0 100%;width:100%;height:100%;display:flex;align-items:center;justify-content:center;padding:20px 0;border:0!important;overflow:hidden}
+.hc-track>.section>.wrap{transform-origin:center center}
+.shot{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;object-position:top;border-radius:8px;background:#e6e0ff}.themed .mock-brand{color:var(--c)}.themed .house{background:linear-gradient(145deg,var(--a),var(--b));display:grid;place-items:center}.themed .house:before{display:none}.themed .house:after{content:attr(data-e);font-size:46px;filter:drop-shadow(0 4px 8px #0003)}.themed .mini-house{background:linear-gradient(150deg,var(--a),var(--b))!important}.themed .mock-hero{background:linear-gradient(120deg,#faf9ff,#ece8ff)}
+
+/* ===== CABEÇALHO (igual ao index) ===== */
+.site-header{position:relative;top:auto;z-index:20;background:#7943e2;color:#fff;box-shadow:0 2px 14px #0002;border-bottom:0;backdrop-filter:none}
+.site-header .nav{height:80px;display:flex;align-items:center;justify-content:flex-start;gap:36px}
+.site-header .logo{font-size:28px;font-weight:800;letter-spacing:-1.5px;font-style:normal}
+.site-header .logo img{display:block;height:40px;width:auto;filter:brightness(0) invert(1)}
+.site-header .menu{display:flex;gap:28px;margin-left:auto;font-size:14px;font-weight:600}
+.site-header .menu a:hover{color:#e7dcff}
+.site-header .nav-wa{background:#071421;color:#fff;font-weight:800;font-size:13px;padding:11px 18px;border-radius:22px;white-space:nowrap}
+@media(max-width:900px){.site-header .menu{display:none}.site-header .nav{gap:12px;height:68px}.site-header .logo img{height:34px}.site-header .nav-wa{margin-left:auto}}
+
+/* ===== SLIDES: setas + bolinhas ===== */
+.hc-track{transition:transform 1s cubic-bezier(.65,0,.35,1)}
+.hc-track>.section{padding:20px 0 76px}
+.hc-ui{position:absolute;left:0;right:0;bottom:16px;z-index:5;display:flex;align-items:center;justify-content:center;gap:16px;pointer-events:none}
+.hc-ui>*{pointer-events:auto}
+.hc-arrow{width:42px;height:42px;border-radius:50%;border:1px solid #7943e2;background:#fff;color:#7943e2;font-size:20px;line-height:1;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 14px #7943e233;transition:background .2s,color .2s,opacity .2s}
+.hc-arrow:hover{background:#7943e2;color:#fff}
+.hc-arrow[disabled]{opacity:.3;cursor:default;background:#fff;color:#7943e2}
+.hc-dots{display:flex;gap:10px;align-items:center}
+.hc-dot{width:11px;height:11px;border-radius:50%;border:0;padding:0;background:#7943e244;cursor:pointer;transition:width .3s,background .3s}
+.hc-dot.on{width:30px;border-radius:6px;background:#7943e2}
+@media(max-width:600px){.hc-ui{bottom:10px;gap:10px}.hc-arrow{width:36px;height:36px}.hc-track>.section{padding:12px 0 62px}}
+.phone-shot{padding:0!important;min-height:0!important;background:#fff;overflow:hidden}.phone-shot img{display:block;width:100%;height:auto}.phone{width:125px}@media(max-width:600px){.phone{width:92px}}
+.plat-shot{display:block;width:100%;height:auto;border-radius:15px;border:1px solid #b9a5ff;box-shadow:0 18px 50px #5b2fd128,0 4px 14px #5b2fd114}
+.orc-card{max-width:880px;margin:0 auto;text-align:center;padding:56px 28px;border:1px solid #4a2a8a;border-radius:26px;background:radial-gradient(ellipse at 50% 0,#6a28d055,transparent 60%),linear-gradient(120deg,#21104a,#100b20);box-shadow:0 24px 70px #5b2fd133}
+.orc-card .t-sm,.orc-card .t-xl{margin-inline:auto}
+.orc-card p{max-width:560px;margin:14px auto 18px}
+.orc-tag{display:inline-block;background:#6f2bea33;color:#d9c2ff;border:1px solid #8842ff;border-radius:99px;padding:7px 16px;font-size:13px;font-weight:800;letter-spacing:.4px}
+.orc-list{list-style:none;padding:0;margin:22px auto 30px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px 26px;color:#e5def5;font-size:14px}
+.orc-list li:before{content:"✓";color:#b987ff;font-weight:900;margin-right:8px}
+.orc-btn{padding:20px 40px;font-size:18px;box-shadow:0 10px 40px #7a3bff66;animation:orcPulse 2.4s ease-in-out infinite}
+@keyframes orcPulse{0%,100%{box-shadow:0 10px 40px #7a3bff55}50%{box-shadow:0 10px 60px #a35cffaa}}
+@media(prefers-reduced-motion:reduce){.orc-btn{animation:none}}
+@media(max-width:600px){.orc-card{padding:40px 18px}.orc-btn{padding:17px 24px;font-size:16px;width:100%}}
+
+/* ===== MOBILE: títulos centralizados + setas coladas no mockup ===== */
+@media(max-width:600px){
+  .section h2,.cta-section h2,.hero h1,.hc-track .copy>.eyebrow{text-align:center}
+  .t-sm,.t-xl{margin-left:auto;margin-right:auto;text-align:center}
+  .hc-ui{bottom:auto}
+}
+
+/* ===== Etiqueta (eyebrow) dos slides: sem numeração, estilo "pill" ===== */
+.hc-track .eyebrow{display:inline-flex;align-items:center;gap:9px;padding:8px 15px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:#d9c2ff;background:rgba(163,76,255,.14);border:1px solid rgba(190,140,255,.35);margin-bottom:6px}
+.hc-track .eyebrow:before{content:"";width:7px;height:7px;border-radius:50%;background:linear-gradient(135deg,#a34cff,#d9b3ff);box-shadow:0 0 10px #a34cff}
+#plataforma .eyebrow{color:#5b22c9;background:#f0e9ff;border-color:#d3c0ff}
+#plataforma .eyebrow:before{background:linear-gradient(135deg,#6420ef,#a34cff);box-shadow:none}
+@media(max-width:600px){.hc-track .eyebrow{font-size:10px;padding:7px 13px;letter-spacing:.14em}}
+/* ===== ENTRADA: tela inclinada no espaço ===== */
+#stage{position:fixed;z-index:1000;inset:0;overflow:hidden;cursor:grab;background:radial-gradient(ellipse at 50% 42%,#0a0e1a 0%,#03040a 55%,#000 100%)}
+#stage.gone{opacity:0;visibility:hidden;pointer-events:none;transition:opacity .7s ease,visibility 0s .7s}
+#stars{position:absolute;inset:0;width:100%;height:100%}
+#device{position:absolute;inset:0;pointer-events:none;transform-origin:50% 50%;will-change:transform}
+#screen{position:absolute;inset:0;overflow:hidden;background:var(--bg);color:var(--text);border:solid #2b2838;border-width:26px;border-radius:44px;box-shadow:0 0 110px rgba(0,224,255,.4),0 40px 90px rgba(0,0,0,.6)}
+#screenInner{position:absolute;inset:0;isolation:isolate;overflow:hidden}
+#enterHint{position:absolute;left:0;right:0;top:max(3.2vh,18px);z-index:4;display:flex;flex-direction:column;align-items:center;gap:4px;pointer-events:none;color:#fff;font-size:11px;font-weight:600;letter-spacing:5px;text-transform:uppercase;opacity:.55;animation:hintPulse 2.8s ease-in-out infinite}
+#enterHint svg{animation:hintBob 1.8s ease-in-out infinite}
+@keyframes hintPulse{0%,100%{opacity:.35}50%{opacity:.8}}
+@keyframes hintBob{0%,100%{transform:translateY(0)}50%{transform:translateY(4px)}}
+@media(prefers-reduced-motion:reduce){#enterHint,#enterHint svg{animation:none}}
+#bar{position:fixed;right:22px;top:50%;width:6px;height:170px;margin-top:-85px;border-radius:6px;background:rgba(255,255,255,.14);z-index:3;pointer-events:none}
+#thumb{position:absolute;left:0;top:0;width:100%;height:32px;border-radius:6px;background:#fff}
+html.locked,html.locked body{overflow:hidden;height:100%}
+</style>
+<noscript><style>#stage{display:none}html.locked,html.locked body{overflow:auto;height:auto}</style></noscript>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<section id="stage" aria-label="Animação de entrada">
+  <canvas id="stars"></canvas>
+  <div id="enterHint" aria-hidden="true"><span>role para entrar</span><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></div>
+  <div id="device" aria-hidden="true"><div id="screen"><div id="screenInner"></div></div></div>
+  <div id="bar" aria-hidden="true"><div id="thumb"></div></div>
+</section>
+
+
+<header class="site-header">
+<div class="wrap nav">
+<a class="logo" href="/"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="40"></a>
+<nav class="menu" aria-label="Principal">
+<a href="#plataforma">Plataformas</a><a href="#hcarousel">Projetos</a><a href="#investimento">Investimento</a>
+</nav>
+<a class="nav-wa" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20conversar%20sobre%20o%20desenvolvimento%20de%20uma%20plataforma.">WhatsApp</a>
+</div>
+</header>
+<main>
+<section class="hero" id="inicio">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <div class="eyebrow">Estratégia, tecnologia e desenvolvimento sob medida</div>
+      <h1><span class="t-sm">Sua ideia pode virar</span><span class="t-xl gradient">UM NOVO</span><span class="t-xl t-out">NEGÓCIO DIGITAL.</span></h1>
+      <p>Desenvolvemos plataformas web para empresas que querem criar um novo canal de negócios, organizar operações ou lançar um produto digital. Do marketplace ao portal de anúncios, a tecnologia é planejada para o seu modelo de negócio.</p>
+      <div class="actions"><a class="btn" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20avaliar%20um%20projeto%20de%20plataforma%20web%20com%20a%20Leanttro." target="_blank" rel="noopener">◉ Quero tirar minha ideia do papel →</a></div>
+      
+    </div>
+    <div class="device-stage" aria-label="Demonstração ilustrativa de uma plataforma imobiliária em computador e celular">
+      <div class="glow"></div>
+      <div class="laptop"><div class="screen"><div class="browserbar"><i></i><i></i><i></i></div><img class="shot" src="https://directus.leanttro.com/assets/c4152172-b29b-4dca-bb6e-63e1e2a3c2f8?width=900&quality=75&format=webp" srcset="https://directus.leanttro.com/assets/c4152172-b29b-4dca-bb6e-63e1e2a3c2f8?width=600&quality=75&format=webp 600w, https://directus.leanttro.com/assets/c4152172-b29b-4dca-bb6e-63e1e2a3c2f8?width=900&quality=75&format=webp 900w, https://directus.leanttro.com/assets/c4152172-b29b-4dca-bb6e-63e1e2a3c2f8?width=1200&quality=75&format=webp 1200w" sizes="(max-width:850px) 92vw, 590px" alt="Projeto OndeImóveis" loading="eager" decoding="async" fetchpriority="high"></div><div class="laptop-base"></div></div>
+      <div class="phone"><div class="phone-screen phone-shot"><img src="https://directus.leanttro.com/assets/704a1abf-06ed-4173-a0ec-30e9de9456f2?width=400&quality=75&format=webp" srcset="https://directus.leanttro.com/assets/704a1abf-06ed-4173-a0ec-30e9de9456f2?width=250&quality=75&format=webp 250w, https://directus.leanttro.com/assets/704a1abf-06ed-4173-a0ec-30e9de9456f2?width=400&quality=75&format=webp 400w" sizes="125px" alt="OndeImóveis versão mobile" loading="eager" decoding="async" fetchpriority="high"></div></div>
+    </div>
+  </div>
+</section>
+<div class="trust-strip"><div class="wrap trust"><div><strong>Experiência personalizada</strong>Fluxos para seu público</div><div><strong>Painel administrativo</strong>Gestão da operação</div><div><strong>Modelo de receita</strong>Planos e oportunidades</div><div><strong>Integrações</strong>Automação e IA sob demanda</div></div></div>
+<div class="hcarousel" id="hcarousel"><div class="hc-sticky"><div class="hc-track" id="hcTrack">
+<section class="section" id="plataforma"><div class="wrap split">
+  <div class="copy"><div class="eyebrow">Plataforma sob medida</div><h2><span class="t-sm">Uma estrutura pensada para</span><span class="t-xl gradient">O SEU</span><span class="t-xl t-out">MODELO DE NEGÓCIO.</span></h2><ul class="checks"><li>Estrutura de páginas e categorias alinhada ao projeto</li><li>Busca, filtros e listagens conforme a necessidade</li><li>Layout responsivo para celular e computador</li><li>Arquitetura preparada para evoluir com o negócio</li></ul></div>
+  <div class="visual"><img class="plat-shot" src="https://directus.leanttro.com/assets/41cc2198-e02a-4c46-8146-a46202122b1c?quality=80&format=webp" srcset="https://directus.leanttro.com/assets/41cc2198-e02a-4c46-8146-a46202122b1c?width=600&quality=80&format=webp 600w, https://directus.leanttro.com/assets/41cc2198-e02a-4c46-8146-a46202122b1c?width=900&quality=80&format=webp 900w, https://directus.leanttro.com/assets/41cc2198-e02a-4c46-8146-a46202122b1c?width=1200&quality=80&format=webp 1200w" sizes="(max-width:850px) 92vw, 560px" alt="O seu modelo de negócio" loading="lazy" decoding="async"></div>
+</div></section>
+<section class="section alt" id="anunciantes"><div class="wrap split reverse">
+  <div class="copy"><div class="eyebrow">Case · Guia local</div><h2><span class="t-sm">Um guia local com busca e anunciantes</span><span class="t-xl gradient">FEIRAS</span><span class="t-xl t-out">DE RUA</span></h2><ul class="checks"><li>Guia de feiras livres, gastronômicas e artesanais de São Paulo</li><li>Busca por localização, com horário, endereço e mapa</li><li>Espaço para anunciantes, blog e chatbot</li></ul></div>
+  <div class="visual case-visual"><div class="laptop"><div class="screen"><div class="browserbar"><i></i><i></i><i></i></div><img class="shot" src="https://directus.leanttro.com/assets/5b0db2ab-689e-48f4-97a1-a341f5ae86e1?width=900&quality=75&format=webp" srcset="https://directus.leanttro.com/assets/5b0db2ab-689e-48f4-97a1-a341f5ae86e1?width=600&quality=75&format=webp 600w, https://directus.leanttro.com/assets/5b0db2ab-689e-48f4-97a1-a341f5ae86e1?width=900&quality=75&format=webp 900w, https://directus.leanttro.com/assets/5b0db2ab-689e-48f4-97a1-a341f5ae86e1?width=1200&quality=75&format=webp 1200w" sizes="(max-width:850px) 92vw, 560px" alt="Projeto Feiras de Rua" loading="lazy" decoding="async"></div><div class="laptop-base"></div></div></div>
+</div></section>
+<section class="section" id="ondeimoveis"><div class="wrap split">
+  <div class="copy"><div class="eyebrow">Case · Portal imobiliário</div><h2><span class="t-sm">Portal imobiliário com busca e listagens</span><span class="t-xl gradient">ONDEIMÓVEIS</span></h2><ul class="checks"><li>Busca com filtros por local, finalidade, tipo e preço</li><li>Páginas de imóveis e recursos para anunciantes</li><li>Exemplo prático de uma solução digital própria</li></ul></div>
+  <div class="visual case-visual"><div class="laptop"><div class="screen"><div class="browserbar"><i></i><i></i><i></i></div><img class="shot" src="https://directus.leanttro.com/assets/cac4513b-3bc1-4564-a25e-9ce002ce258e?width=900&quality=75&format=webp" srcset="https://directus.leanttro.com/assets/cac4513b-3bc1-4564-a25e-9ce002ce258e?width=600&quality=75&format=webp 600w, https://directus.leanttro.com/assets/cac4513b-3bc1-4564-a25e-9ce002ce258e?width=900&quality=75&format=webp 900w, https://directus.leanttro.com/assets/cac4513b-3bc1-4564-a25e-9ce002ce258e?width=1200&quality=75&format=webp 1200w" sizes="(max-width:850px) 92vw, 560px" alt="Projeto OndeImóveis" loading="lazy" decoding="async"></div><div class="laptop-base"></div></div></div>
+</div></section>
+<section class="section alt" id="oficina"><div class="wrap split reverse">
+  <div class="copy"><div class="eyebrow">Case · Catálogo e eventos</div><h2><span class="t-sm">Catálogo de expositores e eventos em condomínios</span><span class="t-xl gradient">OFICINA</span><span class="t-xl t-out">EMPREENDER SP</span></h2><ul class="checks"><li>Catálogo de expositores com filtro por categoria e região</li><li>Cadastro gratuito com curadoria e planos para destaque</li><li>Agenda de eventos, vagas para expositores, cursos e blog</li></ul></div>
+  <div class="visual case-visual"><div class="laptop"><div class="screen"><div class="browserbar"><i></i><i></i><i></i></div><img class="shot" src="https://directus.leanttro.com/assets/135dcb1a-f291-4ad6-b61e-97e3e23704bf?width=900&quality=75&format=webp" srcset="https://directus.leanttro.com/assets/135dcb1a-f291-4ad6-b61e-97e3e23704bf?width=600&quality=75&format=webp 600w, https://directus.leanttro.com/assets/135dcb1a-f291-4ad6-b61e-97e3e23704bf?width=900&quality=75&format=webp 900w, https://directus.leanttro.com/assets/135dcb1a-f291-4ad6-b61e-97e3e23704bf?width=1200&quality=75&format=webp 1200w" sizes="(max-width:850px) 92vw, 560px" alt="Projeto Oficina Empreender SP" loading="lazy" decoding="async"></div><div class="laptop-base"></div></div></div>
+</div></section>
+<section class="section" id="rodizio"><div class="wrap split">
+  <div class="copy"><div class="eyebrow">Case · Guia gastronômico</div><h2><span class="t-sm">Guia de rodízios com avaliações e comunidade</span><span class="t-xl gradient">GUIA DO</span><span class="t-xl t-out">RODÍZIO</span></h2><ul class="checks"><li>Categorias de rodízio: japonês, carnes, pizza e mexicano</li><li>Pratos com foto, avaliação por estrelas e batalha de favoritos</li><li>Rodízios por localização, blog e vagas na gastronomia</li></ul></div>
+  <div class="visual case-visual"><div class="laptop"><div class="screen"><div class="browserbar"><i></i><i></i><i></i></div><img class="shot" src="https://res.cloudinary.com/evwhdqmt/image/upload/f_auto,q_auto,w_900/v1794838627/fe01feb5-2c49-4a58-925e-296a80be7256.png" srcset="https://res.cloudinary.com/evwhdqmt/image/upload/f_auto,q_auto,w_600/v1794838627/fe01feb5-2c49-4a58-925e-296a80be7256.png 600w, https://res.cloudinary.com/evwhdqmt/image/upload/f_auto,q_auto,w_900/v1794838627/fe01feb5-2c49-4a58-925e-296a80be7256.png 900w, https://res.cloudinary.com/evwhdqmt/image/upload/f_auto,q_auto,w_1200/v1794838627/fe01feb5-2c49-4a58-925e-296a80be7256.png 1200w" sizes="(max-width:850px) 92vw, 560px" alt="Projeto Guia do Rodízio" loading="lazy" decoding="async"></div><div class="laptop-base"></div></div></div>
+</div></section>
+<section class="section alt" id="marketingos"><div class="wrap split reverse">
+  <div class="copy"><div class="eyebrow">Case · Marketing B2B</div><h2><span class="t-sm">Sistema de marketing B2B em white-label</span><span class="t-xl gradient">MARKETING OS</span></h2><ul class="checks"><li>Prospecção de leads por nicho via Google Maps, Instagram e LinkedIn</li><li>Conteúdo com IA e disparo de e-mail e WhatsApp no mesmo hub</li><li>CRM e métricas rodando 100% no servidor do cliente, com a marca dele</li></ul></div>
+  <div class="visual case-visual"><div class="laptop"><div class="screen"><div class="browserbar"><i></i><i></i><i></i></div><img class="shot" src="https://directus.leanttro.com/assets/e5fe2321-b3eb-4710-8b92-63b15ef99072?width=900&quality=75&format=webp" srcset="https://directus.leanttro.com/assets/e5fe2321-b3eb-4710-8b92-63b15ef99072?width=600&quality=75&format=webp 600w, https://directus.leanttro.com/assets/e5fe2321-b3eb-4710-8b92-63b15ef99072?width=900&quality=75&format=webp 900w, https://directus.leanttro.com/assets/e5fe2321-b3eb-4710-8b92-63b15ef99072?width=1200&quality=75&format=webp 1200w" sizes="(max-width:850px) 92vw, 560px" alt="Projeto Marketing OS" loading="lazy" decoding="async"></div><div class="laptop-base"></div></div></div>
+</div></section>
+<section class="section" id="automacaografica"><div class="wrap split">
+  <div class="copy"><div class="eyebrow">Case · Indústria gráfica</div><h2><span class="t-sm">Sistema de pré-impressão com IA para a indústria gráfica</span><span class="t-xl gradient">AUTOMAÇÃO</span><span class="t-xl t-out">GRÁFICA</span></h2><ul class="checks"><li>Módulos para lacres, serigrafia, DTF e mouse pads</li><li>Tratamento de imagem com IA e upscale direto no navegador</li><li>Setup de produção reduzido de horas para minutos</li></ul></div>
+  <div class="visual case-visual"><div class="laptop"><div class="screen"><div class="browserbar"><i></i><i></i><i></i></div><img class="shot" src="https://directus.leanttro.com/assets/de11c786-c23d-4296-8a0c-344096bc1796?width=900&quality=75&format=webp" srcset="https://directus.leanttro.com/assets/de11c786-c23d-4296-8a0c-344096bc1796?width=600&quality=75&format=webp 600w, https://directus.leanttro.com/assets/de11c786-c23d-4296-8a0c-344096bc1796?width=900&quality=75&format=webp 900w, https://directus.leanttro.com/assets/de11c786-c23d-4296-8a0c-344096bc1796?width=1200&quality=75&format=webp 1200w" sizes="(max-width:850px) 92vw, 560px" alt="Projeto Automação Gráfica" loading="lazy" decoding="async"></div><div class="laptop-base"></div></div></div>
+</div></section>
+</div><div class="hc-ui" id="hcUi"></div></div></div>
+
+<section class="section" id="investimento"><div class="wrap"><div class="orc-card">
+<div class="eyebrow">Projetos sob medida</div>
+<h2><span class="t-sm">Você tem a ideia.</span><span class="t-xl gradient">NÓS FAZEMOS</span><span class="t-xl t-out">ACONTECER.</span></h2>
+<p>Conte o que você precisa e receba uma proposta com escopo e prazo.</p>
+<div class="orc-tag">Valor final sob orçamento</div>
+<ul class="orc-list"><li>Conversa para entender o que você precisa</li><li>Proposta com escopo e prazo</li><li>Contrato e nota fiscal</li></ul>
+<a class="btn orc-btn" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Vi%20a%20pagina%20da%20Leanttro%20e%20quero%20entender%20o%20investimento%20para%20uma%20plataforma%20web." target="_blank" rel="noopener">◉ Pedir orçamento no WhatsApp →</a>
+</div></div></section>
+<section class="cta-section"><div class="wrap"><div class="eyebrow">Vamos avaliar a viabilidade do seu projeto.</div><h2><span class="t-sm">Sua próxima plataforma começa</span><span class="t-xl gradient">COM UMA CONVERSA.</span></h2><a class="btn" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20apresentar%20minha%20ideia%20de%20plataforma%20e%20solicitar%20uma%20avaliacao." target="_blank" rel="noopener">◉ Falar sobre meu projeto →</a></div></section>
+</main>
+<footer class="site-footer"><div class="wrap footer-row"><a class="logo" href="#inicio">LEANTTRO<span>.</span></a><nav class="footer-links" aria-label="Links do rodapé"><a href="#plataforma">Plataformas</a><a href="#hcarousel">Projetos</a><a href="#investimento">Investimento</a><a href="#inicio">Voltar ao topo ↑</a></nav><span>© <span id="year"></span> Leanttro. Todos os direitos reservados.</span></div></footer>
+<script>
+document.getElementById('year').textContent=new Date().getFullYear();
+</script>
+
+<script>
+(function(){
+  var car=document.getElementById('hcarousel'); if(!car) return;
+  var sticky=car.querySelector('.hc-sticky'), track=document.getElementById('hcTrack'), ui=document.getElementById('hcUi');
+  var slides=[].slice.call(track.children), n=slides.length;
+  var header=document.querySelector('.site-header');
+  var hh=76, slideH=0, slideW=0, idx=0, lockUntil=0, snapT=0;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduce) track.style.transition='none';
+
+  // ----- setas + bolinhas -----
+  var prev=document.createElement('button'); prev.className='hc-arrow'; prev.setAttribute('aria-label','Projeto anterior'); prev.textContent='‹';
+  var next=document.createElement('button'); next.className='hc-arrow'; next.setAttribute('aria-label','Próximo projeto'); next.textContent='›';
+  var dotsEl=document.createElement('div'); dotsEl.className='hc-dots';
+  var dots=slides.map(function(_,i){
+    var d=document.createElement('button'); d.className='hc-dot'; d.setAttribute('aria-label','Ir para o slide '+(i+1));
+    d.addEventListener('click',function(){ go(i); }); dotsEl.appendChild(d); return d;
+  });
+  ui.appendChild(prev); ui.appendChild(dotsEl); ui.appendChild(next);
+  prev.addEventListener('click',function(){ go(idx-1); });
+  next.addEventListener('click',function(){ go(idx+1); });
+
+  function absTop(){ return car.getBoundingClientRect().top+window.scrollY-hh; }
+  function pinned(){ var t=car.getBoundingClientRect().top-hh; return t<=1 && t>=-(n-1)*slideH-1; }
+  function warm(i){ for(var k=Math.max(0,i-1);k<=Math.min(n-1,i+2);k++){ [].forEach.call(slides[k].querySelectorAll('img[loading=lazy]'),function(im){ im.loading='eager'; }); } }
+  function show(i){
+    idx=i; warm(i);
+    track.style.transform='translate3d('+(-i*slideW)+'px,0,0)';
+    dots.forEach(function(d,k){ d.classList.toggle('on',k===i); });
+    prev.disabled=(i===0); next.disabled=(i===n-1);
+    placeUi();
+  }
+  // mobile: coloca as setas/bolinhas logo abaixo do mockup do slide atual
+  function placeUi(){
+    if(window.innerWidth>600){ ui.style.top=''; ui.style.bottom=''; return; }
+    var v=slides[idx].querySelector('.visual'); if(!v) return;
+    var r=v.getBoundingClientRect(), st=sticky.getBoundingClientRect();
+    var y=r.bottom-st.top+16;
+    ui.style.bottom='auto';
+    ui.style.top=Math.max(0,Math.min(y,slideH-48))+'px';
+  }
+  // troca de slide: pula a posição de rolagem (o slide fica fixo na tela) e anima a troca
+  function go(i){
+    if(i<0||i>n-1) return;
+    lockUntil=Date.now()+(reduce?150:1100);
+    if(!pinned()) window.scrollTo({top:absTop(),behavior:'instant'});
+    window.scrollTo({top:absTop()+i*slideH,behavior:'instant'});
+    show(i);
+  }
+
+  function measure(){
+    hh=0;
+    document.documentElement.style.setProperty('--hh','0px');
+    slideH=window.innerHeight-hh; slideW=sticky.clientWidth||window.innerWidth;
+    sticky.style.height=slideH+'px';
+    car.style.height=(n*slideH)+'px';
+    var avail=slideH-(window.innerWidth<=600?74:96);
+    slides.forEach(function(sl){
+      var w=sl.firstElementChild; if(!w) return;
+      w.style.transform='none';
+      var h=w.offsetHeight, k=h>avail?avail/h:1;
+      w.style.transform=k<1?'scale('+k+')':'none';
+    });
+    var t=track.style.transition; track.style.transition='none';
+    show(idx); track.offsetHeight; track.style.transition=reduce?'none':t;
+    if(pinned()) window.scrollTo({top:absTop()+idx*slideH,behavior:'instant'});
+    placeUi();
+  }
+
+  // rolagem nativa (barra de rolagem, toque): o slide mais próximo assume e "encaixa"
+  addEventListener('scroll',function(){
+    if(!pinned()) return;
+    var raw=Math.max(0,Math.min(n-1,-(car.getBoundingClientRect().top-hh)/Math.max(1,slideH)));
+    var i=Math.round(raw);
+    if(i!==idx) show(i);
+    clearTimeout(snapT);
+    snapT=setTimeout(function(){
+      if(pinned() && Math.abs(window.scrollY-(absTop()+idx*slideH))>2) window.scrollTo({top:absTop()+idx*slideH,behavior:'instant'});
+    },140);
+  },{passive:true});
+
+  // ----- roda do mouse / trackpad: um gesto = um slide -----
+  // Um gesto = um slide. A inércia do trackpad/roda é ignorada até a rolagem "silenciar".
+  var lastWheel=0, gestureLocked=false;
+  addEventListener('wheel',function(e){
+    if(e.ctrlKey) return;
+    var now=Date.now(), gap=now-lastWheel; lastWheel=now;
+    if(gap>200) gestureLocked=false;          // pausa = gesto novo
+    if(!pinned()){ gestureLocked=true; return; } // chegando no carrossel: o gesto que trouxe até aqui não troca slide
+    if(Math.abs(e.deltaY)<2) return;
+    var dir=e.deltaY>0?1:-1, nx=idx+dir;
+    var busy=gestureLocked||now<lockUntil;
+    if(nx<0||nx>n-1){                         // nas pontas: só sai do carrossel com um gesto novo
+      if(busy) e.preventDefault();
+      return;
+    }
+    e.preventDefault();
+    if(busy) return;
+    gestureLocked=true;
+    go(nx);
+  },{passive:false});
+
+  // ----- toque: deslizar troca de slide -----
+  var tx=0, ty=0, tOn=false;
+  addEventListener('touchstart',function(e){ tx=e.touches[0].clientX; ty=e.touches[0].clientY; tOn=pinned(); },{passive:true});
+  addEventListener('touchmove',function(e){
+    if(!tOn) return;
+    var dx=tx-e.touches[0].clientX, dy=ty-e.touches[0].clientY;
+    var d=Math.abs(dx)>Math.abs(dy)?dx:dy, nx=idx+(d>0?1:-1);
+    if(Math.abs(d)>6 && nx>=0 && nx<=n-1) e.preventDefault();
+  },{passive:false});
+  addEventListener('touchend',function(e){
+    if(!tOn) return; tOn=false;
+    var c=e.changedTouches[0], dx=tx-c.clientX, dy=ty-c.clientY;
+    var d=Math.abs(dx)>Math.abs(dy)?dx:dy;
+    if(Math.abs(d)<45||Date.now()<lockUntil) return;
+    go(idx+(d>0?1:-1));
+  });
+
+  // ----- teclado -----
+  addEventListener('keydown',function(e){
+    if(e.defaultPrevented||e.ctrlKey||e.metaKey||e.altKey) return;
+    var t=e.target, tag=t&&t.tagName;
+    if(tag==='INPUT'||tag==='TEXTAREA'||tag==='SELECT'||(t&&t.isContentEditable)) return;
+    var k=e.key, dir=0;
+    if(k==='ArrowRight'||k==='ArrowDown'||k==='PageDown'||(k===' '&&!e.shiftKey)) dir=1;
+    else if(k==='ArrowLeft'||k==='ArrowUp'||k==='PageUp'||(k===' '&&e.shiftKey)) dir=-1;
+    if(!dir||!pinned()) return;
+    var nx=idx+dir; if(nx<0||nx>n-1) return;
+    e.preventDefault();
+    if(Date.now()<lockUntil) return;
+    go(nx);
+  });
+
+  addEventListener('resize',measure);
+  addEventListener('load',measure);
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(measure);
+  measure();
+})();
+</script>
+<script>
+(function(){
+  var $=function(q){return document.querySelector(q)};
+  var stage=$('#stage'), thumb=$('#thumb'), cv=$('#stars'), hint=$('#enterHint'), device=$('#device'), screen=$('#screen');
+  var exploded=false, target=0, cur=0, mx=0, my=0, sx=0, sy=0, root=document.documentElement;
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // tela = cópia do topo do próprio site (transição sem emenda)
+  (function(){
+    var inner=$('#screenInner');
+    [document.querySelector('.site-header'),document.querySelector('main > .hero'),document.querySelector('main > .trust-strip')].forEach(function(n){
+      if(!n) return;
+      var c=n.cloneNode(true); c.removeAttribute('id');
+      c.querySelectorAll('[id]').forEach(function(x){x.removeAttribute('id')});
+      c.querySelectorAll('[data-wa]').forEach(function(x){x.removeAttribute('data-wa')});
+      inner.appendChild(c);
+    });
+  })();
+
+  // estrelas
+  var cx=cv.getContext('2d'), W=0, H=0, stars=[];
+  for(var i=0;i<280;i++) stars.push({x:Math.random(),y:Math.random(),z:.15+Math.random()*.85,r:.4+Math.random()*1.3,ph:Math.random()*6.28,c:Math.random()<.15?'170,195,255':(Math.random()<.1?'255,225,190':'255,255,255')});
+  function size(){var d=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;cv.width=W*d;cv.height=H*d;cx.setTransform(d,0,0,d,0,0)}
+  size(); addEventListener('resize',size);
+  function drawStars(t){
+    cx.clearRect(0,0,W,H);
+    for(var i=0;i<stars.length;i++){
+      var s=stars[i], y=(((s.y-cur*s.z*.9)%1)+1)%1*H, x=s.x*W+sx*s.z*34;
+      var a=(.55+.45*Math.sin(t*1.5+s.ph))*(.25+.75*s.z);
+      cx.fillStyle='rgba('+s.c+','+a.toFixed(3)+')';
+      cx.beginPath(); cx.arc(x,y+sy*s.z*20,s.r*(.6+s.z*.6),0,6.283); cx.fill();
+    }
+  }
+
+  if('scrollRestoration' in history) history.scrollRestoration='manual';
+  window.scrollTo({top:0,left:0,behavior:'instant'});
+
+  // entrada: rolar / deslizar / setas
+  function push(d){ if(exploded) return; target=Math.max(0,Math.min(1,target+d)); }
+  var openedAt=0, fwd=0;
+  function back(to){
+    root.classList.add('locked'); window.scrollTo({top:0,left:0,behavior:'instant'});
+    stage.classList.remove('gone'); exploded=false; target=to; if(to===0) cur=0;
+  }
+  addEventListener('wheel',function(e){
+    if(exploded){ if(e.deltaY<0 && window.scrollY<=0 && Date.now()-openedAt>900) back(.9); return; }
+    if(!fwd && Math.abs(e.deltaY)>=3) fwd=(e.deltaY>0?1:-1);
+    push(Math.max(-150,Math.min(150,e.deltaY))*(fwd||1)/190);
+  },{passive:true});
+  var ty=null;
+  addEventListener('touchstart',function(e){ty=e.touches[0].clientY},{passive:true});
+  addEventListener('touchmove',function(e){
+    if(ty===null) return; var y=e.touches[0].clientY;
+    if(exploded){ if(y-ty>40 && window.scrollY<=0 && Date.now()-openedAt>900){back(.9);ty=y} return; }
+    push((ty-y)/(innerHeight*.42)); ty=y;
+  },{passive:true});
+  addEventListener('touchend',function(){ty=null});
+  addEventListener('keydown',function(e){
+    if(['ArrowDown','PageDown',' ','Enter'].indexOf(e.key)>-1 && !exploded){push(.5); e.preventDefault();}
+    if(['ArrowUp','PageUp'].indexOf(e.key)>-1){
+      if(exploded){ if(window.scrollY<=0 && Date.now()-openedAt>900) back(.9); } else push(-.5);
+    }
+  });
+  stage.addEventListener('click',function(){push(.5)});
+  addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+
+  function explode(){
+    if(exploded) return; exploded=true; target=1;
+    root.classList.remove('locked'); openedAt=Date.now();
+    setTimeout(function(){stage.classList.add('gone')},250);
+  }
+
+  function frame(ms){
+    var t=ms/1000, w=reduce?0:1;
+    cur+=(target-cur)*.1; sx+=(mx-sx)*.06; sy+=(my-sy)*.06;
+    var p=cur, E0=.46, sp=p*p*(3-2*p), e=E0+(1-E0)*sp, tl=1-e;
+    var fl=Math.sin(t*.9)*.6*w*(1-p);
+    device.style.transform='perspective(1400px) translate3d('+(sx*10*tl)+'px,'+((5+fl*2)*tl)+'vh,0) rotateY('+(-16*tl+sx*5*tl)+'deg) rotateX('+(9*tl-sy*4*tl)+'deg) rotateZ('+(-3*tl+fl*.4)+'deg) scale('+(.42+.58*e)+')';
+    screen.style.borderWidth=(26*tl)+'px';
+    screen.style.borderRadius=(44*tl)+'px';
+    screen.style.boxShadow=tl>.02?'0 0 110px rgba(0,224,255,'+(.4*tl)+'),0 40px 90px rgba(0,0,0,'+(.6*tl)+')':'none';
+    if(hint) hint.style.opacity=Math.max(0,.55*(1-p*8)).toFixed(3);
+    thumb.style.top=(p*(170-32))+'px';
+    drawStars(t);
+    if(!exploded && target>.97 && cur>.975) explode();
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
