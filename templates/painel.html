@@ -948,8 +948,8 @@ input[type=checkbox].row-check{
 
 <script>
 // ── CONFIG ──
-window.API_BASE = 'https://teste.leanttro.com';
-const API = (window.API_BASE || 'http://localhost:5000');
+window.API_BASE = window.location.origin;
+const API = window.API_BASE;
 
 // ── STATE ──
 let TOKEN = localStorage.getItem('lt_token') || '';
