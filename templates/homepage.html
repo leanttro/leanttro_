@@ -401,6 +401,8 @@ h1{font-family:Manrope,sans-serif;font-size:clamp(43px,5.1vw,68px);line-height:1
 #thumb{position:absolute;left:0;top:0;width:100%;height:32px;border-radius:6px;background:#fff}
 
 html.locked,html.locked body{overflow:hidden;height:100%}
+@media(max-width:680px){.hero .actions{flex-direction:column;align-items:stretch}.hero .actions .btn{width:100%;max-width:100%;white-space:normal;text-align:center;padding:14px 16px}.hero-copy,.hero h1{max-width:100%;overflow-wrap:break-word}}
+
 
 
 </style>
@@ -806,6 +808,7 @@ window.addEventListener('scroll',()=>{let current='inicio';sections.forEach(sect
   window.scrollTo({top:0,left:0,behavior:'instant'});
 
   // ===== entrada: rolar / deslizar / setas =====
+  var MOB=matchMedia('(max-width:900px)').matches;
   function push(d){ if(exploded) return; target=Math.max(0,Math.min(1,target+d)); }
   var openedAt=0, fwd=0;
   function back(to){
@@ -830,7 +833,7 @@ window.addEventListener('scroll',()=>{let current='inicio';sections.forEach(sect
       if(y-ty>40 && window.scrollY<=0 && Date.now()-openedAt>900){ back(.9); ty=y; }
       return;
     }
-    push((ty-y)/(innerHeight*1.1)); ty=y;
+    push((ty-y)/(innerHeight*(MOB?.3:1.1))); ty=y;
   },{passive:true});
   addEventListener('touchend',function(){ ty=null; });
   addEventListener('keydown',function(e){
@@ -845,14 +848,15 @@ window.addEventListener('scroll',()=>{let current='inicio';sections.forEach(sect
 
   function explode(){
     if(exploded) return; exploded=true; target=1;
-    root.classList.remove('locked'); openedAt=Date.now();
+    if(MOB){ setTimeout(function(){ if(exploded) root.classList.remove('locked'); },1300); } else root.classList.remove('locked');
+    openedAt=Date.now();
     setTimeout(function(){stage.classList.add('gone')},250);
   }
 
   // ===== loop: o astronauta reage ao quanto você "andou" =====
   function frame(ms){
     var t=ms/1000;
-    cur += (target-cur)*.07;
+    cur += (target-cur)*(MOB?.16:.07);
     sx += (mx-sx)*.06; sy += (my-sy)*.06;
     var p=cur, w=reduce?0:1;
     var bob=Math.sin(t*1.1)*8*w;
@@ -878,8 +882,8 @@ window.addEventListener('scroll',()=>{let current='inicio';sections.forEach(sect
     var q=Math.max(0,Math.min(1,(p-.4)/.6)), e=q*q*(3-2*q), tl=1-e;
     device.style.opacity=Math.min(1,q*14);
     device.style.transform='perspective(1400px) translateY('+(tl*5)+'vh) rotateY('+(-16*tl)+'deg) rotateX('+(9*tl)+'deg) rotateZ('+(-3*tl)+'deg) scale('+(.42+.58*e)+')';
-    screen.style.borderWidth=(26*tl)+'px';
-    screen.style.borderRadius=(44*tl)+'px';
+    screen.style.borderWidth=((MOB?10:26)*tl)+'px';
+    screen.style.borderRadius=((MOB?22:44)*tl)+'px';
     screen.style.boxShadow=tl>.02?'0 0 110px rgba(0,224,255,'+(.4*tl)+'),0 40px 90px rgba(0,0,0,'+(.6*tl)+')':'none';
 
     thumb.style.top=(p*(170-32))+'px';
