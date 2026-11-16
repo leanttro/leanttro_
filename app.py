@@ -497,9 +497,15 @@ def deletar_categoria(id):
 def listar_hub_negocios():
     categoria = request.args.get("categoria")
     bairro    = request.args.get("bairro")
+    q         = (request.args.get("q") or "").strip().lower()
+    limit     = request.args.get("limit", type=int)
+    offset    = max(request.args.get("offset", default=0, type=int) or 0, 0)
     conn = get_db(); cur = conn.cursor()
     filters = ["n.ativo = true"]
     params  = []
+    if q:
+        filters.append("(LOWER(n.nome) LIKE %s OR LOWER(COALESCE(n.bairro,'')) LIKE %s OR LOWER(COALESCE(n.endereco,'')) LIKE %s OR LOWER(c.nome) LIKE %s)")
+        params += [f"%{q}%"] * 4
     if categoria:
         filters.append("c.slug = %s")
         params.append(categoria)
@@ -507,6 +513,32 @@ def listar_hub_negocios():
         filters.append("LOWER(n.bairro) LIKE %s")
         params.append(f"%{bairro.lower()}%")
     where = " AND ".join(filters)
+
+    # Sem "limit" o comportamento é o antigo (devolve tudo) — outras páginas continuam funcionando.
+    if limit:
+        limit = min(max(limit, 1), 500)
+        cur.execute(f"""
+            SELECT COUNT(*) AS total
+            FROM hub_negocios n JOIN hub_categorias c ON c.id = n.categoria_id
+            WHERE {where}
+        """, params)
+        total = cur.fetchone()["total"]
+        cur.execute(f"""
+            SELECT n.id, n.nome, n.slug, n.endereco, n.bairro, n.cidade, n.telefone, n.whatsapp,
+                   n.foto_url, n.plano, n.destaque, n.categoria_id,
+                   c.nome as categoria_nome, c.slug as categoria_slug
+            FROM hub_negocios n
+            JOIN hub_categorias c ON c.id = n.categoria_id
+            WHERE {where}
+            ORDER BY n.destaque DESC, n.visualizacoes DESC NULLS LAST, n.id DESC
+            LIMIT %s OFFSET %s
+        """, params + [limit, offset])
+        negocios = cur.fetchall()
+        cur.close(); conn.close()
+        resp = jsonify(list(negocios))
+        resp.headers["X-Total-Count"] = str(total)
+        return resp
+
     cur.execute(f"""
         SELECT n.*, c.nome as categoria_nome, c.slug as categoria_slug
         FROM hub_negocios n
@@ -517,6 +549,41 @@ def listar_hub_negocios():
     negocios = cur.fetchall()
     cur.close(); conn.close()
     return jsonify(list(negocios))
+
+# ── Painel: lista TODOS os negócios (ativos e inativos) ──
+@app.route("/admin/hub/negocios", methods=["GET"])
+@token_required
+def listar_negocios_admin():
+    conn = get_db(); cur = conn.cursor()
+    cur.execute("""
+        SELECT n.*, c.nome as categoria_nome, c.slug as categoria_slug
+        FROM hub_negocios n
+        JOIN hub_categorias c ON c.id = n.categoria_id
+        ORDER BY n.destaque DESC, n.id DESC
+    """)
+    negocios = cur.fetchall()
+    cur.close(); conn.close()
+    return jsonify(list(negocios))
+
+# ── Painel: ativar/desativar em lote (uma única query) ──
+# body: {"ids":[1,2,3], "ativo": true}                      -> altera só esses ids
+#       {"ids":[1,2,3], "exclusivo": true}                  -> ativa esses e desativa todos os outros
+@app.route("/admin/hub/negocios/ativo-bulk", methods=["POST"])
+@token_required
+def bulk_ativo_negocios():
+    d = request.json or {}
+    ids = d.get("ids", [])
+    if not ids:
+        return jsonify({"erro": "Nenhum ID informado"}), 400
+    conn = get_db(); cur = conn.cursor()
+    if d.get("exclusivo"):
+        cur.execute("UPDATE hub_negocios SET ativo = (id = ANY(%s)), updated_em = now()", (ids,))
+    else:
+        cur.execute("UPDATE hub_negocios SET ativo = %s, updated_em = now() WHERE id = ANY(%s)",
+                    (bool(d.get("ativo", True)), ids))
+    afetados = cur.rowcount
+    conn.commit(); cur.close(); conn.close()
+    return jsonify({"ok": True, "afetados": afetados})
 
 @app.route("/hub/negocios/<slug>", methods=["GET"])
 def detalhe_negocio(slug):
