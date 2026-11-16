@@ -405,28 +405,6 @@ html.locked,html.locked body{overflow:hidden;height:100%}
 
 </style>
 <noscript><style>#stage{display:none}html.locked,html.locked body{overflow:auto;height:auto}</style></noscript>
-<style>
-#orcamento{background:#0d0719;padding:88px 0;color:#fff}
-#orcamento .hf-head{text-align:center;max-width:620px;margin:0 auto 34px}
-#orcamento .hf-head h2{font:900 clamp(30px,4vw,44px)/1.1 Manrope,sans-serif;letter-spacing:-1.5px;margin:16px 0 12px}
-#orcamento .hf-head h2 em{font-style:normal;color:#a96bff}
-#orcamento .hf-head p{color:#d1c7df;line-height:1.7;font-size:15px}
-.hf-form{max-width:640px;margin:0 auto;padding:30px;border-radius:18px;background:#ffffff0a;border:1px solid #ffffff1a;box-shadow:0 14px 36px #00000040}
-.hf-row{display:grid;gap:14px;margin-bottom:14px}
-.hf-field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#fff}
-.hf-field input,.hf-field select{font:inherit;font-weight:500;font-size:15px;padding:13px 14px;border:1px solid #ffffff26;border-radius:10px;background:#ffffff0f;color:#fff;width:100%}
-.hf-field select option{color:#110b20;background:#fff}
-.hf-field input::placeholder{color:#9d93b3}
-.hf-field input:focus,.hf-field select:focus{outline:2px solid #a96bff;outline-offset:1px;border-color:#a96bff}
-.hf-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
-.hf-form .btn{width:100%;cursor:pointer;font-family:inherit;border:0}
-.hf-form .btn[disabled]{opacity:.6;cursor:wait}
-.hf-msg{margin:14px 0 0;font-size:14px;line-height:1.5;min-height:20px}
-.hf-msg.ok{color:#5ee0a0;font-weight:700}.hf-msg.err{color:#ff8a80;font-weight:700}
-.hf-alt{margin:14px 0 0;font-size:13px;color:#b9aecb;text-align:center}
-.hf-alt a{color:#c7a6ff;font-weight:800;text-decoration:underline}
-@media(max-width:600px){.hf-form{padding:22px 18px}#orcamento{padding:64px 0}}
-</style>
 </head>
 <body>
 <section id="stage" aria-label="Animação de entrada">
@@ -589,8 +567,8 @@ html.locked,html.locked body{overflow:hidden;height:100%}
  <div class="container nav">
   <a class="logo" href="/" aria-label="Leanttro"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="40"></a>
   <nav class="menu nav-links" id="navLinks" aria-label="Principal">
-   <a class="active" href="#inicio">Início</a><a href="#projetos">Projetos</a><a href="#plataformas">Plataformas</a><a href="#sites">Sites</a><a href="#contato">Contato</a>
-  </nav>
+<a href="/plataformas">Plataformas</a><a href="/sites">Sites</a><a href="/loja">Loja</a>
+</nav>
   <a class="nav-wa" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20conversar%20sobre%20um%20projeto%20com%20a%20Leanttro." target="_blank" rel="noopener">WhatsApp</a>
   <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
@@ -687,33 +665,6 @@ html.locked,html.locked body{overflow:hidden;height:100%}
    </div>
   </div>
   <div class="st-cta" id="contato"><div><strong>Vamos conversar?</strong><span>Conte o que você precisa e eu indico o melhor caminho.</span></div><a class="btn btn-primary" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20um%20site%20profissional%20com%20a%20Leanttro." target="_blank" rel="noopener">◉ &nbsp;Entrar em contato pelo WhatsApp&nbsp; →</a></div>
- </div>
-</section>
-<section id="orcamento" aria-labelledby="hfTitle">
- <div class="container">
-  <div class="hf-head"><span class="eyebrow">ORÇAMENTO</span>
-  <h2 id="hfTitle">Prefere que <em>eu te chame?</em></h2>
-  <p>Deixe seu nome e WhatsApp. Eu entro em contato para entender o que você precisa.</p></div>
-  <form class="hf-form" id="leadForm" novalidate>
-   <div class="hf-row">
-    <label class="hf-field">Seu nome<input type="text" name="nome" autocomplete="name" required maxlength="80" placeholder="Como posso te chamar?"></label>
-    <label class="hf-field">WhatsApp com DDD<input type="tel" name="telefone" autocomplete="tel" inputmode="tel" required maxlength="20" placeholder="(11) 91234-5678"></label>
-    <label class="hf-field">O que você precisa?
-     <select name="interesse">
-      <option value="Landing page Básica">Landing page Básica (R$ 700)</option>
-      <option value="Landing page Completa">Landing page Completa (R$ 1.200)</option>
-      <option value="Site profissional">Site profissional (até 5 páginas)</option>
-      <option value="Site em 3D">Site em 3D, projeto personalizado</option>
-      <option value="Plataforma / marketplace / portal">Plataforma / marketplace / portal</option>
-      <option value="Sistema sob medida">Sistema sob medida</option>
-      <option value="Ainda não sei">Ainda não sei, quero ajuda</option>
-     </select></label>
-   </div>
-   <input class="hf-hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
-   <button class="btn btn-primary" type="submit" id="lfBtn">Quero receber meu orçamento</button>
-   <p class="hf-msg" id="lfMsg" role="status" aria-live="polite"></p>
-   <p class="hf-alt">Prefere conversar agora? <a href="https://wa.me/5511913324827?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Chamar no WhatsApp</a></p>
-  </form>
  </div>
 </section>
 </main>
@@ -938,47 +889,6 @@ window.addEventListener('scroll',()=>{let current='inicio';sections.forEach(sect
   }
   requestAnimationFrame(frame);
 
-})();
-</script>
-<script>
-(function(){
-  var LEADS_URL='/leads';
-  var EMAIL_AVISO='c39916a29952e2b6e71f44db3900992f';
-  var f=document.getElementById('leadForm'); if(!f) return;
-  var btn=document.getElementById('lfBtn'), msg=document.getElementById('lfMsg');
-  function say(t,c){msg.textContent=t;msg.className='hf-msg '+(c||'')}
-  function avisoEmail(d){
-    return fetch('https://formsubmit.co/ajax/'+EMAIL_AVISO,{
-      method:'POST',
-      headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({_subject:'Novo lead pelo site Leanttro',_template:'table',_captcha:'false',
-        Formulario:'Homepage',Nome:d.nome,WhatsApp:d.telefone,Interesse:d.interesse,Origem:d.origem})
-    }).then(function(r){return r.ok}).catch(function(){return false});
-  }
-  function salvaBanco(d){
-    return fetch(LEADS_URL,{method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({nome:d.nome,telefone:d.telefone,email:'',empresa:'',origem:d.origem,interesse:d.interesse})
-    }).then(function(r){return r.ok}).catch(function(){return false});
-  }
-  f.addEventListener('submit',function(e){
-    e.preventDefault();
-    if(f.site.value) return;
-    var nome=f.nome.value.trim(), tel=f.telefone.value.replace(/\D/g,'');
-    if(nome.length<2){say('Digite seu nome.','err');f.nome.focus();return}
-    if(tel.length<10||tel.length>13){say('Digite o WhatsApp com DDD, por exemplo (11) 91234-5678.','err');f.telefone.focus();return}
-    btn.disabled=true; say('Enviando...');
-    var d={nome:nome,telefone:f.telefone.value.trim(),interesse:f.interesse.value,
-           origem:/[?&]gclid=/.test(location.search)?'google-ads':'homepage'};
-    Promise.all([salvaBanco(d),avisoEmail(d)]).then(function(r){
-      if(r[0]||r[1]){
-        try{gtag('event','form_lead',{event_category:'lead',event_label:d.interesse})}catch(err){}
-        f.reset(); say('Recebi seu contato! Vou te responder pelo WhatsApp.','ok');
-      }else{
-        say('Não consegui enviar agora. Chame direto no WhatsApp, é rápido.','err');
-      }
-      btn.disabled=false;
-    });
-  });
 })();
 </script>
 </body>
