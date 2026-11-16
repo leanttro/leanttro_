@@ -827,7 +827,15 @@ def painel():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("homepage.html")
+
+@app.route("/sites")
+def pagina_sites():
+    return render_template("sites.html")
+
+@app.route("/plataformas")
+def pagina_plataformas():
+    return render_template("plataforma.html")
 
 
 # ═══════════════════════════════════════════════════════════════════
