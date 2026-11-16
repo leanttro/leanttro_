@@ -405,6 +405,28 @@ html.locked,html.locked body{overflow:hidden;height:100%}
 
 </style>
 <noscript><style>#stage{display:none}html.locked,html.locked body{overflow:auto;height:auto}</style></noscript>
+<style>
+#orcamento{background:#0d0719;padding:88px 0;color:#fff}
+#orcamento .hf-head{text-align:center;max-width:620px;margin:0 auto 34px}
+#orcamento .hf-head h2{font:900 clamp(30px,4vw,44px)/1.1 Manrope,sans-serif;letter-spacing:-1.5px;margin:16px 0 12px}
+#orcamento .hf-head h2 em{font-style:normal;color:#a96bff}
+#orcamento .hf-head p{color:#d1c7df;line-height:1.7;font-size:15px}
+.hf-form{max-width:640px;margin:0 auto;padding:30px;border-radius:18px;background:#ffffff0a;border:1px solid #ffffff1a;box-shadow:0 14px 36px #00000040}
+.hf-row{display:grid;gap:14px;margin-bottom:14px}
+.hf-field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:#fff}
+.hf-field input,.hf-field select{font:inherit;font-weight:500;font-size:15px;padding:13px 14px;border:1px solid #ffffff26;border-radius:10px;background:#ffffff0f;color:#fff;width:100%}
+.hf-field select option{color:#110b20;background:#fff}
+.hf-field input::placeholder{color:#9d93b3}
+.hf-field input:focus,.hf-field select:focus{outline:2px solid #a96bff;outline-offset:1px;border-color:#a96bff}
+.hf-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.hf-form .btn{width:100%;cursor:pointer;font-family:inherit;border:0}
+.hf-form .btn[disabled]{opacity:.6;cursor:wait}
+.hf-msg{margin:14px 0 0;font-size:14px;line-height:1.5;min-height:20px}
+.hf-msg.ok{color:#5ee0a0;font-weight:700}.hf-msg.err{color:#ff8a80;font-weight:700}
+.hf-alt{margin:14px 0 0;font-size:13px;color:#b9aecb;text-align:center}
+.hf-alt a{color:#c7a6ff;font-weight:800;text-decoration:underline}
+@media(max-width:600px){.hf-form{padding:22px 18px}#orcamento{padding:64px 0}}
+</style>
 </head>
 <body>
 <section id="stage" aria-label="Animação de entrada">
@@ -413,100 +435,146 @@ html.locked,html.locked body{overflow:hidden;height:100%}
   <div id="astro"><div id="astroMove">
     <svg id="astroSvg" viewBox="0 0 500 720" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <linearGradient id="suit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".55" stop-color="#d7dce6"/><stop offset="1" stop-color="#8f98aa"/></linearGradient>
-        <linearGradient id="suitV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f6fa"/><stop offset="1" stop-color="#a3abbb"/></linearGradient>
-        <linearGradient id="armG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b4bbc8"/></linearGradient>
-        <radialGradient id="helm" cx=".35" cy=".28" r=".85"><stop offset="0" stop-color="#ffffff"/><stop offset=".6" stop-color="#d4d9e3"/><stop offset="1" stop-color="#8a93a5"/></radialGradient>
-        <radialGradient id="glass" cx=".4" cy=".35" r=".85"><stop offset="0" stop-color="#1c2438"/><stop offset=".5" stop-color="#07090f"/><stop offset="1" stop-color="#000"/></radialGradient>
+        <linearGradient id="suit" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset=".28" stop-color="#e8edf4"/><stop offset=".68" stop-color="#b8c2d1"/><stop offset="1" stop-color="#778397"/></linearGradient>
+        <linearGradient id="suitV" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f5f7fb"/><stop offset=".55" stop-color="#d8dee8"/><stop offset="1" stop-color="#929daf"/></linearGradient>
+        <linearGradient id="armG" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff"/><stop offset=".48" stop-color="#e0e6ef"/><stop offset="1" stop-color="#9ba7b9"/></linearGradient>
+        <radialGradient id="helm" cx=".32" cy=".22" r=".9"><stop offset="0" stop-color="#fff"/><stop offset=".36" stop-color="#edf1f7"/><stop offset=".72" stop-color="#b9c2d0"/><stop offset="1" stop-color="#697587"/></radialGradient>
+        <linearGradient id="glass" x1=".12" y1="0" x2=".86" y2="1"><stop offset="0" stop-color="#ffdf91"/><stop offset=".2" stop-color="#a95a12"/><stop offset=".48" stop-color="#3b1b0b"/><stop offset=".72" stop-color="#160d0a"/><stop offset="1" stop-color="#05070d"/></linearGradient>
+        <linearGradient id="goldEdge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff0bd"/><stop offset=".45" stop-color="#d28a32"/><stop offset="1" stop-color="#5b3215"/></linearGradient>
+        <linearGradient id="navy" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#263b5d"/><stop offset="1" stop-color="#0c172b"/></linearGradient>
+        <linearGradient id="metal" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f7f9fc"/><stop offset=".5" stop-color="#8d98a9"/><stop offset="1" stop-color="#e5eaf1"/></linearGradient>
+        <radialGradient id="visorGlow" cx=".25" cy=".1" r=".9"><stop offset="0" stop-color="#fff4ce" stop-opacity=".9"/><stop offset=".35" stop-color="#f4a83b" stop-opacity=".24"/><stop offset="1" stop-color="#f4a83b" stop-opacity="0"/></radialGradient>
         <filter id="blur3" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="3"/></filter>
         <filter id="blur8" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+        <filter id="suitShadow" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="5"/></filter>
       </defs>
 
-      <!-- mochila -->
-      <rect x="148" y="226" width="204" height="210" rx="40" fill="#8f98a9"/>
+      <!-- mochila técnica -->
+      <g id="pack">
+        <path d="M151 253 Q143 267 145 314 L151 432 Q155 455 178 458 L322 458 Q345 453 349 430 L355 312 Q357 270 344 253Z" fill="#687589" stroke="#dce2ec" stroke-width="5"/>
+        <path d="M157 278 Q150 295 157 421 L176 438 L324 438 L343 419 L347 293 L330 270Z" fill="url(#navy)"/>
+        <path d="M164 292 L180 282 L180 420 L164 409Z M336 292 L320 282 L320 420 L336 409Z" fill="#aab5c5" opacity=".65"/>
+        <rect x="177" y="315" width="146" height="90" rx="18" fill="#111c30" stroke="#8794a8" stroke-width="4"/>
+        <path d="M190 332 H310 M190 388 H310" stroke="#d2d9e3" stroke-width="3" opacity=".5"/>
+        <rect x="193" y="345" width="114" height="31" rx="8" fill="#26364c" stroke="#9ba7b8" stroke-width="2"/>
+        <circle cx="207" cy="360" r="5" fill="#e6a94d"/><circle cx="293" cy="360" r="5" fill="#6fc6dc"/>
+        <path d="M250 275 V303 M250 409 V438" stroke="#dce2eb" stroke-width="5" opacity=".7"/>
+      </g>
 
-      <!-- pernas -->
+      <!-- pernas articuladas -->
       <g id="legL">
-        <path d="M214 470 L196 640" stroke="#98a1b2" stroke-width="78" stroke-linecap="round" fill="none"/>
-        <path d="M214 470 L196 640" stroke="url(#suitV)" stroke-width="70" stroke-linecap="round" fill="none"/>
-        <ellipse cx="203" cy="575" rx="30" ry="24" fill="#eef0f5" stroke="#a4acba" stroke-width="3"/>
-        <ellipse cx="190" cy="692" rx="46" ry="36" fill="#e3e7ee"/><rect x="146" y="700" width="92" height="22" rx="10" fill="#15161c"/>
+        <path d="M211 474 Q194 531 188 583" stroke="#68758a" stroke-width="83" stroke-linecap="round" fill="none"/>
+        <path d="M211 474 Q194 531 188 583" stroke="url(#suitV)" stroke-width="72" stroke-linecap="round" fill="none"/>
+        <path d="M197 504 Q207 514 219 511" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".8"/>
+        <ellipse cx="190" cy="574" rx="35" ry="31" fill="#26364c" stroke="#aeb8c7" stroke-width="7"/>
+        <ellipse cx="190" cy="574" rx="22" ry="19" fill="#080e19" stroke="#66758b" stroke-width="4"/>
+        <path d="M188 597 Q176 641 177 663" stroke="#65738a" stroke-width="66" stroke-linecap="round" fill="none"/>
+        <path d="M188 597 Q176 641 177 663" stroke="url(#suitV)" stroke-width="56" stroke-linecap="round" fill="none"/>
+        <path d="M148 658 Q176 646 208 660 L218 687 Q215 708 190 712 L157 703 Q142 692 148 658Z" fill="url(#metal)" stroke="#69778b" stroke-width="4"/>
+        <path d="M151 690 Q181 700 214 690 L211 706 Q180 720 157 704Z" fill="#101a2a"/>
+        <path d="M161 665 L194 670" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".75"/>
       </g>
       <g id="legR">
-        <path d="M286 470 L304 640" stroke="#98a1b2" stroke-width="78" stroke-linecap="round" fill="none"/>
-        <path d="M286 470 L304 640" stroke="url(#suitV)" stroke-width="70" stroke-linecap="round" fill="none"/>
-        <ellipse cx="297" cy="575" rx="30" ry="24" fill="#eef0f5" stroke="#a4acba" stroke-width="3"/>
-        <ellipse cx="310" cy="692" rx="46" ry="36" fill="#e3e7ee"/><rect x="262" y="700" width="92" height="22" rx="10" fill="#15161c"/>
+        <path d="M289 474 Q306 531 312 583" stroke="#68758a" stroke-width="83" stroke-linecap="round" fill="none"/>
+        <path d="M289 474 Q306 531 312 583" stroke="url(#suitV)" stroke-width="72" stroke-linecap="round" fill="none"/>
+        <path d="M303 504 Q291 514 279 511" stroke="#fff" stroke-width="7" stroke-linecap="round" opacity=".8"/>
+        <ellipse cx="310" cy="574" rx="35" ry="31" fill="#26364c" stroke="#aeb8c7" stroke-width="7"/>
+        <ellipse cx="310" cy="574" rx="22" ry="19" fill="#080e19" stroke="#66758b" stroke-width="4"/>
+        <path d="M312 597 Q324 641 323 663" stroke="#65738a" stroke-width="66" stroke-linecap="round" fill="none"/>
+        <path d="M312 597 Q324 641 323 663" stroke="url(#suitV)" stroke-width="56" stroke-linecap="round" fill="none"/>
+        <path d="M282 660 Q313 646 345 658 L352 686 Q350 706 326 712 L293 703 Q278 692 282 660Z" fill="url(#metal)" stroke="#69778b" stroke-width="4"/>
+        <path d="M281 690 Q312 700 348 690 L345 706 Q314 720 291 704Z" fill="#101a2a"/>
+        <path d="M306 665 L339 670" stroke="#fff" stroke-width="5" stroke-linecap="round" opacity=".75"/>
       </g>
 
-      <!-- tronco -->
-      <rect x="170" y="466" width="160" height="60" rx="30" fill="#c9cfdb"/>
-      <rect x="160" y="212" width="180" height="285" rx="50" fill="url(#suit)"/>
-      <path d="M180 300 Q250 320 320 300" stroke="#8f98aa" stroke-width="3" fill="none" opacity=".35"/>
-      <path d="M176 420 Q250 440 324 420" stroke="#8f98aa" stroke-width="3" fill="none" opacity=".35"/>
-      <rect x="180" y="336" width="64" height="60" rx="22" fill="#eef0f5" stroke="#a4acba" stroke-width="3"/>
-      <rect x="256" y="336" width="64" height="60" rx="22" fill="#eef0f5" stroke="#a4acba" stroke-width="3"/>
-      <rect x="244" y="222" width="12" height="262" rx="5" fill="#e4e8ef" stroke="#9aa3b2" stroke-width="2"/>
-      <path d="M196 232 L226 330 M304 232 L274 330" stroke="#c4cad6" stroke-width="10" stroke-linecap="round" opacity=".9"/>
-      <rect x="182" y="258" width="30" height="18" rx="5" fill="#0b0c11"/>
-      <rect x="288" y="258" width="30" height="18" rx="5" fill="#0b0c11"/>
-      <rect x="268" y="402" width="7" height="34" rx="3" fill="#0b0c11"/>
-      <circle cx="198" cy="452" r="19" fill="#05060a" stroke="#cfd5df" stroke-width="4"/>
-      <circle cx="302" cy="452" r="19" fill="#05060a" stroke="#cfd5df" stroke-width="4"/>
-      <ellipse cx="250" cy="218" rx="64" ry="15" fill="#0c0d12"/>
+      <!-- corpo do traje -->
+      <path d="M172 248 Q190 222 220 218 H280 Q310 222 328 248 L347 432 Q348 469 319 493 Q250 518 181 493 Q152 469 153 432Z" fill="#6d788b" opacity=".7" transform="translate(0 5)"/>
+      <path d="M169 246 Q187 222 220 218 H280 Q313 222 331 246 L344 427 Q349 467 317 491 Q250 515 183 491 Q151 467 156 427Z" fill="url(#suit)" stroke="#778397" stroke-width="5"/>
+      <path d="M174 279 Q250 299 326 279 L335 354 Q250 372 165 354Z" fill="#e9edf3" opacity=".65"/>
+      <path d="M164 398 Q250 421 336 398 L340 449 Q250 475 160 449Z" fill="url(#navy)"/>
+      <path d="M173 408 Q250 430 327 408" stroke="#dce4ee" stroke-width="4" fill="none" opacity=".75"/>
+      <path d="M188 250 L205 324 M312 250 L295 324" stroke="#fff" stroke-width="11" stroke-linecap="round" opacity=".75"/>
+      <path d="M250 250 V465" stroke="#8b97a9" stroke-width="4" opacity=".45"/>
+      <path d="M185 300 Q250 318 315 300" stroke="#8793a5" stroke-width="3" fill="none" opacity=".5"/>
+      <path d="M176 450 Q250 470 324 450" stroke="#aeb8c7" stroke-width="3" fill="none" opacity=".7"/>
+
+      <!-- painel de controle no peito -->
+      <rect x="190" y="333" width="120" height="80" rx="15" fill="#5d697d" stroke="#f1f4f8" stroke-width="5"/>
+      <rect x="199" y="341" width="102" height="64" rx="10" fill="#18263a" stroke="#9ca8b8" stroke-width="2"/>
+      <rect x="208" y="350" width="42" height="30" rx="5" fill="#aeb9c8" stroke="#e5eaf1" stroke-width="2"/>
+      <path d="M214 372 L222 360 L230 367 L240 354" fill="none" stroke="#26364c" stroke-width="3"/>
+      <circle cx="270" cy="356" r="7" fill="#e7a84b" stroke="#ffe0a0" stroke-width="2"/>
+      <circle cx="288" cy="356" r="7" fill="#6ac5d8" stroke="#c2f5ff" stroke-width="2"/>
+      <rect x="263" y="371" width="32" height="5" rx="2" fill="#aeb9c8"/>
+      <circle cx="214" cy="392" r="3" fill="#e9b15c"/><circle cx="227" cy="392" r="3" fill="#e9b15c"/>
+      <path d="M250 421 V451" stroke="#f0f3f7" stroke-width="8" stroke-linecap="round"/>
+      <circle cx="250" cy="460" r="13" fill="#111d30" stroke="#d7dee8" stroke-width="4"/>
+      <circle cx="250" cy="460" r="5" fill="#e3a34b"/>
 
       <!-- braço esquerdo -->
       <g id="armL">
-        <circle cx="172" cy="252" r="40" fill="url(#suit)"/>
-        <path d="M172 252 L96 290 L66 232" stroke="#9ca5b6" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <path d="M172 252 L96 290 L66 232" stroke="url(#armG)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <path d="M82 278 Q100 296 118 280" stroke="#8f98aa" stroke-width="3" fill="none" opacity=".45"/>
-        <path d="M99 232 L45 260" stroke="#0b0c11" stroke-width="9" stroke-linecap="round"/>
-        <g transform="rotate(-22 58 214)">
-          <ellipse cx="58" cy="212" rx="27" ry="32" fill="#e6e9f0" stroke="#aab1be" stroke-width="3"/>
-          <ellipse cx="37" cy="190" rx="6.5" ry="16" fill="#eef0f5" stroke="#aab1be" stroke-width="2"/>
-          <ellipse cx="51" cy="182" rx="7" ry="19" fill="#eef0f5" stroke="#aab1be" stroke-width="2"/>
-          <ellipse cx="66" cy="181" rx="7" ry="20" fill="#eef0f5" stroke="#aab1be" stroke-width="2"/>
-          <ellipse cx="80" cy="188" rx="6.5" ry="17" fill="#eef0f5" stroke="#aab1be" stroke-width="2"/>
-          <ellipse cx="89" cy="218" rx="9" ry="18" transform="rotate(38 89 218)" fill="#eef0f5" stroke="#aab1be" stroke-width="2"/>
+        <ellipse cx="174" cy="259" rx="38" ry="43" fill="url(#suit)" stroke="#8b97a8" stroke-width="4"/>
+        <path d="M170 260 Q126 276 91 302 L63 245" stroke="#68758a" stroke-width="66" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M170 260 Q126 276 91 302 L63 245" stroke="url(#armG)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M137 274 L151 293 M104 292 L117 317" stroke="#8a96a8" stroke-width="10" stroke-linecap="round"/>
+        <path d="M75 268 L105 252" stroke="url(#navy)" stroke-width="20" stroke-linecap="round"/>
+        <path d="M57 229 L82 215" stroke="#18263a" stroke-width="13" stroke-linecap="round"/>
+        <g transform="rotate(-28 52 215)">
+          <path d="M31 214 Q27 192 43 184 Q58 177 75 190 L86 216 Q83 242 59 248 Q36 245 31 214Z" fill="#121a28" stroke="#aeb8c7" stroke-width="4"/>
+          <path d="M34 199 Q20 181 27 169 Q35 161 43 175 L51 192" fill="#202b3d" stroke="#aeb8c7" stroke-width="3"/>
+          <path d="M47 190 Q38 166 48 157 Q58 153 63 169 L67 190" fill="#202b3d" stroke="#aeb8c7" stroke-width="3"/>
+          <path d="M63 190 Q58 166 69 160 Q80 159 82 177 L81 198" fill="#202b3d" stroke="#aeb8c7" stroke-width="3"/>
+          <path d="M77 201 Q78 181 89 181 Q100 184 94 204 L88 221" fill="#202b3d" stroke="#aeb8c7" stroke-width="3"/>
+          <path d="M77 222 Q91 218 99 229 Q101 240 87 244 L71 238" fill="#202b3d" stroke="#aeb8c7" stroke-width="3"/>
+          <path d="M38 216 Q56 229 78 215" fill="none" stroke="#687991" stroke-width="4"/>
         </g>
       </g>
 
       <!-- braço direito -->
       <g id="armR">
-        <circle cx="328" cy="252" r="40" fill="url(#suit)"/>
-        <path d="M328 252 L404 290 L434 232" stroke="#9ca5b6" stroke-width="64" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <path d="M328 252 L404 290 L434 232" stroke="url(#armG)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-        <path d="M382 280 Q400 296 418 278" stroke="#8f98aa" stroke-width="3" fill="none" opacity=".45"/>
-        <path d="M401 232 L455 260" stroke="#0b0c11" stroke-width="9" stroke-linecap="round"/>
-        <g transform="rotate(22 442 214)">
-          <ellipse cx="442" cy="212" rx="27" ry="32" fill="#e6e9f0" stroke="#aab1be" stroke-width="3"/>
-          <ellipse cx="463" cy="190" rx="6.5" ry="16" fill="#eef0f5" stroke="#aab1be" stroke-width="2"/>
-          <ellipse cx="449" cy="182" rx="7" ry="19" fill="#eef0f5" stroke="#aab1be" stroke-width="2"/>
-          <ellipse cx="434" cy="181" rx="7" ry="20" fill="#eef0f5" stroke="#aab1be" stroke-width="2"/>
-          <ellipse cx="420" cy="188" rx="6.5" ry="17" fill="#eef0f5" stroke="#aab1be" stroke-width="2"/>
-          <ellipse cx="411" cy="218" rx="9" ry="18" transform="rotate(-38 411 218)" fill="#eef0f5" stroke="#aab1be" stroke-width="2"/>
+        <ellipse cx="326" cy="259" rx="38" ry="43" fill="url(#suit)" stroke="#8b97a8" stroke-width="4"/>
+        <path d="M330 260 Q374 276 409 302 L437 245" stroke="#68758a" stroke-width="66" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M330 260 Q374 276 409 302 L437 245" stroke="url(#armG)" stroke-width="56" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        <path d="M363 274 L349 293 M396 292 L383 317" stroke="#8a96a8" stroke-width="10" stroke-linecap="round"/>
+        <path d="M425 268 L395 252" stroke="url(#navy)" stroke-width="20" stroke-linecap="round"/>
+        <path d="M443 229 L418 215" stroke="#18263a" stroke-width="13" stroke-linecap="round"/>
+        <g transform="rotate(28 448 215)">
+          <path d="M469 214 Q473 192 457 184 Q442 177 425 190 L414 216 Q417 242 441 248 Q464 245 469 214Z" fill="#121a28" stroke="#aeb8c7" stroke-width="4"/>
+          <path d="M466 199 Q480 181 473 169 Q465 161 457 175 L449 192" fill="#202b3d" stroke="#aeb8c7" stroke-width="3"/>
+          <path d="M453 190 Q462 166 452 157 Q442 153 437 169 L433 190" fill="#202b3d" stroke="#aeb8c7" stroke-width="3"/>
+          <path d="M437 190 Q442 166 431 160 Q420 159 418 177 L419 198" fill="#202b3d" stroke="#aeb8c7" stroke-width="3"/>
+          <path d="M423 201 Q422 181 411 181 Q400 184 406 204 L412 221" fill="#202b3d" stroke="#aeb8c7" stroke-width="3"/>
+          <path d="M423 222 Q409 218 401 229 Q399 240 413 244 L429 238" fill="#202b3d" stroke="#aeb8c7" stroke-width="3"/>
+          <path d="M462 216 Q444 229 422 215" fill="none" stroke="#687991" stroke-width="4"/>
         </g>
       </g>
 
-      <!-- capacete -->
+      <!-- capacete profissional com visor espelhado -->
       <g id="helmet">
-        <ellipse cx="152" cy="138" rx="13" ry="24" fill="#c8cedb"/>
-        <ellipse cx="348" cy="138" rx="13" ry="24" fill="#c8cedb"/>
-        <ellipse cx="250" cy="128" rx="98" ry="93" fill="url(#helm)"/>
-        <path d="M192 66 Q250 40 308 66" stroke="#fff" stroke-width="6" fill="none" opacity=".55" stroke-linecap="round"/>
-        <ellipse cx="250" cy="138" rx="76" ry="69" fill="#101119"/>
-        <ellipse cx="250" cy="138" rx="68" ry="61" fill="url(#glass)"/>
-        <image class="visor-logo" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" x="198" y="118" width="104" height="40" preserveAspectRatio="xMidYMid meet"/>
-        <path d="M200 100 Q250 70 300 100" stroke="#6f86c8" stroke-width="3" fill="none" opacity=".22"/>
-        <ellipse cx="250" cy="206" rx="52" ry="9" fill="#0c0d12"/>
+        <path d="M144 130 Q144 48 250 39 Q356 48 356 130 L352 176 Q346 207 315 219 L185 219 Q154 207 148 176Z" fill="#5d697d" stroke="#e8edf4" stroke-width="5"/>
+        <ellipse cx="151" cy="139" rx="17" ry="32" fill="url(#metal)" stroke="#6c788b" stroke-width="4"/>
+        <ellipse cx="349" cy="139" rx="17" ry="32" fill="url(#metal)" stroke="#6c788b" stroke-width="4"/>
+        <rect x="137" y="123" width="18" height="34" rx="8" fill="#26364c" stroke="#b9c3d1" stroke-width="3"/>
+        <rect x="345" y="123" width="18" height="34" rx="8" fill="#26364c" stroke="#b9c3d1" stroke-width="3"/>
+        <ellipse cx="250" cy="128" rx="108" ry="101" fill="url(#helm)" stroke="#f5f7fa" stroke-width="4"/>
+        <path d="M158 135 Q160 56 250 49 Q340 56 342 135" fill="none" stroke="#fff" stroke-width="7" opacity=".7" stroke-linecap="round"/>
+        <ellipse cx="250" cy="142" rx="86" ry="76" fill="#151b27" stroke="#687589" stroke-width="8"/>
+        <ellipse cx="250" cy="140" rx="77" ry="67" fill="url(#glass)" stroke="url(#goldEdge)" stroke-width="3"/>
+        <ellipse cx="250" cy="140" rx="75" ry="65" fill="url(#visorGlow)"/>
+        <path d="M189 104 Q221 77 269 84 Q299 87 322 108" fill="none" stroke="#fff0c4" stroke-width="7" opacity=".6" stroke-linecap="round"/>
+        <path d="M184 132 Q211 116 237 124" fill="none" stroke="#ffd98c" stroke-width="3" opacity=".45"/>
+        <path d="M270 177 Q300 188 319 166" fill="none" stroke="#e6a44a" stroke-width="3" opacity=".25"/>
+        <image class="visor-logo" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" x="208" y="124" width="84" height="32" preserveAspectRatio="xMidYMid meet" opacity=".82"/>
+        <path d="M170 181 Q250 211 330 181" fill="none" stroke="#f2f5f9" stroke-width="5" opacity=".85"/>
+        <path d="M185 198 Q250 218 315 198" fill="none" stroke="#4d596d" stroke-width="7" opacity=".75"/>
+        <rect x="211" y="207" width="78" height="14" rx="7" fill="url(#metal)" stroke="#657287" stroke-width="2"/>
+        <circle cx="226" cy="214" r="3" fill="#25344b"/><circle cx="274" cy="214" r="3" fill="#25344b"/>
         <g class="flare">
-          <path d="M140 114 L276 114" stroke="#fff" stroke-width="3" opacity=".6" filter="url(#blur3)"/>
-          <path d="M208 56 L208 172" stroke="#fff" stroke-width="2.5" opacity=".5" filter="url(#blur3)"/>
-          <circle cx="208" cy="114" r="22" fill="#fff" opacity=".35" filter="url(#blur8)"/>
-          <circle cx="208" cy="114" r="6.5" fill="#fff"/>
+          <path d="M171 96 Q223 65 281 83" stroke="#fff" stroke-width="4" opacity=".65" fill="none" filter="url(#blur3)"/>
+          <circle cx="205" cy="88" r="13" fill="#fff4d7" opacity=".5" filter="url(#blur8)"/>
         </g>
       </g>
+
       <!-- dica de rolagem em arco -->
       <g id="scrollHint">
         <path id="hintArc" d="M 64 138 Q 250 -215 436 138" fill="none" stroke="rgba(255,255,255,.16)" stroke-width="1.2" stroke-dasharray="1.5 8" stroke-linecap="round"/>
@@ -579,7 +647,7 @@ html.locked,html.locked body{overflow:hidden;height:100%}
     <h2>Sua ideia pode virar<br>um <span>novo negócio digital.</span></h2>
     <p>Desenvolvemos plataformas sob medida para quem quer criar um novo canal de negócios, organizar operações ou lançar um produto digital. Do marketplace ao portal de anúncios, a tecnologia é planejada para o seu modelo.</p>
     <div class="pf-feats"><div class="pf-feat"><div class="pf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="14" rx="2"/><path d="M3 9h18M8 21h8"/></svg></div><div><strong>Experiência personalizada</strong><span>Fluxos pensados para o seu público</span></div></div><div class="pf-feat"><div class="pf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg></div><div><strong>Painel administrativo</strong><span>Gestão completa da operação</span></div></div><div class="pf-feat"><div class="pf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17 9 11l4 4 8-8"/><path d="M15 7h6v6"/></svg></div><div><strong>Modelo de receita</strong><span>Planos, anúncios e oportunidades</span></div></div><div class="pf-feat"><div class="pf-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m13 2-3 9h7L8 22l3-9H4l9-11Z"/></svg></div><div><strong>Integrações e IA</strong><span>Automação sob demanda</span></div></div></div>
-    <a class="btn btn-primary" href="plataforma.html">Conhecer as plataformas <span>→</span></a>
+    <a class="btn btn-primary" href="/plataformas">Conhecer as plataformas <span>→</span></a>
    </div>
    <div class="pf-stage reveal">
     <div class="pf-glow"></div>
@@ -604,7 +672,7 @@ html.locked,html.locked body{overflow:hidden;height:100%}
     <h2>Seu site profissional<br>no ar <span>em até 48h.</span></h2>
     <p>Landing pages e sites institucionais feitos para serem encontrados no Google e gerar contato. Valores claros, contrato, nota fiscal e 50% só depois de aprovar.</p>
     <div class="st-feats"><div class="st-feat"><div class="st-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg></div><div><strong>Pronto para o celular</strong><span>Rápido e bonito em qualquer tela</span></div></div><div class="st-feat"><div class="st-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></div><div><strong>SEO básico incluso</strong><span>O Google entende o seu negócio</span></div></div><div class="st-feat"><div class="st-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8.5 8.5 0 0 1-12.6 7.4L3 21l1.7-5.2A8.5 8.5 0 1 1 21 12Z"/></svg></div><div><strong>Botão de WhatsApp</strong><span>O cliente toca e já fala com você</span></div></div><div class="st-feat"><div class="st-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8l-5-5Z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></div><div><strong>Contrato e nota fiscal</strong><span>50% só depois de aprovar</span></div></div></div>
-    <div class="st-btns"><a class="btn btn-primary" href="sites.html">Conhecer os sites <span>→</span></a><a class="btn btn-outline" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20um%20site%20profissional%20com%20a%20Leanttro." target="_blank" rel="noopener">◉ &nbsp;Pedir orçamento</a></div>
+    <div class="st-btns"><a class="btn btn-primary" href="/sites">Conhecer os sites <span>→</span></a><a class="btn btn-outline" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20um%20site%20profissional%20com%20a%20Leanttro." target="_blank" rel="noopener">◉ &nbsp;Pedir orçamento</a></div>
    </div>
    <div class="st-stage reveal">
     <div class="st-glow"></div>
@@ -619,6 +687,33 @@ html.locked,html.locked body{overflow:hidden;height:100%}
    </div>
   </div>
   <div class="st-cta" id="contato"><div><strong>Vamos conversar?</strong><span>Conte o que você precisa e eu indico o melhor caminho.</span></div><a class="btn btn-primary" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20um%20site%20profissional%20com%20a%20Leanttro." target="_blank" rel="noopener">◉ &nbsp;Entrar em contato pelo WhatsApp&nbsp; →</a></div>
+ </div>
+</section>
+<section id="orcamento" aria-labelledby="hfTitle">
+ <div class="container">
+  <div class="hf-head"><span class="eyebrow">ORÇAMENTO</span>
+  <h2 id="hfTitle">Prefere que <em>eu te chame?</em></h2>
+  <p>Deixe seu nome e WhatsApp. Eu entro em contato para entender o que você precisa.</p></div>
+  <form class="hf-form" id="leadForm" novalidate>
+   <div class="hf-row">
+    <label class="hf-field">Seu nome<input type="text" name="nome" autocomplete="name" required maxlength="80" placeholder="Como posso te chamar?"></label>
+    <label class="hf-field">WhatsApp com DDD<input type="tel" name="telefone" autocomplete="tel" inputmode="tel" required maxlength="20" placeholder="(11) 91234-5678"></label>
+    <label class="hf-field">O que você precisa?
+     <select name="interesse">
+      <option value="Landing page Básica">Landing page Básica (R$ 700)</option>
+      <option value="Landing page Completa">Landing page Completa (R$ 1.200)</option>
+      <option value="Site profissional">Site profissional (até 5 páginas)</option>
+      <option value="Site em 3D">Site em 3D, projeto personalizado</option>
+      <option value="Plataforma / marketplace / portal">Plataforma / marketplace / portal</option>
+      <option value="Sistema sob medida">Sistema sob medida</option>
+      <option value="Ainda não sei">Ainda não sei, quero ajuda</option>
+     </select></label>
+   </div>
+   <input class="hf-hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+   <button class="btn btn-primary" type="submit" id="lfBtn">Quero receber meu orçamento</button>
+   <p class="hf-msg" id="lfMsg" role="status" aria-live="polite"></p>
+   <p class="hf-alt">Prefere conversar agora? <a href="https://wa.me/5511913324827?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Chamar no WhatsApp</a></p>
+  </form>
  </div>
 </section>
 </main>
@@ -843,6 +938,47 @@ window.addEventListener('scroll',()=>{let current='inicio';sections.forEach(sect
   }
   requestAnimationFrame(frame);
 
+})();
+</script>
+<script>
+(function(){
+  var LEADS_URL='/leads';
+  var EMAIL_AVISO='c39916a29952e2b6e71f44db3900992f';
+  var f=document.getElementById('leadForm'); if(!f) return;
+  var btn=document.getElementById('lfBtn'), msg=document.getElementById('lfMsg');
+  function say(t,c){msg.textContent=t;msg.className='hf-msg '+(c||'')}
+  function avisoEmail(d){
+    return fetch('https://formsubmit.co/ajax/'+EMAIL_AVISO,{
+      method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({_subject:'Novo lead pelo site Leanttro',_template:'table',_captcha:'false',
+        Formulario:'Homepage',Nome:d.nome,WhatsApp:d.telefone,Interesse:d.interesse,Origem:d.origem})
+    }).then(function(r){return r.ok}).catch(function(){return false});
+  }
+  function salvaBanco(d){
+    return fetch(LEADS_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({nome:d.nome,telefone:d.telefone,email:'',empresa:'',origem:d.origem,interesse:d.interesse})
+    }).then(function(r){return r.ok}).catch(function(){return false});
+  }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(f.site.value) return;
+    var nome=f.nome.value.trim(), tel=f.telefone.value.replace(/\D/g,'');
+    if(nome.length<2){say('Digite seu nome.','err');f.nome.focus();return}
+    if(tel.length<10||tel.length>13){say('Digite o WhatsApp com DDD, por exemplo (11) 91234-5678.','err');f.telefone.focus();return}
+    btn.disabled=true; say('Enviando...');
+    var d={nome:nome,telefone:f.telefone.value.trim(),interesse:f.interesse.value,
+           origem:/[?&]gclid=/.test(location.search)?'google-ads':'homepage'};
+    Promise.all([salvaBanco(d),avisoEmail(d)]).then(function(r){
+      if(r[0]||r[1]){
+        try{gtag('event','form_lead',{event_category:'lead',event_label:d.interesse})}catch(err){}
+        f.reset(); say('Recebi seu contato! Vou te responder pelo WhatsApp.','ok');
+      }else{
+        say('Não consegui enviar agora. Chame direto no WhatsApp, é rápido.','err');
+      }
+      btn.disabled=false;
+    });
+  });
 })();
 </script>
 </body>
