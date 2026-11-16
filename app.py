@@ -262,9 +262,13 @@ def robots_txt():
 def pagina_negocio(slug):
     return render_template("negocio.html")
 
+@app.route("/conteudo")
+def pagina_conteudo():
+    return render_template("conteudo.html")
+
 @app.route("/blog")
 def pagina_blog():
-    return render_template("blog.html")
+    return redirect("/conteudo", code=301)
 
 @app.route("/blog/<slug>")
 def pagina_post(slug):
@@ -277,7 +281,7 @@ def pagina_categoria(slug):
 @app.route("/seuhub")
 @app.route("/seu-hub")
 def pagina_seuhub():
-    return render_template("seuhub.html")
+    return redirect("/conteudo", code=301)
 
 @app.route("/portfolio")
 def pagina_portfolio():
@@ -311,7 +315,7 @@ def pagina_bairro(bairro_slug):
         'hub', 'webhook', 'obrigado', 'erro', 'politica-de-privacidade',
         'termos', 'privacidade', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico',
         'portfolio', 'metricas', 'negocio', 'categoria', 'api',
-        'seu-hub', 'seuhub'
+        'seu-hub', 'seuhub', 'conteudo'
     }
     if bairro_slug in ROTAS_RESERVADAS:
         return "Not Found", 404
@@ -770,10 +774,9 @@ def sitemap():
     # Páginas estáticas
     estaticas = [
         ("", "1.0", "daily"),
-        ("/blog", "0.8", "daily"),
+        ("/conteudo", "0.9", "daily"),
         ("/loja", "0.8", "weekly"),
         ("/portfolio", "0.7", "weekly"),
-        ("/seuhub", "0.8", "weekly"),
         ("/metricas", "0.6", "monthly"),
     ]
     for path, priority, freq in estaticas:
