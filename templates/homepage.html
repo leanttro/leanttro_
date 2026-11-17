@@ -14,6 +14,20 @@
 <title>Leanttro — Tecnologia que impulsiona seu negócio</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237943e2'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Arial' font-weight='800' text-anchor='middle' fill='white'%3EL%3C/text%3E%3C/svg%3E">
 <meta name="description" content="Sites, plataformas e soluções digitais personalizadas para impulsionar o seu negócio.">
+<link rel="canonical" href="https://www.leanttro.com/">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="Leanttro">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.leanttro.com/">
+<meta property="og:title" content="Leanttro — Tecnologia que impulsiona seu negócio">
+<meta property="og:description" content="Sites, plataformas e soluções digitais personalizadas para impulsionar o seu negócio.">
+<meta property="og:image" content="https://res.cloudinary.com/dhu1cqvrb/image/upload/c_fit,w_760,h_360/c_pad,w_1200,h_630,b_rgb:ffffff/f_jpg,q_85/v1779207400/leanttro_bohuce.png">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo da Leanttro">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Leanttro — Tecnologia que impulsiona seu negócio">
+<meta name="twitter:description" content="Sites, plataformas e soluções digitais personalizadas para impulsionar o seu negócio.">
+<meta name="twitter:image" content="https://res.cloudinary.com/dhu1cqvrb/image/upload/c_fit,w_760,h_360/c_pad,w_1200,h_630,b_rgb:ffffff/f_jpg,q_85/v1779207400/leanttro_bohuce.png">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800;900&display=swap');
 :root{--ink:#110b20;--deep:#0d0719;--purple:#702cff;--violet:#8e45ff;--lilac:#c7a6ff;--muted:#706982;--paper:#fff;--soft:#f7f4ff;--line:#e9e2f5;--max:1180px}
@@ -416,6 +430,62 @@ html.locked,html.locked body{overflow:hidden;height:100%}
 
 
 
+
+/* ===== formulário, avaliações e FAQ ===== */
+.lf-sec{padding:92px 0 70px;background:#fff}
+.lf-head{text-align:center}.lf-head h2,.lf-head p{margin-left:auto;margin-right:auto}
+.leadform{max-width:640px;margin:0 auto;padding:30px;border-radius:18px;background:#fff;border:1px solid var(--line);box-shadow:0 14px 36px #702cff1f}
+.lf-row{display:grid;gap:14px;margin-bottom:16px}
+.lf-field{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:700;color:var(--ink)}
+.lf-field input,.lf-field select{font:inherit;font-weight:500;font-size:15px;padding:13px 14px;border:1px solid #d9d2e8;border-radius:10px;background:#fff;color:var(--ink);width:100%}
+.lf-field input:focus,.lf-field select:focus{outline:2px solid var(--purple);outline-offset:1px;border-color:var(--purple)}
+.lf-hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.leadform .btn{width:100%;border:0;cursor:pointer;font-family:inherit;font-size:14px;border-radius:12px}
+.leadform .btn[disabled]{opacity:.6;cursor:wait}
+.lf-msg{margin:14px 0 0;font-size:14px;line-height:1.5;min-height:20px;text-align:center}
+.lf-msg.ok{color:#1a7f4b;font-weight:700}.lf-msg.err{color:#b3261e;font-weight:700}
+.lf-alt{margin:14px 0 0;font-size:13px;color:var(--muted);text-align:center}
+.lf-alt a{color:#6532cf;font-weight:800;text-decoration:underline}
+.rv-sec{padding:20px 0 96px}
+.sr-only{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.stars{display:flex;gap:2px}
+.rv-head{display:flex;align-items:center;gap:14px;margin-bottom:22px}
+.rv-google{margin-left:auto;display:inline-flex;align-items:center;gap:8px;border:1px solid var(--line);background:#fff;border-radius:10px;padding:10px 16px;font-size:13px;font-weight:700;color:var(--ink);box-shadow:0 3px 10px #1105200f}
+.rv-score{font:900 52px/1 Manrope;letter-spacing:-2px;color:var(--ink)}
+.rv-head span{font-size:12px;color:var(--muted);display:block;margin-top:4px}
+.rv-track{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rv{border:1px solid var(--line);border-radius:12px;background:#fff;padding:20px}
+.rv-top{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.rv-av{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,#7943e2,#1fb6a6);color:#fff;font-weight:800;font-size:13px;display:flex;align-items:center;justify-content:center;flex:none}
+.rv-top b{display:block;font-size:14px;color:var(--ink)}
+.rv-top small{display:block;font-size:12px;color:var(--muted);margin-top:2px}
+.rv p{font-size:13.5px;line-height:1.6;color:var(--muted);margin:12px 0 0}
+.rv-nav{display:none;align-items:center;justify-content:center;gap:14px;margin-top:18px}
+.rv-nav button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:20px;line-height:1;color:var(--ink);cursor:pointer;padding:0}
+.rv-nav button:disabled{opacity:.35;cursor:default}
+.rv-bar{width:150px;height:3px;border-radius:3px;background:#e4def5;overflow:hidden}
+.rv-bar i{display:block;height:100%;width:33%;background:var(--purple);border-radius:3px;transition:margin-left .15s}
+.faq-dark{position:relative;overflow:hidden;background:radial-gradient(ellipse at 12% 0%,#2a1160,#150b28 55%,#0d0719);color:#fff;padding:96px 0}
+.faq-dark:before{content:"";position:absolute;width:650px;height:650px;border:1px solid #8a43ff30;border-radius:50%;left:-300px;bottom:-380px;box-shadow:0 0 0 55px #8a43ff08,0 0 0 110px #8a43ff06;pointer-events:none}
+.faq-dark .container{position:relative;z-index:1}
+.fq-head{text-align:center}.fq-head h2{color:#fff;margin-left:auto;margin-right:auto;max-width:760px}
+.fq-head h2 span{background:linear-gradient(90deg,#c59bff,#a05cff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.fq-head p{color:#cfc4e0;margin-left:auto;margin-right:auto}
+.fq-list{max-width:820px;margin:0 auto;display:grid;gap:12px}
+.fq-item{background:#ffffff0d;border:1px solid #ffffff1f;border-radius:14px;backdrop-filter:blur(6px);transition:border-color .2s,background .2s}
+.fq-item[open]{background:#ffffff14;border-color:#a56aff80}
+.fq-item summary{list-style:none;cursor:pointer;padding:18px 54px 18px 20px;font:800 16px/1.4 Manrope;letter-spacing:-.2px;position:relative}
+.fq-item summary::-webkit-details-marker{display:none}
+.fq-item summary:after{content:"+";position:absolute;right:20px;top:50%;transform:translateY(-50%);font:600 24px/1 DM Sans;color:#b98aff;transition:transform .2s}
+.fq-item[open] summary:after{content:"–"}
+.fq-item p{margin:0;padding:0 20px 20px;font-size:14.5px;line-height:1.75;color:#d1c7df}
+@media(max-width:900px){
+ .lf-sec{padding:64px 0 48px}.rv-sec{padding:12px 0 64px}.faq-dark{padding:64px 0}
+ .rv-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch;scrollbar-width:none;margin:0 -16px;padding:2px 16px 4px;scroll-padding:0 16px}
+ .rv-track::-webkit-scrollbar{display:none}
+ .rv{flex:0 0 84%;scroll-snap-align:start}.rv-nav{display:flex}
+}
+@media(max-width:600px){.rv-head{flex-wrap:wrap}.rv-google{margin-left:0;width:100%;justify-content:center}.leadform{padding:22px 18px}.fq-item summary{font-size:15px}}
 </style>
 <noscript><style>#stage{display:none}html.locked,html.locked body{overflow:auto;height:auto}</style></noscript>
 </head>
@@ -677,9 +747,58 @@ html.locked,html.locked body{overflow:hidden;height:100%}
     <div class="st-tabs"><button type="button" class="st-tab active" data-i="0"><span>01</span>Julia Theila</button><button type="button" class="st-tab" data-i="1"><span>02</span>AMS Transfer</button><button type="button" class="st-tab" data-i="2"><span>03</span>Micasa Hostel</button><button type="button" class="st-tab" data-i="3"><span>04</span>Oceano Etiquetas</button><button type="button" class="st-tab" data-i="4"><span>05</span>Zanvia Consultoria</button><button type="button" class="st-tab" data-i="5"><span>06</span>Creapes 3D</button></div>
    </div>
   </div>
-  <div class="st-cta" id="contato"><div><strong>Vamos conversar?</strong><span>Conte o que você precisa e eu indico o melhor caminho.</span></div><a class="btn btn-primary" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20um%20site%20profissional%20com%20a%20Leanttro." target="_blank" rel="noopener">◉ &nbsp;Entrar em contato pelo WhatsApp&nbsp; →</a></div>
  </div>
 </section>
+
+<section class="lf-sec" id="contato" aria-labelledby="lfTitle">
+ <div class="container">
+  <div class="section-heading lf-head reveal">
+   <span class="eyebrow">ORÇAMENTO</span>
+   <h2 id="lfTitle">Prefere que <span>eu te chame?</span></h2>
+   <p>Deixe seu nome e WhatsApp. Eu entro em contato para entender o que você precisa.</p>
+  </div>
+  <form class="leadform" id="leadForm" novalidate>
+   <div class="lf-row">
+    <label class="lf-field">Seu nome<input type="text" name="nome" autocomplete="name" required maxlength="80" placeholder="Como posso te chamar?"></label>
+    <label class="lf-field">WhatsApp com DDD<input type="tel" name="telefone" autocomplete="tel" inputmode="tel" required maxlength="20" placeholder="(11) 91234-5678"></label>
+    <label class="lf-field">O que você precisa?
+     <select name="interesse">
+      <option value="Landing page Básica">Landing page Básica (R$ 700)</option>
+      <option value="Landing page Completa">Landing page Completa (R$ 1.200)</option>
+      <option value="Site profissional">Site profissional (até 5 páginas)</option>
+      <option value="Site em 3D">Site em 3D, projeto personalizado</option>
+      <option value="Sistema sob medida">Sistema sob medida</option>
+      <option value="Ainda não sei">Ainda não sei, quero ajuda</option>
+     </select></label>
+   </div>
+   <input class="lf-hp" type="text" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+   <button class="btn btn-primary" type="submit" id="lfBtn">Quero receber meu orçamento</button>
+   <p class="lf-msg" id="lfMsg" role="status" aria-live="polite"></p>
+   <p class="lf-alt">Prefere conversar agora? <a href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento." target="_blank" rel="noopener">Chamar no WhatsApp</a></p>
+  </form>
+ </div>
+</section>
+
+<section class="lf-sec rv-sec" id="avaliacoes" aria-labelledby="rvTitle">
+<div class="container">
+<h2 id="rvTitle" class="sr-only">Avaliações de clientes no Google</h2>
+<div class="rv-head"><b class="rv-score">5.0</b><div><div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg></div><span>Avaliações no Google</span></div><a class="rv-google" href="https://www.google.com/search?q=leanttro#mpd=~7553232772289112501/customers/reviews" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84C6.71 7.31 9.14 5.38 12 5.38z" fill="#EA4335"/></svg>Ver todas as avaliações</a></div>
+<div class="rv-track" id="rvTrack"><article class="rv"><div class="rv-top"><span class="rv-av">LR</span><div><b>Luana Rezende</b><small>há 22 semanas</small></div></div><div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg></div><p>Excelência no que faz. Entregou os projetos no prazo, sugeriu melhorias e continua entregando os trabalhos no meu site e marketing digital com muita eficiência. Darei 5 estrelas porque não posso dar mais. Vale muito o investimento.</p></article><article class="rv"><div class="rv-top"><span class="rv-av">CC</span><div><b>Creapes Creative Apes</b><small>há 23 semanas</small></div></div><div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg></div><p>O trabalho é impecável! Feito com todo cuidado e carinho especialmente para nossa empresa! Tivemos o privilégio de poder escolher cada detalhe e ter uma perspectiva especialista e profissional para nosso site. Obrigada!</p></article><article class="rv"><div class="rv-top"><span class="rv-av">DR</span><div><b>Daverson Rodrigues</b><small>há 23 semanas</small></div></div><div class="stars" aria-label="5 estrelas"><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg><svg viewBox="0 0 24 24" width="14" height="14" aria-hidden="true"><path fill="#fbbc04" d="m12 2.5 2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9L12 2.5Z"/></svg></div><p>Um profissional impecável, alavancou muito minhas vendas e visibilidade, zero arrependimentos de verdade</p></article></div>
+<div class="rv-nav"><button type="button" id="rvPrev" aria-label="Anterior">‹</button><div class="rv-bar"><i id="rvFill"></i></div><button type="button" id="rvNext" aria-label="Próxima">›</button></div>
+</div>
+</section>
+
+<section class="faq-dark" id="duvidas" aria-labelledby="fqTitle">
+ <div class="container">
+  <div class="section-heading fq-head reveal">
+   <span class="eyebrow">DÚVIDAS FREQUENTES</span>
+   <h2 id="fqTitle">Tudo o que você precisa saber <span>antes de ter um site.</span></h2>
+   <p>Respostas diretas sobre site, SEO e presença digital para quem quer ser encontrado no Google e vender mais.</p>
+  </div>
+  <div class="fq-list"><details class="fq-item"><summary>Quanto custa fazer um site profissional no Brasil?</summary><p>Depende do tipo de projeto. Uma landing page simples (uma página só) costuma custar bem menos que um site institucional com várias páginas, blog e painel de edição. Lojas virtuais e sistemas sob medida ficam numa faixa acima. Peça sempre um orçamento por escrito que diga o que está incluso: design, texto, domínio, hospedagem, SEO básico e suporte depois da entrega.</p></details><details class="fq-item"><summary>Qual a diferença entre landing page e site institucional?</summary><p>Landing page é uma página única com um objetivo claro, como levar o visitante ao WhatsApp ou a um formulário. É ideal para anúncios e para validar uma oferta. O site institucional tem várias páginas (início, serviços, sobre, contato, blog) e serve para apresentar a empresa com mais profundidade e ser encontrado em mais buscas no Google.</p></details><details class="fq-item"><summary>Preciso de site se já tenho Instagram?</summary><p>Sim, na maioria dos casos. O Instagram é um canal alugado: o alcance depende do algoritmo e você não controla as regras. O site é seu, aparece nas buscas do Google quando alguém procura o que você vende, passa credibilidade e permite medir de onde vêm os contatos. Os dois funcionam melhor juntos.</p></details><details class="fq-item"><summary>O que é SEO e como ele faz meu site aparecer no Google?</summary><p>SEO (Search Engine Optimization) é o conjunto de práticas que ajuda o Google a entender e recomendar o seu site: títulos e descrições bem escritos, textos que respondem o que as pessoas pesquisam, site rápido, boa navegação no celular, URLs organizadas e links de qualidade. Não é mágica nem instantâneo, mas é o que gera visitas contínuas sem pagar por clique.</p></details><details class="fq-item"><summary>Quanto tempo leva para um site aparecer nas buscas do Google?</summary><p>Em geral, de algumas semanas a alguns meses. O Google precisa descobrir, rastrear e avaliar o site, e pesquisas muito concorridas demoram mais. Ter conteúdo útil, cadastrar o site no Google Search Console, criar um perfil no Google Meu Negócio e publicar com frequência acelera o processo.</p></details><details class="fq-item"><summary>O que preciso para colocar um site no ar?</summary><p>Basicamente quatro coisas: um domínio (o endereço, como suaempresa.com.br), uma hospedagem (onde o site fica armazenado), o conteúdo (textos, logo e fotos) e o desenvolvimento do site em si. Domínios .com.br são registrados no Registro.br e costumam ter custo anual baixo; já a hospedagem varia conforme o tamanho do projeto.</p></details><details class="fq-item"><summary>Meu site precisa funcionar bem no celular?</summary><p>Precisa. Hoje a maior parte dos acessos vem do celular, e o Google avalia primeiro a versão mobile do site para decidir o ranking. Um site responsivo se ajusta a qualquer tela, carrega rápido e tem botões fáceis de tocar. Teste o seu no celular e veja se o telefone ou o WhatsApp estão a um toque de distância.</p></details><details class="fq-item"><summary>O que é o Google Meu Negócio e vale a pena usar?</summary><p>É o perfil gratuito da sua empresa no Google Search e no Google Maps, com endereço, horário, fotos, telefone e avaliações de clientes. Para negócios locais, é uma das formas mais eficientes de aparecer em buscas como “dentista perto de mim”. Funciona melhor quando está ligado a um site com as mesmas informações.</p></details><details class="fq-item"><summary>Como saber se meu site está gerando clientes?</summary><p>Instale o Google Analytics e o Google Search Console para ver quantas pessoas visitam, de onde vêm e quais páginas mais acessam. Depois, meça ações concretas: cliques no botão do WhatsApp, formulários enviados e ligações. Visita sem contato é sinal de que a mensagem, a oferta ou o botão de ação precisam melhorar.</p></details><details class="fq-item"><summary>Meu site precisa seguir a LGPD?</summary><p>Se ele coleta dados pessoais, como nome, telefone ou e-mail em formulários, ou usa cookies de análise e anúncios, sim. Na prática isso significa ter uma política de privacidade clara, explicar para que os dados serão usados, pedir consentimento quando necessário e proteger as informações recebidas. Em caso de dúvida sobre obrigações legais, consulte um advogado.</p></details></div>
+ </div>
+</section>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Quanto custa fazer um site profissional no Brasil?", "acceptedAnswer": {"@type": "Answer", "text": "Depende do tipo de projeto. Uma landing page simples (uma página só) costuma custar bem menos que um site institucional com várias páginas, blog e painel de edição. Lojas virtuais e sistemas sob medida ficam numa faixa acima. Peça sempre um orçamento por escrito que diga o que está incluso: design, texto, domínio, hospedagem, SEO básico e suporte depois da entrega."}}, {"@type": "Question", "name": "Qual a diferença entre landing page e site institucional?", "acceptedAnswer": {"@type": "Answer", "text": "Landing page é uma página única com um objetivo claro, como levar o visitante ao WhatsApp ou a um formulário. É ideal para anúncios e para validar uma oferta. O site institucional tem várias páginas (início, serviços, sobre, contato, blog) e serve para apresentar a empresa com mais profundidade e ser encontrado em mais buscas no Google."}}, {"@type": "Question", "name": "Preciso de site se já tenho Instagram?", "acceptedAnswer": {"@type": "Answer", "text": "Sim, na maioria dos casos. O Instagram é um canal alugado: o alcance depende do algoritmo e você não controla as regras. O site é seu, aparece nas buscas do Google quando alguém procura o que você vende, passa credibilidade e permite medir de onde vêm os contatos. Os dois funcionam melhor juntos."}}, {"@type": "Question", "name": "O que é SEO e como ele faz meu site aparecer no Google?", "acceptedAnswer": {"@type": "Answer", "text": "SEO (Search Engine Optimization) é o conjunto de práticas que ajuda o Google a entender e recomendar o seu site: títulos e descrições bem escritos, textos que respondem o que as pessoas pesquisam, site rápido, boa navegação no celular, URLs organizadas e links de qualidade. Não é mágica nem instantâneo, mas é o que gera visitas contínuas sem pagar por clique."}}, {"@type": "Question", "name": "Quanto tempo leva para um site aparecer nas buscas do Google?", "acceptedAnswer": {"@type": "Answer", "text": "Em geral, de algumas semanas a alguns meses. O Google precisa descobrir, rastrear e avaliar o site, e pesquisas muito concorridas demoram mais. Ter conteúdo útil, cadastrar o site no Google Search Console, criar um perfil no Google Meu Negócio e publicar com frequência acelera o processo."}}, {"@type": "Question", "name": "O que preciso para colocar um site no ar?", "acceptedAnswer": {"@type": "Answer", "text": "Basicamente quatro coisas: um domínio (o endereço, como suaempresa.com.br), uma hospedagem (onde o site fica armazenado), o conteúdo (textos, logo e fotos) e o desenvolvimento do site em si. Domínios .com.br são registrados no Registro.br e costumam ter custo anual baixo; já a hospedagem varia conforme o tamanho do projeto."}}, {"@type": "Question", "name": "Meu site precisa funcionar bem no celular?", "acceptedAnswer": {"@type": "Answer", "text": "Precisa. Hoje a maior parte dos acessos vem do celular, e o Google avalia primeiro a versão mobile do site para decidir o ranking. Um site responsivo se ajusta a qualquer tela, carrega rápido e tem botões fáceis de tocar. Teste o seu no celular e veja se o telefone ou o WhatsApp estão a um toque de distância."}}, {"@type": "Question", "name": "O que é o Google Meu Negócio e vale a pena usar?", "acceptedAnswer": {"@type": "Answer", "text": "É o perfil gratuito da sua empresa no Google Search e no Google Maps, com endereço, horário, fotos, telefone e avaliações de clientes. Para negócios locais, é uma das formas mais eficientes de aparecer em buscas como “dentista perto de mim”. Funciona melhor quando está ligado a um site com as mesmas informações."}}, {"@type": "Question", "name": "Como saber se meu site está gerando clientes?", "acceptedAnswer": {"@type": "Answer", "text": "Instale o Google Analytics e o Google Search Console para ver quantas pessoas visitam, de onde vêm e quais páginas mais acessam. Depois, meça ações concretas: cliques no botão do WhatsApp, formulários enviados e ligações. Visita sem contato é sinal de que a mensagem, a oferta ou o botão de ação precisam melhorar."}}, {"@type": "Question", "name": "Meu site precisa seguir a LGPD?", "acceptedAnswer": {"@type": "Answer", "text": "Se ele coleta dados pessoais, como nome, telefone ou e-mail em formulários, ou usa cookies de análise e anúncios, sim. Na prática isso significa ter uma política de privacidade clara, explicar para que os dados serão usados, pedir consentimento quando necessário e proteger as informações recebidas. Em caso de dúvida sobre obrigações legais, consulte um advogado."}}]}</script>
 </main>
 
 <footer class="footer">
@@ -692,6 +811,50 @@ html.locked,html.locked body{overflow:hidden;height:100%}
   <div class="copyright">© <span id="year"></span> Leanttro. Todos os direitos reservados.</div>
  </div>
 </footer>
+<script>
+(function(){var t=document.getElementById("rvTrack"),p=document.getElementById("rvPrev"),n=document.getElementById("rvNext"),f=document.getElementById("rvFill");if(!t)return;
+function up(){var m=t.scrollWidth-t.clientWidth,r=m>0?t.scrollLeft/m:0,w=f.parentNode.clientWidth,fw=f.offsetWidth;f.style.marginLeft=Math.max(0,(w-fw)*r)+"px";p.disabled=t.scrollLeft<=2;n.disabled=t.scrollLeft>=m-2}
+function go(d){var c=t.querySelector(".rv");t.scrollBy({left:d*(c.offsetWidth+16),behavior:"smooth"})}
+p.onclick=function(){go(-1)};n.onclick=function(){go(1)};t.addEventListener("scroll",up,{passive:true});window.addEventListener("resize",up);up();
+})();
+(function(){
+  var LEADS_URL='/leads'; // grava na tabela leads (aparece no painel /admin)
+  var EMAIL_AVISO='c39916a29952e2b6e71f44db3900992f'; // FormSubmit, mesmo aviso por e-mail da /sites
+  var f=document.getElementById('leadForm'); if(!f) return;
+  var btn=document.getElementById('lfBtn'), msg=document.getElementById('lfMsg');
+  function say(t,c){msg.textContent=t;msg.className='lf-msg '+(c||'')}
+  function avisoEmail(d){
+    return fetch('https://formsubmit.co/ajax/'+EMAIL_AVISO,{method:'POST',
+      headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({_subject:'Novo lead pelo site Leanttro',_template:'table',_captcha:'false',
+        Formulario:'Home',Nome:d.nome,WhatsApp:d.telefone,Interesse:d.interesse,Origem:d.origem})
+    }).then(function(r){return r.ok}).catch(function(){return false});
+  }
+  function salvaBanco(d){
+    return fetch(LEADS_URL,{method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({nome:d.nome,telefone:d.telefone,email:'',empresa:'',origem:d.origem,interesse:d.interesse})
+    }).then(function(r){return r.ok}).catch(function(){return false});
+  }
+  f.addEventListener('submit',function(e){
+    e.preventDefault();
+    if(f.site.value) return; // honeypot
+    var nome=f.nome.value.trim(), tel=f.telefone.value.replace(/\D/g,'');
+    if(nome.length<2){say('Digite seu nome.','err');f.nome.focus();return}
+    if(tel.length<10||tel.length>13){say('Digite o WhatsApp com DDD, por exemplo (11) 91234-5678.','err');f.telefone.focus();return}
+    btn.disabled=true; say('Enviando...');
+    var d={nome:nome,telefone:f.telefone.value.trim(),interesse:f.interesse.value,
+           origem:/[?&]gclid=/.test(location.search)?'google-ads':'home'};
+    Promise.all([salvaBanco(d),avisoEmail(d)]).then(function(r){
+      if(r[0]||r[1]){
+        try{gtag('event','form_lead',{event_category:'lead',event_label:d.interesse});
+          if(typeof ADS_CONVERSION!=='undefined'&&ADS_CONVERSION){gtag('event','conversion',{send_to:ADS_CONVERSION,value:1.0,currency:'BRL'})}}catch(err){}
+        f.reset(); say('Recebi seu contato! Vou te responder pelo WhatsApp.','ok');
+      }else say('Não consegui enviar agora. Chame direto no WhatsApp, é rápido.','err');
+      btn.disabled=false;
+    });
+  });
+})();
+</script>
 <script>
 const menuToggle=document.getElementById('menuToggle');
 const navLinks=document.getElementById('navLinks');
