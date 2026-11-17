@@ -389,6 +389,11 @@ a:focus-visible,summary:focus-visible{outline:3px solid #7943e2;outline-offset:2
 #bar{position:fixed;right:22px;top:50%;width:6px;height:170px;margin-top:-85px;border-radius:6px;background:rgba(255,255,255,.14);z-index:3;pointer-events:none}
 #thumb{position:absolute;left:0;top:0;width:100%;height:32px;border-radius:6px;background:#fff}
 html.locked,html.locked body{overflow:hidden;height:100%}
+/* menu hambúrguer (mobile) */
+header .menu-toggle{display:none;background:none;border:1px solid #ffffff70;color:#fff;border-radius:10px;padding:8px;cursor:pointer}
+@media(max-width:900px){header .menu-toggle{display:block}
+header .menu{display:none;position:absolute;top:100%;left:0;right:0;margin:0;background:#7943e2;padding:20px 24px;flex-direction:column;align-items:flex-start;gap:20px;border-top:1px solid #ffffff30;box-shadow:0 10px 20px #0003}
+header .menu.open{display:flex}}
 </style>
 <noscript><style>#stage{display:none}html.locked,html.locked body{overflow:auto;height:auto}</style></noscript>
 </head>
@@ -410,10 +415,13 @@ html.locked,html.locked body{overflow:hidden;height:100%}
 <header>
 <div class="wrap nav">
 <a class="logo" href="/"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="40"></a>
-<nav class="menu" aria-label="Principal">
+<nav class="menu" id="navLinks" aria-label="Principal">
 <a href="/plataformas">Plataformas</a><a href="/sites">Sites</a><a href="/loja">Loja</a><a href="/conteudo">Conteúdo</a>
 </nav>
 <a class="nav-wa" data-wa="topo" href="https://wa.me/5511913324827?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20quero%20um%20or%C3%A7amento.">WhatsApp</a>
+<button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
+<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+</button>
 </div>
 </header>
 
@@ -871,6 +879,14 @@ p.onclick=function(){go(-1)};n.onclick=function(){go(1)};t.addEventListener("scr
     requestAnimationFrame(frame);
   }
   requestAnimationFrame(frame);
+})();
+</script>
+<script>
+(function(){
+  var b=document.getElementById('menuToggle'),m=document.getElementById('navLinks');
+  if(!b||!m) return;
+  b.addEventListener('click',function(){var o=m.classList.toggle('open');b.setAttribute('aria-expanded',String(o))});
+  m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');b.setAttribute('aria-expanded','false')})});
 })();
 </script>
 </body>
