@@ -1,5 +1,11 @@
 import os
+import io
+import re
 import json
+import shutil
+import secrets
+import threading
+from pathlib import Path
 import datetime as _dt
 import jwt
 import bcrypt
@@ -9,7 +15,9 @@ import psycopg2.extras
 import requests as req_ext
 from datetime import datetime, timedelta
 from functools import wraps
-from flask import Flask, request, jsonify, render_template, Response, session, redirect
+from flask import Flask, request, jsonify, render_template, Response, session, redirect, send_file, abort
+from werkzeug.middleware.proxy_fix import ProxyFix
+from PIL import Image, ImageOps
 from flask_cors import CORS
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import Flow
@@ -17,6 +25,8 @@ from googleapiclient.discovery import build
 
 app = Flask(__name__)
 CORS(app)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1)
+app.config["MAX_CONTENT_LENGTH"] = 12 * 1024 * 1024  # limite de upload (12 MB)
 app.secret_key = os.environ.get("SECRET_KEY", "troca-isso")
 app.config["SESSION_COOKIE_SECURE"] = True
 app.config["SESSION_COOKIE_SAMESITE"] = "Lax"
@@ -49,6 +59,153 @@ def token_required(f):
     return decorated
 
 # ─── AUTH / ADMIN ─────────────────────────────────────────────────────────────
+# ─── MÍDIA / UPLOAD (volume /data/uploads) ───────────────────────────────────
+# Dokploy: monte um volume em /data. Imagens ficam em /data/uploads/<hex16>.webp
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+def _data_dir():
+    d = Path(os.environ.get("DATA_DIR", "/data"))
+    try:
+        d.mkdir(parents=True, exist_ok=True)
+        if os.access(d, os.W_OK):
+            return d
+    except OSError:
+        pass
+    d = Path(BASE_DIR) / "data"          # fallback local (sem volume)
+    d.mkdir(exist_ok=True)
+    return d
+
+DATA   = _data_dir()
+UP     = DATA / "uploads"
+CACHE  = UP / "cache"
+CACHE.mkdir(parents=True, exist_ok=True)
+
+PUBLIC_URL = os.environ.get("PUBLIC_URL", "").strip().rstrip("/")   # ex.: https://leanttro.com
+MAX_PIXELS = 40_000_000          # recusa imagens gigantes (protege a RAM)
+LADO_MAX   = {"icone": 256}      # demais: 1600px
+LADO_PADRAO = 1600
+LARGURAS   = (320, 480, 640, 960, 1280)   # variantes geradas sob demanda (cache em disco)
+NOME_RE    = re.compile(r"^[a-f0-9]{16}\.webp$")
+MIDIA_RE   = re.compile(r"/midia/([a-f0-9]{16}\.webp)")
+_img_lock  = threading.Semaphore(2)       # no máx. 2 processamentos de imagem simultâneos
+
+def _salvar_upload(stream, lado):
+    """Reduz, converte para WEBP e grava em /data/uploads. Retorna o nome do arquivo ou None."""
+    with _img_lock:
+        try:
+            with Image.open(stream) as im:
+                if im.width * im.height > MAX_PIXELS:
+                    return None
+                if im.format == "JPEG":
+                    im.draft("RGB", (lado, lado))       # decodifica já reduzido: bem menos RAM
+                img = ImageOps.exif_transpose(im)
+                tem_alfa = img.mode in ("RGBA", "LA") or (img.mode == "P" and "transparency" in img.info)
+                img = img.convert("RGBA" if tem_alfa else "RGB")
+                img.thumbnail((lado, lado), Image.LANCZOS)
+                nome = secrets.token_hex(8) + ".webp"
+                tmp = UP / (nome + ".tmp")
+                img.save(tmp, "WEBP", quality=82, method=4)
+                os.replace(tmp, UP / nome)
+                return nome
+        except Exception:
+            return None
+
+def _apagar_midia(url):
+    m = MIDIA_RE.search(url or "")
+    if not m:
+        return
+    nome = m.group(1)
+    (UP / nome).unlink(missing_ok=True)
+    for f in CACHE.glob(nome[:-5] + "-*.webp"):
+        f.unlink(missing_ok=True)
+
+def _trocou(velha, nova):
+    """Se a imagem foi trocada/removida, apaga a antiga do volume (evita lixo)."""
+    if velha and velha != (nova or ""):
+        _apagar_midia(velha)
+
+def _url_antiga(cur, tabela, coluna, id):
+    cur.execute("SELECT %s AS v FROM %s WHERE id = %%s" % (coluna, tabela), (id,))
+    r = cur.fetchone()
+    return r["v"] if r else None
+
+def _base_url():
+    if PUBLIC_URL:
+        return PUBLIC_URL
+    u = request.url_root.rstrip("/")
+    if u.startswith("http://") and "localhost" not in u and "127.0.0.1" not in u:
+        u = "https://" + u[7:]
+    return u
+
+@app.route("/midia/<nome>")
+def midia(nome):
+    if not NOME_RE.match(nome):
+        abort(404)
+    p = UP / nome
+    if not p.is_file():
+        abort(404)
+    w = request.args.get("w", type=int)
+    if w:
+        alvo = next((x for x in LARGURAS if x >= w), None)
+        if alvo:
+            v = CACHE / ("%s-%d.webp" % (nome[:-5], alvo))
+            if not v.exists():
+                with _img_lock:
+                    with Image.open(p) as im:
+                        if im.width > alvo:
+                            im = im.resize((alvo, max(1, int(im.height * alvo / im.width))), Image.LANCZOS)
+                            tmp = v.with_name(v.name + "." + secrets.token_hex(3) + ".tmp")
+                            im.save(tmp, "WEBP", quality=80, method=4)
+                            os.replace(tmp, v)
+            if v.exists():
+                p = v
+    r = send_file(p, mimetype="image/webp", conditional=True, max_age=31536000)
+    r.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+    return r
+
+@app.route("/admin/upload", methods=["POST"])
+@token_required
+def admin_upload():
+    arq = request.files.get("arquivo")
+    if not arq or not arq.filename:
+        return jsonify({"erro": "Nenhum arquivo enviado"}), 400
+    lado = LADO_MAX.get(request.form.get("tipo", ""), LADO_PADRAO)
+    nome = _salvar_upload(arq.stream, lado)
+    if not nome:
+        return jsonify({"erro": "Arquivo inválido. Envie JPG, PNG, WEBP ou GIF (até 12 MB)."}), 400
+    return jsonify({"url": _base_url() + "/midia/" + nome, "nome": nome}), 201
+
+@app.route("/admin/midia/limpar", methods=["POST"])
+@token_required
+def limpar_midia():
+    """Remove arquivos do volume que nenhum registro usa mais (com mais de 24h).
+    Por padrão só simula; passe ?apagar=1 para apagar de verdade."""
+    consultas = [
+        "SELECT r.m[1] AS n FROM produtos t, regexp_matches(coalesce(t.imagem_url,'')||' '||coalesce(t.descricao,''), '/midia/([a-f0-9]{16})[.]webp', 'g') AS r(m)",
+        "SELECT r.m[1] AS n FROM hub_negocios t, regexp_matches(coalesce(t.foto_url,'')||' '||coalesce(t.descricao,''), '/midia/([a-f0-9]{16})[.]webp', 'g') AS r(m)",
+        "SELECT r.m[1] AS n FROM hub_categorias t, regexp_matches(coalesce(t.icone_url,''), '/midia/([a-f0-9]{16})[.]webp', 'g') AS r(m)",
+        "SELECT r.m[1] AS n FROM blog_posts t, regexp_matches(coalesce(t.imagem_url,'')||' '||coalesce(t.resumo,'')||' '||coalesce(t.conteudo,''), '/midia/([a-f0-9]{16})[.]webp', 'g') AS r(m)",
+    ]
+    usados = set()
+    try:
+        conn = get_db(); cur = conn.cursor()
+        for q in consultas:
+            cur.execute(q)
+            usados.update(r["n"] for r in cur.fetchall())
+        cur.close(); conn.close()
+    except Exception as e:
+        return jsonify({"erro": "Não foi possível varrer o banco; nada foi apagado.", "detalhe": str(e)}), 500
+    import time as _t
+    limite = _t.time() - 86400
+    orfas, liberado = [], 0
+    for f in UP.glob("*.webp"):
+        if f.stem in usados or f.stat().st_mtime > limite:
+            continue
+        orfas.append(f.name); liberado += f.stat().st_size
+        if request.args.get("apagar") == "1":
+            _apagar_midia("/midia/" + f.name)
+    return jsonify({"orfas": len(orfas), "bytes": liberado, "apagado": request.args.get("apagar") == "1", "arquivos": orfas[:100]})
+
 @app.route("/admin/login", methods=["POST"])
 def admin_login():
     data = request.json
@@ -133,6 +290,7 @@ def editar_produto(id):
     if preco_json is not None and not isinstance(preco_json, str):
         preco_json = json.dumps(preco_json)
     conn = get_db(); cur = conn.cursor()
+    _velha = _url_antiga(cur, "produtos", "imagem_url", id)
     cur.execute("""
         UPDATE produtos SET nome=%s, slug=%s, descricao=%s, categoria=%s, preco=%s, preco_json=%s,
         arquivo_url=%s, imagem_url=%s, ativo=%s, destaque=%s, tipo=%s, updated_em=now()
@@ -141,6 +299,7 @@ def editar_produto(id):
           d.get("arquivo_url"), d.get("imagem_url"), d.get("ativo", True), d.get("destaque", False),
           d.get("tipo", "loja"), id))
     conn.commit(); cur.close(); conn.close()
+    _trocou(_velha, d.get("imagem_url"))
     return jsonify({"ok": True})
 
 @app.route("/admin/produtos/<int:id>", methods=["DELETE"])
@@ -478,11 +637,13 @@ def criar_categoria():
 def editar_categoria(id):
     d = request.json
     conn = get_db(); cur = conn.cursor()
+    _velha = _url_antiga(cur, "hub_categorias", "icone_url", id)
     cur.execute("""
         UPDATE hub_categorias SET nome=%s, slug=%s, icone_url=%s, ativo=%s
         WHERE id=%s
     """, (d["nome"], d["slug"], d.get("icone_url"), d.get("ativo", True), id))
     conn.commit(); cur.close(); conn.close()
+    _trocou(_velha, d.get("icone_url"))
     return jsonify({"ok": True})
 
 @app.route("/admin/hub/categorias/<int:id>", methods=["DELETE"])
@@ -670,6 +831,7 @@ def criar_negocio():
 def editar_negocio(id):
     d = request.json
     conn = get_db(); cur = conn.cursor()
+    _velha = _url_antiga(cur, "hub_negocios", "foto_url", id)
     cur.execute("""
         UPDATE hub_negocios SET categoria_id=%s, nome=%s, slug=%s, endereco=%s, bairro=%s,
         cidade=%s, lat=%s, lng=%s, telefone=%s, whatsapp=%s, site_url=%s, foto_url=%s,
@@ -680,6 +842,7 @@ def editar_negocio(id):
           d.get("site_url"), d.get("foto_url"), d.get("descricao"), d.get("plano"),
           d.get("destaque"), d.get("ativo", True), id))
     conn.commit(); cur.close(); conn.close()
+    _trocou(_velha, d.get("foto_url"))
     return jsonify({"ok": True})
 
 @app.route("/admin/hub/negocios/<int:id>", methods=["DELETE"])
@@ -769,6 +932,7 @@ def criar_post():
 def editar_post(id):
     d = request.json
     conn = get_db(); cur = conn.cursor()
+    _velha = _url_antiga(cur, "blog_posts", "imagem_url", id)
     cur.execute("""
         UPDATE blog_posts SET titulo=%s, slug=%s, resumo=%s, conteudo=%s, categoria=%s,
         imagem_url=%s, publicado=%s, updated_em=now()
@@ -779,6 +943,7 @@ def editar_post(id):
     for tag in d.get("tags", []):
         cur.execute("INSERT INTO blog_tags (post_id, tag) VALUES (%s,%s)", (id, tag))
     conn.commit(); cur.close(); conn.close()
+    _trocou(_velha, d.get("imagem_url"))
     return jsonify({"ok": True})
 
 @app.route("/admin/blog/<int:id>", methods=["DELETE"])
@@ -986,8 +1151,13 @@ SCOPES_METRICAS = [
 ]
 
 # Arquivo onde os tokens são salvos por GA ID (ex: G-H7F6WRRVS7)
-BASE_DIR     = os.path.dirname(os.path.abspath(__file__))
-TOKENS_FILE  = os.path.join(BASE_DIR, 'data', 'metricas_tokens.json')
+TOKENS_FILE  = str(DATA / 'metricas_tokens.json')
+_OLD_TOKENS  = os.path.join(BASE_DIR, 'data', 'metricas_tokens.json')
+if not os.path.exists(TOKENS_FILE) and os.path.exists(_OLD_TOKENS):
+    try:
+        shutil.copy(_OLD_TOKENS, TOKENS_FILE)
+    except Exception:
+        pass
 
 
 # ── Helpers de token ────────────────────────────────────────────────
