@@ -400,6 +400,14 @@ input[type=checkbox].row-check{
   .field-row{grid-template-columns:1fr}
   .stats-grid{grid-template-columns:1fr 1fr}
 }
+
+/* ── UPLOAD DE IMAGEM ── */
+.up{display:flex;gap:8px}
+.up input:not([type=file]){flex:1;min-width:0}
+.up-btn{flex:none;padding:0 14px;background:var(--surface);border:1px solid var(--border2);border-radius:var(--radius);color:var(--text);font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap}
+.up-btn:hover{border-color:var(--accent)}
+.up-btn:disabled{opacity:.6;cursor:wait}
+.up-prev{display:block;margin-top:8px;max-width:160px;max-height:100px;border-radius:8px;border:1px solid var(--border2);object-fit:cover}
 </style>
 </head>
 <body>
@@ -802,7 +810,7 @@ input[type=checkbox].row-check{
       </div>
       <div class="field"><label>Descrição</label><textarea id="mp-desc" rows="3" placeholder="Descreva o produto..."></textarea></div>
       <div class="field-row">
-        <div class="field"><label>URL da Imagem</label><input id="mp-imagem" placeholder="https://..."></div>
+        <div class="field"><label>URL da Imagem</label><div class="up"><input id="mp-imagem" placeholder="https://... ou clique em Enviar"><button type="button" class="up-btn" onclick="this.nextElementSibling.click()">📷 Enviar</button><input type="file" accept="image/*" hidden onchange="uploadImg(this, 'mp-imagem')"></div><img class="up-prev" data-for="mp-imagem" alt="" style="display:none"></div>
         <div class="field"><label>URL do Arquivo</label><input id="mp-arquivo" placeholder="https://..."></div>
       </div>
       <div class="field-row">
@@ -870,7 +878,7 @@ input[type=checkbox].row-check{
       </div>
       <div class="field-row">
         <div class="field"><label>Site</label><input id="mn-site" placeholder="https://..."></div>
-        <div class="field"><label>Foto URL</label><input id="mn-foto" placeholder="https://..."></div>
+        <div class="field"><label>Foto URL</label><div class="up"><input id="mn-foto" placeholder="https://... ou clique em Enviar"><button type="button" class="up-btn" onclick="this.nextElementSibling.click()">📷 Enviar</button><input type="file" accept="image/*" hidden onchange="uploadImg(this, 'mn-foto')"></div><img class="up-prev" data-for="mn-foto" alt="" style="display:none"></div>
       </div>
       <div class="field"><label>Descrição</label><textarea id="mn-desc" rows="3"></textarea></div>
       <div class="field"><label>Plano</label>
@@ -901,7 +909,7 @@ input[type=checkbox].row-check{
       <input type="hidden" id="mcat-id">
       <div class="field"><label>Nome</label><input id="mcat-nome" placeholder="Ex: Restaurantes"></div>
       <div class="field"><label>Slug</label><input id="mcat-slug" placeholder="restaurantes"></div>
-      <div class="field"><label>Ícone URL</label><input id="mcat-icone" placeholder="https://..."></div>
+      <div class="field"><label>Ícone URL</label><div class="up"><input id="mcat-icone" placeholder="https://... ou clique em Enviar"><button type="button" class="up-btn" onclick="this.nextElementSibling.click()">📷 Enviar</button><input type="file" accept="image/*" hidden onchange="uploadImg(this, 'mcat-icone', 'icone')"></div><img class="up-prev" data-for="mcat-icone" alt="" style="display:none"></div>
       <div class="field"><div class="field-check"><input type="checkbox" id="mcat-ativo" checked><label for="mcat-ativo">Ativa</label></div></div>
     </div>
     <div class="modal-foot">
@@ -931,7 +939,7 @@ input[type=checkbox].row-check{
           </select>
         </div>
       </div>
-      <div class="field"><label>Imagem URL</label><input id="mpost-img" placeholder="https://..."></div>
+      <div class="field"><label>Imagem URL</label><div class="up"><input id="mpost-img" placeholder="https://... ou clique em Enviar"><button type="button" class="up-btn" onclick="this.nextElementSibling.click()">📷 Enviar</button><input type="file" accept="image/*" hidden onchange="uploadImg(this, 'mpost-img')"></div><img class="up-prev" data-for="mpost-img" alt="" style="display:none"></div>
       <div class="field"><label>Resumo</label><textarea id="mpost-resumo" rows="2" placeholder="Breve descrição..."></textarea></div>
       <div class="field"><label>Conteúdo (HTML/Markdown)</label><textarea id="mpost-conteudo" rows="8" placeholder="Conteúdo completo do post..."></textarea></div>
       <div class="field"><label>Tags (separadas por vírgula)</label><input id="mpost-tags" placeholder="seo, automacao, n8n"></div>
@@ -1026,6 +1034,43 @@ async function bootApp() {
 function doLogout() {
   TOKEN = ''; localStorage.removeItem('lt_token');
   location.reload();
+}
+
+
+// ── UPLOAD DE IMAGEM (salva no volume /data do servidor) ──
+function refreshPrevs() {
+  document.querySelectorAll('.up-prev').forEach(img => {
+    let v = (document.getElementById(img.dataset.for).value || '').trim();
+    if (!v) { img.removeAttribute('src'); img.style.display = 'none'; return; }
+    if (v.includes('/midia/') && !v.includes('?')) v += '?w=320';   // miniatura leve
+    img.src = v; img.style.display = 'block';
+  });
+}
+document.addEventListener('input', e => { if (e.target.closest && e.target.closest('.up')) refreshPrevs(); });
+
+async function uploadImg(fileInput, targetId, kind) {
+  const f = fileInput.files[0];
+  fileInput.value = '';
+  if (!f) return;
+  if (f.size > 12 * 1024 * 1024) { toast('Arquivo muito grande (máx. 12 MB)', 'error'); return; }
+  const btn = fileInput.previousElementSibling, txt = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Enviando...';
+  try {
+    const fd = new FormData();
+    fd.append('arquivo', f);
+    if (kind) fd.append('tipo', kind);
+    const r = await fetch(API + '/admin/upload', { method: 'POST', headers: { 'Authorization': 'Bearer ' + TOKEN }, body: fd });
+    if (r.status === 401) { doLogout(); return; }
+    const j = await r.json().catch(() => ({}));
+    if (!r.ok) throw new Error(j.erro || 'Falha no upload');
+    document.getElementById(targetId).value = j.url;
+    refreshPrevs();
+    toast('Imagem enviada! Clique em Salvar.', 'success');
+  } catch (e) {
+    toast(e.message || 'Erro no upload', 'error');
+  } finally {
+    btn.disabled = false; btn.textContent = txt;
+  }
 }
 
 // ── API HELPER ──
@@ -1185,6 +1230,7 @@ function filterTable(type) {
 
 function openModal(type, data) {
   document.getElementById('modal-' + type).classList.add('open');
+  refreshPrevs();
 }
 
 function closeModal(type) {
