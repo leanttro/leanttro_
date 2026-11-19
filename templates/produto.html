@@ -45,28 +45,6 @@ body{font-family:var(--sans);background:var(--bg);color:var(--text);line-height:
 a{text-decoration:none;color:inherit}
 img{max-width:100%;display:block}
 
-/* HEADER */
-header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:200;padding:0 20px}
-.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:68px;gap:24px}
-.logo img{height:38px;width:auto}
-nav.desktop-nav ul{list-style:none;display:flex;gap:4px}
-nav.desktop-nav ul li a{padding:8px 14px;border-radius:8px;font-size:.9rem;font-weight:500;color:var(--muted);transition:all .15s;white-space:nowrap}
-nav.desktop-nav ul li a:hover{color:var(--primary);background:rgba(121,67,226,.07)}
-nav.desktop-nav ul li a.ativo{color:var(--primary);font-weight:600}
-.header-cta{display:flex;align-items:center;gap:10px;flex-shrink:0}
-.btn-wpp-header{display:inline-flex;align-items:center;gap:7px;background:#25D366;color:#fff;padding:9px 18px;border-radius:8px;font-size:.875rem;font-weight:600;transition:all .2s;white-space:nowrap}
-.btn-wpp-header:hover{background:#1da850;transform:translateY(-1px)}
-.btn-wpp-header svg{width:17px;height:17px;flex-shrink:0}
-.hamburger{display:none;background:none;border:none;cursor:pointer;padding:8px;color:var(--text)}
-.hamburger svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:2}
-.mobile-nav-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:300;justify-content:center;align-items:center;opacity:0;transition:opacity .25s}
-.mobile-nav-overlay.active{display:flex;opacity:1}
-.mobile-nav-overlay ul{list-style:none;text-align:center}
-.mobile-nav-overlay ul li{margin:18px 0}
-.mobile-nav-overlay ul li a{color:#fff;font-family:var(--display);font-size:1.8rem;font-weight:700}
-.mobile-nav-close{position:absolute;top:22px;right:22px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;line-height:1}
-@media(max-width:768px){nav.desktop-nav{display:none}.hamburger{display:flex}header{padding:0 12px}.header-inner{height:60px;gap:8px}.logo img{height:32px}.btn-wpp-header{font-size:0;gap:0;padding:8px 12px}.btn-wpp-header svg{width:20px;height:20px}}
-
 /* HERO */
 .hero-page{background:var(--primary);padding:56px 20px 0;position:relative;overflow:hidden}
 .hero-page-inner{max-width:1200px;margin:0 auto;text-align:center;padding-bottom:64px}
@@ -156,52 +134,57 @@ footer{background:var(--dark);padding:40px 20px 20px}
 .footer-bottom{max-width:1200px;margin:16px auto 0;font-size:.75rem;color:rgba(255,255,255,.3);text-align:center}
 .footer-bottom a{color:rgba(255,255,255,.45)}
 .footer-bottom a:hover{color:#fff}
+/* ===== CABEÇALHO (igual ao de Soluções Gráficas) ===== */
+.site-header{position:sticky;top:0;z-index:200;background:#7943e2;color:#fff;box-shadow:0 2px 14px #0002;font-family:"DM Sans",Arial,sans-serif}
+.site-header .hd-container{max-width:none;padding:0;width:min(1180px,calc(100% - 64px));margin:auto}
+.site-header .nav{height:80px;display:flex;align-items:center;gap:36px}
+.site-header .logo{display:flex;align-items:center;gap:10px;font-size:28px;font-weight:800;letter-spacing:-1.5px;color:#fff;text-decoration:none}
+.site-header .logo svg,.site-header .logo img{filter:brightness(0) invert(1)}
+.site-header .logo img{display:block;height:40px;width:auto}
+.logo-fb{display:flex;align-items:center;gap:10px}.logo-fb[hidden]{display:none}
+.site-header .menu{display:flex;gap:28px;margin-left:auto;font-size:14px;font-weight:600;align-items:center}
+.site-header .menu a{color:#fff;text-decoration:none}
+.site-header .menu a:hover,.site-header .menu a.active{color:#e7dcff}
+.site-header .nav-wa{background:#071421;color:#fff;font-weight:800;font-size:13px;padding:11px 18px;border-radius:22px;white-space:nowrap;text-decoration:none}
+.site-header .menu-toggle{display:none;background:none;border:1px solid #ffffff70;color:#fff;border-radius:10px;padding:8px;cursor:pointer}
+@media(max-width:900px){.site-header .nav{gap:12px;height:68px}.site-header .nav-wa{margin-left:auto}.site-header .menu-toggle{display:block}
+ .site-header .menu{display:none;position:absolute;top:100%;left:0;right:0;margin:0;background:#7943e2;padding:20px 24px;flex-direction:column;align-items:flex-start;gap:20px;border-top:1px solid #ffffff30;box-shadow:0 10px 20px #0003}
+ .site-header .menu.open{display:flex}}
+@media(max-width:680px){.site-header .hd-container{max-width:none;padding:0;width:calc(100% - 36px)}}
+/* ===== MENU: Soluções com seta ===== */
+.site-header .dd{position:relative}
+.site-header .dd-btn{background:none;border:0;padding:0;margin:0;color:inherit;font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.site-header .dd-btn:hover,.site-header .dd.open .dd-btn,.site-header .dd-btn.active{color:#e7dcff}
+.site-header .dd-btn:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:6px}
+.site-header .dd-ar{width:12px;height:12px;transition:transform .2s}
+.site-header .dd.open .dd-ar{transform:rotate(180deg)}
+.site-header .dd-menu{position:absolute;top:100%;left:50%;min-width:210px;margin-top:16px;padding:8px;background:#fff;border-radius:14px;box-shadow:0 18px 40px rgba(30,8,90,.3);opacity:0;visibility:hidden;transform:translateX(-50%) translateY(6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:40}
+.site-header .dd-menu:before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+.site-header .dd.open .dd-menu{opacity:1;visibility:visible;transform:translateX(-50%)}
+.site-header .menu .dd-menu a{display:block;padding:11px 14px;border-radius:10px;color:#2a1d5c;font-size:14px;font-weight:600;white-space:nowrap}
+.site-header .menu .dd-menu a:hover,.site-header .menu .dd-menu a[aria-current]{background:#f3ecff;color:#5b21b6}
+@media(hover:hover) and (min-width:901px){.site-header .dd:hover .dd-menu{opacity:1;visibility:visible;transform:translateX(-50%)}.site-header .dd:hover .dd-ar{transform:rotate(180deg)}}
+@media(max-width:900px){.site-header .dd{width:100%}.site-header .dd-menu{position:static;display:none;min-width:0;margin:12px 0 0;padding:4px 0 0 14px;background:transparent;box-shadow:none;border-left:2px solid #ffffff40;border-radius:0;opacity:1;visibility:visible;transform:none}
+.site-header .dd-menu:before{display:none}.site-header .dd.open .dd-menu{display:block;transform:none}
+.site-header .menu .dd-menu a{color:#fff;padding:9px 0;border-radius:0}.site-header .menu .dd-menu a:hover,.site-header .menu .dd-menu a[aria-current]{background:none;color:#e7dcff}}
 </style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&display=swap">
 </head>
 <body>
 
-<!-- HEADER -->
-<header>
-  <div class="header-inner">
-    <a href="/" class="logo-link">
-      <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" height="38">
-    </a>
-    <nav class="desktop-nav" aria-label="Navegação principal">
-      <ul>
-        <li><a href="/">Home</a></li>
-        <li><a href="/seu-hub">Seu Hub</a></li>
-        <li><a href="/loja" class="ativo">Loja</a></li>
-        <li><a href="/portfolio">Portfólio</a></li>
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/metricas">Métricas Grátis</a></li>
-        <li><a href="/#orcamento">Orçamento</a></li>
-      </ul>
-    </nav>
-    <div class="header-cta">
-      <a href="https://wa.me/5511913324827" class="btn-wpp-header" target="_blank" rel="noopener">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
-      </a>
-      <button class="hamburger" id="hamburger" aria-label="Menu">
-        <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
-      </button>
-    </div>
-  </div>
-</header>
-
-<!-- MOBILE NAV -->
-<div class="mobile-nav-overlay" id="mobileNav">
-  <button class="mobile-nav-close" id="navClose">×</button>
-  <nav><ul>
-    <li><a href="/" onclick="closeNav()">Home</a></li>
-    <li><a href="/seu-hub" onclick="closeNav()">Seu Hub</a></li>
-    <li><a href="/loja" onclick="closeNav()">Loja</a></li>
-    <li><a href="/portfolio" onclick="closeNav()">Portfólio</a></li>
-    <li><a href="/blog" onclick="closeNav()">Blog</a></li>
-    <li><a href="/metricas" onclick="closeNav()">Métricas Grátis</a></li>
-    <li><a href="/#orcamento" onclick="closeNav()">Orçamento</a></li>
-  </ul></nav>
-</div>
+<header class="site-header"><div class="container hd-container nav">
+  <a class="logo" href="/" aria-label="Leanttro">
+    <img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="40">
+  </a>
+  <nav class="menu nav-links" id="navLinks" aria-label="Principal">
+<a href="/sites">Sites</a><a href="/plataformas">Plataformas</a>
+<div class="dd" id="ddSol"><button type="button" class="dd-btn" aria-haspopup="true" aria-expanded="false" aria-controls="ddMenu">Soluções <svg class="dd-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+<div class="dd-menu" id="ddMenu"><a href="/redes-sociais">Redes Sociais</a><a href="/solucoes-graficas">Soluções Gráficas</a></div></div>
+<a class="active" href="/loja">Loja</a><a href="/conteudo">Conteúdo</a>
+</nav>
+  <a class="nav-wa" href="https://wa.me/5511913324827" target="_blank" rel="noopener">WhatsApp</a>
+  <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+</div></header>
 
 <!-- HERO (preenchido via JS) -->
 <section class="hero-page" id="heroSection" style="display:none">
@@ -311,7 +294,7 @@ footer{background:var(--dark);padding:40px 20px 20px}
 </a>
 
 <script>
-const API_BASE = 'https://teste.leanttro.com';
+const API_BASE = location.protocol==='file:' ? 'https://leanttro.com' : '';
 
 function formatPreco(v) {
   if (!v && v !== 0) return '';
@@ -498,14 +481,12 @@ function getSlugFromPath() {
     document.getElementById('erroState').style.display = 'block';
   }
 })();
-
-const hamburger = document.getElementById('hamburger');
-const mobileNav = document.getElementById('mobileNav');
-const navClose = document.getElementById('navClose');
-hamburger.addEventListener('click', () => mobileNav.classList.add('active'));
-navClose.addEventListener('click', () => mobileNav.classList.remove('active'));
-mobileNav.addEventListener('click', e => { if(e.target===mobileNav) mobileNav.classList.remove('active') });
-function closeNav(){ mobileNav.classList.remove('active') }
 </script>
+<script>(function(){var b=document.getElementById('menuToggle'),m=document.getElementById('navLinks');if(!b||!m)return;b.addEventListener('click',function(){var o=m.classList.toggle('open');b.setAttribute('aria-expanded',o)});m.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){m.classList.remove('open');b.setAttribute('aria-expanded','false')})})})()</script>
+<script>(function(){var dd=document.getElementById('ddSol');if(!dd)return;var b=dd.querySelector('.dd-btn');
+function set(o){dd.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))}
+b.addEventListener('click',function(e){e.stopPropagation();set(!dd.classList.contains('open'))});
+document.addEventListener('click',function(e){if(!dd.contains(e.target))set(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});})();</script>
 </body>
 </html>
