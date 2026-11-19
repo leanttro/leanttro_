@@ -54,6 +54,9 @@ footer{background:#10021d;color:#bca9cf;padding:24px 0;font-size:12px}.footer-in
 .work{display:block}
 .vercase{display:inline-block;margin-top:16px;font-weight:800;font-size:14px;color:#7900e9}
 .vercase:hover{color:#ed21bc}
+.gallery{display:flex;flex-wrap:wrap;justify-content:center}
+.gallery .work{width:calc((100% - 26px)/3);flex:0 0 auto}
+@media(max-width:680px){.gallery .work{width:calc((100% - 10px)/2)}}
 .crumb{font-size:13px;color:#7a6a90;margin-bottom:18px}.crumb a{color:#7900e9;font-weight:700}
 .case{padding:60px 0 70px;background:linear-gradient(110deg,#f8f0ff,#f0e7ff 60%,#fbeaff)}
 .case h1{font-size:clamp(32px,4.2vw,50px);line-height:1.05;letter-spacing:-1.5px;margin:14px 0 12px;color:#19052f}
