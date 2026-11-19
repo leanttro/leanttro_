@@ -22,6 +22,7 @@ from flask_cors import CORS
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
+import seo_paginas
 
 app = Flask(__name__)
 CORS(app)
@@ -420,6 +421,9 @@ def robots_txt():
         f"Sitemap: {base}/sitemap.xml\n"
     )
     return Response(txt, mimetype="text/plain")
+
+# ─── SEO PROGRAMÁTICO (/servicos, /admin/seo) ─────────────────────────────────
+_seo_sitemap_urls = seo_paginas.init_seo(app, get_db, token_required, _base_url)
 
 # ─── REDES SOCIAIS: página pública, cases e admin ────────────────────────────
 from psycopg2 import errors as _pgerr
@@ -1401,6 +1405,8 @@ def sitemap():
         pass
 
     cur.close(); conn.close()
+
+    urls += _seo_sitemap_urls(BASE_URL)
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
