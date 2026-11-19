@@ -395,6 +395,23 @@ h1{font-family:Manrope,sans-serif;font-size:clamp(43px,5.1vw,68px);line-height:1
 @media(max-width:900px){.site-header .nav{gap:12px;height:68px}.site-header .logo img{height:34px}.site-header .nav-wa{margin-left:auto}.site-header .menu-toggle{display:block}
  .site-header .menu{display:none;position:absolute;top:100%;left:0;right:0;margin:0;background:#7943e2;padding:20px 24px;flex-direction:column;align-items:flex-start;gap:20px;border-top:1px solid #ffffff30;box-shadow:0 10px 20px #0003}
  .site-header .menu.open{display:flex}}
+/* ===== MENU: Soluções com seta ===== */
+.site-header .dd{position:relative}
+.site-header .dd-btn{background:none;border:0;padding:0;margin:0;color:inherit;font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.site-header .dd-btn:hover,.site-header .dd.open .dd-btn,.site-header .dd-btn.active{color:#e7dcff}
+.site-header .dd-btn:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:6px}
+.site-header .dd-ar{width:12px;height:12px;transition:transform .2s}
+.site-header .dd.open .dd-ar{transform:rotate(180deg)}
+.site-header .dd-menu{position:absolute;top:100%;left:50%;min-width:210px;margin-top:16px;padding:8px;background:#fff;border-radius:14px;box-shadow:0 18px 40px rgba(30,8,90,.3);opacity:0;visibility:hidden;transform:translateX(-50%) translateY(6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:40}
+.site-header .dd-menu:before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+.site-header .dd.open .dd-menu{opacity:1;visibility:visible;transform:translateX(-50%)}
+.site-header .menu .dd-menu a{display:block;padding:11px 14px;border-radius:10px;color:#2a1d5c;font-size:14px;font-weight:600;white-space:nowrap}
+.site-header .menu .dd-menu a:hover,.site-header .menu .dd-menu a[aria-current]{background:#f3ecff;color:#5b21b6}
+@media(hover:hover) and (min-width:901px){.site-header .dd:hover .dd-menu{opacity:1;visibility:visible;transform:translateX(-50%)}.site-header .dd:hover .dd-ar{transform:rotate(180deg)}}
+@media(max-width:900px){.site-header .dd{width:100%}.site-header .dd-menu{position:static;display:none;min-width:0;margin:12px 0 0;padding:4px 0 0 14px;background:transparent;box-shadow:none;border-left:2px solid #ffffff40;border-radius:0;opacity:1;visibility:visible;transform:none}
+.site-header .dd-menu:before{display:none}.site-header .dd.open .dd-menu{display:block;transform:none}
+.site-header .menu .dd-menu a{color:#fff;padding:9px 0;border-radius:0}.site-header .menu .dd-menu a:hover,.site-header .menu .dd-menu a[aria-current]{background:none;color:#e7dcff}}
+
 /* ===== PALCO ESPACIAL ===== */
 #stage{position:fixed;z-index:1000;inset:0;overflow:hidden;cursor:grab;
   background:radial-gradient(ellipse at 50% 42%,#0a0e1a 0%,#03040a 55%,#000 100%);
@@ -650,7 +667,10 @@ html.locked,html.locked body{overflow:hidden;height:100%}
  <div class="container nav">
   <a class="logo" href="/" aria-label="Leanttro"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="40"></a>
   <nav class="menu nav-links" id="navLinks" aria-label="Principal">
-<a href="/plataformas">Plataformas</a><a href="/sites">Sites</a><a href="/redes-sociais">Redes Sociais</a><a href="/loja">Loja</a><a href="/conteudo">Conteúdo</a>
+<a href="/sites">Sites</a><a href="/plataformas">Plataformas</a>
+<div class="dd" id="ddSol"><button type="button" class="dd-btn" aria-haspopup="true" aria-expanded="false" aria-controls="ddMenu">Soluções <svg class="dd-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
+<div class="dd-menu" id="ddMenu"><a href="/redes-sociais">Redes Sociais</a><a href="/solucoes-graficas">Soluções Gráficas</a></div></div>
+<a href="/loja">Loja</a><a href="/conteudo">Conteúdo</a>
 </nav>
   <a class="nav-wa" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20conversar%20sobre%20um%20projeto%20com%20a%20Leanttro." target="_blank" rel="noopener">WhatsApp</a>
   <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false">
@@ -1073,5 +1093,10 @@ window.addEventListener('scroll',()=>{let current='inicio';sections.forEach(sect
 
 })();
 </script>
+<script>(function(){var dd=document.getElementById('ddSol');if(!dd)return;var b=dd.querySelector('.dd-btn');
+function set(o){dd.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))}
+b.addEventListener('click',function(e){e.stopPropagation();set(!dd.classList.contains('open'))});
+document.addEventListener('click',function(e){if(!dd.contains(e.target))set(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});})();</script>
 </body>
 </html>
