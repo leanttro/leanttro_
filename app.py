@@ -22,7 +22,6 @@ from flask_cors import CORS
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import Flow
 from googleapiclient.discovery import build
-import seo_paginas
 
 app = Flask(__name__)
 CORS(app)
@@ -187,8 +186,13 @@ def limpar_midia():
         "SELECT r.m[1] AS n FROM hub_categorias t, regexp_matches(coalesce(t.icone_url,''), '/midia/([a-f0-9]{16})[.]webp', 'g') AS r(m)",
         "SELECT r.m[1] AS n FROM blog_posts t, regexp_matches(coalesce(t.imagem_url,'')||' '||coalesce(t.resumo,'')||' '||coalesce(t.conteudo,''), '/midia/([a-f0-9]{16})[.]webp', 'g') AS r(m)",
     ]
+    consultas += [
+        "SELECT r.m[1] AS n FROM rs_artes t, regexp_matches(coalesce(t.imagem_url,''), '/midia/([a-f0-9]{16})[.]webp', 'g') AS r(m)",
+        "SELECT r.m[1] AS n FROM rs_config t, regexp_matches(coalesce(t.valor,''), '/midia/([a-f0-9]{16})[.]webp', 'g') AS r(m)",
+    ]
     usados = set()
     try:
+        _rs_init()
         conn = get_db(); cur = conn.cursor()
         for q in consultas:
             cur.execute(q)
@@ -417,8 +421,284 @@ def robots_txt():
     )
     return Response(txt, mimetype="text/plain")
 
-# ─── SEO PROGRAMÁTICO (/servicos, /admin/seo) ─────────────────────────────────
-_seo_sitemap_urls = seo_paginas.init_seo(app, get_db, token_required, _base_url)
+# ─── REDES SOCIAIS: página pública, cases e admin ────────────────────────────
+from psycopg2 import errors as _pgerr
+import unicodedata
+
+_rs_lock  = threading.Lock()
+_rs_ready = False
+_rs_cache = {"data": None, "t": 0.0}
+
+_UNS = "https://images.unsplash.com/"
+RS_DEFAULTS = {
+    "hero_1_img": _UNS + "photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=500&q=85", "hero_1_label": "Seu novo imóvel está aqui.",
+    "hero_2_img": _UNS + "photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=500&q=85", "hero_2_label": "Tratamentos faciais",
+    "hero_3_img": _UNS + "photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=500&q=85", "hero_3_label": "Serviços especializados",
+    "hero_4_img": _UNS + "photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=500&q=85",   "hero_4_label": "Presentes especiais",
+    "phone_img":  _UNS + "photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=85", "phone_texto": "Hambúrguer gourmet",
+    "cta_imagem": _UNS + "photo-1611162617474-5b21e879e113?auto=format&fit=crop&w=1000&q=85",
+    "whatsapp": "", "preco_10": "", "preco_15": "",
+    "seo_titulo": "Artes para Redes Sociais | Leanttro",
+    "seo_desc": "Artes profissionais para o Instagram da sua empresa. Escolha o pacote de 10 ou 15 artes e veja cases reais de clientes.",
+}
+RS_KEYS = set(RS_DEFAULTS)
+RS_LIMITE = {"seo_desc": 300, "seo_titulo": 120, "hero_1_label": 60, "hero_2_label": 60, "hero_3_label": 60,
+             "hero_4_label": 60, "phone_texto": 40, "preco_10": 30, "preco_15": 30}
+
+def _rs_init():
+    """Cria as tabelas na primeira vez (idempotente) — não precisa rodar SQL na mão."""
+    global _rs_ready
+    if _rs_ready:
+        return
+    with _rs_lock:
+        if _rs_ready:
+            return
+        conn = get_db(); cur = conn.cursor()
+        cur.execute("CREATE TABLE IF NOT EXISTS rs_config (chave TEXT PRIMARY KEY, valor TEXT NOT NULL DEFAULT '')")
+        cur.execute("""CREATE TABLE IF NOT EXISTS rs_clientes (
+            id SERIAL PRIMARY KEY, slug TEXT UNIQUE NOT NULL, nome TEXT NOT NULL,
+            segmento TEXT DEFAULT '', titulo TEXT DEFAULT '', descricao TEXT DEFAULT '',
+            ordem INT DEFAULT 0, ativo BOOLEAN DEFAULT TRUE,
+            criado_em TIMESTAMP DEFAULT NOW(), atualizado_em TIMESTAMP DEFAULT NOW())""")
+        cur.execute("""CREATE TABLE IF NOT EXISTS rs_artes (
+            id SERIAL PRIMARY KEY, cliente_id INT NOT NULL REFERENCES rs_clientes(id) ON DELETE CASCADE,
+            imagem_url TEXT NOT NULL, legenda TEXT DEFAULT '', ordem INT DEFAULT 0)""")
+        cur.execute("CREATE INDEX IF NOT EXISTS rs_artes_cliente ON rs_artes (cliente_id, ordem)")
+        conn.commit(); cur.close(); conn.close()
+        _rs_ready = True
+
+def _rs_slug(txt):
+    t = unicodedata.normalize("NFKD", txt or "").encode("ascii", "ignore").decode()
+    return re.sub(r"[^a-zA-Z0-9]+", "-", t).strip("-").lower()[:60]
+
+def _rs_url_ok(u):
+    u = (u or "").strip()
+    return u if (re.match(r"^(https?://|/)", u) and len(u) <= 500) else ""
+
+def _rs_base():
+    return os.environ.get("BASE_URL", "https://www.leanttro.com").rstrip("/")
+
+def _rs_abs(u):
+    if not u:
+        return ""
+    return u if u.startswith("http") else _rs_base() + (u if u.startswith("/") else "/" + u)
+
+def _rs_img(url, w):
+    """/midia/x.webp -> /midia/x.webp?w=<bucket> (versão leve, em cache no disco)."""
+    if url and "/midia/" in url and "?" not in url:
+        return "%s?w=%d" % (url, w)
+    return url
+
+def _rs_srcset(url, widths):
+    if not (url and "/midia/" in url and "?" not in url):
+        return ""
+    return ", ".join("%s?w=%d %dw" % (url, w, w) for w in widths)
+
+app.jinja_env.globals.update(rs_img=_rs_img, rs_srcset=_rs_srcset)
+
+def _rs_config_efetiva(cur):
+    cfg = dict(RS_DEFAULTS)
+    cur.execute("SELECT chave, valor FROM rs_config")
+    for r in cur.fetchall():
+        if r["chave"] in RS_KEYS and r["valor"] != "":
+            cfg[r["chave"]] = r["valor"]
+    return cfg
+
+def _rs_invalidar():
+    _rs_cache["data"] = None
+
+def _rs_publico():
+    """Config + clientes ativos com artes. Cache de 5 min em memória (limpo a cada edição no painel)."""
+    c = _rs_cache
+    if c["data"] is not None and _time.time() - c["t"] < 300:
+        return c["data"]
+    _rs_init()
+    conn = get_db(); cur = conn.cursor()
+    try:
+        cfg = _rs_config_efetiva(cur)
+        cur.execute("SELECT id, slug, nome, segmento, titulo, descricao FROM rs_clientes WHERE ativo ORDER BY ordem, id")
+        clientes = cur.fetchall()
+        artes = {}
+        if clientes:
+            cur.execute("SELECT cliente_id, imagem_url, legenda FROM rs_artes WHERE cliente_id = ANY(%s) ORDER BY cliente_id, ordem, id",
+                        ([x["id"] for x in clientes],))
+            for a in cur.fetchall():
+                artes.setdefault(a["cliente_id"], []).append(dict(a))
+    finally:
+        cur.close(); conn.close()
+    lista = []
+    for cl in clientes:
+        cl = dict(cl); cl["artes"] = artes.get(cl["id"], [])
+        if cl["artes"]:
+            lista.append(cl)
+    c["data"] = {"cfg": cfg, "clientes": lista}; c["t"] = _time.time()
+    return c["data"]
+
+@app.route("/redes-sociais")
+def pagina_redes_sociais():
+    d = _rs_publico(); cfg = d["cfg"]; base = _rs_base()
+    canonical = base + "/redes-sociais"
+    og = d["clientes"][0]["artes"][0]["imagem_url"] if d["clientes"] else cfg["hero_1_img"]
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "ProfessionalService", "name": "Leanttro", "url": base, "areaServed": "BR",
+         "description": cfg["seo_desc"], "serviceType": "Criação de artes para redes sociais"},
+        {"@type": "CollectionPage", "name": cfg["seo_titulo"], "url": canonical,
+         "hasPart": [{"@type": "CreativeWork", "name": cl["nome"], "url": "%s/redes-sociais/%s" % (base, cl["slug"])} for cl in d["clientes"]]},
+    ]}
+    return render_template("redes_sociais.html", cfg=cfg, clientes=d["clientes"], canonical=canonical,
+                           og_image=_rs_abs(og), ld=ld)
+
+@app.route("/redes-sociais/<slug>")
+def pagina_redes_sociais_case(slug):
+    d = _rs_publico(); cfg = d["cfg"]; base = _rs_base()
+    cl = next((x for x in d["clientes"] if x["slug"] == slug), None)
+    if not cl:
+        abort(404)
+    outros = [x for x in d["clientes"] if x["slug"] != slug][:6]
+    canonical = "%s/redes-sociais/%s" % (base, slug)
+    desc = cl["descricao"] or "Case %s: artes profissionais para redes sociais criadas pela Leanttro." % cl["nome"]
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Leanttro", "item": base},
+            {"@type": "ListItem", "position": 2, "name": "Redes sociais", "item": base + "/redes-sociais"},
+            {"@type": "ListItem", "position": 3, "name": cl["nome"], "item": canonical}]},
+        {"@type": "CreativeWork", "name": "Case %s" % cl["nome"], "description": desc, "url": canonical,
+         "about": cl["segmento"] or "Redes sociais", "image": [_rs_abs(a["imagem_url"]) for a in cl["artes"]],
+         "creator": {"@type": "Organization", "name": "Leanttro", "url": base}},
+    ]}
+    return render_template("redes_case.html", cfg=cfg, c=cl, outros=outros, canonical=canonical,
+                           og_image=_rs_abs(cl["artes"][0]["imagem_url"]), ld=ld)
+
+# ── admin ──
+@app.route("/admin/rs", methods=["GET"])
+@token_required
+def admin_rs_get():
+    _rs_init()
+    conn = get_db(); cur = conn.cursor()
+    try:
+        cfg = _rs_config_efetiva(cur)
+        cur.execute("SELECT id, slug, nome, segmento, titulo, descricao, ordem, ativo FROM rs_clientes ORDER BY ordem, id")
+        clientes = [dict(x) for x in cur.fetchall()]
+        cur.execute("SELECT cliente_id, imagem_url, legenda FROM rs_artes ORDER BY cliente_id, ordem, id")
+        por = {}
+        for a in cur.fetchall():
+            por.setdefault(a["cliente_id"], []).append({"imagem_url": a["imagem_url"], "legenda": a["legenda"]})
+        for cl in clientes:
+            cl["artes"] = por.get(cl["id"], [])
+    finally:
+        cur.close(); conn.close()
+    return jsonify({"config": cfg, "clientes": clientes})
+
+@app.route("/admin/rs/config", methods=["PUT"])
+@token_required
+def admin_rs_config():
+    d = request.get_json(silent=True) or {}
+    _rs_init()
+    novos = {}
+    for k in RS_KEYS:
+        if k not in d:
+            continue
+        v = str(d[k] or "").strip()
+        if k.endswith("_img") or k == "cta_imagem":
+            v = _rs_url_ok(v)
+        elif k == "whatsapp":
+            v = re.sub(r"\D", "", v)[:15]
+        else:
+            v = v[:RS_LIMITE.get(k, 300)]
+        novos[k] = v
+    conn = get_db(); cur = conn.cursor()
+    try:
+        cur.execute("SELECT chave, valor FROM rs_config")
+        antigos = {r["chave"]: r["valor"] for r in cur.fetchall()}
+        for k, v in novos.items():
+            cur.execute("INSERT INTO rs_config (chave, valor) VALUES (%s, %s) "
+                        "ON CONFLICT (chave) DO UPDATE SET valor = EXCLUDED.valor", (k, v))
+        conn.commit()
+    finally:
+        cur.close(); conn.close()
+    for k, v in novos.items():
+        _trocou(antigos.get(k), v)
+    _rs_invalidar()
+    return jsonify({"ok": True})
+
+def _rs_salvar(cid=None):
+    d = request.get_json(silent=True) or {}
+    nome = str(d.get("nome") or "").strip()[:80]
+    if not nome:
+        return jsonify({"erro": "Informe o nome do cliente"}), 400
+    slug = _rs_slug(d.get("slug") or nome)
+    if not slug:
+        return jsonify({"erro": "Slug inválido"}), 400
+    try:
+        ordem = int(d.get("ordem") or 0)
+    except (TypeError, ValueError):
+        ordem = 0
+    campos = (slug, nome, str(d.get("segmento") or "").strip()[:60], str(d.get("titulo") or "").strip()[:120],
+              str(d.get("descricao") or "").strip()[:1000], ordem, bool(d.get("ativo", True)))
+    artes = []
+    for a in (d.get("artes") or [])[:6]:
+        if isinstance(a, dict):
+            u = _rs_url_ok(a.get("url") or a.get("imagem_url"))
+            if u:
+                artes.append((u, str(a.get("legenda") or "").strip()[:120]))
+    _rs_init()
+    conn = get_db(); cur = conn.cursor()
+    antigas = []
+    try:
+        if cid:
+            cur.execute("SELECT imagem_url FROM rs_artes WHERE cliente_id = %s", (cid,))
+            antigas = [r["imagem_url"] for r in cur.fetchall()]
+            cur.execute("UPDATE rs_clientes SET slug=%s, nome=%s, segmento=%s, titulo=%s, descricao=%s, ordem=%s, ativo=%s, "
+                        "atualizado_em=NOW() WHERE id=%s RETURNING id", campos + (cid,))
+            if not cur.fetchone():
+                conn.rollback()
+                return jsonify({"erro": "Cliente não encontrado"}), 404
+            cur.execute("DELETE FROM rs_artes WHERE cliente_id = %s", (cid,))
+        else:
+            cur.execute("INSERT INTO rs_clientes (slug, nome, segmento, titulo, descricao, ordem, ativo) "
+                        "VALUES (%s,%s,%s,%s,%s,%s,%s) RETURNING id", campos)
+            cid = cur.fetchone()["id"]
+        for i, (u, leg) in enumerate(artes):
+            cur.execute("INSERT INTO rs_artes (cliente_id, imagem_url, legenda, ordem) VALUES (%s,%s,%s,%s)", (cid, u, leg, i))
+        conn.commit()
+    except _pgerr.UniqueViolation:
+        conn.rollback()
+        return jsonify({"erro": "Já existe um cliente com esse slug"}), 409
+    finally:
+        cur.close(); conn.close()
+    novas = {u for u, _ in artes}
+    for u in antigas:
+        if u not in novas:
+            _apagar_midia(u)
+    _rs_invalidar()
+    return jsonify({"ok": True, "id": cid, "slug": slug})
+
+@app.route("/admin/rs/clientes", methods=["POST"])
+@token_required
+def admin_rs_criar():
+    return _rs_salvar()
+
+@app.route("/admin/rs/clientes/<int:cid>", methods=["PUT"])
+@token_required
+def admin_rs_editar(cid):
+    return _rs_salvar(cid)
+
+@app.route("/admin/rs/clientes/<int:cid>", methods=["DELETE"])
+@token_required
+def admin_rs_excluir(cid):
+    _rs_init()
+    conn = get_db(); cur = conn.cursor()
+    try:
+        cur.execute("SELECT imagem_url FROM rs_artes WHERE cliente_id = %s", (cid,))
+        urls = [r["imagem_url"] for r in cur.fetchall()]
+        cur.execute("DELETE FROM rs_clientes WHERE id = %s", (cid,))
+        conn.commit()
+    finally:
+        cur.close(); conn.close()
+    for u in urls:
+        _apagar_midia(u)
+    _rs_invalidar()
+    return jsonify({"ok": True})
 
 # ─── PÁGINAS ──────────────────────────────────────────────────────────────────
 @app.route("/negocio/<slug>")
@@ -478,7 +758,7 @@ def pagina_bairro(bairro_slug):
         'hub', 'webhook', 'obrigado', 'erro', 'politica-de-privacidade',
         'termos', 'privacidade', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico',
         'portfolio', 'metricas', 'negocio', 'categoria', 'api',
-        'seu-hub', 'seuhub', 'conteudo'
+        'seu-hub', 'seuhub', 'conteudo', 'redes-sociais'
     }
     if bairro_slug in ROTAS_RESERVADAS:
         return "Not Found", 404
@@ -1028,8 +1308,8 @@ def sitemap():
         ("", "1.0", "daily"),
         ("/conteudo", "0.9", "daily"),
         ("/loja", "0.8", "weekly"),
-        ("/servicos", "0.9", "weekly"),
         ("/portfolio", "0.7", "weekly"),
+        ("/redes-sociais", "0.8", "weekly"),
         ("/metricas", "0.6", "monthly"),
     ]
     for path, priority, freq in estaticas:
@@ -1109,9 +1389,18 @@ def sitemap():
     <priority>0.8</priority>
   </url>""")
 
-    cur.close(); conn.close()
+    try:
+        for cl in _rs_publico()["clientes"]:
+            urls.append(f"""  <url>
+    <loc>{BASE_URL}/redes-sociais/{cl['slug']}</loc>
+    <lastmod>{now}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>""")
+    except Exception:
+        pass
 
-    urls += _seo_sitemap_urls(BASE_URL)
+    cur.close(); conn.close()
 
     xml = '<?xml version="1.0" encoding="UTF-8"?>\n'
     xml += '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
