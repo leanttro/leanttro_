@@ -66,6 +66,39 @@ footer{background:#10021d;color:#bca9cf;padding:24px 0;font-size:12px}.footer-in
 .outros-list{display:flex;flex-wrap:wrap;gap:10px}.outros-list a{border:1.5px solid #e0c8f7;border-radius:30px;padding:9px 18px;font-weight:800;font-size:14px;color:#7900e9}
 .outros-list a:hover{background:#f6ecff}
 @media(max-width:760px){.case-grid{grid-template-columns:repeat(2,1fr);gap:10px}.case{padding:40px 0 50px}}
+
+/* ===== ATUALIZAÇÕES COMERCIAIS ===== */
+.hero p strong{color:#fff}
+.package-note{position:relative;margin:22px 0 0;padding:14px 16px;border:1px solid #a45acb;border-radius:14px;background:#ffffff0d;color:#f2e6ff;font-size:13px;line-height:1.5}
+.price-card ul{min-height:178px}
+.price-card li{line-height:1.35}
+.price-card .price-bottom{cursor:pointer}
+.price-card .price-bottom:hover{filter:brightness(1.08)}
+.delivery-card p strong{color:inherit}
+.revision{background:#fff;padding:62px 0}
+.revision-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:35px;align-items:center}
+.revision-copy h2{font-size:clamp(30px,3vw,42px);line-height:1.08;letter-spacing:-1.3px;margin:15px 0}
+.revision-copy h2 span{color:#8b16e9}
+.revision-copy p{font-size:15px;line-height:1.65;color:#514360}
+.revision-card{border:1px solid #e1c9fa;border-radius:22px;padding:26px;background:linear-gradient(135deg,#faf5ff,#fff);box-shadow:0 12px 28px #4b187c12}
+.revision-card h3{font-size:20px;margin:0 0 15px;color:#4e087d}
+.revision-card ul{padding:0;margin:0;list-style:none;display:grid;gap:11px}
+.revision-card li{font-size:14px;line-height:1.5;color:#382748}
+.revision-card li:before{content:"✓";font-weight:900;color:#7c16d1;margin-right:10px}
+.revision-alert{margin-top:17px;padding:13px 15px;border-radius:12px;background:#f0e4ff;color:#4e087d;font-size:13px;line-height:1.55}
+.faq{padding:58px 0;background:#f8f2ff}
+.faq h2{text-align:center;margin:0 0 25px}
+.faq-list{max-width:850px;margin:auto;display:grid;gap:12px}
+.faq-item{background:#fff;border:1px solid #e6d7f5;border-radius:15px;padding:18px 20px}
+.faq-item h3{font-size:15px;margin:0 0 7px;color:#4c087b}
+.faq-item p{font-size:14px;line-height:1.55;color:#514360;margin:0}
+@media(max-width:760px){
+ .revision-grid{grid-template-columns:1fr;gap:20px}
+ .price-card ul{min-height:unset}
+ .revision{padding:48px 0}
+ .faq{padding:45px 0}
+}
+
 </style>
 </head>
 <body>
@@ -86,7 +119,7 @@ footer{background:#10021d;color:#bca9cf;padding:24px 0;font-size:12px}.footer-in
  <div class="wrap hero-inner">
   <div class="hero-copy reveal">
    <h1>Seu Instagram merece muito mais do que <span class="gradient-text">posts improvisados.</span></h1>
-   <p>Artes profissionais para sua empresa aparecer, atrair clientes e transmitir confiança nas redes sociais. Você escolhe o pacote e nós cuidamos da criação.</p>
+   <p>Deixe seu Instagram com aparência profissional sem precisar criar conteúdo do zero. Desenvolvemos artes personalizadas, escrevemos as legendas com apoio de IA e, se você preferir, também deixamos as publicações programadas.</p>
    <div class="actions"><a class="btn btn-primary" href="#pacotes">Conhecer pacotes <span>➜</span></a><a class="btn btn-outline" href="#portfolio">Ver exemplos de artes</a></div>
   </div>
   <div class="hero-art reveal" aria-label="Composição de exemplos de publicações para redes sociais">
@@ -101,7 +134,7 @@ footer{background:#10021d;color:#bca9cf;padding:24px 0;font-size:12px}.footer-in
 </section>
 <section class="section portfolio" id="portfolio">
  <div class="wrap portfolio-grid">
-  <div class="portfolio-copy reveal"><span class="tag">PORTFÓLIO</span><h2>Exemplos de artes que criamos para <span>diferentes negócios.</span></h2><div class="underline"></div><p>Artes profissionais, criativas e estratégicas para atrair, engajar e gerar resultados no seu Instagram.</p></div>
+  <div class="portfolio-copy reveal"><span class="tag">PORTFÓLIO</span><h2>Conteúdo visual pensado para <span>diferentes negócios.</span></h2><div class="underline"></div><p>Veja exemplos de estilos e possibilidades para apresentar sua empresa com mais consistência e profissionalismo no Instagram.</p></div>
   <div class="reveal" id="portfolio-box">
   {% if clientes %}
    {% if clientes|length > 1 %}<div class="ctabs" role="tablist">{% for cl in clientes %}<button type="button" class="ctab{% if loop.first %} on{% endif %}" data-alvo="g{{ cl.id }}" role="tab">{{ cl.nome }}</button>{% endfor %}</div>{% endif %}
@@ -125,10 +158,10 @@ footer{background:#10021d;color:#bca9cf;padding:24px 0;font-size:12px}.footer-in
 </section>
 <section class="section packages" id="pacotes">
  <div class="wrap package-layout">
-  <div class="package-intro reveal"><span class="tag">PACOTES</span><h2>Escolha o pacote ideal para a <span>sua empresa.</span></h2><p>Artes profissionais, com estratégia e identidade visual, prontas para fortalecer a sua presença no Instagram.</p></div>
-  <article class="price-card pack-5 reveal"><div class="pack-top"><div class="pack-icon">▱</div><div><small>PACOTE</small><h3>5 ARTES</h3></div></div><ul><li>5 artes profissionais</li><li>Conteúdo personalizado</li><li>Identidade visual consistente</li><li>Artes prontas para publicar</li></ul><a class="price-bottom" href="#" data-package="Pacote 5 artes"><strong>R$ 120</strong><span>Consulte　➜</span></a></article>
-  <article class="price-card reveal"><div class="pack-top"><div class="pack-icon">▱</div><div><small>PACOTE</small><h3>10 ARTES</h3></div></div><ul><li>10 artes profissionais</li><li>Conteúdo personalizado</li><li>Identidade visual consistente</li><li>Artes prontas para publicar</li></ul><a class="price-bottom" href="#" data-package="Pacote 10 artes"><strong>{{ ("R$ " ~ cfg.preco_10) if cfg.preco_10 else "R$ —" }}</strong><span>Consulte　➜</span></a></article>
-  <article class="price-card featured reveal"><span class="ribbon">♛ MAIS COMPLETO</span><div class="pack-top"><div class="pack-icon">▱</div><div><small>PACOTE</small><h3><em>15 ARTES</em></h3></div></div><ul><li>15 artes profissionais</li><li>Conteúdo personalizado</li><li>Identidade visual consistente</li><li>Artes prontas para publicar</li></ul><a class="price-bottom" href="#" data-package="Pacote 15 artes"><strong>{{ ("R$ " ~ cfg.preco_15) if cfg.preco_15 else "R$ —" }}</strong><span>Consulte　➜</span></a></article>
+  <div class="package-intro reveal"><span class="tag">PACOTES</span><h2>Seu conteúdo profissional, <span>sem complicação.</span></h2><p>Escolha a quantidade de artes que sua empresa precisa em cada contratação. Todos os pacotes incluem criação personalizada, legendas e 1 alteração por arte. Você pode contratar novos pacotes para manter seu perfil sempre atualizado.</p><div class="package-note"><strong>Você escolhe a modalidade:</strong> receber as artes prontas para publicar ou contratar também a programação das publicações. O preço do pacote é o mesmo nas duas opções.</div></div>
+  <article class="price-card pack-5 reveal"><div class="pack-top"><div class="pack-icon">▱</div><div><small>PACOTE</small><h3>5 ARTES</h3></div></div><ul><li>5 artes personalizadas para sua empresa</li><li>Legendas criadas com apoio de IA</li><li>Identidade visual alinhada à sua marca</li><li>1 alteração por arte</li><li>Entrega pronta para publicação ou programação por nós</li></ul><a class="price-bottom" href="#" data-package="Pacote 5 artes"><strong>R$ 120</strong><span>Contratar　➜</span></a></article>
+  <article class="price-card reveal"><div class="pack-top"><div class="pack-icon">▱</div><div><small>PACOTE</small><h3>10 ARTES</h3></div></div><ul><li>10 artes personalizadas para sua empresa</li><li>Legendas criadas com apoio de IA</li><li>Identidade visual alinhada à sua marca</li><li>1 alteração por arte</li><li>Entrega pronta para publicação ou programação por nós</li></ul><a class="price-bottom" href="#" data-package="Pacote 10 artes"><strong>R$ 190</strong><span>Contratar　➜</span></a></article>
+  <article class="price-card featured reveal"><span class="ribbon">♛ MAIS COMPLETO</span><div class="pack-top"><div class="pack-icon">▱</div><div><small>PACOTE</small><h3><em>15 ARTES</em></h3></div></div><ul><li>15 artes personalizadas para sua empresa</li><li>Legendas criadas com apoio de IA</li><li>Identidade visual alinhada à sua marca</li><li>1 alteração por arte</li><li>Entrega pronta para publicação ou programação por nós</li></ul><a class="price-bottom" href="#" data-package="Pacote 15 artes"><strong>R$ 250</strong><span>Contratar　➜</span></a></article>
  </div>
 </section>
 <section class="delivery">
@@ -148,9 +181,44 @@ footer{background:#10021d;color:#bca9cf;padding:24px 0;font-size:12px}.footer-in
   </div>
  </div>
 </section>
+
+<section class="revision" id="alteracoes">
+ <div class="wrap revision-grid">
+  <div class="revision-copy reveal">
+   <span class="tag">APROVAÇÃO E AJUSTES</span>
+   <h2>Você pode revisar antes de <span>publicar.</span></h2>
+   <p>Queremos que o conteúdo esteja alinhado à sua empresa. Por isso, cada arte inclui uma oportunidade de ajuste antes da aprovação final.</p>
+   <p>A revisão é feita para corrigir detalhes e pequenos pontos da peça, sem transformar o pacote em um processo de criação ilimitado.</p>
+  </div>
+  <div class="revision-card reveal">
+   <h3>1 alteração incluída por arte</h3>
+   <ul>
+    <li>Correção de textos, informações e pequenos erros.</li>
+    <li>Ajustes pontuais de cores, imagens ou elementos.</li>
+    <li>Pequenas adequações no layout da arte apresentada.</li>
+    <li>Envio das alterações para sua conferência antes da aprovação.</li>
+   </ul>
+   <div class="revision-alert"><strong>Importante:</strong> envie todos os ajustes daquela arte em uma única solicitação. Mudança completa de briefing, troca do conceito aprovado ou novas versões além da alteração incluída poderão ser orçadas à parte. Depois da aprovação final, alterações também poderão gerar cobrança adicional.</div>
+  </div>
+ </div>
+</section>
+<section class="faq" id="duvidas">
+ <div class="wrap">
+  <h2>Dúvidas frequentes</h2>
+  <div class="faq-list">
+   <article class="faq-item"><h3>O pacote inclui legendas?</h3><p>Sim. As publicações recebem legendas elaboradas com apoio de inteligência artificial e ajustadas ao tema e às informações fornecidas pela sua empresa.</p></article>
+   <article class="faq-item"><h3>Preciso pagar mais para vocês programarem as publicações?</h3><p>Não. A programação das publicações está incluída na modalidade Criação + Publicação e mantém o mesmo preço do pacote escolhido.</p></article>
+   <article class="faq-item"><h3>Quantas alterações posso solicitar?</h3><p>Cada arte inclui 1 alteração antes da aprovação final. Reúna os ajustes em uma única mensagem. Mudanças de conceito ou alterações adicionais podem ser cobradas separadamente.</p></article>
+   <article class="faq-item"><h3>Como funciona a publicação?</h3><p>Na modalidade Criação + Publicação, enviamos as artes e legendas para sua aprovação. Depois de aprovadas, organizamos o calendário e programamos as postagens conforme as datas combinadas.</p></article>
+   <article class="faq-item"><h3>O que preciso enviar para começar?</h3><p>As informações da empresa, logotipo (se tiver), cores ou referências visuais, serviços/produtos que deseja divulgar e os dados que precisam aparecer nas publicações.</p></article>
+   <article class="faq-item"><h3>Posso contratar mais de um pacote?</h3><p>Sim. Você pode contratar novos pacotes conforme a necessidade de conteúdo da sua empresa. Se quiser manter uma frequência contínua, converse conosco sobre a organização recorrente das entregas.</p></article>
+  </div>
+ </div>
+</section>
+
 <section class="final-cta">
  <div class="wrap final-grid">
-  <div class="reveal"><h2>Sua empresa merece aparecer com <span>profissionalismo.</span></h2><p>Chega de deixar seu Instagram parado ou publicar qualquer coisa só para não ficar sem conteúdo.</p><a class="btn" href="#" data-whatsapp>QUERO PROFISSIONALIZAR MEU INSTAGRAM　➜</a></div>
+  <div class="reveal"><h2>Sua empresa merece aparecer com <span>profissionalismo.</span></h2><p>Tenha artes personalizadas, legendas prontas e, se preferir, publicações programadas. Escolha seu pacote e deixe a produção do conteúdo com a Leanttro.</p><a class="btn" href="#" data-whatsapp>ESCOLHER MEU PACOTE　➜</a></div>
   <div class="laptop reveal"><div class="cta-sticker">◎</div><div class="laptop-screen"><img src="{{ rs_img(cfg.cta_imagem,960) }}" alt="Painel com conteúdo de redes sociais" width="1000" height="600" loading="lazy" decoding="async"></div><div class="laptop-base"></div></div>
  </div>
 </section>
@@ -159,7 +227,7 @@ footer{background:#10021d;color:#bca9cf;padding:24px 0;font-size:12px}.footer-in
 <script>
 /* CONFIGURE AQUI O NÚMERO COM DDI + DDD, SOMENTE NÚMEROS. Ex.: 5511999999999 */
 const WHATSAPP_NUMBER = "{{ cfg.whatsapp or '5500000000000' }}";
-const DEFAULT_MESSAGE = "Olá! Quero profissionalizar o Instagram da minha empresa. Gostaria de conhecer os pacotes de artes.";
+const DEFAULT_MESSAGE = "Olá! Quero profissionalizar o Instagram da minha empresa. Gostaria de conhecer os pacotes de artes e a opção de criação + publicação.";
 function whatsappUrl(message=DEFAULT_MESSAGE){
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
 }
@@ -168,7 +236,7 @@ document.querySelectorAll("[data-whatsapp]").forEach(link=>{
   link.target="_blank"; link.rel="noopener";
 });
 document.querySelectorAll("[data-package]").forEach(link=>{
-  link.href=whatsappUrl("Olá! Tenho interesse no "+link.dataset.package+". Pode me passar mais informações?");
+  link.href=whatsappUrl("Olá! Tenho interesse no "+link.dataset.package+". Gostaria de saber como funciona a opção somente criação e a opção criação + publicação.");
   link.target="_blank"; link.rel="noopener";
 });
 const menuToggle=document.getElementById("menuToggle"), navLinks=document.getElementById("navLinks");
