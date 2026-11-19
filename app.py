@@ -762,7 +762,7 @@ def pagina_bairro(bairro_slug):
         'hub', 'webhook', 'obrigado', 'erro', 'politica-de-privacidade',
         'termos', 'privacidade', 'entrar', 'minha-conta', 'redefinir-senha', 'favicon.ico',
         'portfolio', 'metricas', 'negocio', 'categoria', 'api',
-        'seu-hub', 'seuhub', 'conteudo', 'redes-sociais'
+        'seu-hub', 'seuhub', 'conteudo', 'redes-sociais', 'solucoes-graficas'
     }
     if bairro_slug in ROTAS_RESERVADAS:
         return "Not Found", 404
@@ -1314,6 +1314,7 @@ def sitemap():
         ("/loja", "0.8", "weekly"),
         ("/portfolio", "0.7", "weekly"),
         ("/redes-sociais", "0.8", "weekly"),
+        ("/solucoes-graficas", "0.8", "weekly"),
         ("/metricas", "0.6", "monthly"),
     ]
     for path, priority, freq in estaticas:
@@ -1436,6 +1437,10 @@ def pagina_sites():
 @app.route("/plataformas")
 def pagina_plataformas():
     return render_template("plataforma.html")
+
+@app.route("/solucoes-graficas")
+def pagina_solucoes_graficas():
+    return render_template("solucoes_graficas.html")
 
 
 # ═══════════════════════════════════════════════════════════════════
