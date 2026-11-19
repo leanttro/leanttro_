@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>SEO programático — Leanttro</title>
+<style>
+:root{--p:#7943e2;--pd:#5c2ec4;--ok:#0a9d6a;--err:#d6336c;--warn:#e8a300;--bd:#e4e4f0;--bg:#f8f8fc;--mut:#6b6b80}
+*{box-sizing:border-box}
+body{font-family:Inter,system-ui,sans-serif;margin:0;background:var(--bg);color:#1a1a2e;font-size:14px}
+header{background:#fff;border-bottom:1px solid var(--bd);padding:14px 24px;display:flex;justify-content:space-between;align-items:center}
+header h1{font-size:1.05rem;margin:0}
+header a{color:var(--p);font-weight:600;text-decoration:none}
+.wrap{display:grid;grid-template-columns:360px 1fr;gap:20px;padding:20px 24px;align-items:start}
+.card{background:#fff;border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:16px}
+.card h2{font-size:.95rem;margin:0 0 10px}
+label{display:block;font-weight:600;font-size:.78rem;margin:10px 0 4px;color:var(--mut)}
+input,select,textarea{width:100%;padding:8px 10px;border:1.5px solid var(--bd);border-radius:8px;font:inherit}
+textarea{min-height:70px;resize:vertical}
+button{background:var(--p);color:#fff;border:0;border-radius:8px;padding:8px 14px;font:inherit;font-weight:600;cursor:pointer}
+button:hover{background:var(--pd)}
+button.sec{background:#fff;color:var(--p);border:1.5px solid var(--p)}
+button.red{background:var(--err)}
+button.green{background:var(--ok)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.row>*{flex:1;min-width:120px}
+.row>button{flex:0 0 auto}
+.lista{max-height:420px;overflow:auto;margin-top:10px}
+.item{padding:8px 10px;border:1px solid var(--bd);border-radius:8px;margin-bottom:6px;cursor:pointer;display:flex;justify-content:space-between;gap:8px;align-items:center}
+.item:hover{border-color:var(--p)}
+.item small{color:var(--mut);display:block}
+.tag{font-size:.7rem;padding:2px 8px;border-radius:10px;font-weight:700;white-space:nowrap}
+.tag.pub{background:#d9f7ec;color:var(--ok)}.tag.rasc{background:#fff3d1;color:#9a6b00}
+.msg{padding:10px 12px;border-radius:8px;margin-top:10px;font-size:.85rem;white-space:pre-wrap}
+.msg.e{background:#fde8ef;color:var(--err)}.msg.w{background:#fff6dd;color:#8a6200}.msg.o{background:#d9f7ec;color:var(--ok)}
+.vars{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+iframe{width:100%;height:640px;border:1px solid var(--bd);border-radius:12px;background:#fff}
+.thumb{max-width:160px;border-radius:8px;margin-top:8px}
+.hide{display:none}
+@media(max-width:1000px){.wrap{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<script>if(location.search.includes('embed=1'))document.write('<style>header{display:none}</style>');</script>
+<header><h1>SEO programático</h1><a href="/admin">← Painel</a></header>
+<div class="wrap">
+  <div>
+    <div class="card">
+      <h2>1. Bairros <span id="nBairros" style="color:var(--mut);font-weight:400"></span></h2>
+      <label>Cole um por linha: Nome;Zona;Prioridade (zona e prioridade são opcionais)</label>
+      <textarea id="bairrosTxt" placeholder="Vila Mariana;Zona Sul;2&#10;Tatuapé;Zona Leste&#10;Pinheiros;Zona Oeste"></textarea>
+      <div class="row" style="margin-top:8px"><button onclick="importarBairros()">Importar</button></div>
+      <div id="msgB"></div>
+    </div>
+
+    <div class="card">
+      <h2>2. Rascunhos em lote</h2>
+      <p style="margin:0 0 8px;color:var(--mut)">Cria um rascunho por categoria que ainda não tem página dessa oferta, distribuindo variantes e bairros. Nada vai pro ar sozinho.</p>
+      <div class="row"><select id="ofertaLote"></select><button onclick="lote()">Gerar</button></div>
+      <div id="msgL"></div>
+    </div>
+
+    <div class="card">
+      <h2>3. Nova página avulsa</h2>
+      <label>Categoria</label><select id="novaCat"></select>
+      <label>Oferta</label><select id="novaOferta"></select>
+      <label>Bairro foco (opcional — gera categoria × bairro)</label>
+      <input id="novaBairro" placeholder="slug, ex.: vila-mariana">
+      <div class="row" style="margin-top:10px"><button onclick="novo()">Gerar rascunho</button></div>
+    </div>
+
+    <div class="card">
+      <h2>Páginas <span id="nPag" style="color:var(--mut);font-weight:400"></span></h2>
+      <input id="filtro" placeholder="filtrar…" oninput="renderLista()">
+      <div class="lista" id="lista"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="card hide" id="editor">
+      <div class="row" style="justify-content:space-between">
+        <h2 id="edTitulo" style="margin:0">Editor</h2>
+        <div class="row" style="flex:0 0 auto">
+          <button class="sec" onclick="salvar()">Salvar</button>
+          <button class="sec" onclick="checar()">Checar qualidade</button>
+          <button class="green" onclick="publicar(true)">Publicar</button>
+          <button class="sec" onclick="publicar(false)">Despublicar</button>
+          <button class="red" onclick="excluir()">Excluir</button>
+        </div>
+      </div>
+      <div id="msgE"></div>
+
+      <label>Variantes de texto (troque pra mudar o texto; o sistema já sugere as menos usadas)</label>
+      <div class="vars" id="vars"></div>
+      <div class="row" style="margin-top:8px">
+        <button class="sec" onclick="regerar(false)">Aplicar variantes</button>
+        <button class="sec" onclick="regerar(true)">🎲 Sortear de novo</button>
+      </div>
+
+      <div class="row"><div><label>H1</label><input id="h1"></div><div><label>Slug (/servicos/…)</label><input id="slug"></div></div>
+      <label>Title</label><input id="titulo">
+      <label>Meta description <span id="cMeta"></span></label><textarea id="meta_desc" style="min-height:50px"></textarea>
+
+      <label>Imagem (suba uma diferente por página)</label>
+      <div class="row"><input type="file" id="arq" accept="image/*"><button class="sec" onclick="subir()">Enviar</button></div>
+      <input id="imagem_url" placeholder="URL da imagem" style="margin-top:6px">
+      <input id="imagem_alt" placeholder="Texto alternativo (descreva a foto de verdade)" style="margin-top:6px">
+      <img id="thumb" class="thumb hide">
+
+      <label>Introdução</label><textarea id="f_intro"></textarea>
+      <label>Problema — um parágrafo por linha</label><textarea id="f_problema"></textarea>
+      <label>Entregas — um item por linha</label><textarea id="f_entregas"></textarea>
+      <label>Texto dos bairros</label><textarea id="f_bairros_texto"></textarea>
+      <label>Bairros citados (separados por vírgula)</label><textarea id="f_bairros"></textarea>
+      <label>⭐ Nota do autor — escreva você: um caso real, um número, algo do segmento (é o que diferencia a página)</label>
+      <textarea id="f_nota" style="min-height:110px"></textarea>
+
+      <div class="row" style="margin-top:12px"><button class="sec" onclick="preview()">Atualizar preview</button></div>
+    </div>
+    <iframe id="prev" class="hide"></iframe>
+    <div class="card" id="vazio"><h2>Selecione ou gere uma página</h2><p style="color:var(--mut)">Comece importando os bairros, depois gere os rascunhos em lote.</p></div>
+  </div>
+</div>
+
+<script>
+const TOKEN = localStorage.getItem('lt_token') || '';
+if(!TOKEN){ location.href='/admin'; }
+const H = {'Authorization':'Bearer '+TOKEN,'Content-Type':'application/json'};
+let META=null, PAGS=[], PG=null;   // PG = página em edição (objeto completo)
+
+async function api(path, opt={}){
+  const r = await fetch(path,{headers:H,...opt});
+  if(r.status===401){ localStorage.removeItem('lt_token'); location.href='/admin'; }
+  let j=null; try{ j=await r.json(); }catch(e){}
+  return {ok:r.ok,status:r.status,data:j};
+}
+function msg(el,txt,cls){ document.getElementById(el).innerHTML = txt?`<div class="msg ${cls}"></div>`:''; if(txt) document.querySelector('#'+el+' .msg').textContent=txt; }
+
+async function init(){
+  const m = await api('/admin/seo/meta'); META=m.data;
+  document.getElementById('nBairros').textContent = '('+META.total_bairros+')';
+  const ofs = Object.entries(META.ofertas).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');
+  ofertaLote.innerHTML = ofs; novaOferta.innerHTML = ofs;
+  novaCat.innerHTML = META.categorias.map(c=>`<option value="${c.id}">${c.nome}</option>`).join('');
+  carregarLista();
+}
+async function carregarLista(){ PAGS=(await api('/admin/seo/paginas')).data||[]; renderLista(); }
+function renderLista(){
+  const f=(document.getElementById('filtro').value||'').toLowerCase();
+  const el=document.getElementById('lista'); el.innerHTML='';
+  const L=PAGS.filter(p=>(p.h1||'').toLowerCase().includes(f));
+  document.getElementById('nPag').textContent='('+PAGS.filter(p=>p.publicada).length+' no ar / '+PAGS.length+')';
+  L.forEach(p=>{
+    const d=document.createElement('div'); d.className='item';
+    d.innerHTML='<div><b></b><small></small></div><span class="tag"></span>';
+    d.querySelector('b').textContent=p.h1;
+    d.querySelector('small').textContent=(p.tem_imagem?'📷 ':'⚠ sem foto · ')+'/servicos/'+p.slug;
+    const t=d.querySelector('.tag'); t.textContent=p.publicada?'NO AR':'RASCUNHO'; t.classList.add(p.publicada?'pub':'rasc');
+    d.onclick=()=>abrir(p.id); el.appendChild(d);
+  });
+}
+async function importarBairros(){
+  const r=await api('/admin/seo/bairros/importar',{method:'POST',body:JSON.stringify({texto:bairrosTxt.value})});
+  msg('msgB', r.ok?('Processados: '+r.data.processados):'Erro ao importar', r.ok?'o':'e');
+  if(r.ok){ bairrosTxt.value=''; const m=await api('/admin/seo/meta'); META=m.data; nBairros.textContent='('+META.total_bairros+')'; }
+}
+async function lote(){
+  msg('msgL','Gerando…','w');
+  const r=await api('/admin/seo/lote',{method:'POST',body:JSON.stringify({oferta:ofertaLote.value})});
+  msg('msgL', r.ok?`Criados ${r.data.criadas} rascunhos (${r.data.puladas} já existiam).`:'Erro', r.ok?'o':'e');
+  carregarLista();
+}
+async function novo(){
+  const r=await api('/admin/seo/gerar',{method:'POST',body:JSON.stringify({categoria_id:+novaCat.value,oferta:novaOferta.value,bairro_slug:novaBairro.value.trim()||null})});
+  if(!r.ok){ alert(r.data&&r.data.erro||'Erro'); return; }
+  PG=r.data; PG.id=null; PG.publicada=false; abrirEditor();
+}
+async function abrir(id){
+  const r=await api('/admin/seo/paginas/'+id); PG=r.data; abrirEditor(); preview();
+}
+function abrirEditor(){
+  editor.classList.remove('hide'); vazio.classList.add('hide');
+  const c=PG.conteudo;
+  edTitulo.textContent=PG.id?('Editando #'+PG.id+(PG.publicada?' — NO AR':' — rascunho')):'Novo rascunho (não salvo)';
+  h1.value=PG.h1||''; slug.value=PG.slug||''; titulo.value=PG.titulo||''; meta_desc.value=PG.meta_desc||'';
+  imagem_url.value=PG.imagem_url||''; imagem_alt.value=PG.imagem_alt||''; atualizaThumb();
+  f_intro.value=c.intro||''; f_problema.value=(c.problema.paragrafos||[]).join('\n');
+  f_entregas.value=(c.entregas.itens||[]).join('\n'); f_bairros_texto.value=c.bairros.texto||'';
+  f_bairros.value=(PG.bairros||[]).join(', '); f_nota.value=c.nota_autor||'';
+  vars.innerHTML=Object.entries(META.slots).map(([s,n])=>{
+    const cur=(PG.variantes||{})[s]||0;
+    return `<div><label>${s}</label><select data-slot="${s}">${Array.from({length:n},(_,i)=>`<option value="${i}" ${i==cur?'selected':''}>${i+1}</option>`).join('')}</select></div>`;
+  }).join('');
+  contaMeta(); msg('msgE','');
+}
+function contaMeta(){ cMeta.textContent='('+meta_desc.value.length+'/160)'; }
+meta_desc.addEventListener('input',contaMeta);
+imagem_url.addEventListener('change',atualizaThumb);
+function atualizaThumb(){ const u=imagem_url.value; thumb.classList.toggle('hide',!u); if(u) thumb.src=u; }
+
+function lerForm(){
+  const c=JSON.parse(JSON.stringify(PG.conteudo));
+  c.intro=f_intro.value.trim();
+  c.problema.paragrafos=f_problema.value.split('\n').map(s=>s.trim()).filter(Boolean);
+  c.entregas.itens=f_entregas.value.split('\n').map(s=>s.trim()).filter(Boolean);
+  c.bairros.texto=f_bairros_texto.value.trim();
+  c.nota_autor=f_nota.value.trim();
+  const v={}; document.querySelectorAll('#vars select').forEach(s=>v[s.dataset.slot]=+s.value);
+  return {
+    slug:slug.value.trim(), oferta:PG.oferta, categoria_id:PG.categoria_id, categoria_nome:PG.categoria_nome,
+    bairro_slug:PG.bairro_slug||null, h1:h1.value.trim(), titulo:titulo.value.trim(), meta_desc:meta_desc.value.trim(),
+    imagem_url:imagem_url.value.trim(), imagem_alt:imagem_alt.value.trim(), conteudo:c,
+    bairros:f_bairros.value.split(',').map(s=>s.trim()).filter(Boolean), variantes:v
+  };
+}
+async function regerar(sortear){
+  const d=lerForm(); const nota=d.conteudo.nota_autor;
+  const body={categoria_id:PG.categoria_id,oferta:PG.oferta,bairro_slug:PG.bairro_slug,bairros:d.bairros};
+  if(sortear){ body.seed=Math.floor(Math.random()*1e9); } else { body.variantes=d.variantes; }
+  const r=await api('/admin/seo/gerar',{method:'POST',body:JSON.stringify(body)});
+  if(!r.ok){ alert('Erro ao gerar'); return; }
+  const keep={id:PG.id,publicada:PG.publicada,imagem_url:d.imagem_url,imagem_alt:d.imagem_alt,slug:PG.id?d.slug:r.data.slug};
+  PG={...r.data,...keep}; PG.conteudo.nota_autor=nota; abrirEditor();
+  if(PG.id) preview();
+}
+async function salvar(){
+  const d=lerForm();
+  const r=PG.id?await api('/admin/seo/paginas/'+PG.id,{method:'PUT',body:JSON.stringify(d)})
+               :await api('/admin/seo/paginas',{method:'POST',body:JSON.stringify(d)});
+  if(!r.ok){ msg('msgE',(r.data&&r.data.erro)||'Erro ao salvar','e'); return false; }
+  if(!PG.id) PG.id=r.data.id;
+  PG={...PG,...d}; msg('msgE','Salvo.','o'); edTitulo.textContent='Editando #'+PG.id+(PG.publicada?' — NO AR':' — rascunho');
+  carregarLista(); preview(); return true;
+}
+async function checar(){
+  if(!(await salvar())) return;
+  const r=await api('/admin/seo/paginas/'+PG.id+'/checar'); mostrarChk(r.data);
+}
+function mostrarChk(c){
+  let t=`${c.palavras} palavras · similaridade máx. ${Math.round(c.similaridade_max*100)}%\n`;
+  if(c.erros.length) t+='\n❌ Bloqueiam a publicação:\n• '+c.erros.join('\n• ');
+  if(c.avisos.length) t+='\n\n⚠ Avisos:\n• '+c.avisos.join('\n• ');
+  if(!c.erros.length&&!c.avisos.length) t+='\n✅ Tudo certo.';
+  msg('msgE',t,c.erros.length?'e':(c.avisos.length?'w':'o'));
+}
+async function publicar(on){
+  if(on && !(await salvar())) return;
+  if(!PG.id){ if(!(await salvar())) return; }
+  let r=await api('/admin/seo/paginas/'+PG.id+'/publicar',{method:'POST',body:JSON.stringify({publicar:on})});
+  if(r.status===422){
+    mostrarChk(r.data.checagem);
+    if(confirm('A página foi reprovada na trava de qualidade. Publicar mesmo assim? (não recomendado)'))
+      r=await api('/admin/seo/paginas/'+PG.id+'/publicar',{method:'POST',body:JSON.stringify({publicar:true,forcar:true})});
+    else return;
+  }
+  if(r.ok){ PG.publicada=on; msg('msgE',on?'No ar! Entra no sitemap automaticamente.':'Despublicada.','o'); carregarLista(); abrirEditorSoTitulo(); }
+}
+function abrirEditorSoTitulo(){ edTitulo.textContent='Editando #'+PG.id+(PG.publicada?' — NO AR':' — rascunho'); }
+async function excluir(){
+  if(!PG.id){ editor.classList.add('hide'); return; }
+  if(!confirm('Excluir esta página?')) return;
+  await api('/admin/seo/paginas/'+PG.id,{method:'DELETE'});
+  editor.classList.add('hide'); prev.classList.add('hide'); vazio.classList.remove('hide'); carregarLista();
+}
+async function subir(){
+  const f=arq.files[0]; if(!f){ alert('Escolha um arquivo'); return; }
+  const fd=new FormData(); fd.append('arquivo',f);
+  const r=await fetch('/admin/upload',{method:'POST',headers:{'Authorization':'Bearer '+TOKEN},body:fd});
+  const j=await r.json(); if(!r.ok){ alert(j.erro||'Erro no upload'); return; }
+  imagem_url.value=j.url; atualizaThumb();
+}
+async function preview(){
+  if(!PG||!PG.id) return;
+  const r=await fetch('/admin/seo/paginas/'+PG.id+'/preview',{headers:{'Authorization':'Bearer '+TOKEN}});
+  prev.srcdoc=await r.text(); prev.classList.remove('hide');
+}
+init();
+</script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sites, automações e plataformas para o seu segmento em São Paulo | Leanttro</title>
+<meta name="description" content="Criação de sites, automação de processos e plataformas sob medida para cada segmento de negócio em São Paulo. Escolha o seu e veja o que está incluído.">
+<meta name="robots" content="{{ 'index, follow' if total else 'noindex, follow' }}">
+<link rel="canonical" href="{{ base }}/servicos">
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#7943e2;--primary-d:#5c2ec4;--text:#1a1a2e;--muted:#6b6b80;--border:#e4e4f0;--bg2:#f8f8fc}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',sans-serif;color:var(--text);line-height:1.6}
+a{color:inherit;text-decoration:none}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+.hero{background:linear-gradient(135deg,var(--primary),var(--primary-d));color:#fff;padding:56px 0}
+.hero h1{font-family:'Montserrat',sans-serif;font-weight:800;font-size:2.3rem;line-height:1.15;margin-bottom:12px}
+.hero p{max-width:620px;color:rgba(255,255,255,.88)}
+.hero a.back{display:inline-block;margin-bottom:16px;font-size:.85rem;color:rgba(255,255,255,.7)}
+section{padding:40px 0}
+section:nth-of-type(even){background:var(--bg2)}
+h2{font-family:'Montserrat',sans-serif;font-size:1.5rem;font-weight:800;margin-bottom:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.grid a{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;font-weight:500;font-size:.95rem}
+.grid a:hover{border-color:var(--primary);color:var(--primary)}
+.vazio{padding:60px 0;color:var(--muted);text-align:center}
+</style>
+</head>
+<body>
+<div class="hero"><div class="container">
+  <a class="back" href="/">← Leanttro</a>
+  <h1>Sites, automações e plataformas para o seu segmento</h1>
+  <p>Cada negócio tem uma rotina e um público diferentes. Escolha o seu segmento para ver como o trabalho funciona, o que está incluído e quanto costuma custar.</p>
+</div></div>
+{% for key, paginas in grupos.items() %}
+<section><div class="container">
+  <h2>{{ ofertas[key].nome }}</h2>
+  <div class="grid">{% for p in paginas %}<a href="/servicos/{{ p.slug }}">{{ p.categoria_nome }}</a>{% endfor %}</div>
+</div></section>
+{% endfor %}
+{% if not total %}<div class="container vazio">Em breve.</div>{% endif %}
+</body>
+</html>

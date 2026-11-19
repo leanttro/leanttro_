@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MNBQCEXP3R"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-MNBQCEXP3R');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{ pg.titulo }}</title>
+<meta name="description" content="{{ pg.meta_desc }}">
+<meta name="robots" content="{{ robots }}">
+<meta name="theme-color" content="#7943e2">
+<link rel="canonical" href="{{ url }}">
+<link rel="icon" type="image/png" href="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779293253/leanttroo_2_uvpqac.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Leanttro">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:url" content="{{ url }}">
+<meta property="og:title" content="{{ pg.titulo }}">
+<meta property="og:description" content="{{ pg.meta_desc }}">
+{% if pg.imagem_url %}<meta property="og:image" content="{{ pg.imagem_url }}">{% endif %}
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{{ jsonld|safe }}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--primary:#7943e2;--primary-d:#5c2ec4;--accent:#00e5a0;--dark:#0a0a0f;--text:#1a1a2e;--muted:#6b6b80;--border:#e4e4f0;--bg:#fff;--bg2:#f8f8fc;--radius:12px;--sans:'Inter',sans-serif;--display:'Montserrat',sans-serif}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--sans);color:var(--text);line-height:1.7;background:var(--bg)}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+header{background:#fff;border-bottom:1px solid var(--border);position:sticky;top:0;z-index:50}
+.header-inner{max-width:1100px;margin:0 auto;padding:0 20px;height:64px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.header-inner img{height:34px;width:auto}
+.header-inner nav a{margin-left:18px;font-size:.9rem;font-weight:500;color:var(--muted)}
+.header-inner nav a:hover{color:var(--primary)}
+.btn-wa{display:inline-block;background:#25D366;color:#fff;padding:10px 20px;border-radius:10px;font-weight:600;font-size:.92rem}
+.btn-wa:hover{background:#1da850}
+/* hero */
+.hero{background:linear-gradient(135deg,var(--primary),var(--primary-d));color:#fff;padding:48px 0 56px}
+.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.hero.sem-foto .hero-grid{grid-template-columns:1fr}
+.crumbs{font-size:.8rem;color:rgba(255,255,255,.7);margin-bottom:14px}
+.crumbs a:hover{color:#fff}
+.hero h1{font-family:var(--display);font-weight:800;font-size:2.4rem;line-height:1.15;letter-spacing:-.5px;margin-bottom:16px}
+.hero p.lead{font-size:1.08rem;color:rgba(255,255,255,.88);margin-bottom:26px;max-width:560px}
+.hero .btn-wa{padding:14px 26px;font-size:1rem}
+.hero-img{border-radius:16px;overflow:hidden;aspect-ratio:4/3;background:rgba(255,255,255,.1);box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.hero-img img{width:100%;height:100%;object-fit:cover}
+/* conteúdo */
+main section{padding:44px 0}
+main section:nth-of-type(even){background:var(--bg2)}
+h2{font-family:var(--display);font-size:1.6rem;font-weight:800;line-height:1.25;margin-bottom:16px;letter-spacing:-.3px}
+.prose p{margin-bottom:14px;max-width:760px}
+.checks{list-style:none;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:12px;margin:18px 0}
+.checks li{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:14px 16px 14px 44px;position:relative}
+.checks li::before{content:'✓';position:absolute;left:16px;top:13px;color:var(--primary);font-weight:800}
+.preco{font-weight:600;color:var(--primary-d)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.chip{padding:7px 14px;border-radius:20px;border:1.5px solid var(--border);background:#fff;font-size:.88rem}
+a.chip:hover{border-color:var(--primary);color:var(--primary)}
+.nota{border-left:4px solid var(--accent);background:#fff;padding:18px 22px;border-radius:0 var(--radius) var(--radius) 0;max-width:780px}
+details{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);margin-bottom:10px;padding:14px 18px;max-width:780px}
+summary{cursor:pointer;font-weight:600}
+details p{margin-top:10px;color:var(--muted)}
+.links-rel{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:10px}
+.links-rel a{background:#fff;border:1.5px solid var(--border);border-radius:var(--radius);padding:12px 16px;font-size:.92rem;font-weight:500}
+.links-rel a:hover{border-color:var(--primary);color:var(--primary)}
+.cta{background:linear-gradient(135deg,var(--primary),var(--primary-d));color:#fff;border-radius:20px;padding:44px 28px;text-align:center}
+.cta h2{color:#fff}.cta p{max-width:520px;margin:0 auto 24px;color:rgba(255,255,255,.88)}
+.cta .btn-wa{padding:14px 28px}
+footer{background:var(--dark);color:rgba(255,255,255,.55);padding:32px 20px;text-align:center;font-size:.85rem}
+footer a{color:rgba(255,255,255,.75)}
+@media(max-width:800px){.hero-grid{grid-template-columns:1fr}.hero h1{font-size:1.85rem}.header-inner nav{display:none}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <a href="/"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/v1779207400/leanttro_bohuce.png" alt="Leanttro Tecnologia" height="34"></a>
+    <nav><a href="/">Home</a><a href="/servicos">Serviços</a><a href="/portfolio">Portfólio</a><a href="/conteudo">Blog</a></nav>
+    <a class="btn-wa" href="{{ wa }}" target="_blank" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<div class="hero {% if not pg.imagem_url %}sem-foto{% endif %}">
+  <div class="container hero-grid">
+    <div>
+      <div class="crumbs"><a href="/">Home</a> › <a href="/servicos">Serviços</a> › {{ pg.categoria_nome }}</div>
+      <h1>{{ pg.h1 }}</h1>
+      <p class="lead">{{ c.intro }}</p>
+      <a class="btn-wa" href="{{ wa }}" target="_blank" rel="noopener">Pedir orçamento no WhatsApp</a>
+    </div>
+    {% if pg.imagem_url %}
+    <div class="hero-img">
+      {% if '/midia/' in pg.imagem_url %}
+      <img src="{{ pg.imagem_url }}?w=960" srcset="{{ pg.imagem_url }}?w=640 640w, {{ pg.imagem_url }}?w=960 960w, {{ pg.imagem_url }}?w=1280 1280w"
+           sizes="(max-width:800px) 100vw, 480px" alt="{{ pg.imagem_alt or pg.h1 }}" fetchpriority="high" width="960" height="720">
+      {% else %}
+      <img src="{{ pg.imagem_url }}" alt="{{ pg.imagem_alt or pg.h1 }}" fetchpriority="high" width="960" height="720">
+      {% endif %}
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+<main>
+  <section><div class="container prose">
+    <h2>{{ c.problema.h2 }}</h2>
+    {% for p in c.problema.paragrafos %}<p>{{ p }}</p>{% endfor %}
+  </div></section>
+
+  <section><div class="container">
+    <h2>{{ c.entregas.h2 }}</h2>
+    <ul class="checks">{% for i in c.entregas.itens %}<li>{{ i }}</li>{% endfor %}</ul>
+    <p class="preco">{{ c.entregas.preco }}</p>
+  </div></section>
+
+  {% if c.nota_autor %}
+  <section><div class="container">
+    <div class="nota prose"><p>{{ c.nota_autor }}</p></div>
+  </div></section>
+  {% endif %}
+
+  <section><div class="container prose">
+    <h2>{{ c.bairros.h2 }}</h2>
+    <p>{{ c.bairros.texto }}</p>
+    <div class="chips">
+      {% for b in chips %}
+        {% if b.link %}<a class="chip" href="/{{ b.slug }}">{{ b.nome }}</a>
+        {% else %}<span class="chip">{{ b.nome }}</span>{% endif %}
+      {% endfor %}
+    </div>
+  </div></section>
+
+  <section><div class="container">
+    <h2>Perguntas frequentes</h2>
+    {% for f in c.faq %}<details><summary>{{ f.q }}</summary><p>{{ f.a }}</p></details>{% endfor %}
+  </div></section>
+
+  {% if outras_ofertas or relacionadas %}
+  <section><div class="container">
+    <h2>Veja também</h2>
+    <div class="links-rel">
+      {% for o in outras_ofertas %}<a href="/servicos/{{ o.slug }}">{{ o.nome }} para {{ pg.categoria_nome }}</a>{% endfor %}
+      {% for r in relacionadas %}<a href="/servicos/{{ r.slug }}">{{ r.h1 }}</a>{% endfor %}
+    </div>
+  </div></section>
+  {% endif %}
+
+  <section><div class="container">
+    <div class="cta">
+      <h2>{{ c.cta.titulo }}</h2>
+      <p>{{ c.cta.texto }}</p>
+      <a class="btn-wa" href="{{ wa }}" target="_blank" rel="noopener">Falar no WhatsApp</a>
+    </div>
+  </div></section>
+</main>
+
+<footer>
+  <strong style="color:#fff">Leanttro Tecnologia</strong> — Sites, plataformas e automações em São Paulo<br>
+  <a href="/politica-de-privacidade">Privacidade</a> · <a href="/termos">Termos</a>
+</footer>
+</body>
+</html>
