@@ -78,12 +78,29 @@ footer{background:linear-gradient(110deg,#100a20,#1c0b3b);color:#fff;padding:28p
 @media(max-width:850px){.container{width:calc(100% - 40px)}.main-grid{grid-template-columns:minmax(0,1fr) 245px;gap:15px}.profile h1{font-size:33px}.avatar{width:150px;height:150px}.service-grid{gap:9px}.service-card{padding:11px;gap:9px}.service-icon{width:40px;height:40px}.related-grid{grid-template-columns:repeat(2,1fr)}.wide-promo{padding:20px}}
 @media(max-width:650px){.container{width:calc(100% - 32px)}.notice{font-size:10px}.profile{min-height:0;padding:25px 0;gap:17px}.avatar{width:105px;height:105px;border-radius:16px;font-size:43px}.avatar img{padding:6px}.profile h1{font-size:27px;margin:7px 0}.address{font-size:11px}.crumbs{font-size:10px}.main-grid{grid-template-columns:1fr}.sidebar{grid-template-columns:1fr 1fr;align-items:stretch}.contact-panel{padding:15px}.contact-list a{font-size:10px;padding:10px 8px}.promo-side{padding:17px 13px}.promo-side h3{font-size:16px}.promo-side p{font-size:10px}.panel{padding:16px}.map{height:210px}.wide-promo{grid-template-columns:1fr;gap:0;text-align:center;padding:19px 18px}.mockup{height:130px;order:2}.wide-copy{order:1}.wide-copy h2{font-size:23px}.wide-copy p{font-size:12px}.services{margin-bottom:24px}.section-head h2{font-size:19px}.service-grid{grid-template-columns:1fr}.service-card{padding:13px}.service-card p{font-size:11px}.related-grid{grid-template-columns:1fr 1fr;gap:9px}.related-card{padding:10px;gap:8px}.related-card strong{font-size:11px}.footer-main{grid-template-columns:1fr;gap:15px}.footer-links{justify-content:flex-start;flex-wrap:wrap;gap:15px}.social{justify-content:flex-start}}
 @media(max-width:390px){.profile{align-items:flex-start}.avatar{width:82px;height:82px;font-size:35px}.profile h1{font-size:23px}.sidebar{grid-template-columns:1fr}.related-grid{grid-template-columns:1fr}.notice-inner{gap:8px}}
+.sh{font-family:"DM Sans",Arial,sans-serif}.sh a{text-decoration:none}
+/* ===== CABEÇALHO: menu Soluções (igual ao de Soluções Gráficas) ===== */
+.sh .dd{position:relative}
+.sh .dd-btn{background:none;border:0;padding:0;margin:0;color:inherit;font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.sh .dd-btn:hover,.sh .dd.open .dd-btn,.sh .dd-btn.active{color:#e7dcff}
+.sh .dd-btn:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:6px}
+.sh .dd-ar{width:12px;height:12px;transition:transform .2s}
+.sh .dd.open .dd-ar{transform:rotate(180deg)}
+.sh .dd-menu{position:absolute;top:100%;left:50%;min-width:210px;margin-top:16px;padding:8px;background:#fff;border-radius:14px;box-shadow:0 18px 40px rgba(30,8,90,.3);opacity:0;visibility:hidden;transform:translateX(-50%) translateY(6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:40}
+.sh .dd-menu:before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+.sh .dd.open .dd-menu{opacity:1;visibility:visible;transform:translateX(-50%)}
+.sh .sh-menu .dd-menu a{display:block;padding:11px 14px;border-radius:10px;color:#2a1d5c;font-size:14px;font-weight:600;white-space:nowrap}
+.sh .sh-menu .dd-menu a:hover,.sh .sh-menu .dd-menu a[aria-current]{background:#f3ecff;color:#5b21b6}
+@media(hover:hover) and (min-width:901px){.sh .dd:hover .dd-menu{opacity:1;visibility:visible;transform:translateX(-50%)}.sh .dd:hover .dd-ar{transform:rotate(180deg)}}
+@media(max-width:900px){.sh .dd{width:100%}.sh .dd-menu{position:static;display:none;min-width:0;margin:12px 0 0;padding:4px 0 0 14px;background:transparent;box-shadow:none;border-left:2px solid #ffffff40;border-radius:0;opacity:1;visibility:visible;transform:none}
+.sh .dd-menu:before{display:none}.sh .dd.open .dd-menu{display:block;transform:none}
+.sh .sh-menu .dd-menu a{color:#fff;padding:9px 0;border-radius:0}.sh .sh-menu .dd-menu a:hover,.sh .sh-menu .dd-menu a[aria-current]{background:none;color:#e7dcff}}
 </style>
 </head>
 <body>
 
 <!-- CABEÇALHO PADRÃO -->
-<header class="sh"><div class="sh-wrap"><a class="sh-logo" href="/" aria-label="Leanttro"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="40"></a><nav class="sh-menu" id="shMenu" aria-label="Principal"><a href="/plataformas">Plataformas</a><a href="/sites">Sites</a><a href="/loja">Loja</a><a href="/conteudo">Conteúdo</a></nav><a class="sh-wa" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20conversar%20sobre%20um%20projeto%20com%20a%20Leanttro." target="_blank" rel="noopener">WhatsApp</a><button class="sh-toggle" id="shToggle" aria-label="Abrir menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
+<header class="sh"><div class="sh-wrap"><a class="sh-logo" href="/" aria-label="Leanttro"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="40"></a><nav class="sh-menu" id="shMenu" aria-label="Principal"><a href="/sites">Sites</a><a href="/plataformas">Plataformas</a><div class="dd" id="ddSol"><button type="button" class="dd-btn" aria-haspopup="true" aria-expanded="false" aria-controls="ddMenu">Soluções <svg class="dd-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="dd-menu" id="ddMenu"><a href="/redes-sociais">Redes Sociais</a><a href="/solucoes-graficas">Soluções Gráficas</a></div></div><a href="/loja">Loja</a><a href="/conteudo">Conteúdo</a></nav><a class="sh-wa" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20conversar%20sobre%20um%20projeto%20com%20a%20Leanttro." target="_blank" rel="noopener">WhatsApp</a><button class="sh-toggle" id="shToggle" aria-label="Abrir menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
 
 <!-- CARREGANDO -->
 <div id="loadingState" class="state">Carregando negócio…</div>
@@ -334,5 +351,10 @@ shM.querySelectorAll('a').forEach(l=>l.addEventListener('click',()=>{shM.classLi
 
 init();
 </script>
+<script>(function(){var dd=document.getElementById('ddSol');if(!dd)return;var b=dd.querySelector('.dd-btn');
+function set(o){dd.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))}
+b.addEventListener('click',function(e){e.stopPropagation();set(!dd.classList.contains('open'))});
+document.addEventListener('click',function(e){if(!dd.contains(e.target))set(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});})();</script>
 </body>
 </html>
