@@ -29,6 +29,23 @@ header.sh{height:auto;position:relative;z-index:30;width:100%;background:#7943e2
 .thumb{background:linear-gradient(145deg,#8c4cff,#4d16d0);background-size:cover;background-position:center}.bizactions a.call{display:inline-block}.rating{line-height:1.35}
 .nearbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:12px 0 0}.near{border:1.5px solid #8b4cff;background:#fff;color:#6721e3;border-radius:24px;padding:9px 16px;font-size:12px;font-weight:800;cursor:pointer;transition:.2s}.near:hover{background:#f4edff}.near.on{background:linear-gradient(100deg,#812cff,#5e1cdb);color:#fff;border-color:transparent}.near:disabled{opacity:.6;cursor:wait}.geo-status{font-size:11px;color:#625b78}.geo-status.err{color:#c0392b}.dist{color:#188449;font-weight:800}.retry{margin-top:10px;border:0;border-radius:20px;background:#7226f0;color:#fff;font-weight:800;font-size:12px;padding:9px 18px;cursor:pointer}
 .more{display:flex;justify-content:center;margin-top:16px}.more button{cursor:pointer;background:#fff}.empty{grid-column:1/-1;text-align:center;padding:32px 12px;color:#625b78;font-size:14px}
+.sh{font-family:"DM Sans",Arial,sans-serif}.sh a{text-decoration:none}
+/* ===== CABEÇALHO: menu Soluções (igual ao de Soluções Gráficas) ===== */
+.sh .dd{position:relative}
+.sh .dd-btn{background:none;border:0;padding:0;margin:0;color:inherit;font:inherit;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.sh .dd-btn:hover,.sh .dd.open .dd-btn,.sh .dd-btn.active{color:#e7dcff}
+.sh .dd-btn:focus-visible{outline:2px solid #fff;outline-offset:4px;border-radius:6px}
+.sh .dd-ar{width:12px;height:12px;transition:transform .2s}
+.sh .dd.open .dd-ar{transform:rotate(180deg)}
+.sh .dd-menu{position:absolute;top:100%;left:50%;min-width:210px;margin-top:16px;padding:8px;background:#fff;border-radius:14px;box-shadow:0 18px 40px rgba(30,8,90,.3);opacity:0;visibility:hidden;transform:translateX(-50%) translateY(6px);transition:opacity .18s,transform .18s,visibility .18s;z-index:40}
+.sh .dd-menu:before{content:"";position:absolute;left:0;right:0;top:-18px;height:18px}
+.sh .dd.open .dd-menu{opacity:1;visibility:visible;transform:translateX(-50%)}
+.sh .sh-menu .dd-menu a{display:block;padding:11px 14px;border-radius:10px;color:#2a1d5c;font-size:14px;font-weight:600;white-space:nowrap}
+.sh .sh-menu .dd-menu a:hover,.sh .sh-menu .dd-menu a[aria-current]{background:#f3ecff;color:#5b21b6}
+@media(hover:hover) and (min-width:901px){.sh .dd:hover .dd-menu{opacity:1;visibility:visible;transform:translateX(-50%)}.sh .dd:hover .dd-ar{transform:rotate(180deg)}}
+@media(max-width:900px){.sh .dd{width:100%}.sh .dd-menu{position:static;display:none;min-width:0;margin:12px 0 0;padding:4px 0 0 14px;background:transparent;box-shadow:none;border-left:2px solid #ffffff40;border-radius:0;opacity:1;visibility:visible;transform:none}
+.sh .dd-menu:before{display:none}.sh .dd.open .dd-menu{display:block;transform:none}
+.sh .sh-menu .dd-menu a{color:#fff;padding:9px 0;border-radius:0}.sh .sh-menu .dd-menu a:hover,.sh .sh-menu .dd-menu a[aria-current]{background:none;color:#e7dcff}}
 </style>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%237943e2'/%3E%3Ctext x='32' y='45' font-size='38' font-family='Arial' font-weight='800' text-anchor='middle' fill='white'%3EL%3C/text%3E%3C/svg%3E">
 <link rel="canonical" href="https://www.leanttro.com/conteudo">
@@ -36,7 +53,7 @@ header.sh{height:auto;position:relative;z-index:30;width:100%;background:#7943e2
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-MNBQCEXP3R"></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-MNBQCEXP3R');</script>
 </head>
 <body>
-<header class="sh"><div class="sh-wrap"><a class="sh-logo" href="/" aria-label="Leanttro"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="40"></a><nav class="sh-menu" id="shMenu" aria-label="Principal"><a href="/plataformas">Plataformas</a><a href="/sites">Sites</a><a href="/loja">Loja</a><a class="active" href="/conteudo">Conteúdo</a></nav><a class="sh-wa" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20conversar%20sobre%20um%20projeto%20com%20a%20Leanttro." target="_blank" rel="noopener">WhatsApp</a><button class="sh-toggle" id="shToggle" aria-label="Abrir menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
+<header class="sh"><div class="sh-wrap"><a class="sh-logo" href="/" aria-label="Leanttro"><img src="https://res.cloudinary.com/dhu1cqvrb/image/upload/f_auto,q_auto,h_80/v1779207400/leanttro_bohuce.png" alt="Leanttro" height="40"></a><nav class="sh-menu" id="shMenu" aria-label="Principal"><a href="/sites">Sites</a><a href="/plataformas">Plataformas</a><div class="dd" id="ddSol"><button type="button" class="dd-btn" aria-haspopup="true" aria-expanded="false" aria-controls="ddMenu">Soluções <svg class="dd-ar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button><div class="dd-menu" id="ddMenu"><a href="/redes-sociais">Redes Sociais</a><a href="/solucoes-graficas">Soluções Gráficas</a></div></div><a href="/loja">Loja</a><a class="active" href="/conteudo">Conteúdo</a></nav><a class="sh-wa" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Quero%20conversar%20sobre%20um%20projeto%20com%20a%20Leanttro." target="_blank" rel="noopener">WhatsApp</a><button class="sh-toggle" id="shToggle" aria-label="Abrir menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
 <main id="inicio">
 <section class="hero"><div class="wrap hero-in"><div><h1>Tudo o que você precisa,<br>em <span>um só lugar.</span></h1><p>Explore nosso hub de negócios, encontre comércios indicados por nós e aprenda com os guias e artigos da nossa biblioteca.</p><form class="search" id="searchForm"><b>⌕</b><input id="searchInput" type="search" placeholder="Buscar negócios, artigos ou assuntos..." aria-label="Buscar negócios, artigos ou assuntos"><button>Buscar</button></form></div><div class="hero-art" aria-label="Mapa ilustrado com marcador de localização"><div class="map"></div><div class="pin"></div><div class="tile t1">▣</div><div class="tile t2">★</div><div class="tile t3">▤</div></div></div></section>
 <section class="blog" id="blog"><div class="wrap"><div class="blog-head"><div><div class="label">Biblioteca Leanttro</div><h2>Conhecimento que impulsiona seu negócio</h2><p>Guias, tutoriais e ideias práticas sobre tecnologia, automação e marketing para você aplicar hoje.</p></div></div><div class="posts" id="posts"><div class="empty">Carregando artigos…</div></div><div class="more" id="morePosts" hidden><button class="outline" id="morePostsBtn">Ver todos os artigos&nbsp; →</button></div></div></section>
@@ -157,4 +174,9 @@ document.getElementById('searchInput').addEventListener('input',e=>{if(!e.target
   buildFilters(Array.isArray(c)?c:[]);
   renderPosts();renderFeatured();
 })();
-</script></body></html>
+</script><script>(function(){var dd=document.getElementById('ddSol');if(!dd)return;var b=dd.querySelector('.dd-btn');
+function set(o){dd.classList.toggle('open',o);b.setAttribute('aria-expanded',String(o))}
+b.addEventListener('click',function(e){e.stopPropagation();set(!dd.classList.contains('open'))});
+document.addEventListener('click',function(e){if(!dd.contains(e.target))set(false)});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false)});})();</script>
+</body></html>
