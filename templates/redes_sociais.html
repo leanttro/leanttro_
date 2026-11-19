@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#19052f">
+<title>{{ cfg.seo_titulo }}</title>
+<meta name="description" content="{{ cfg.seo_desc }}">
+<link rel="canonical" href="{{ canonical }}">
+<meta property="og:type" content="website"><meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="{{ cfg.seo_titulo }}"><meta property="og:description" content="{{ cfg.seo_desc }}">
+<meta property="og:url" content="{{ canonical }}"><meta property="og:image" content="{{ og_image }}">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{{ ld|tojson }}</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+:root{--ink:#17072b;--deep:#160326;--deep2:#23063d;--purple:#8d16ff;--violet:#bb22ff;--pink:#f323b5;--orange:#ff7846;--lilac:#f5edff;--white:#fff;--muted:#cfc1e2;--max:1240px}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,Arial,sans-serif;color:var(--ink);background:#fff;overflow-x:hidden}a{color:inherit;text-decoration:none}button{font:inherit}.wrap{width:min(var(--max),calc(100% - 64px));margin:auto}
+.site-header{height:74px;background:#19052f;color:#fff;display:flex;align-items:center;position:relative;z-index:20;border-bottom:1px solid rgba(194,75,255,.35)}
+.site-header:after{content:"";position:absolute;bottom:-1px;left:0;width:100%;height:2px;background:linear-gradient(90deg,#6c10ff,#e52aff,#ff3da9,#6c10ff);box-shadow:0 0 18px #b51dff}
+.nav{display:flex;align-items:center;justify-content:space-between;gap:30px}.logo{font-size:29px;font-weight:900;font-style:italic;letter-spacing:-2px;color:#fff}.logo span{color:#b92aff}.navlinks{display:flex;gap:42px;margin-left:auto;margin-right:35px;font-size:14px;font-weight:700}.navlinks a{transition:.2s}.navlinks a:hover{color:#ec68ff}.whats{background:#08c82d;color:#fff;border-radius:30px;padding:13px 22px;font-size:14px;font-weight:800;box-shadow:0 7px 22px #08c82d44;transition:.25s}.whats:hover{transform:translateY(-3px);box-shadow:0 10px 28px #08c82d77}.menu-btn{display:none;background:none;border:0;color:white;font-size:27px}
+.hero{background:radial-gradient(ellipse at 73% 48%,#4a0870 0,transparent 36%),radial-gradient(ellipse at 7% 105%,#e44a35 0,transparent 21%),linear-gradient(115deg,#1a052e,#1c0634 52%,#10021e);color:#fff;min-height:540px;position:relative;isolation:isolate;overflow:hidden}
+.hero:before{content:"";position:absolute;inset:auto -8% -170px -8%;height:250px;background:radial-gradient(ellipse,#9c16ff88,transparent 65%);filter:blur(20px);z-index:-1}.hero:after{content:"";position:absolute;right:-150px;top:-190px;width:520px;height:520px;border:1px solid #a42bff66;border-radius:50%;box-shadow:0 0 0 30px #a42bff0c,0 0 0 70px #a42bff0c;z-index:-1}
+.hero-inner{min-height:540px;display:grid;grid-template-columns:.92fr 1.08fr;align-items:center;gap:20px;padding-top:35px;padding-bottom:35px}.eyebrow{display:inline-flex;align-items:center;border:1px solid #d83aff;border-radius:30px;padding:8px 17px;color:#fff;font-size:13px;font-weight:800;letter-spacing:.5px;background:#7900b933}.hero h1{font-size:clamp(38px,4.4vw,61px);line-height:1.02;letter-spacing:-2.6px;margin:20px 0 17px;font-weight:900;max-width:620px}.gradient-text{background:linear-gradient(90deg,#ee40d6,#ff8a69);-webkit-background-clip:text;background-clip:text;color:transparent}.hero p{font-size:17px;line-height:1.55;color:#f1e9f9;max-width:520px;margin:0 0 27px}.actions{display:flex;gap:14px;flex-wrap:wrap}.btn{display:inline-flex;align-items:center;justify-content:center;gap:12px;border-radius:40px;padding:15px 25px;font-weight:800;font-size:15px;transition:.25s;border:1px solid transparent}.btn-primary{background:linear-gradient(100deg,#a000ff,#ed21bc);color:white;box-shadow:0 9px 25px #a400ff55}.btn-outline{border-color:#e7c9ff;color:white;background:#ffffff08}.btn:hover{transform:translateY(-4px);filter:brightness(1.12);box-shadow:0 12px 28px #b21aff66}
+.hero-art{height:440px;position:relative;display:flex;align-items:center;justify-content:center;perspective:1000px}.phone{width:235px;height:420px;background:linear-gradient(145deg,#171225,#080610);border:5px solid #302342;border-radius:37px;padding:13px 10px;position:absolute;z-index:4;transform:rotate(-7deg);box-shadow:0 22px 55px #000a,0 0 35px #b51dff77}.phone-top{height:18px;display:flex;justify-content:center}.speaker{width:55px;height:6px;background:#05030a;border-radius:8px}.phone-screen{height:370px;border-radius:22px;overflow:hidden;background:#090611}.social-head{height:42px;padding:10px;color:#fff;font-size:10px;font-weight:800;display:flex;align-items:center;gap:7px}.avatar{width:22px;height:22px;border-radius:50%;background:linear-gradient(45deg,#ff9c37,#e822c5,#8e25ff);padding:2px}.avatar:after{content:"";display:block;background:#2b0d40;border-radius:50%;height:100%}.phone-photo{height:250px;position:relative;background:linear-gradient(0deg,#130a0b66,transparent),url('https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=700&q=85') center/cover}.phone-photo strong{position:absolute;left:14px;bottom:20px;font-size:26px;line-height:1;color:#fff;text-shadow:0 2px 8px #000}.phone-icons{color:white;padding:12px;font-size:19px;letter-spacing:8px}.phone-caption{color:#eee;font-size:9px;padding:0 12px}.float-card{position:absolute;border:2px solid #ffffff77;border-radius:18px;overflow:hidden;box-shadow:0 18px 35px #0008;z-index:3}.float-card img{display:block;width:100%;height:100%;object-fit:cover}.float-card .label{position:absolute;inset:auto 0 0;padding:18px 13px 13px;background:linear-gradient(transparent,#10051eeF);color:#fff;font-size:18px;font-weight:900;line-height:1.05}.card-house{width:190px;height:170px;left:1%;top:46px;transform:rotate(7deg)}.card-beauty{width:205px;height:160px;right:0;top:58px;transform:rotate(5deg)}.card-service{width:170px;height:165px;left:0;bottom:18px;transform:rotate(-8deg)}.card-gift{width:190px;height:160px;right:2%;bottom:20px;transform:rotate(7deg)}.social-bubble{position:absolute;z-index:6;width:58px;height:58px;border-radius:17px;display:grid;place-items:center;font-size:30px;color:white;background:linear-gradient(135deg,#ff3bb8,#8a18ff);box-shadow:0 8px 22px #e11bba88}.bubble-insta{top:2px;right:29%;transform:rotate(12deg)}.bubble-heart{bottom:0;left:26%;transform:rotate(-13deg);background:linear-gradient(135deg,#ff357a,#ff145b)}.bubble-like{right:0;bottom:43%;transform:rotate(12deg);background:linear-gradient(135deg,#8c28ff,#3c6dff)}
+.section{padding:75px 0}.portfolio{background:linear-gradient(110deg,#f8f0ff,#f0e7ff 60%,#fbeaff);overflow:hidden}.portfolio-grid{display:grid;grid-template-columns:.8fr 1.6fr;gap:45px;align-items:center}.tag{display:inline-block;border:1.5px solid #9c1aff;border-radius:30px;color:#7900e9;padding:7px 17px;font-size:13px;font-weight:900;letter-spacing:.7px}.section h2{font-size:clamp(30px,3vw,43px);line-height:1.08;letter-spacing:-1.5px;margin:17px 0 18px;font-weight:900}.portfolio-copy h2 span{color:#8b0bea}.portfolio-copy p{font-size:16px;line-height:1.55;max-width:350px}.underline{width:64px;height:4px;border-radius:5px;background:linear-gradient(90deg,#a400ff,#ed29c5);margin:22px 0}.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;transform:rotate(-1deg)}.work{height:190px;position:relative;border-radius:18px;overflow:hidden;box-shadow:0 12px 24px #3d126c2b;transition:.3s;background:#32104a}.work:nth-child(2),.work:nth-child(5){transform:translateY(12px)}.work:hover{transform:translateY(-7px) rotate(1deg);box-shadow:0 18px 35px #4b168c55}.work img{width:100%;height:100%;object-fit:cover;transition:.5s}.work:hover img{transform:scale(1.08)}.work:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,#08020dcc)}.work-title{position:absolute;z-index:1;bottom:14px;left:14px;color:#fff;font-size:19px;font-weight:900;line-height:1.05;text-shadow:0 2px 8px #000}.work-title small{display:block;font-size:10px;letter-spacing:1px;margin-bottom:5px;color:#ffd75b}
+.packages{background:radial-gradient(ellipse at 90% 50%,#54007877,transparent 35%),linear-gradient(110deg,#180329,#21063b 65%,#160223);color:#fff;position:relative;overflow:hidden}.packages:before{content:"";position:absolute;width:450px;height:450px;border:1px solid #b71cff55;border-radius:50%;left:-280px;bottom:-260px;box-shadow:0 0 0 25px #a11bff0c,0 0 0 55px #a11bff0c}.package-layout{display:grid;grid-template-columns:.8fr 1fr 1fr;gap:24px;align-items:center;position:relative}.packages .tag{color:white;border-color:#d43cff}.package-intro h2{font-size:38px}.package-intro h2 span{color:#f044d1}.package-intro p{color:#dfd1ed;line-height:1.6;font-size:15px}.price-card{position:relative;border:1px solid #9f54c7;border-radius:24px;padding:28px 27px 24px;background:linear-gradient(145deg,#ffffff16,#ffffff08);box-shadow:0 15px 35px #09001566;transition:.3s}.price-card:hover{transform:translateY(-7px)}.price-card.featured{border:2px solid #ec36ff;box-shadow:0 0 0 4px #b81aff25,0 0 35px #d51bff66;background:linear-gradient(145deg,#521078aa,#26043c)}.ribbon{position:absolute;right:0;top:-15px;background:linear-gradient(90deg,#ff8a26,#ff198e);border-radius:20px 0 20px 0;padding:9px 17px;font-size:11px;font-weight:900;box-shadow:0 5px 15px #ff318866}.pack-top{display:flex;align-items:center;gap:16px;margin-bottom:20px}.pack-icon{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;background:#8e20bf55;border:1px solid #c76aff;color:#e9aaff;font-size:27px}.pack-top small{font-size:12px;font-weight:800;letter-spacing:1px}.pack-top h3{font-size:34px;margin:2px 0 0;line-height:1}.pack-top h3 em{font-style:normal;color:#ff7d54}.price-card ul{list-style:none;padding:0;margin:0 0 25px;display:grid;gap:12px;color:#f5eaff;font-size:14px}.price-card li:before{content:"✓";color:#ef9aff;font-weight:900;font-size:19px;margin-right:12px}.price-bottom{border-radius:35px;background:linear-gradient(90deg,#fff,#e8d8ff);color:#210638;padding:13px 18px;display:flex;justify-content:space-between;align-items:center;font-weight:900}.featured .price-bottom{background:linear-gradient(90deg,#ff8a25,#fa13a5);color:white}.price-bottom strong{font-size:22px}.price-bottom span{font-size:14px}
+.delivery{background:linear-gradient(105deg,#f6edff,#fff 48%,#f5eaff);padding:58px 0}.delivery-grid{display:grid;grid-template-columns:.68fr 1fr 1.2fr;gap:20px;align-items:center}.delivery h2{font-size:37px;margin:0}.delivery h2 span{color:#8b16e9}.delivery-card{min-height:160px;border-radius:22px;padding:25px;display:flex;gap:18px;align-items:center;background:#fff;border:1px solid #dfc8ff;box-shadow:0 10px 25px #4b187c19;transition:.3s}.delivery-card:hover{transform:translateY(-5px)}.delivery-card.featured{background:linear-gradient(120deg,#9200f7,#5d08b5 65%,#d20dba);color:#fff;border:2px solid #e13cff;box-shadow:0 12px 28px #9712d755}.delivery-icon{font-size:43px;flex:0 0 58px;color:#8c20ed}.featured .delivery-icon{color:white}.delivery-card h3{font-size:20px;margin:0 0 9px;color:#7400d7}.featured h3{color:white}.delivery-card p{font-size:14px;line-height:1.45;margin:0;color:#332243}.featured p{color:#f4e5ff}
+.steps{background:linear-gradient(110deg,#19042d,#21063c);color:#fff;padding:62px 0}.steps-layout{display:grid;grid-template-columns:.78fr 1.8fr;gap:35px;align-items:center}.steps h2{font-size:36px;margin:15px 0 0}.steps h2 span{color:#e73acb}.steps-row{display:grid;grid-template-columns:1fr 28px 1fr 28px 1fr;gap:10px;align-items:center}.step{border:1px solid #a45acb;border-radius:20px;padding:25px 20px 20px;min-height:155px;position:relative;background:#ffffff09}.step-num{position:absolute;top:-17px;left:18px;width:44px;height:44px;border-radius:13px;display:grid;place-items:center;font-size:24px;font-weight:900;background:linear-gradient(135deg,#a500ff,#e327ce);box-shadow:0 5px 18px #ae17ff88}.step-icon{font-size:25px;color:#e19cff;margin-left:48px}.step p{font-size:15px;line-height:1.45;margin:14px 0 0}.step-arrow{font-size:27px;color:#c43aff;text-align:center}
+.final-cta{background:radial-gradient(ellipse at 80% 70%,#5c087c 0,transparent 36%),linear-gradient(110deg,#1b042e,#21053d 70%,#140222);color:white;position:relative;overflow:hidden;padding:62px 0 70px}.final-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:25px;align-items:center}.final-cta h2{font-size:clamp(34px,4vw,52px);line-height:1.02;margin:0 0 18px;letter-spacing:-1.8px}.final-cta h2 span{background:linear-gradient(90deg,#f038c7,#ff8650);-webkit-background-clip:text;background-clip:text;color:transparent}.final-cta p{font-size:18px;line-height:1.5;color:#eee1f7;max-width:570px;margin:0 0 24px}.final-cta .btn{font-size:16px;padding:18px 29px;background:linear-gradient(90deg,#f20c8d,#ff7c36);box-shadow:0 10px 30px #f21a8a55}.laptop{position:relative;max-width:520px;margin:auto;transform:rotate(-5deg);filter:drop-shadow(0 25px 28px #0009)}.laptop-screen{border:9px solid #241436;border-radius:20px 20px 9px 9px;background:#090414;padding:8px;box-shadow:0 0 0 1px #b84dff}.laptop-screen img{display:block;width:100%;height:245px;object-fit:cover;border-radius:8px}.laptop-base{height:18px;background:linear-gradient(#aaa,#3d3152 60%,#171020);width:112%;margin-left:-6%;border-radius:0 0 35px 35px;clip-path:polygon(5% 0,95% 0,100% 100%,0 100%)}.cta-sticker{position:absolute;left:4%;top:4%;font-size:46px;filter:drop-shadow(0 5px 8px #0008);transform:rotate(-13deg)}
+footer{background:#10021d;color:#bca9cf;padding:24px 0;font-size:12px}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:20px}.footer-logo{font-size:21px;font-weight:900;font-style:italic;color:white}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:950px){.hero-inner{grid-template-columns:1fr 1fr}.hero h1{font-size:45px}.hero-art{transform:scale(.85);transform-origin:center}.package-layout{grid-template-columns:1fr 1fr}.package-intro{grid-column:1/-1;max-width:600px}.delivery-grid{grid-template-columns:1fr 1fr}.delivery-grid>div:first-child{grid-column:1/-1}.steps-layout{grid-template-columns:1fr}.steps-intro{max-width:600px}}
+@media(max-width:680px){.wrap{width:min(100% - 36px,var(--max))}.site-header{height:66px}.logo{font-size:25px}.navlinks{display:none;position:absolute;top:66px;left:0;right:0;background:#1b0630;padding:22px;flex-direction:column;gap:20px;margin:0;border-top:1px solid #7424a8}.navlinks.open{display:flex}.whats{padding:10px 13px;font-size:12px}.menu-btn{display:block}.hero{min-height:unset}.hero-inner{display:flex;flex-direction:column;align-items:stretch;padding-top:52px;padding-bottom:18px;gap:0}.hero h1{font-size:clamp(38px,11vw,53px);letter-spacing:-1.8px}.hero p{font-size:15px}.actions{gap:10px}.btn{padding:13px 17px;font-size:13px}.hero-art{height:360px;width:100%;transform:scale(.82);transform-origin:top center;margin-bottom:-55px}.phone{width:200px;height:360px}.phone-screen{height:313px}.phone-photo{height:207px}.phone-photo strong{font-size:21px}.card-house{width:145px;height:130px;left:-4%;top:25px}.card-beauty{width:150px;height:125px;right:-5%;top:40px}.card-service{width:135px;height:130px;left:-5%;bottom:20px}.card-gift{width:145px;height:125px;right:-4%;bottom:15px}.social-bubble{width:46px;height:46px;font-size:24px}.section{padding:55px 0}.portfolio-grid{grid-template-columns:1fr;gap:28px}.portfolio-copy p{max-width:500px}.gallery{grid-template-columns:repeat(2,1fr);gap:10px;transform:none}.work{height:155px}.work-title{font-size:16px;left:10px;bottom:10px}.package-layout{grid-template-columns:1fr;gap:18px}.package-intro{grid-column:auto}.package-intro h2{font-size:34px}.price-card{padding:24px 21px}.delivery-grid{grid-template-columns:1fr;gap:14px}.delivery-grid>div:first-child{grid-column:auto}.delivery h2{font-size:34px}.delivery-card{min-height:140px;padding:20px}.steps-row{grid-template-columns:1fr;gap:22px}.step{min-height:unset;padding:24px 20px 20px}.step-arrow{transform:rotate(90deg);font-size:23px}.steps-layout{gap:35px}.final-grid{grid-template-columns:1fr;gap:35px}.final-cta{padding:54px 0}.final-cta h2{font-size:39px}.final-cta p{font-size:15px}.laptop{max-width:380px;width:90%}.laptop-screen img{height:180px}.footer-inner{flex-direction:column;text-align:center}.footer-inner span{line-height:1.5}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.reveal{opacity:1;transform:none;transition:none}*{animation:none!important;transition:none!important}}
+
+.ctabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 18px}
+.ctab{border:1.5px solid #9c1aff;background:transparent;color:#7900e9;border-radius:30px;padding:8px 16px;font-size:13px;font-weight:800;cursor:pointer;font-family:inherit;transition:.2s}
+.ctab:hover{background:#f0e0ff}.ctab.on{background:linear-gradient(100deg,#a000ff,#ed21bc);color:#fff;border-color:transparent}
+.gallery[hidden]{display:none}
+.work{display:block}
+.vercase{display:inline-block;margin-top:16px;font-weight:800;font-size:14px;color:#7900e9}
+.vercase:hover{color:#ed21bc}
+.crumb{font-size:13px;color:#7a6a90;margin-bottom:18px}.crumb a{color:#7900e9;font-weight:700}
+.case{padding:60px 0 70px;background:linear-gradient(110deg,#f8f0ff,#f0e7ff 60%,#fbeaff)}
+.case h1{font-size:clamp(32px,4.2vw,50px);line-height:1.05;letter-spacing:-1.5px;margin:14px 0 12px;color:#19052f}
+.case p.lead{font-size:17px;line-height:1.6;max-width:720px;color:#3b2a52;margin:0 0 30px}
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.case-grid figure{margin:0;border-radius:18px;overflow:hidden;box-shadow:0 12px 24px #3d126c2b;background:#32104a;aspect-ratio:1/1;position:relative}
+.case-grid img{width:100%;height:100%;object-fit:cover;display:block}
+.case-grid figcaption{position:absolute;inset:auto 0 0;padding:20px 12px 11px;color:#fff;font-size:13px;font-weight:700;background:linear-gradient(transparent,#08020dcc)}
+.outros{padding:50px 0;background:#fff}.outros h2{font-size:26px;margin:0 0 18px;color:#19052f}
+.outros-list{display:flex;flex-wrap:wrap;gap:10px}.outros-list a{border:1.5px solid #e0c8f7;border-radius:30px;padding:9px 18px;font-weight:800;font-size:14px;color:#7900e9}
+.outros-list a:hover{background:#f6ecff}
+@media(max-width:760px){.case-grid{grid-template-columns:repeat(2,1fr);gap:10px}.case{padding:40px 0 50px}}
+</style>
+</head>
+<body>
+<header class="site-header">
+ <div class="wrap nav">
+  <a class="logo" href="#inicio" aria-label="Leanttro">LEAN<span>TTRO.</span></a>
+  <nav class="navlinks" id="navlinks"><a href="#portfolio">Portfólio</a><a href="#pacotes">Pacotes</a><a href="#como-funciona">Como funciona</a></nav>
+  <a class="whats" href="#" data-whatsapp>◉ WhatsApp</a>
+  <button class="menu-btn" id="menuBtn" aria-label="Abrir menu">☰</button>
+ </div>
+</header>
+<main>
+<section class="hero" id="inicio">
+ <div class="wrap hero-inner">
+  <div class="hero-copy reveal">
+   <span class="eyebrow">ARTES PARA REDES SOCIAIS</span>
+   <h1>Seu Instagram merece muito mais do que <span class="gradient-text">posts improvisados.</span></h1>
+   <p>Artes profissionais para sua empresa aparecer, atrair clientes e transmitir confiança nas redes sociais. Você escolhe o pacote e nós cuidamos da criação.</p>
+   <div class="actions"><a class="btn btn-primary" href="#pacotes">Conhecer pacotes <span>➜</span></a><a class="btn btn-outline" href="#portfolio">Ver exemplos de artes</a></div>
+  </div>
+  <div class="hero-art reveal" aria-label="Composição de exemplos de publicações para redes sociais">
+   <div class="float-card card-house"><img src="{{ rs_img(cfg.hero_1_img,480) }}" alt="Arte para redes sociais - imobiliária" width="500" height="400" fetchpriority="high" decoding="async"><div class="label">{{ cfg.hero_1_label }}</div></div>
+   <div class="float-card card-beauty"><img src="{{ rs_img(cfg.hero_2_img,480) }}" alt="Arte para redes sociais - estética" width="500" height="400" loading="lazy" decoding="async"><div class="label">{{ cfg.hero_2_label }}</div></div>
+   <div class="float-card card-service"><img src="{{ rs_img(cfg.hero_3_img,480) }}" alt="Arte para redes sociais - serviços" width="500" height="400" loading="lazy" decoding="async"><div class="label">{{ cfg.hero_3_label }}</div></div>
+   <div class="float-card card-gift"><img src="{{ rs_img(cfg.hero_4_img,480) }}" alt="Arte para redes sociais - presentes" width="500" height="400" loading="lazy" decoding="async"><div class="label">{{ cfg.hero_4_label }}</div></div>
+   <div class="phone"><div class="phone-top"><div class="speaker"></div></div><div class="phone-screen"><div class="social-head"><span class="avatar"></span> leanttro <span style="margin-left:auto">•••</span></div><div class="phone-photo" style="background:linear-gradient(0deg,#130a0b66,transparent),url('{{ rs_img(cfg.phone_img,640) }}') center/cover"><strong>{{ cfg.phone_texto|upper }}</strong></div><div class="phone-icons">♡ ♧ ➤　⌑</div><div class="phone-caption"><b>leanttro</b> O sabor que conquista.</div></div></div>
+   <div class="social-bubble bubble-insta">◎</div><div class="social-bubble bubble-heart">♥</div><div class="social-bubble bubble-like">▮</div>
+  </div>
+ </div>
+</section>
+<section class="section portfolio" id="portfolio">
+ <div class="wrap portfolio-grid">
+  <div class="portfolio-copy reveal"><span class="tag">PORTFÓLIO</span><h2>Exemplos de artes que criamos para <span>diferentes negócios.</span></h2><div class="underline"></div><p>Artes profissionais, criativas e estratégicas para atrair, engajar e gerar resultados no seu Instagram.</p></div>
+  <div class="reveal" id="portfolio-box">
+  {% if clientes %}
+   {% if clientes|length > 1 %}<div class="ctabs" role="tablist">{% for cl in clientes %}<button type="button" class="ctab{% if loop.first %} on{% endif %}" data-alvo="g{{ cl.id }}" role="tab">{{ cl.nome }}</button>{% endfor %}</div>{% endif %}
+   {% for cl in clientes %}
+   <div class="gallery" id="g{{ cl.id }}"{% if not loop.first %} hidden{% endif %}>
+    {% for ar in cl.artes %}<a class="work" href="/redes-sociais/{{ cl.slug }}" title="Ver case {{ cl.nome }}"><img src="{{ rs_img(ar.imagem_url,480) }}" {% if rs_srcset(ar.imagem_url,[320,480,640]) %}srcset="{{ rs_srcset(ar.imagem_url,[320,480,640]) }}" sizes="(max-width:760px) 50vw, 300px"{% endif %} alt="{{ ar.legenda or ('Arte para redes sociais - ' ~ cl.nome ~ ' ' ~ loop.index) }}" width="600" height="400" loading="lazy" decoding="async"><div class="work-title"><small>{{ (cl.segmento or cl.nome)|upper }}</small>{{ ar.legenda or cl.titulo or cl.nome }}</div></a>{% endfor %}
+   </div>
+   {% endfor %}
+   <div id="vercase-wrap">{% for cl in clientes %}<a class="vercase" data-g="g{{ cl.id }}" href="/redes-sociais/{{ cl.slug }}"{% if not loop.first %} hidden{% endif %}>Ver case completo {{ cl.nome }} ➜</a>{% endfor %}</div>
+  {% else %}
+   <div class="gallery"><article class="work"><img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=85" alt="Hambúrguer artesanal"><div class="work-title"><small>GASTRONOMIA</small>Hambúrguer<br>artesanal</div></article>
+   <article class="work"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=600&q=85" alt="Imóvel moderno"><div class="work-title"><small>IMOBILIÁRIA</small>Invista no<br>seu futuro</div></article>
+   <article class="work"><img src="https://images.unsplash.com/photo-1616394584738-fc6e612e71b9?auto=format&fit=crop&w=600&q=85" alt="Estética e beleza"><div class="work-title"><small>BELEZA</small>Seu momento<br>de cuidado</div></article>
+   <article class="work"><img src="https://images.unsplash.com/photo-1549465220-1a8b9238cd48?auto=format&fit=crop&w=600&q=85" alt="Presentes"><div class="work-title"><small>PRESENTES</small>Presentes que<br>conectam</div></article>
+   <article class="work"><img src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=85" alt="Serviços profissionais"><div class="work-title"><small>SERVIÇOS</small>Qualidade e<br>confiança</div></article>
+   <article class="work"><img src="https://images.unsplash.com/photo-1594035910387-fea47794261f?auto=format&fit=crop&w=600&q=85" alt="Perfume"><div class="work-title"><small>PRODUTOS</small>Pequenos detalhes,<br>grandes momentos</div></article>
+  </div>
+  {% endif %}
+  </div>
+ </div>
+</section>
+<section class="section packages" id="pacotes">
+ <div class="wrap package-layout">
+  <div class="package-intro reveal"><span class="tag">PACOTES</span><h2>Escolha o pacote ideal para a <span>sua empresa.</span></h2><p>Artes profissionais, com estratégia e identidade visual, prontas para fortalecer a sua presença no Instagram.</p></div>
+  <article class="price-card reveal"><div class="pack-top"><div class="pack-icon">▱</div><div><small>PACOTE</small><h3>10 ARTES</h3></div></div><ul><li>10 artes profissionais</li><li>Conteúdo personalizado</li><li>Identidade visual consistente</li><li>Artes prontas para publicar</li></ul><a class="price-bottom" href="#" data-package="Pacote 10 artes"><strong>{{ ("R$ " ~ cfg.preco_10) if cfg.preco_10 else "R$ —" }}</strong><span>Consulte　➜</span></a></article>
+  <article class="price-card featured reveal"><span class="ribbon">♛ MAIS COMPLETO</span><div class="pack-top"><div class="pack-icon">▱</div><div><small>PACOTE</small><h3><em>15 ARTES</em></h3></div></div><ul><li>15 artes profissionais</li><li>Conteúdo personalizado</li><li>Identidade visual consistente</li><li>Artes prontas para publicar</li></ul><a class="price-bottom" href="#" data-package="Pacote 15 artes"><strong>{{ ("R$ " ~ cfg.preco_15) if cfg.preco_15 else "R$ —" }}</strong><span>Consulte　➜</span></a></article>
+ </div>
+</section>
+<section class="delivery">
+ <div class="wrap delivery-grid">
+  <div class="reveal"><h2>Você escolhe como quer <span>receber.</span></h2><div class="underline"></div></div>
+  <article class="delivery-card reveal"><div class="delivery-icon">▧</div><div><h3>SOMENTE CRIAÇÃO</h3><p>As artes são criadas, enviadas para aprovação e entregues prontas para publicar.</p></div></article>
+  <article class="delivery-card featured reveal"><div class="delivery-icon">▦</div><div><h3>CRIAÇÃO + PUBLICAÇÃO</h3><p>Além da criação, nós organizamos o calendário editorial e realizamos as publicações após a sua aprovação, com praticidade e tranquilidade.</p></div></article>
+ </div>
+</section>
+<section class="steps" id="como-funciona">
+ <div class="wrap steps-layout">
+  <div class="steps-intro reveal"><span class="tag">COMO FUNCIONA</span><h2>Um processo simples, rápido e <span>descomplicado.</span></h2></div>
+  <div class="steps-row reveal">
+   <article class="step"><span class="step-num">1</span><div class="step-icon">▤</div><p>Você contrata seu pacote e nos apresenta sua empresa.</p></article><div class="step-arrow">➜</div>
+   <article class="step"><span class="step-num">2</span><div class="step-icon">▧</div><p>Criamos as artes e enviamos para sua aprovação.</p></article><div class="step-arrow">➜</div>
+   <article class="step"><span class="step-num">3</span><div class="step-icon">▣</div><p>Entregamos as artes ou cuidamos das publicações, conforme a modalidade escolhida.</p></article>
+  </div>
+ </div>
+</section>
+<section class="final-cta">
+ <div class="wrap final-grid">
+  <div class="reveal"><h2>Sua empresa merece aparecer com <span>profissionalismo.</span></h2><p>Chega de deixar seu Instagram parado ou publicar qualquer coisa só para não ficar sem conteúdo.</p><a class="btn" href="#" data-whatsapp>QUERO PROFISSIONALIZAR MEU INSTAGRAM　➜</a></div>
+  <div class="laptop reveal"><div class="cta-sticker">◎</div><div class="laptop-screen"><img src="{{ rs_img(cfg.cta_imagem,960) }}" alt="Painel com conteúdo de redes sociais" width="1000" height="600" loading="lazy" decoding="async"></div><div class="laptop-base"></div></div>
+ </div>
+</section>
+</main>
+<footer><div class="wrap footer-inner"><div class="footer-logo">LEANTTRO.</div><span>Ideias que viram resultados. © <span id="year"></span> Leanttro. Todos os direitos reservados.</span></div></footer>
+<script>
+/* CONFIGURE AQUI O NÚMERO COM DDI + DDD, SOMENTE NÚMEROS. Ex.: 5511999999999 */
+const WHATSAPP_NUMBER = "{{ cfg.whatsapp or '5500000000000' }}";
+const DEFAULT_MESSAGE = "Olá! Quero profissionalizar o Instagram da minha empresa. Gostaria de conhecer os pacotes de artes.";
+function whatsappUrl(message=DEFAULT_MESSAGE){
+  return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+document.querySelectorAll("[data-whatsapp]").forEach(link=>{
+  link.href=whatsappUrl();
+  link.target="_blank"; link.rel="noopener";
+});
+document.querySelectorAll("[data-package]").forEach(link=>{
+  link.href=whatsappUrl("Olá! Tenho interesse no "+link.dataset.package+". Pode me passar mais informações?");
+  link.target="_blank"; link.rel="noopener";
+});
+const menuBtn=document.getElementById("menuBtn"), nav=document.getElementById("navlinks");
+menuBtn.addEventListener("click",()=>{nav.classList.toggle("open");menuBtn.textContent=nav.classList.contains("open")?"×":"☰";});
+nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("open");menuBtn.textContent="☰";}));
+document.getElementById("year").textContent=new Date().getFullYear();
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+ if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target);}
+}),{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+document.querySelectorAll(".ctab").forEach(b=>b.addEventListener("click",()=>{
+ document.querySelectorAll(".ctab").forEach(x=>x.classList.toggle("on",x===b));
+ document.querySelectorAll("#portfolio-box .gallery").forEach(g=>g.hidden=(g.id!==b.dataset.alvo));
+ document.querySelectorAll(".vercase").forEach(v=>v.hidden=(v.dataset.g!==b.dataset.alvo));
+}));
+</script>
+</body>
+</html>
