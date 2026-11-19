@@ -58,9 +58,9 @@ footer{background:#10021d;color:#bca9cf;padding:24px 0;font-size:12px}.footer-in
 .case h1{font-size:clamp(32px,4.2vw,50px);line-height:1.05;letter-spacing:-1.5px;margin:14px 0 12px;color:#19052f}
 .case p.lead{font-size:17px;line-height:1.6;max-width:720px;color:#3b2a52;margin:0 0 30px}
 .case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-.case-grid figure{margin:0;border-radius:18px;overflow:hidden;box-shadow:0 12px 24px #3d126c2b;background:#32104a;aspect-ratio:1/1;position:relative}
-.case-grid img{width:100%;height:100%;object-fit:cover;display:block}
-.case-grid figcaption{position:absolute;inset:auto 0 0;padding:20px 12px 11px;color:#fff;font-size:13px;font-weight:700;background:linear-gradient(transparent,#08020dcc)}
+.case-grid figure{margin:0;border-radius:18px;overflow:hidden;box-shadow:0 12px 24px #3d126c2b;background:#32104a;aspect-ratio:4/5;position:relative}
+.case-grid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+
 .outros{padding:50px 0;background:#fff}.outros h2{font-size:26px;margin:0 0 18px;color:#19052f}
 .outros-list{display:flex;flex-wrap:wrap;gap:10px}.outros-list a{border:1.5px solid #e0c8f7;border-radius:30px;padding:9px 18px;font-weight:800;font-size:14px;color:#7900e9}
 .outros-list a:hover{background:#f6ecff}
@@ -87,7 +87,7 @@ footer{background:#10021d;color:#bca9cf;padding:24px 0;font-size:12px}.footer-in
  <h1>{{ c.titulo or ('Case ' ~ c.nome) }}</h1>
  <p class="lead">{{ c.descricao or ('Artes profissionais para redes sociais criadas pela Leanttro para ' ~ c.nome ~ '.') }}</p>
  <div class="case-grid">
- {% for ar in c.artes %}<figure><img src="{{ rs_img(ar.imagem_url,640) }}" {% if rs_srcset(ar.imagem_url,[320,480,640,960]) %}srcset="{{ rs_srcset(ar.imagem_url,[320,480,640,960]) }}" sizes="(max-width:760px) 50vw, 400px"{% endif %} alt="{{ ar.legenda or ('Arte para redes sociais - ' ~ c.nome ~ ' ' ~ loop.index) }}" width="800" height="800" {% if loop.index>3 %}loading="lazy"{% endif %} decoding="async">{% if ar.legenda %}<figcaption>{{ ar.legenda }}</figcaption>{% endif %}</figure>{% endfor %}
+ {% for ar in c.artes %}<figure><img src="{{ rs_img(ar.imagem_url,640) }}" {% if rs_srcset(ar.imagem_url,[320,480,640,960]) %}srcset="{{ rs_srcset(ar.imagem_url,[320,480,640,960]) }}" sizes="(max-width:760px) 50vw, 400px"{% endif %} alt="{{ ar.legenda or ('Arte para redes sociais - ' ~ c.nome ~ ' ' ~ loop.index) }}" width="640" height="800" {% if loop.index>3 %}loading="lazy"{% endif %} decoding="async"></figure>{% endfor %}
  </div>
  <a class="btn btn-primary" style="margin-top:30px" href="#" data-whatsapp>QUERO ARTES ASSIM PARA MINHA EMPRESA　➜</a>
 </div></section>
