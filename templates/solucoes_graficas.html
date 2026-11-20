@@ -65,7 +65,6 @@ h1 em{font-style:normal;background:linear-gradient(90deg,#8b4cf5,#d28bff);-webki
 .cta{display:flex;gap:12px;flex-wrap:wrap}
 #stage{position:fixed;left:50%;bottom:calc(100vh - var(--hh) + 28px);transform:translateX(-50%);z-index:3;text-align:center;font-size:13px;color:var(--mute);width:min(280px,70vw);transition:opacity .6s}
 #stage.off{opacity:0}
-.replay{position:fixed;right:5vw;bottom:calc(100vh - var(--hh) + 24px);z-index:3;padding:9px 16px;font-size:12px}
 #bar{display:block;height:3px;margin-top:10px;border-radius:3px;background:rgba(255,255,255,.12);overflow:hidden}
 #bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#7c3aed,#d28bff)}
 @media(max-width:820px){
@@ -103,6 +102,25 @@ html.locked{overflow:hidden}
 .row1 h3{grid-area:tt}.row1 p{grid-area:tx}.row1 .card a{grid-area:lk;justify-self:start}}
 @media(max-width:520px){.eco .row1{grid-template-columns:1fr}.eco{padding:72px 20px}}
 @media(min-width:821px){:root{--hh:clamp(540px,82vh,720px)}}
+
+@media(max-width:600px){
+ dialog.dlg,dialog.dlg.wide{width:calc(100vw - 16px);max-height:calc(100dvh - 20px);border-radius:22px}
+ .dlg-in{padding:22px 18px 24px}
+ .dlg-x{top:12px;right:12px;width:40px;height:40px}
+ .dlg-hd{display:grid;grid-template-columns:68px 1fr;column-gap:14px;row-gap:12px;align-items:center;padding-right:44px;margin-bottom:16px}
+ .dlg-hd>div:last-child{display:contents}
+ .dlg-art{width:68px}
+ .dlg h3{font-size:24px;margin:0}
+ .dlg-lead{grid-column:1/-1;font-size:16px;line-height:1.55}
+ .dlg-in>p{font-size:15.5px;line-height:1.65}
+ .dlg h4{font-size:14px;margin:22px 0 10px}
+ .dlg ul{gap:12px}.dlg li{font-size:15.5px;line-height:1.5;padding-left:30px}
+ .dlg .dlg-note{font-size:14px;line-height:1.55}
+ .dlg-frame{overflow-x:auto;-webkit-overflow-scrolling:touch}
+ .dlg-img{min-width:680px}
+ .dlg-shot:after{content:'← arraste para ver a tela inteira →';display:block;text-align:center;font-size:11.5px;color:#8a7fb0;margin-top:8px}
+ .dlg .btn{width:100%;text-align:center;justify-content:center}
+}
 html.modal{overflow:hidden}
 dialog.dlg{border:0;padding:0;border-radius:26px;width:min(580px,calc(100vw - 28px));max-height:calc(100vh - 40px);background:linear-gradient(170deg,#fff,#f7f2ff);color:#1b1040;box-shadow:0 30px 80px rgba(30,8,90,.5);font-family:Sora,'Segoe UI',Arial,sans-serif;overflow:auto}
 dialog.dlg[open]{animation:dlgIn .25s ease}
@@ -307,7 +325,6 @@ html.locked,html.locked body{overflow:hidden;height:100%}
   <a class="nav-wa" href="https://wa.me/5511913324827?text=Ol%C3%A1%21%20Vim%20pelo%20site%20da%20Leanttro%20e%20quero%20falar%20com%20um%20especialista%20sobre%20solu%C3%A7%C3%B5es%20para%20a%20minha%20gr%C3%A1fica." target="_blank" rel="noopener">WhatsApp</a>
   <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </div></header>
-<button class="btn ghost replay" id="replay" type="button">↻ Rever abertura</button>
 
 <main class="hero" id="hero">
   <h1>Soluções tecnológicas para <em>gráficas</em></h1>
@@ -580,7 +597,7 @@ function resize(){
   renderer.setSize(w,h,false);cam.aspect=a;cam.updateProjectionMatrix();
   const vh=th*7,vw=vh*a;
   L.d1=Math.max(6.6,(L.W+.8)/(th*a));
-  if(a<1){L.fx=0;L.fs=Math.min(1.3,vw*2.05/L.W);L.fy=-vh*.45;L.ry=-.12;}
+  if(a<1){L.d1=Math.max(4.4,L.d1*.58);L.fx=0;L.fs=Math.min(1.3,vw*2.05/L.W);L.fy=-vh*.45;L.ry=-.12;}
   else{L.fs=Math.min(1.7,vw*1.02/L.W);L.fx=vw*.43;L.fy=0;L.ry=-.3;}
 }
 addEventListener('resize',resize);resize();
@@ -626,7 +643,6 @@ function start(){
   U.uPrint.value=tex(makePrint(L.W/3));U.uDash.value=tex(makeDash());
   new THREE.TextureLoader().setCrossOrigin('anonymous').load(IMG,function(tx){tx.anisotropy=8;var ia=tx.image.width/tx.image.height;U.uImgA.value=ia;U.uDash.value=tx;L.W=Math.min(6.5,Math.max(2.4,3*ia));resize();U.uPrint.value=tex(makePrint(L.W/3));},undefined,function(){});
   let t0=performance.now()-(reduce?20000:0),last=t0;
-  $('#replay').onclick=()=>{t0=performance.now();shown=false;hero.classList.remove('on');scrollTo(0,0);document.documentElement.classList.add('locked');};
   (function frame(now){
     const dt=Math.min(.05,(now-last)/1000);last=now;
     update((now-t0)/1000,dt);renderer.render(scene,cam);requestAnimationFrame(frame);
